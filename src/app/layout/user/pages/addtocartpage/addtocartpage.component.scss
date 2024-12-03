@@ -45,9 +45,11 @@ button{
   padding-bottom: 6.5rem;
 }
 .dl-icon{
+  cursor: pointer;
   padding-left: 6px;
   padding-top: 1.5rem;
   size: 5px;
+
 
 }
 hr{
@@ -67,6 +69,7 @@ hr{
   display: flex;
   justify-content: center;
   padding-top: 3rem;
+  cursor: pointer;
 }
 
 .total{
