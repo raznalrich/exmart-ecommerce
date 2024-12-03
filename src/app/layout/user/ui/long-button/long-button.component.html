@@ -1,0 +1,25 @@
+<button
+  [type]="type"
+  [class]="styleClass"
+  [disabled]="disabled"
+  [style.background-color]="bgColor"
+  [style.color]="color"
+>
+  @if (imgSrc && imgPosition === 'left') {
+    <img
+      [src]="imgSrc"
+      [alt]="imgAlt"
+      class="button-image"
+    />
+  }
+
+  {{ label }}
+
+  @if (imgSrc && imgPosition === 'right') {
+    <img
+      [src]="imgSrc"
+      [alt]="imgAlt"
+      class="button-image"
+    />
+  }
+</button>
