@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { ApiService } from '../../../../api.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-single-page-dropdown',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './single-page-dropdown.component.html',
   styleUrl: './single-page-dropdown.component.scss'
 })
@@ -13,7 +14,7 @@ export class SinglePageDropdownComponent {
   // @Input() buttonName: string = '';
   // @Input()details:any;
   arr:any;
-  @Input()details:any={
+details:any={
 title:'',
 content:''
     }
@@ -24,7 +25,7 @@ content:''
       this.arr = this.details.dropdowns;
      console.log(this.arr);
 
-// console.log(this.details)
+    // console.log(this.details)
     });
 
 
