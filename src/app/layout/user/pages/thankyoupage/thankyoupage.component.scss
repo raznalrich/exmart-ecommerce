@@ -11,28 +11,9 @@ h1{
   color: #ffff;
   padding-top: 20px;
 }
-.OrderDetails{
-  background-color: #ffff;
-  margin: 50px;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
 
-}
-.eachOrderDetails{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-}
 
-.OrderDetailsText{
-  text-align: start;
-  margin-bottom: 20px;
-}
+
 .OrderAmountBox
 {
   background-color: #ffff;
