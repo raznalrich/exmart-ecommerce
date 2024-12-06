@@ -9,6 +9,7 @@ import { ApiService } from '../../../../api.service';
   styleUrl: './single-product-detail.component.scss'
 })
 export class SingleProductDetailComponent {
+colors:any
   arr:any;
   @Input()details:any={
 name:'',
