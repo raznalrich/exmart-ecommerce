@@ -1,0 +1,42 @@
+.custom-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  padding: 1rem 1.5rem; /* Button padding */
+  color: white;
+  cursor: pointer;
+  text-align: left;
+  gap: 1rem; /* Space between icon and text */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 20px;
+  width: 400px;
+  margin: 0 auto; /* Center horizontally */
+}
+
+.custom-button:hover {
+  transform: translateY(-2px); /* Lift on hover */
+}
+
+.custom-button .icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-button .icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.custom-button .text h4 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.custom-button .text p {
+  margin: 0;
+}
