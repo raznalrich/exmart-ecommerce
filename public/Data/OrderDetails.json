@@ -1,0 +1,26 @@
+{
+  "orderId": "12345",
+  "orderDate": "2024-12-03",
+  "items": [
+    {
+      "name": "Experion Jacket",
+      "size": "XL",
+      "color": "Black",
+      "price": "$500"
+    },
+    {
+      "name": "Urban Sneakers",
+      "size": "L",
+      "color": "White",
+      "price": "$120"
+    },
+    {
+      "name": "Classic Watch",
+      "size": "One Size",
+      "color": "Silver",
+      "price": "$250"
+    }
+  ],
+  "totalAmount": "$870",
+  "deliveryCharge": "$30"
+}
