@@ -1,0 +1,29 @@
+[
+  {
+    "category": "garments",
+    "name": "T-SHIRT",
+    "type": "collared",
+    "colors": ["#000000", "#ffffff", "#ff00ff", "#ff69b4"],
+    "price": 499,
+    "imageUrl": "assets/images/tshirt.jpg",
+    "size": "M"
+  },
+  {
+    "category": "garments",
+    "name": "JACKET",
+    "type": "woolen",
+    "colors": ["#000000", "#ffffff", "#0000ff", "#32cd32"],
+    "price": 799,
+    "imageUrl": "assets/images/jacket.jpg",
+    "size": "M"
+  },
+  {
+    "category": "stationary",
+    "name": "NOTEBOOK",
+    "type": "spiral",
+    "colors": ["#ff0000"],
+    "price": 99,
+    "imageUrl": "assets/images/notebook.jpg",
+    "size": null
+  }
+]
