@@ -4,16 +4,17 @@
     <p><strong>MRP ₹{{ details.product?.price }}</strong></p>
     <p><strong>Colour:</strong> {{ details.product?.color }}</p>
 
-    <div class="color-options">
-      <div class="color-box" [style.background]="colors.code">{{details.product.color}}</div>
-    </div><br>
+  <div class="color-options">
+    <button class="color-box"> <div [ngStyle]="{'background-color':colors.code}"></div>
+      <!-- {{ details.product.colors.code}}-->
+      </button>
+  </div><br>
 
     <div class="size-options">
       <div class="size-buttons">
           <button>{{ details.product.size }}</button>
       </div>
   </div>
-
 
   <div class="quantity">
     <label for="quantity"></label>
@@ -24,6 +25,7 @@
     <button class="add-to-bag-btn">Add to Bag</button>
   </div>
 </div>
+
 
 
 
