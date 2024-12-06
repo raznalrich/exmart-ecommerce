@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class ApiServiceService {
 
-  constructor() { }
+
+  constructor(public http:HttpClient) { }
+
+  getItemsInOrder() {
+    return this.http.get(`Data/OrderDetails.json`)
+  }
+
 }
