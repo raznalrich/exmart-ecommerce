@@ -1,0 +1,63 @@
+.MainContainer{
+  background-color: rgba(62, 104, 185, 0.9);
+  margin: 100px;
+  border-radius: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+h1{
+  color: #ffff;
+  padding-top: 20px;
+}
+
+
+
+.OrderAmountBox
+{
+  background-color: #ffff;
+  margin: 50px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.inputFields{
+  background-color: #ffff;
+  margin: 50px;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+input , textarea{
+  width: 60%;
+}
+button{
+  background-color: rgba(62, 104, 185, 0.9);  /* Matching the MainContainer background color */
+  color: #fff;  /* White text color */
+  border: none;  /* Removing the default border */
+  border-radius: 20px;  /* Rounded corners to match the other elements */
+  padding: 15px 30px;  /* Padding for better button size */
+  font-size: 16px;  /* Set a reasonable font size */
+  cursor: pointer;  /* Indicating that it's clickable */
+  transition: background-color 0.3s ease, transform 0.3s ease;  /* Smooth hover effect */
+}
+
+button:hover {
+  background-color: rgba(62, 104, 185, 1);  /* Darker shade on hover */
+  transform: translateY(-2px);  /* Slight lift effect on hover */
+}
+
+button:focus {
+  outline: none;  /* Removing default focus outline */
+}
+
+button:active {
+  transform: translateY(1px);  /* Slight press effect when the button is clicked */
+}
