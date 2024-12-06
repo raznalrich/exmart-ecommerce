@@ -1,0 +1,26 @@
+.container1{
+  background-color: #64A2F5;
+  padding: 5px;
+  margin: 0;
+  width: 100%;
+  .row{
+    width: 100%;
+    hr{
+      color: white;
+      border: 2px white solid;
+    }
+    p{
+      color: white;
+    }
+    ul{
+      list-style: none;
+      li{
+        color: white;
+        padding-top: 5px;
+        i{
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}
