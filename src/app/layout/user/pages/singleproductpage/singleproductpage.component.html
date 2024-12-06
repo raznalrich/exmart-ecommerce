@@ -1,1 +1,18 @@
-<p>singleproductpage works!</p>
+<div class="main">
+<div class="product-card">
+  @for (data of card; track data.id) {
+    <app-single-card [card]="data"></app-single-card>
+    }
+</div>
+<div class="product-carousel">
+<app-single-carousel [carouselImages]="carouselImages"></app-single-carousel>
+</div>
+<div>
+<app-single-product-detail></app-single-product-detail>
+<div class="product-detail">
+    <app-single-page-dropdown></app-single-page-dropdown>
+    <!-- <app-single-page-dropdown buttonName="Delivery & Return"></app-single-page-dropdown> -->
+</div>
+</div>
+</div>
+
