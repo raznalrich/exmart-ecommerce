@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #64A2F5 ;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  text-align: left;
+}
+
+.expHead {
+  color: white;
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.freqVist {
+  font-size: 31.5px;
+  color: rgb(255, 255, 255);
+}
+
+.content {
+  display: flex;
+  margin-top: 20px;
+  gap: 80px;
+}
+
+.main-image img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.rightside {
+
+  gap: 10px;
+}
+
+.subImaging{
+  padding-top: 70px;
+  display: flex;
+  gap: 30px;
+}
+.sub-image img {
+  width: 215px;
+  height: auto;
+  border: 1px solid #ccc;
+}

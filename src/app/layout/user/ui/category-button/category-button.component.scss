@@ -1,0 +1,29 @@
+.reusable-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Button width */
+  height: 100px; /* Button height */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reusable-button:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+
+}
+
+.reusable-button .icon {
+  width: 50%;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.reusable-button .label {
+  margin: 0;
+  font-size: 0.9rem;
+  color: white;
+  text-align: center;
+}

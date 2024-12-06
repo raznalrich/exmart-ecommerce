@@ -1,0 +1,42 @@
+<!-- feedback.component.html -->
+<div class="feedback-container">
+  <div class="titles">
+    <div class="expHead">EXPERIONITES</div>
+    <div class="feedback">Put Your Feedback</div>
+  </div>
+
+  <div class="form">
+    <form (ngSubmit)="submitFeedback()">
+      <input
+        type="text"
+        placeholder="enter your feedback"
+        name="feedback" />
+    </form>
+
+    <div class="button">
+      <app-long-button
+      label="Submit"
+      [imgAlt]="'Upload Icon'"
+      [imgPosition]="'left'"
+      [bgColor]="'#64A2F5'"
+      ></app-long-button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- <div class="container">
+  <div class="headings">
+    <div class="expHead">EXPERIONITES</div>
+    <div class="putFeed">Put Your Feedback</div>
+  </div>
+  <div class="feedbackSearch">
+      <input>
+
+  </div>
+
+</div> -->
