@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ThankyoupageComponent } from './layout/user/pages/thankyoupage/thankyoupage.component';
 
 import { HomeStaticComponent } from './layout/user/pages/home-static/home-static.component';
 import { HomepageComponent } from "./layout/user/homepage/homepage.component";
@@ -12,7 +13,8 @@ import { SingleproductpageComponent } from './layout/user/pages/singleproductpag
   selector: 'app-root',
   standalone: true,
 
-  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent,SingleproductpageComponent],
+  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent,ThankyoupageComponent,SingleproductpageComponent],
+
 
 
   templateUrl: './app.component.html',
