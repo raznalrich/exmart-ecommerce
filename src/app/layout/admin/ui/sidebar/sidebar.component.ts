@@ -11,25 +11,31 @@ import { RouterModule } from '@angular/router';
 export class SidebarComponent {
   menuItems: any = [{
     id:1,
-    routerLink:'',
+    routerLink:'admindashboard',
     item:'Dashboard',
     image:'bi bi-bar-chart'
   },
   {
     id:2,
-    routerLink:'cart',
+    routerLink:'productlist',
     item:'Products',
     image:'bi bi-boxes'
   },
   {
     id:3,
-    routerLink:'profile',
+    routerLink:'orderlist',
     item:'Orders',
     image:'bi bi-cart-fill'
   },
   {
     id:4,
-    routerLink:'ad',
+    routerLink:'reportpage',
+    item:'Report',
+    image:'bi bi-cart-fill'
+  },
+  {
+    id:5,
+    routerLink:'viewfeedback',
     item:'Feedback',
     image:'bi bi-chat-right-dots'
   },
