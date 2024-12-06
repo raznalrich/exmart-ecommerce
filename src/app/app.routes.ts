@@ -1,5 +1,6 @@
 import { HomepageComponent } from './layout/user/homepage/homepage.component';
 import { Routes } from '@angular/router';
+import { ThankyoupageComponent } from './layout/user/pages/thankyoupage/thankyoupage.component';
 
 import { SingleproductpageComponent } from './layout/user/pages/singleproductpage/singleproductpage.component';
 import { HomeStaticComponent } from './layout/user/pages/home-static/home-static.component';
@@ -19,6 +20,11 @@ export const routes: Routes = [
       },
       {
         path:'viewproduct/:id',component:SingleproductpageComponent
+      },
+      {
+        
+          path:"thankyou", component:ThankyoupageComponent
+
       }
     ]
   },
