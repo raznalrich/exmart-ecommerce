@@ -1,12 +1,12 @@
 <div class="container" style="max-width: 600px;">
-  <form class="row g-3">
+  <form class="row g-3" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" />
+      <input type="email" class="form-control" id="inputEmail4" formControlName="email" />
     </div>
     <div class="col-md-6">
       <label for="inputPassword4" class="form-label">Mobile Number</label>
-      <input type="text" class="form-control" id="inputPassword4" />
+      <input type="text" class="form-control" id="inputPassword4" formControlName="phone" />
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">Address</label>
@@ -15,11 +15,12 @@
         class="form-control"
         id="inputAddress"
         placeholder="1234 Main St"
+        formControlName="address"
       />
     </div>
     <div class="col-md-6">
       <label for="inputCity" class="form-label">City</label>
-      <input type="text" class="form-control" id="inputCity" />
+      <input type="text" class="form-control" id="inputCity" formControlName="city" />
     </div>
     <div class="col-md-4">
       <label for="inputState" class="form-label">State</label>
@@ -30,7 +31,7 @@
     </div>
     <div class="col-md-2">
       <label for="inputZip" class="form-label">PIN</label>
-      <input type="text" class="form-control" id="inputZip" />
+      <input type="text" class="form-control" id="inputZip" formControlName="pincode"/>
     </div>
     <div class="col-12">
       <strong class="heading">Address Type</strong>
@@ -42,6 +43,7 @@
             name="genderOptions"
             id="genderMale"
             value="male"
+            formControlName="home"
           />
           <label class="form-check-label" for="genderMale">Home</label>
         </div>
@@ -52,6 +54,7 @@
             name="genderOptions"
             id="genderFemale"
             value="female"
+            formControlName="work"
           />
           <label class="form-check-label" for="genderFemale">Work</label>
         </div>
