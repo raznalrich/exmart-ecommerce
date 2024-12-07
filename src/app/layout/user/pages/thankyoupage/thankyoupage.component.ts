@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ItemsInOrderComponent } from "../../ui/items-in-order/items-in-order.component";
 import { ApiServiceService } from '../../../../services/api-service.service';
+import { OrderTrackingBarComponent } from "../../ui/order-tracking-bar/order-tracking-bar.component";
 
 interface Order {
   orderId: string;
@@ -20,7 +21,7 @@ interface Item {
 @Component({
   selector: 'app-thankyoupage',
   standalone: true,
-  imports: [ItemsInOrderComponent],
+  imports: [ItemsInOrderComponent, OrderTrackingBarComponent],
   templateUrl: './thankyoupage.component.html',
   styleUrl: './thankyoupage.component.scss'
 })
@@ -31,9 +32,10 @@ export class ThankyoupageComponent {
   constructor(public api:ApiServiceService){}
 
   ngOnInit(){
-    // this.api.getItemsInOrder().subscribe((res:Order)=>{
-
-    // })
+    this.api.getItemsInOrder().subscribe((res:any)=>{
+      this.orders = res
+      console.log(this.orders)
+    })
   }
 
 
