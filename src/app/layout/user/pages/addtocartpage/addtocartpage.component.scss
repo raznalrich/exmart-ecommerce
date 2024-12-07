@@ -1,5 +1,5 @@
 h1{
-  padding-left: 16rem;
+  padding-left: 5rem;
 }
 
 .product-details{
@@ -9,6 +9,7 @@ h1{
 img{
   max-width: 8rem;
   height: 8rem;
+  margin-right: 5re;
 }
 h3{
 
@@ -77,6 +78,19 @@ hr{
   display: flex;
   gap: 13rem;
 
+}
+
+.checkout-btn{
+  cursor: pointer;
+  padding-bottom: 3rem;
+}
+#totalPrice{
+  margin-left: 1rem;
+}
+
+
+.delete-btn{
+  padding-top: 1.2em;
 }
 
 
