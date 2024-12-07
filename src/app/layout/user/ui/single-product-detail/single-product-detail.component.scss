@@ -1,0 +1,97 @@
+.product-details {
+  margin-left: 40px;
+  margin-top: 60px;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+}
+
+.color-box {
+  width: 40px;
+  height: 40px;
+  background: lightgray;
+  border-radius: 50%;
+}
+
+.quantity {
+  margin-top: 10px;
+}
+
+.quantity input {
+  padding: 5px 10px;
+  width: 60px;
+  background-color: #b8daff;
+  border: solid #64A2F5 1px;
+  border-radius: 10px;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.wishlist-btn {
+  background-color: #b8daff;
+  padding: 5px 10px;
+  margin-left: 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+
+.add-to-bag-btn {
+  background-color: #64A2F5;;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.add-to-bag-btn:hover{
+background-color: whitesmoke;
+color: #64A2F5;
+border: #64A2F5 1px solid;
+}
+
+.size-options {
+  margin-bottom: 20px;
+}
+
+.size-buttons {
+color: black;
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+}
+
+.size-buttons button {
+  width: 40px; /* Set width */
+  height: 40px; /* Set height */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 50%; /* Make it circular */
+  background-color: #f9f9f9; /* Background color */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s, border-color 0.3s; /* Transition for hover effects */
+  display: flex; /* Flexbox for centering text */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+.size-buttons button:hover {
+  background-color: #007bff; /* Change background on hover */
+  color: white; /* Change text color on hover */
+  border-color: #0056b3; /* Change border color on hover */
+}
+
+.size-buttons button.selected {
+  background-color: #007bff; /* Highlight selected size */
+  color: white; /* Change text color for selected size */
+  border-color: #0056b3; /* Change border color for selected size */
+}
+
+
