@@ -28,5 +28,15 @@
     "price": 99,
     "imageUrl": "assets/images/notebook.jpg",
     "size": null
+  },
+  {
+    "id":4,
+    "category": "stationary",
+    "name": "NOTEBOOK",
+    "type": "spiral",
+    "colors": ["#ff0000"],
+    "price": 99,
+    "imageUrl": "assets/images/notebook.jpg",
+    "size": null
   }
 ]
