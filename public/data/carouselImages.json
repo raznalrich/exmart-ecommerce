@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "imageSrc": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/6ef0fad5-e710-41a0-b447-4a9cdeaad947/AS+M+NK+DF+UV+MILER+SS.png",
+      "altText": "Slide 1"
+    },
+    {
+      "id": 2,
+      "imageSrc": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/148f1b07-d6d7-43ab-bf76-c5afb41a44ea/AS+M+NK+DF+UV+MILER+SS.png",
+      "altText": "Slide 2"
+    },
+    {
+      "id": 3,
+      "imageSrc": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4273514a-8a0c-4386-86a7-d6bc8dfc857a/AS+M+NK+DF+UV+MILER+SS.png",
+      "altText": "Slide 3"
+    }
+]
