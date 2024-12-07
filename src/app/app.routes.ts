@@ -21,7 +21,7 @@ export const routes: Routes = [
         path:'viewproduct/:id',component:SingleproductpageComponent
       },
       {
-        
+
           path:"thankyou", component:ThankyoupageComponent
 
       }
