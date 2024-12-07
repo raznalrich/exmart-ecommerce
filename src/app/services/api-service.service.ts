@@ -1,12 +1,17 @@
 import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiServiceService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  getProducts(){
+    return this.http.get('data/product-sample.json');
+  }
+
 
   getproduct(){
     return this.http.get('/data/productsTrail.json');
