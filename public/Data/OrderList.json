@@ -1,0 +1,62 @@
+[
+  {
+    "order": "001",
+    "date": "2024-12-01",
+    "customer": "John Doe",
+    "status": "Done",
+    "amount": 250.00,
+    "items": [
+      {
+        "itemName": "Laptop",
+        "quantity": 1
+      },
+      {
+        "itemName": "Mouse",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "order": "002",
+    "date": "2024-12-03",
+    "customer": "Jane Smith",
+    "status": "Pending",
+    "amount": 75.00,
+    "items": [
+      {
+        "itemName": "Keyboard",
+        "quantity": 1
+      },
+      {
+        "itemName": "USB Cable",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "order": "003",
+    "date": "2024-12-05",
+    "customer": "Mark Johnson",
+    "status": "Done",
+    "amount": 120.00,
+    "items": [
+      {
+        "itemName": "Monitor",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "order": "004",
+    "date": "2024-12-06",
+    "customer": "Sarah Brown",
+    "status": "Pending",
+    "amount": 400.00,
+    "items": [
+      {
+        "itemName": "Jacket",
+        "quantity": 4
+      }
+    ]
+  }
+]
