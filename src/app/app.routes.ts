@@ -9,13 +9,22 @@ import { OrderListComponent } from './layout/admin/pages/order-list/order-list.c
 import { ReportPageComponent } from './layout/admin/pages/report-page/report-page.component';
 import { ViewFeedbackComponent } from './layout/admin/pages/view-feedback/view-feedback.component';
 import { LoginComponent } from './layout/authentication/login/login.component';
+import { ProductDisplayingSectionComponent } from './layout/user/ui/product-displaying-section/product-displaying-section.component';
 import { ProductlistComponent } from './layout/admin/pages/productlist/productlist.component';
 
 export const routes: Routes = [
   {
     path:'',component: HomepageComponent,children:[
       {
-        path:'home', component: HomeStaticComponent
+        path:'home', component: HomeStaticComponent,children:[
+          {
+            path:'category/:id',component:ProductDisplayingSectionComponent
+          },
+          {
+            path:'',redirectTo:'category/garments',pathMatch:'full'
+          }
+        ],
+
       },
       {
         path:'viewproduct/:id',component:SingleproductpageComponent
@@ -24,6 +33,9 @@ export const routes: Routes = [
 
           path:"thankyou", component:ThankyoupageComponent
 
+      },
+      {
+        path:'',redirectTo:'home',pathMatch:'full'
       }
     ]
   },
