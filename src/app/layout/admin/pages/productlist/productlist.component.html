@@ -1,39 +1,12 @@
-<div class="body">
-    <div class="container-fluid">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (item of items; track item.id) {
-                <tr>
-                    <th scope="row" style="color: black;">{{item.id}}</th>
-                    <td><img src={{item.image}} class="img-fluid rounded-start" alt="" style="width: 40px;">
-                    </td>
-                    <td>{{item.category}}</td>
-                    <td>{{item.product}}</td>
-                    <td>{{item.price}}</td>
-                    <td>
-                        <!-- <button class="btn btn-primary btn-sm" style="margin-right: 5px;">
-                            <i class="bi bi-pen"></i>
-                        </button> -->
-                        @for (item of icons; track $index) {
-                            <app-button [icon]="item"></app-button>
-                        }                       
-                        <!-- <button class="btn btn-danger btn-sm">
-                            <i class="bi bi-trash3"></i>
-                        </button> -->
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
+<div class="page">
+    <div class="top">
+        <app-add-button [button]="button"></app-add-button>
+        <form class="mx-auto" style="flex-grow: 1; max-width: 500px;">
+            <input type="search" placeholder="Search here" aria-label="Search"
+                style="width: 100%; border-radius: 10px; height: 40px; padding-left: 10px;">
+        </form>
+    </div>
+    <div class="bottom">
+        <app-table [items]="items"></app-table>
     </div>
 </div>
