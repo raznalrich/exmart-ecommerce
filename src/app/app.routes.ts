@@ -20,16 +20,23 @@ export const routes: Routes = [
         path:'home', component: HomeStaticComponent,children:[
           {
             path:'category/:id',component:ProductDisplayingSectionComponent
+          },
+          {
+            path:'',redirectTo:'category/garments',pathMatch:'full'
           }
-        ]
+        ],
+
       },
       {
         path:'viewproduct/:id',component:SingleproductpageComponent
       },
       {
-        
+
           path:"thankyou", component:ThankyoupageComponent
 
+      },
+      {
+        path:'',redirectTo:'home',pathMatch:'full'
       }
     ]
   },

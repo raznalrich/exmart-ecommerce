@@ -2,7 +2,7 @@
   <img src="images/trialtshirt.png" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title"><strong>{{cards.name}}</strong></h5>
-    <p class="card-text">{{cards.price | currency:'INR'}}</p>
+    <p  class="card-text">{{cards.price | currency:'INR'}} <button routerLink="/viewproduct/{{cards.id}}" type="button" class="btn btn-outline-primary">View more</button></p>
 
   </div>
 </div>
