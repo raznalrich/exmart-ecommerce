@@ -13,7 +13,15 @@ export class ApiServiceService {
   }
 
 
+
+
+  getItemsInOrder() {
+    return this.http.get(`Data/OrderDetails.json`)
+  }
+
+
   getproduct(){
     return this.http.get('/data/productsTrail.json');
   }
+
 }
