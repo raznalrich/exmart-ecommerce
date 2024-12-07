@@ -5,11 +5,12 @@ import { HomepageComponent } from "./layout/user/homepage/homepage.component";
 import { UsernavbarComponent } from "./layout/user/ui/usernavbar/usernavbar.component";
 import { SidebarComponent } from "./layout/admin/ui/sidebar/sidebar.component";
 import { ProductlistComponent } from "./layout/admin/pages/productlist/productlist.component";
+import { AddButtonComponent } from "./layout/admin/ui/add-button/add-button.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent],
+  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

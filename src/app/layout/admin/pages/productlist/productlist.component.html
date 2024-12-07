@@ -15,19 +15,21 @@
                 @for (item of items; track item.id) {
                 <tr>
                     <th scope="row" style="color: black;">{{item.id}}</th>
-                    <td><img src={{item.image}} class="img-fluid rounded-start" alt=""
-                            style="width: 40px;">
+                    <td><img src={{item.image}} class="img-fluid rounded-start" alt="" style="width: 40px;">
                     </td>
                     <td>{{item.category}}</td>
                     <td>{{item.product}}</td>
                     <td>{{item.price}}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm" style="margin-right: 5px;">
+                        <!-- <button class="btn btn-primary btn-sm" style="margin-right: 5px;">
                             <i class="bi bi-pen"></i>
-                        </button>
-                        <button class="btn btn-danger btn-sm">
+                        </button> -->
+                        @for (item of icons; track $index) {
+                            <app-button [icon]="item"></app-button>
+                        }                       
+                        <!-- <button class="btn btn-danger btn-sm">
                             <i class="bi bi-trash3"></i>
-                        </button>
+                        </button> -->
                     </td>
                 </tr>
                 }
