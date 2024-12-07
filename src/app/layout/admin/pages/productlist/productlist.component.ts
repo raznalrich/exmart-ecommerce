@@ -8,7 +8,7 @@ import { TableComponent } from "../../ui/table/table.component";
 @Component({
   selector: 'app-productlist',
   standalone: true,
-  imports: [ButtonComponent, AddButtonComponent, TableComponent],
+  imports: [AddButtonComponent, TableComponent],
   templateUrl: './productlist.component.html',
   styleUrl: './productlist.component.scss',
 })
