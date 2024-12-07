@@ -1,10 +1,11 @@
 .sidenav {
   background: #8061c3;
   transition: all 0.5s ease;
+  padding: 20px;
   position: fixed;
   z-index: 1;
   top: 0;
-  width: 16.5625rem;
+  width: 17rem;
   height: 100vh;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
@@ -91,7 +92,7 @@
 .active {
   background-color: #fff;
   border-radius: 30px 30px 30px 30px;
-  margin-right: -100vw;
+  margin-right: -3.5vw;
   transition: all 0.3s ease-in-out;
 }
 .active .sidenav-link-icon,

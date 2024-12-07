@@ -31,7 +31,7 @@ export class SidebarComponent {
     id:4,
     routerLink:'reportpage',
     item:'Report',
-    image:'bi bi-cart-fill'
+    image:'bi bi-graph-up-arrow'
   },
   {
     id:5,
