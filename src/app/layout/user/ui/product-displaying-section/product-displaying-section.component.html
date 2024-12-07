@@ -1,10 +1,10 @@
 <div class="productDisplayingSection">
   <h1>{{id}}</h1>
   <div class="productGriding">
-    <app-productcard></app-productcard>
-    <app-productcard></app-productcard>
-    <app-productcard></app-productcard>
-    <app-productcard></app-productcard>
-    <app-productcard></app-productcard>
+    @for(f of data;track f){
+
+      <app-productcard [cards]="f"></app-productcard>
+    }
+   
   </div>
 </div>
