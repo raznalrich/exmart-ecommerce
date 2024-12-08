@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class NewAddressComponent {
   constructor(public api: ApiService) {}
-  states: { name: string; code: string }[] = []; 
+  states: { name: string; code: string }[] = [];
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -40,17 +40,5 @@ export class NewAddressComponent {
     console.log(this.form.value);
   }
 
-  ngOnInit() {
-    this.api.getStateData().subscribe({
-      next: (data: any) => {
-        this.states = data.map(
-          (state: { name: string; code: string }) => state.name
-        );
-        console.log(this.states);
-      },
-      error: (err) => {
-        console.error('Error fetching state data:', err);
-      },
-    });
-  }
+ 
 }
