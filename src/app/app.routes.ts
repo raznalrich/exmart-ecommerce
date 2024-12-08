@@ -14,6 +14,7 @@ import { AddtocartpageComponent } from './layout/user/pages/addtocartpage/addtoc
 
 import { ProductDisplayingSectionComponent } from './layout/user/ui/product-displaying-section/product-displaying-section.component';
 import { ProductlistComponent } from './layout/admin/pages/productlist/productlist.component';
+import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
 
 
 export const routes: Routes = [
@@ -36,6 +37,10 @@ export const routes: Routes = [
       {
 
         path:'addcart',component:AddtocartpageComponent
+      },
+      {
+
+        path:'addressconfirm',component:AddressConfirmPageComponent
       },
       {
 
