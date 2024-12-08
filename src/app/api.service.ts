@@ -1,29 +1,26 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
-
-
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) {}
+  constructor(public  http:HttpClient) { }
 
-  getPINData(pin:any) {
-    return this.http.get('data/pincode.json').pipe(
-      map((data:any) => {
-        const filteredData = data.filter((item:any) => item.pincode === Number( pin));
-        return filteredData;
-      })
-    );
-  }
+getCardImages(){
+return this.http.get(`Data/carouselImages.json`)
+}
 
-  getStateData(){
-    const data = this.http.get('data/states.json')
-    
+getCarouselImages(){
+return this.http.get(`Data/carouselImages.json`)
+}
 
-    return data;
-  }
+getProductDetails(){
+  return this.http.get(`Data/details.json`)
+}
+
+// getDropdownDetails(){
+// return this.http.get(`data/details.json`)
+// }
 }

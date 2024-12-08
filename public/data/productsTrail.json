@@ -1,5 +1,6 @@
 [
   {
+    "id":1,
     "category": "garments",
     "name": "T-SHIRT",
     "type": "collared",
@@ -9,6 +10,7 @@
     "size": "M"
   },
   {
+    "id":2,
     "category": "garments",
     "name": "JACKET",
     "type": "woolen",
@@ -18,6 +20,17 @@
     "size": "M"
   },
   {
+    "id":3,
+    "category": "stationary",
+    "name": "NOTEBOOK",
+    "type": "spiral",
+    "colors": ["#ff0000"],
+    "price": 99,
+    "imageUrl": "assets/images/notebook.jpg",
+    "size": null
+  },
+  {
+    "id":4,
     "category": "stationary",
     "name": "NOTEBOOK",
     "type": "spiral",
