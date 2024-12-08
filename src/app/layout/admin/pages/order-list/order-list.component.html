@@ -1,5 +1,36 @@
+
 <div class="container">
-  <p>Orders</p>
+  <div>
+    <p class="heading">Orders</p>
+  </div>
+
+  <div class="search-container">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="&#x1F50D; Search..."
+      aria-label="Search"
+    />
+  </div>
 </div>
+
+<input class="date-select" type="date">
+
+<section>
+<div class="box-container">
+  <div class="box">
+    <p>Total Orders</p>
+    <p>18</p>
+  </div>
+  <div class="box">
+    <p>Delivered</p>
+    <p>18</p>
+  </div>
+  <div class="box">
+    <p>Returned</p>
+    <p>18</p>
+  </div>
+</div>
+</section>
 <app-orderlist-table [OrderList]="orderlist"></app-orderlist-table>
 

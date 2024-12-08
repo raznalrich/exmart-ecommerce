@@ -6,7 +6,7 @@ import { ApiServiceService } from '../../../../services/api-service.service';
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [OrderlistTableComponent, SidebarComponent],
+  imports: [OrderlistTableComponent,],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.scss'
 })
@@ -23,7 +23,6 @@ export class OrderListComponent {
     })
 
   }
-
 }
 
 
