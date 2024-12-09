@@ -3,12 +3,9 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Actions</th>
+                    @for (item of header; track item.id) {
+                    <th scope="col">{{item.title}}</th>
+                    }
                 </tr>
             </thead>
             <tbody>

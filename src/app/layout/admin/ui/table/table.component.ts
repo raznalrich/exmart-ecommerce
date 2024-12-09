@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
-import { ButtonComponent } from "../button/button.component";
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-table',
@@ -17,6 +17,11 @@ export class TableComponent {
     category: '',
     product: '',
     price: 0,
+  };
+
+  @Input() header: any = {
+    id: 0,
+    title: '',
   };
 
   icons: any = [
