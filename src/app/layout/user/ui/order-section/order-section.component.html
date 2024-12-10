@@ -1,0 +1,21 @@
+<div>
+  <h5 style="font-size: 1.2rem; display: flex; align-items: center; gap: 10px;">
+    <i [class]="icon"></i> {{ title }}
+  </h5>
+  <div
+    class="card border-0 p-2"
+    [style.maxHeight]="maxHeight"
+    style="overflow-y: auto; background-color: #f5f5f5;"
+  >
+    @for (item of items; track item) {
+      <app-order-item
+        [title]="item.title"
+        [type]="item.type"
+        [size]="item.size"
+        [imageUrl]="item.imageUrl"
+        [status]="item.status"
+        [statusIcon]="item.statusIcon"
+      ></app-order-item>
+    }
+  </div>
+ </div>

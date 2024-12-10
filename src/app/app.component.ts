@@ -13,6 +13,9 @@ import { AddButtonComponent } from "./layout/admin/ui/add-button/add-button.comp
 
 
 import { SingleproductpageComponent } from './layout/user/pages/singleproductpage/singleproductpage.component';
+import { NewAddressComponent } from "./layout/user/pages/new-address/new-address.component";
+import { SelectAddressComponent } from "./layout/user/pages/select-address/select-address.component";
+import { UserOrdersComponent } from "./layout/user/pages/user-orders/user-orders.component";
 
 
 @Component({
@@ -20,7 +23,7 @@ import { SingleproductpageComponent } from './layout/user/pages/singleproductpag
   standalone: true,
 
 
-  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent,SingleproductpageComponent,AddtocartpageComponent],
+  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent, SingleproductpageComponent, AddtocartpageComponent, NewAddressComponent, SelectAddressComponent, UserOrdersComponent],
 
 
   templateUrl: './app.component.html',
