@@ -12,14 +12,5 @@ import { ApiService } from '../../../../api.service';
   styleUrl: './address-confirm-page.component.scss'
 })
 export class AddressConfirmPageComponent {
-  address:any;
-@Input()buttonName:string='';
-constructor(public api: ApiService) {}
-  ngOnInit() {
-   this.address= this.api.getProductDetails().subscribe((res: any) => {
-      this.address = res;
-      // console.log(this.address.addresses.name);
-      console.log(this.address.addresses[0].name);
-  }
-)}
+
 }

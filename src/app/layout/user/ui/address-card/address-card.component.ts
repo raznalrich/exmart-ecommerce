@@ -16,7 +16,20 @@ name:'',
 badgeName:'',
 place:'',
 buildingNo:'',
-pincode:0,
+pincode:'',
+city:'',
+district:'',
+stste:'',
+country:'',
 phoneNo:''
 }
+arr:any;
+  ngOnInit() {
+   this.address= this.api.getUserAddress().subscribe((res: any) => {
+      this.address = res;
+      this.arr = this.address.addresses
+      console.log(this.arr);
+      console.log("Name : ",this.arr[0].name);
+  }
+)}
 }
