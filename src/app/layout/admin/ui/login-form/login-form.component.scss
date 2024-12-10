@@ -1,0 +1,132 @@
+
+.login-container {
+  width: 320px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+.login-header {
+  background-color: #3366cc;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.login-header:hover {
+  background-color: #254a99;
+  transition: background-color 0.3s ease;
+}
+
+.login-avatar {
+  margin: 20px 0;
+}
+
+.login-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-avatar img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.login-form {
+  padding: 20px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #3366cc;
+  box-shadow: 0 0 6px rgba(51, 102, 204, 0.5);
+  outline: none;
+}
+
+.form-group .icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #888;
+}
+
+.form-group .icon:hover {
+  color: #3366cc;
+}
+
+
+.forgot-password {
+  display: block;
+  margin: 10px 0 20px;
+  font-size: 14px;
+  color: #888;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #ea3838;
+}
+
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3366cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #254a99;
+  transform: translateY(-2px);
+}
+
+.login-button:active {
+  background-color: #1a3573;
+  transform: translateY(0);
+}
+
+
+.validation-message{
+  color: #d9534f;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  background-color: transparent;
+  text-align: center;
+  margin: 8px 0;
+}
