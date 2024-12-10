@@ -20,7 +20,7 @@ getProductDetails(){
   return this.http.get(`Data/details.json`)
 }
 
-// getDropdownDetails(){
-// return this.http.get(`data/details.json`)
-// }
+getUserAddress(){
+return this.http.get(`Data/address.json`)
+}
 }

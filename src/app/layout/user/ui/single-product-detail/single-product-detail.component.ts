@@ -25,7 +25,7 @@ details:any
       this.arr=this.details.product;
       console.log(this.arr);
       this.colors=this.arr.colors
-      console.log("colors",this.arr.colors[0].code);
+      // console.log("colors",this.arr.colors[0].code);
     });
 }
 }
