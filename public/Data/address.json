@@ -1,0 +1,20 @@
+{
+  "addresses": [
+    {
+      "name": "John Doe",
+      "badge_name": "Home",
+      "place": "123 Maple Street",
+      "building_number": "Apt 4B",
+      "pincode": "123456",
+      "phone_number": "+1234567890"
+    },
+    {
+      "name": "Jane Smith",
+      "badge_name": "Work",
+      "place": "456 Elm Avenue",
+      "building_number": "Office 101",
+      "pincode": "654321",
+      "phone_number": "+0987654321"
+    }
+  ]
+}
