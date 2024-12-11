@@ -2,11 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
+  constructor(public http: HttpClient) {}
 
-  constructor(public  http:HttpClient) { }
+  getCardImages() {
+    return this.http.get(`data/carouselImages.json`);
+  }
+
 
 getCardImages(){
 return this.http.get(`Data/carouselImages.json`)
@@ -20,7 +24,8 @@ getProductDetails(){
   return this.http.get(`Data/details.json`)
 }
 
-// getDropdownDetails(){
-// return this.http.get(`data/details.json`)
-// }
+
+  getProducts() {
+    return this.http.get(`product-sample.json`);
+  }
 }
