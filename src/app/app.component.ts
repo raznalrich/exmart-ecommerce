@@ -1,19 +1,27 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { HomeStaticComponent } from './layout/user/pages/home-static/home-static.component';
+import { AddtocartpageComponent } from './layout/user/pages/addtocartpage/addtocartpage.component';
+
+import { ThankyoupageComponent } from './layout/user/pages/thankyoupage/thankyoupage.component';
 import { HomepageComponent } from "./layout/user/homepage/homepage.component";
 import { UsernavbarComponent } from "./layout/user/ui/usernavbar/usernavbar.component";
 import { SidebarComponent } from "./layout/admin/ui/sidebar/sidebar.component";
-import { AdminDashboardComponent } from "./layout/admin/pages/admin-dashboard/admin-dashboard.component";
-import { SingleproductpageComponent } from "./layout/user/pages/singleproductpage/singleproductpage.component";
+
+import { ProductlistComponent } from "./layout/admin/pages/productlist/productlist.component";
+import { AddButtonComponent } from "./layout/admin/ui/add-button/add-button.component";
+
+
+import { SingleproductpageComponent } from './layout/user/pages/singleproductpage/singleproductpage.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
 
-  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, AdminDashboardComponent, HomeStaticComponent, SingleproductpageComponent],
+
+  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent,SingleproductpageComponent,AddtocartpageComponent],
+
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
