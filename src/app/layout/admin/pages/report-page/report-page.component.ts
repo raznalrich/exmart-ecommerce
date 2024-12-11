@@ -5,8 +5,12 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './report-page.component.html',
-  styleUrl: './report-page.component.scss'
+  styleUrl: './report-page.component.scss',
 })
 export class ReportPageComponent {
-
+  button: any = {
+    id: 1,
+    icon: 'bi bi-plus-circle',
+    title: 'Create New',
+  };
 }
