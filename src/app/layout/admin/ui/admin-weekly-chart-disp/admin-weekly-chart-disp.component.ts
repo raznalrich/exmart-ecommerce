@@ -12,22 +12,20 @@ Chart.register(...registerables);
 export class AdminWeeklyChartDispComponent implements AfterViewInit {
 
   constructor() {
-    // Register Chart.js modules
     Chart.register(...registerables);
   }
 
   ngAfterViewInit(): void {
-    // Bar Chart Configuration
     const barChartConfig: ChartConfiguration = {
       type: 'bar',
       data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep' , 'Oct', 'Nov', 'Dec'],
         datasets: [
           {
             label: 'Daily Data',
-            data: [50, 120, 150, 200, 100, 180, 160],
+            data: [10, 12, 14, 20, 10, 18, 16, 12, 16, 18, 20, 30],
             backgroundColor: [
-              '#4CAF50', '#2196F3', '#FF5722', '#CDDC39', '#FFC107', '#3F51B5', '#F44336',
+              '#F09951','#EA5853','#64A2F5','#43BF73'
             ],
           },
         ],
@@ -37,13 +35,13 @@ export class AdminWeeklyChartDispComponent implements AfterViewInit {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false, // Hide legend
+            display: false,
           },
         },
         scales: {
           y: {
             beginAtZero: true,
-            max: 250,
+            max: 40,
           },
         },
       },
@@ -53,41 +51,4 @@ export class AdminWeeklyChartDispComponent implements AfterViewInit {
     const ctx = document.getElementById('barChart') as HTMLCanvasElement;
     new Chart(ctx, barChartConfig);
   }
-
-
-
 }
-// chart: any;
-//  ngOnInit(): void {
-//   this.chart = new Chart('MyChart',this.config);
-//  }
-
-//  const data: {
-//   datasets: [{
-//       barPercentage: 0.5,
-//       barThickness: 6,
-//       maxBarThickness: 8,
-//       minBarLength: 2,
-//       data: [10, 20, 30, 40, 50, 60, 70]
-//   }]
-// };
-  // public config : any ={
-  //   type: 'bar',
-  //   data:{
-  //     labels: ['Jan','Feb','Mar','Apr'],
-  // datasets: [
-  //   {
-  //   label: 'sales',
-  //   data: [65, 59, 80, 81, 56, 55, 40],
-  //   backgroundColor: 'blue',
-  // },
-  // {
-  //   label: 'chuma eri da',
-  //   data: [10, 23, 27, 81, 16, 90, 40],
-  //   backgroundColor: 'red',
-  // },],
-  // },
-  // options: {
-  //   aspectRatio:1,
-  // },};
-

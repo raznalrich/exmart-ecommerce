@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   width: 170px;
-  height: 120px;
-  background-color: transparent; /* Adjust to match purple */
+  height: 100px;
+  background-color: transparent;
   border: 2px solid #8061C3;
   border-radius: 8px;
   text-align: center;
@@ -22,7 +22,7 @@
     align-items: center;
     gap: 15px;
     font-size: 36px;
-    color: #8061C3; /* Adjust to match purple */
+    color: #8061C3;
     img{
       height: 35px;
       width: 35px;
@@ -32,8 +32,8 @@
 
 
   .countDisp {
-    font-size: 40px;
-    color: #8061C3; /* Adjust to match number color */
+    font-size: 25px;
+    color: #8061C3;
     margin: 8px 0;
   }
 
