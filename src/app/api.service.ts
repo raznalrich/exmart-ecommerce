@@ -7,9 +7,7 @@ import { Injectable } from '@angular/core';
 export class ApiService {
   constructor(public http: HttpClient) {}
 
-  getCardImages() {
-    return this.http.get(`data/carouselImages.json`);
-  }
+
 
 
 getCardImages(){
