@@ -1,0 +1,19 @@
+{
+  "employees": [
+    {
+      "name": "Riya",
+      "feedback": "This is sample feedback for our ExMart website",
+      "image": "assets/riya.jpg"
+    },
+    {
+      "name": "Kavita",
+      "feedback": "This is sample feedback for our ExMart website",
+      "image": "assets/kavita.jpg"
+    },
+    {
+      "name": "Ram",
+      "feedback": "This is sample feedback for our ExMart website",
+      "image": "assets/ram.jpg"
+    }
+  ]
+}

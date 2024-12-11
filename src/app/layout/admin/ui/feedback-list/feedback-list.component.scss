@@ -1,0 +1,53 @@
+.card {
+  border-radius: 10px;
+  width:150vh;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover
+}
+
+.action-icon {
+  color: #8047ac;
+  transition: transform 0.3s ease, color 0.3s ease;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.action-icon:hover {
+  color: #000000;
+  transform: scale(1.2);
+}
+
+.hover-row:hover {
+  background-color: #f9f9f9;
+}
+
+.text-muted {
+  font-size: 0.9rem;
+}
+
+img {
+  border: 2px solid #e9ecef;
+}
+
+.text-end {
+margin-right: 20px;
+}
