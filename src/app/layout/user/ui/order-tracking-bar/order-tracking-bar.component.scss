@@ -1,0 +1,79 @@
+.order-tracking {
+  display: flex;
+  flex-direction: row; /* Default: Horizontal layout */
+  align-items: center;
+  justify-content: space-around;
+  background-color: #3468ad;
+  padding: 20px 6rem;
+  margin-top: 20px;
+  position: relative;
+  flex-wrap: wrap; /* Ensures content wraps on smaller screens */
+}
+
+.step {
+  text-align: center;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.step img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
+}
+
+.line {
+  flex: 1;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    #fff,
+    #fff 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+@media (max-width: 768px) {
+  .order-tracking {
+    flex-direction: column; /* Switch to vertical layout */
+    padding: 20px;
+  }
+
+  .line {
+    height: 2px; /* Keep the line visible */
+    margin: 10px 0; /* Add spacing above and below the line */
+    width: 80%; /* Adjust width for smaller screens */
+  }
+
+  .step img {
+    width: 60px;
+    height: 60px; /* Resize images */
+  }
+
+  .step {
+    font-size: 0.9rem; /* Adjust font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .order-tracking {
+    padding: 10px;
+  }
+
+  .line {
+    width: 60%; /* Further reduce width for smaller screens */
+  }
+
+  .step img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .step {
+    font-size: 0.8rem;
+  }
+}
