@@ -7,6 +7,8 @@ import { ThankyoupageComponent } from './layout/user/pages/thankyoupage/thankyou
 import { HomepageComponent } from "./layout/user/homepage/homepage.component";
 import { UsernavbarComponent } from "./layout/user/ui/usernavbar/usernavbar.component";
 import { SidebarComponent } from "./layout/admin/ui/sidebar/sidebar.component";
+import { AdminDashboardComponent } from "./layout/admin/pages/admin-dashboard/admin-dashboard.component";
+import { SingleproductpageComponent } from "./layout/user/pages/singleproductpage/singleproductpage.component";
 
 import { ProductlistComponent } from "./layout/admin/pages/productlist/productlist.component";
 import { AddButtonComponent } from "./layout/admin/ui/add-button/add-button.component";
@@ -19,6 +21,7 @@ import { UsersidebarComponent } from "./layout/user/ui/usersidebar/usersidebar.c
 @Component({
   selector: 'app-root',
   standalone: true,
+
 
 
   imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent,SingleproductpageComponent,AddtocartpageComponent,UsersidebarComponent],
