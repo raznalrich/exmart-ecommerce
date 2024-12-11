@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { OrderlistTableComponent } from "../../ui/orderlist-table/orderlist-table.component";
 import { SidebarComponent } from "../../ui/sidebar/sidebar.component";
 import { ApiServiceService } from '../../../../services/api-service.service';
+import { SearchbarComponent } from "../../ui/searchbar/searchbar.component";
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [OrderlistTableComponent,],
+  imports: [OrderlistTableComponent, SearchbarComponent],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.scss'
 })

@@ -4,31 +4,24 @@
     <p class="heading">Orders</p>
   </div>
 
-  <div class="search-container">
-    <input
-      type="text"
-      class="search-input"
-      placeholder="&#x1F50D; Search..."
-      aria-label="Search"
-    />
-  </div>
+  <app-searchbar></app-searchbar>
 </div>
 
-<input class="date-select" type="date">
+
 
 <section>
+<div class="box-date">
+  <input class="date-select" type="date">
+</div>
+
 <div class="box-container">
-  <div class="box">
-    <p>Total Orders</p>
-    <p>18</p>
+  <div class="box" style="background-color: #76c2e6;" >
+    <p class="heading">Total Orders</p>
+    <p class="count">18</p>
   </div>
-  <div class="box">
-    <p>Delivered</p>
-    <p>18</p>
-  </div>
-  <div class="box">
-    <p>Returned</p>
-    <p>18</p>
+  <div class="box" style="background-color: #76DBAA;">
+    <p class="heading">Delivered</p>
+    <p class="count">26</p>
   </div>
 </div>
 </section>
