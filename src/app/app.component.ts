@@ -5,13 +5,15 @@ import { HomeStaticComponent } from './layout/user/pages/home-static/home-static
 import { HomepageComponent } from "./layout/user/homepage/homepage.component";
 import { UsernavbarComponent } from "./layout/user/ui/usernavbar/usernavbar.component";
 import { SidebarComponent } from "./layout/admin/ui/sidebar/sidebar.component";
+import { AdminDashboardComponent } from "./layout/admin/pages/admin-dashboard/admin-dashboard.component";
+import { SingleproductpageComponent } from "./layout/user/pages/singleproductpage/singleproductpage.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
 
-  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent],
+  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, AdminDashboardComponent, HomeStaticComponent, SingleproductpageComponent],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
