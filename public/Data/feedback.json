@@ -14,6 +14,21 @@
       "name": "Ram",
       "feedback": "This is sample feedback for our ExMart website",
       "image": "assets/ram.jpg"
+    },
+    {
+      "name": "Rasnal",
+      "feedback": "This is sample feedback for our ExMart website",
+      "image": "assets/rasnal.jpg"
+    },
+    {
+      "name": "Kavita",
+      "feedback": "This is sample feedback for our ExMart website",
+      "image": "assets/kavita.jpg"
+    },
+    {
+      "name": "Pratheep",
+      "feedback": "This is sample feedback for our ExMart website",
+      "image": "assets/pratheep.jpg"
     }
   ]
 }
