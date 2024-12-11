@@ -10,13 +10,14 @@ import { AddButtonComponent } from "./layout/admin/ui/add-button/add-button.comp
 
 
 import { SingleproductpageComponent } from './layout/user/pages/singleproductpage/singleproductpage.component';
+import { UsersidebarComponent } from "./layout/user/ui/usersidebar/usersidebar.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
 
-  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent,SingleproductpageComponent],
+  imports: [RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent, SingleproductpageComponent, UsersidebarComponent],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
