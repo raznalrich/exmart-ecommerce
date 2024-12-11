@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-add-button',
@@ -10,8 +9,8 @@ import { Title } from '@angular/platform-browser';
 })
 export class AddButtonComponent {
   @Input() button: any = {
-    id: 1,
-    icon: 'bi bi-plus-circle',
-    title: 'Create New',
+    id: 0,
+    icon: "",
+    title: "",
   };
 }
