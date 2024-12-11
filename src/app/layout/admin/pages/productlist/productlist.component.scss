@@ -1,0 +1,18 @@
+.page {
+  .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 25px;
+  }
+  input {
+    border-radius: 10px;
+    height: 40px;
+    width: 100%;
+    padding-left: 10px;
+  }
+  input::placeholder {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,117 @@
+<div class="container" style="max-width: 600px">
+  <form class="row g-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="col-md-6">
+      <label for="inputEmail4" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="inputEmail4"
+        formControlName="email"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="inputPassword4" class="form-label">Mobile Number</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputPassword4"
+        formControlName="phone"
+      />
+    </div>
+    <div class="col-12">
+      <label for="inputAddress" class="form-label">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputAddress"
+        placeholder="1234 Main St"
+        formControlName="address"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="inputCity" class="form-label">City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputCity"
+        formControlName="city"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="inputState" class="form-label">State</label>
+      <select id="inputState" class="form-select">
+        <option selected></option>
+        @for (state of states; track state) {
+        <option>{{ state }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="inputZip" class="form-label">PIN</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputZip"
+        formControlName="pincode"
+      />
+    </div>
+    <div class="col-12">
+      <strong class="heading">Address Type</strong>
+      <div class="d-flex align-items-center mt-2">
+        <div class="form-check me-3">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="home"
+            id="genderMale"
+            value="male"
+            formControlName="home"
+          />
+          <label class="form-check-label" for="genderMale">Home</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="work"
+            id="genderFemale"
+            value="female"
+            formControlName="work"
+          />
+          <label class="form-check-label" for="genderFemale">Work</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-end mt-3">
+      <button
+        id="submit"
+        name="submit"
+        class="btn btn-primary px-4 me-3"
+        style="
+          background-color: #2f80ed;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-weight: bold;
+        "
+        value="1"
+      >
+        Save
+      </button>
+      <button
+        id="cancel"
+        name="cancel"
+        class="btn btn-light px-4"
+        style="
+          background-color: #f2f2f2;
+          color: #333;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-weight: bold;
+        "
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
