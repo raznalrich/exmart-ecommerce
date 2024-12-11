@@ -1,13 +1,13 @@
 <div class="OrderDetails">
-  @for(item of Orders; track item){
+  @for(item of orders.items; track item){
     <div class="eachOrderDetails">
       <div><img src="" alt="image not found"></div>
       <div class="OrderDetailsText">
-        <h3>Experion Jacket</h3>
-        <p>Size : XL</p>
-        <p>color : Black</p>
+        <h3>{{item.name}}</h3>
+        <p>Size : {{item.size}}</p>
+        <p>color : {{item.color}}</p>
       </div>
-      <div>$500</div>
+      <div>{{item.price | currency: "INR"}}</div>
     </div>
   }
 
