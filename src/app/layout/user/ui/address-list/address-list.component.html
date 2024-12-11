@@ -1,0 +1,12 @@
+<div class="card border-0 p-2" style="max-height: 380px; overflow-y: auto">
+  @for (address of addresses; track address) {
+    <app-address-card
+      [label]="address.label"
+      [name]="address.name"
+      [phone]="address.phone"
+      [address]="address.address"
+      (edit)="onEdit(address)"
+      (delete)="onDelete(address)"
+    ></app-address-card>
+  }
+ </div>
