@@ -1,6 +1,19 @@
+.PeopleBoxes {
+  width: 100%;
+  height: 50vh; /* Full viewport height */
+  overflow: hidden; /* Prevents overflow issues */
+}
+
+.PeopleBoxes img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container proportionally */
+  display: block; /* Removes any extra spacing around the image */
+}
+
 .MainContainer{
   background-color: rgba(62, 104, 185, 0.9);
-  margin: 100px;
+  margin: 50px 100px;
   border-radius: 20px;
   text-align: center;
   align-items: center;
