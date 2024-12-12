@@ -6,19 +6,19 @@
       "name": "Experion Jacket",
       "size": "XL",
       "color": "Black",
-      "price": "$500"
+      "price": "500"
     },
     {
       "name": "Urban Sneakers",
       "size": "L",
       "color": "White",
-      "price": "$120"
+      "price": "120"
     },
     {
       "name": "Classic Watch",
       "size": "One Size",
       "color": "Silver",
-      "price": "$250"
+      "price": "250"
     }
   ],
   "totalAmount": "$870",

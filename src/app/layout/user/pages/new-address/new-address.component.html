@@ -1,0 +1,59 @@
+<div class="container" style="max-width: 600px">
+  <form>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <app-text-input
+          label="Email"
+          id="inputEmail4"
+          type="email"
+        ></app-text-input>
+      </div>
+      <div class="col-md-6">
+        <app-text-input label="Mobile Number" id="inputPhone"></app-text-input>
+      </div>
+      <div class="col-12">
+        <app-text-input
+          label="Address"
+          id="inputAddress"
+          placeholder="1234 Main St"
+        ></app-text-input>
+      </div>
+      <div class="col-md-6">
+        <app-text-input label="City" id="inputCity"></app-text-input>
+      </div>
+      <div class="col-md-4">
+        <app-select-input
+          label="State"
+          id="inputState"
+          [options]="states"
+        ></app-select-input>
+      </div>
+      <div class="col-md-2">
+        <app-text-input label="PIN" id="inputZip"></app-text-input>
+      </div>
+      <div class="col-12">
+        <app-radio-group
+          label="Address Type"
+          id="addressType"
+          [options]="[
+            { label: 'Home', value: 'home' },
+            { label: 'Work', value: 'work' }
+          ]"
+        ></app-radio-group>
+      </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-end mt-3">
+      <app-save-button
+        [label]="'Save'"
+        (clickEvent)="onSave($event)"
+      ></app-save-button>
+      <app-cancel-button
+        [label]="'Cancel'"
+        class="ms-3"
+        (clickEvent)="onCancel($event)"
+      ></app-cancel-button>
+    </div>
+
+  </form>
+</div>
