@@ -4,7 +4,11 @@ html{
 body {
   font-family: Arial, sans-serif;
 }
-
+.table-container{
+  max-height: 400px; /* Set the height for the scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling if not needed */
+}
 .styled-table {
   width: 100%;
   border-collapse: separate;
@@ -13,11 +17,14 @@ body {
 }
 
 .styled-table th {
+  position: sticky;
+  top: 0;
   text-align: left;
   padding: 12px 15px;
   background-color: #f8f8f8;
   font-weight: bold;
   border-bottom: 2px solid #ddd;
+  z-index: 1;
 }
 
 .styled-table td {

@@ -1,8 +1,14 @@
 .search-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px;
+}
+.search-icon{
+  position: absolute;
+  left: 10px;
+  font-size: 1.2;
 }
 
 .search-input {
