@@ -14,6 +14,11 @@ export class ApiServiceService {
   }
 
 
+  getOrderList() {
+    return this.http.get(`Data/OrderList.json`)
+  }
+
+
 
 
   getItemsInOrder() {
@@ -24,12 +29,5 @@ export class ApiServiceService {
   getproduct(){
     return this.http.get('/Data/productsTrail.json');
   }
-
-
-
-  getOrderList() {
-    return this.http.get(`Data/OrderList.json`)
-  }
-
 
 }
