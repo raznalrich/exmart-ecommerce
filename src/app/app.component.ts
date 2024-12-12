@@ -14,6 +14,7 @@ import { AddButtonComponent } from './layout/admin/ui/add-button/add-button.comp
 import { SingleproductpageComponent } from './layout/user/pages/singleproductpage/singleproductpage.component';
 import { UsersidebarComponent } from './layout/user/ui/usersidebar/usersidebar.component';
 import { CategoryButtonComponent } from "./layout/user/ui/category-button/category-button.component";
+import { AddProductsComponent } from "./layout/admin/pages/add-products/add-products.component";
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,8 @@ import { CategoryButtonComponent } from "./layout/user/ui/category-button/catego
     SingleproductpageComponent,
     AddtocartpageComponent,
     UsersidebarComponent,
-    CategoryButtonComponent
+    CategoryButtonComponent,
+    AddProductsComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

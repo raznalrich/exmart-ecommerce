@@ -13,7 +13,6 @@ export class AddButtonComponent {
     icon: "",
     title: "",
   };
-
   buttonFunction = Output();
   addItem(){
     this.buttonFunction.emit();
