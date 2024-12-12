@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, output } from '@angular/core';
 
 @Component({
   selector: 'app-add-button',
@@ -13,4 +13,9 @@ export class AddButtonComponent {
     icon: "",
     title: "",
   };
+
+  buttonFunction = Output();
+  addItem(){
+    this.buttonFunction.emit();
+  }
 }
