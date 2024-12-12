@@ -15,6 +15,9 @@ import { TableComponent } from '../../ui/table/table.component';
 export class ProductlistComponent {
   constructor(public api: ApiServiceService) {}
 
+  addItem() {
+    throw new Error('Method not implemented.');
+  }
   items: any = {
     id: 0,
     image: '',
