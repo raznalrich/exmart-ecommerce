@@ -58,5 +58,95 @@
         "quantity": 4
       }
     ]
+  },
+  {
+    "order": "005",
+    "date": "2024-12-07",
+    "customer": "Emily Davis",
+    "status": "Done",
+    "amount": 60.00,
+    "items": [
+      {
+        "itemName": "Notebook",
+        "quantity": 6
+      }
+    ]
+  },
+  {
+    "order": "006",
+    "date": "2024-12-08",
+    "customer": "Michael Wilson",
+    "status": "Pending",
+    "amount": 150.00,
+    "items": [
+      {
+        "itemName": "Chair",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "order": "007",
+    "date": "2024-12-09",
+    "customer": "Jessica Taylor",
+    "status": "Done",
+    "amount": 45.00,
+    "items": [
+      {
+        "itemName": "Headphones",
+        "quantity": 1
+      },
+      {
+        "itemName": "Mouse Pad",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "order": "008",
+    "date": "2024-12-10",
+    "customer": "Chris Evans",
+    "status": "Pending",
+    "amount": 520.00,
+    "items": [
+      {
+        "itemName": "Table",
+        "quantity": 1
+      },
+      {
+        "itemName": "Desk Lamp",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "order": "009",
+    "date": "2024-12-11",
+    "customer": "Samantha Lee",
+    "status": "Done",
+    "amount": 90.00,
+    "items": [
+      {
+        "itemName": "Power Bank",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "order": "010",
+    "date": "2024-12-12",
+    "customer": "Ryan Martinez",
+    "status": "Pending",
+    "amount": 300.00,
+    "items": [
+      {
+        "itemName": "Smartphone",
+        "quantity": 1
+      },
+      {
+        "itemName": "Screen Protector",
+        "quantity": 1
+      }
+    ]
   }
 ]
