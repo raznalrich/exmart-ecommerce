@@ -8,7 +8,7 @@
       @for(i of cards.colors ; track i){
         <div class="color-circle" [ngClass]="{'red': i === 'red', 'blue': i === 'blue','white': i === 'white','black': i === 'black'}"></div>    }
       </div>
-    <p  class="card-text">{{cards.price | currency:'INR'}} <button routerLink="/viewproduct/{{cards.id}}" type="button" class="btn btn-outline-primary">View more</button></p>
+    <p  class="card-text para1">{{cards.price | currency:'INR'}} <button routerLink="/viewproduct/{{cards.id}}" type="button" class="btn btn-outline-primary">View more</button></p>
 
   </div>
 </div>
