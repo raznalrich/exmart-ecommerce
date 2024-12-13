@@ -3,13 +3,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    @for (item of header; track item.id) {
-                    <th scope="col">{{item.title}}</th>
+                    @for (item of header; track item) {
+                    <th scope="col">{{item}}</th>
                     }
                 </tr>
             </thead>
             <tbody>
-                @for (item of items; track item.id) {
+                @for (item of items; track item) {
                 <tr>
                     <th scope="row" style="color: black;">{{item.id}}</th>
                     <td><img src={{item.image}} class="img-fluid rounded-start" alt="" style="width: 40px;">
