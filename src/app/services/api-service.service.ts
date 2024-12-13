@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 
+
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -10,6 +11,11 @@ export class ApiServiceService {
 
   getProducts(){
     return this.http.get('Data/product-sample.json');
+  }
+
+
+  getOrderList() {
+    return this.http.get(`Data/OrderList.json`)
   }
 
 
