@@ -1,5 +1,9 @@
 <div class="productDisplayingSection">
   <div class="productGriding">
-    
+    @for(f of data;track f){
+
+      <app-productcard [cards]="f"></app-productcard>
+    }
+
   </div>
 </div>
