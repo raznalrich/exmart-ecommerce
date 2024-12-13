@@ -12,12 +12,7 @@ import { ApiService } from '../../../../api.service';
 })
 export class AddressCardComponent {
   constructor(public api:ApiService){}
-  // @Input() label: string = '';
-  // @Input() name: string = '';
-  // @Input() phone: string = '';
-  // @Input() address: string = '';
-  @Output() edit = new EventEmitter<void>();
-  @Output() delete = new EventEmitter<void>();
+
 @Input()address:any={
 name:'',
 badgeName:'',
@@ -39,11 +34,4 @@ arr:any;
       console.log("Name : ",this.arr[0].name);
   }
 )}
-onEdit() {
-  this.edit.emit();
-}
-
-onDelete() {
-  this.delete.emit();
-}
 }
