@@ -15,6 +15,9 @@ import { TableComponent } from '../../ui/table/table.component';
 export class ProductlistComponent {
   constructor(public api: ApiServiceService) {}
 
+  addItem() {
+    throw new Error('Method not implemented.');
+  }
   items: any = {
     id: 0,
     image: '',
@@ -23,32 +26,7 @@ export class ProductlistComponent {
     price: 0,
   };
 
-  header: any = [
-    {
-      id: 1,
-      title: 'Id',
-    },
-    {
-      id: 2,
-      title: 'Image',
-    },
-    {
-      id: 3,
-      title: 'Category',
-    },
-    {
-      id: 4,
-      title: 'Product',
-    },
-    {
-      id: 5,
-      title: 'Price',
-    },
-    {
-      id: 6,
-      title: 'Actions',
-    },
-  ];
+  header: any = ['Id', 'Image', 'Category', 'Product', 'Price', 'Actions'];
 
   ngOnInit() {
     this.api.getProducts().subscribe((res: any) => {
