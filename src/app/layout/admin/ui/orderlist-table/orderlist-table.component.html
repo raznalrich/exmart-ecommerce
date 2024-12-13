@@ -1,0 +1,32 @@
+<div class="table-container">
+  <table class="styled-table">
+    <!-- @for(item of O) -->
+    <tr>
+      <th>Order</th>
+      <th>Date</th>
+      <th>Customer</th>
+      <th>Status</th>
+      <th>Amount</th>
+      <th>Items</th>
+    </tr>
+    @for(item of OrderList; track item){
+      <tr>
+        <td>{{item.order}}</td>
+        <td>{{item.date}}</td>
+        <td>{{item.customer}}</td>
+        <td>
+          <span class="badge" [class.done]="item.status === 'Done'" [class.pending]="item.status === 'Pending'">
+            {{ item.status }}
+        </span>
+        </td>
+        <td>{{item.amount | currency : "INR"}}</td>
+         <td>{{calculateTotalQuantity(item.items)}}</td>
+
+
+      </tr>
+    }
+
+
+  </table>
+</div>
+

@@ -1,0 +1,27 @@
+.search-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.search-icon{
+  position: absolute;
+  left: 10px;
+  font-size: 1.2;
+}
+
+.search-input {
+  width: 400px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+}
+
+.search-input::placeholder {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: #aaa;
+}
