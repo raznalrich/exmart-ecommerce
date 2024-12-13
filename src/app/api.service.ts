@@ -11,13 +11,21 @@ export class ApiService {
     return this.http.get(`Data/carouselImages.json`);
   }
 
+  // getCarouselImages() {
+  //   return this.http.get(`Data/carouselImages.json`);
+  // }
+
+  getProductDetails() {
+    return this.http.get(`Data/details.json`);
+  }
+
   getCarouselImages() {
     return this.http.get(`Data/carouselImages.json`);
   }
 
-  getProductDetails() {
-    return this.http.get(`data/details.json`);
-  }
+  // getProductDetails() {
+  //   return this.http.get(`data/details.json`);
+  // }
 
   getProducts() {
     return this.http.get(`product-sample.json`);

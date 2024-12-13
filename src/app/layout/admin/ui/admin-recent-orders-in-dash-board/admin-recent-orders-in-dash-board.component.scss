@@ -1,0 +1,50 @@
+.product-list {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  margin: auto;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.product-index {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.product-image {
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.product-info {
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.product-price {
+  font-size: 14px;
+  color: gray;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 10px 0;
+}

@@ -1,0 +1,9 @@
+<div class="mb-3">
+  <label [for]="id" class="form-label">{{ label }}</label>
+  <select [id]="id" class="form-select">
+    <option value="">{{ placeholder }}</option>
+    @for (option of options; track option) {
+      <option [value]="option">{{ option }}</option>
+    }
+  </select>
+</div>
