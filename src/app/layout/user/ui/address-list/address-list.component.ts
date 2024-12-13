@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { AddressCardComponent } from '../address-card/address-card.component';
+import { ProfileAddressCardComponent } from "../profile-address-card/profile-address-card.component";
 
 @Component({
   selector: 'app-address-list',
   standalone: true,
-  imports: [AddressCardComponent],
+  imports: [AddressCardComponent, ProfileAddressCardComponent],
   templateUrl: './address-list.component.html',
   styleUrl: './address-list.component.scss'
 })
