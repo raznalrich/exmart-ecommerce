@@ -10,8 +10,10 @@ import { Component } from '@angular/core';
 export class AdminRecentOrdersInDashBoardComponent {
 
   products = [
-    { name: 'T-Shirt', price: 499 },
-    { name: 'Exp Mug', price: 499 },
-    { name: 'Earpods', price: 499 },
+    { name: 'T-Shirt', price: 499 , image: 'images/trialtshirt.png' },
+    { name: 'Exp Mug', price: 199 , image: 'images/trialtshirt.png'},
+    { name: 'Notebook', price: 99 , image: 'images/trialtshirt.png'},
+    { name: 'Exp Mug', price: 199 , image: 'images/trialtshirt.png'},
+    { name: 'Notebook', price: 99 , image: 'images/trialtshirt.png'},
   ];
 }
