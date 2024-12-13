@@ -1,0 +1,96 @@
+$order-green: #4caf50;
+$order-white: #fff;
+$order-gray: #f8f9fa;
+$order-dark: #343a40;
+
+.order-confirmed-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $order-gray;
+}
+
+.confirmation {
+  text-align: center;
+  padding: 20px;
+  background-color: $order-white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+
+  .checkmark {
+    margin-bottom: 20px;
+
+    svg {
+      width: 80px;
+      height: 80px;
+
+      .circle-path {
+        stroke: $order-green;
+        stroke-width: 4;
+        stroke-dasharray: 157;
+        stroke-dashoffset: 157;
+        animation: drawCircle 1s linear forwards;
+      }
+
+      .checkmark-path {
+        stroke: $order-green;
+        stroke-width: 4;
+        stroke-dasharray: 50;
+        stroke-dashoffset: 50;
+        animation: drawCheckmark 0.5s ease-out 1s forwards;
+      }
+    }
+  }
+
+  h1 {
+    color: $order-dark;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $order-dark;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .continue-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: $order-green;
+    color: $order-white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($order-green, 10%);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawCheckmark {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

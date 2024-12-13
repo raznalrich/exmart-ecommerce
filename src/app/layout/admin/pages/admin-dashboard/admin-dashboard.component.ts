@@ -7,7 +7,7 @@ import { AdminRecentOrdersInDashBoardComponent } from "../../ui/admin-recent-ord
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [SidebarComponent, AdminValuesDisplayingButtonComponent, MatSlideToggleModule, AdminWeeklyChartDispComponent, AdminRecentOrdersInDashBoardComponent],
+  imports: [SidebarComponent,AdminValuesDisplayingButtonComponent, MatSlideToggleModule, AdminWeeklyChartDispComponent, AdminRecentOrdersInDashBoardComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
