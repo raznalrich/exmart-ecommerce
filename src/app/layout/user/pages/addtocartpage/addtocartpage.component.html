@@ -9,11 +9,11 @@
 
   <div class="product-desc">
     <h2>Experion T-shirt</h2>
-    <p>Branded item</p>
+    <p>Jack & Johns</p>
     <p>Color:Black</p>
     <p>size XS</p>
   </div>
-  <h3>MRP 699$</h3>
+  <h3>{{ 699|currency:'INR'}}</h3>
   <div class="like-btn">
     <app-addto-cart-likebtn>button</app-addto-cart-likebtn>
   </div>
@@ -27,12 +27,12 @@
 <h1>Summary</h1>
 <div class="summery-footer">
   <h3>Sub total</h3>
-  <h3 id="price">966$</h3>
+  <h3 id="price">{{966 | currency:'INR'}}</h3>
 </div>
 <hr />
 <div class="total">
   <h3>Total</h3>
-  <h3 id="totalPrice">998$</h3>
+  <h3 id="totalPrice">{{998 | currency:'INR'}}</h3>
 </div>
 <hr />
 <div class="checkout-btn">
