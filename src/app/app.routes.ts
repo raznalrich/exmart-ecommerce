@@ -18,6 +18,7 @@ import { UserprofileComponent } from './layout/user/pages/userprofile/userprofil
 import { NewAddressComponent } from './layout/user/pages/new-address/new-address.component';
 import { UserOrdersComponent } from './layout/user/pages/user-orders/user-orders.component';
 import { SelectAddressComponent } from './layout/user/pages/select-address/select-address.component';
+import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
 
 
 export const routes: Routes = [
@@ -40,6 +41,10 @@ export const routes: Routes = [
       {
 
         path:'addcart',component:AddtocartpageComponent
+      },
+      {
+
+        path:'addressconfirm',component:AddressConfirmPageComponent
       },
       {
 
