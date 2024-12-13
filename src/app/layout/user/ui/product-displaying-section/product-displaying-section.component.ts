@@ -19,7 +19,6 @@ export class ProductDisplayingSectionComponent {
 
   constructor(private route: ActivatedRoute,public api:ApiServiceService){}
   ngOnInit(){
-
     this.paramSubscription = this.route.paramMap.subscribe(paramMap => {
       this.id = paramMap.get('id');
       this.data = this.api.getproduct().subscribe((res:any)=>{

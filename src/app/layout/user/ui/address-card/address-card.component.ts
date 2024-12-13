@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+
+import { Component, Input,Output, EventEmitter } from '@angular/core';
 import { AddressBadgeComponent } from '../address-badge/address-badge.component';
 import { ApiService } from '../../../../api.service';
 
@@ -11,6 +12,12 @@ import { ApiService } from '../../../../api.service';
 })
 export class AddressCardComponent {
   constructor(public api:ApiService){}
+  // @Input() label: string = '';
+  // @Input() name: string = '';
+  // @Input() phone: string = '';
+  // @Input() address: string = '';
+  @Output() edit = new EventEmitter<void>();
+  @Output() delete = new EventEmitter<void>();
 @Input()address:any={
 name:'',
 badgeName:'',
@@ -32,4 +39,11 @@ arr:any;
       console.log("Name : ",this.arr[0].name);
   }
 )}
+onEdit() {
+  this.edit.emit();
+}
+
+onDelete() {
+  this.delete.emit();
+}
 }
