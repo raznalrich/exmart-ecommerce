@@ -11,13 +11,13 @@ import { RouterModule } from '@angular/router';
 export class UsersidebarComponent {
   menuItems: any = [{
     id:1,
-    routerLink:'admindashboard',
+    routerLink:'userorder',
     item:'Orders',
     image:'bi bi-bar-chart'
   },
   {
     id:2,
-    routerLink:'productlist',
+    routerLink:'addresspage',
     item:'Address',
     image:'bi bi-boxes'
   },
