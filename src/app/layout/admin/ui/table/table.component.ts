@@ -11,19 +11,9 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class TableComponent {
   constructor(public api: ApiServiceService) {}
-  @Input() items: any = {
-    id: 0,
-    image: '',
-    category: '',
-    product: '',
-    price: 0,
-  };
-
-  @Input() header: any = {
-    id: 0,
-    title: '',
-  };
-
+  @Input() items: any;
+  @Input() header: any;
+  rowKeys: string[] = [];
   icons: any = [
     {
       id: 1,

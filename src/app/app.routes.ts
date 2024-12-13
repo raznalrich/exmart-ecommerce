@@ -28,9 +28,7 @@ export const routes: Routes = [
           {
             path:'category/:id',component:ProductDisplayingSectionComponent
           },
-          {
-            path:'',redirectTo:'category/garments',pathMatch:'full'
-          }
+
         ],
 
       },
@@ -80,7 +78,10 @@ export const routes: Routes = [
       },
       {
         path:'viewfeedback',component:ViewFeedbackComponent
-      }
+      },
+
+
+
     ]
   },
   {

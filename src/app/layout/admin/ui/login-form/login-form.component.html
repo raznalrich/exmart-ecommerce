@@ -1,0 +1,27 @@
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <h4>USER LOGIN</h4>
+    </div>
+    <div class="login-avatar">
+      <img src="https://cdn-icons-png.flaticon.com/512/554/554835.png" alt="User Avatar">
+    </div>
+    <form class="login-form" [formGroup]="LoginForm" (ngSubmit)="submit()">
+      <div class="form-group">
+        <input type="email" placeholder="Email" required formControlName="email">
+        <span class="icon">&#128231;</span>
+      </div>
+      <div class="validation-message">
+            @if (LoginForm.get('email')?.invalid && LoginForm.get('email')?.touched) {
+             invalid email⚠️
+            }
+        </div>
+      <div class="form-group">
+        <input type="password" placeholder="Password" required  formControlName="password">
+        <span class="icon"><img src="" alt="eyeicon" ></span>
+      </div>
+      <a href="#" class="forgot-password">Forgot Password</a>
+      <button type="submit" class="login-button">LOGIN</button>
+    </form>
+  </div>
+</body>
