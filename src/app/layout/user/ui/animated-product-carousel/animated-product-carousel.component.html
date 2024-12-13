@@ -2,7 +2,10 @@
   <!-- list item -->
   <div class="list">
     <div *ngFor="let item of sliderItems" class="item">
-      <img [src]="item.image" alt="Image">
+      <div class="image-container">
+        <img [src]="item.image" alt="Image">
+        <div class="overlay"></div>
+      </div>
       <div class="content">
         <div class="author">{{ item.author }}</div>
         <div class="title">{{ item.title }}</div>
@@ -29,8 +32,8 @@
 
   <!-- next prev -->
   <div class="arrows">
-    <button id="prev" (click)="showSlider('prev')">{{ "<" }}</button>
-    <button id="next" (click)="showSlider('next')">></button>
+    <button id="prev" (click)="showSlider('prev')"><i class="bi bi-arrow-left"></i></button>
+    <button class="next" id="next" (click)="showSlider('next')"><i class="bi bi-arrow-right"></i></button>
   </div>
 
   <!-- time running -->
