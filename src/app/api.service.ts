@@ -30,4 +30,9 @@ export class ApiService {
   getProducts() {
     return this.http.get(`product-sample.json`);
   }
+
+
+getUserAddress(){
+return this.http.get(`Data/address.json`)
+}
 }
