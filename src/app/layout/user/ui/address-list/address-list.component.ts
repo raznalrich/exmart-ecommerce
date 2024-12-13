@@ -5,7 +5,7 @@ import { ProfileAddressCardComponent } from "../profile-address-card/profile-add
 @Component({
   selector: 'app-address-list',
   standalone: true,
-  imports: [AddressCardComponent, ProfileAddressCardComponent],
+  imports: [ProfileAddressCardComponent],
   templateUrl: './address-list.component.html',
   styleUrl: './address-list.component.scss'
 })
