@@ -1,0 +1,30 @@
+img{
+  height: 290px;
+  // width: 150px;
+  object-fit: contain;
+}
+.btn{
+  border-radius: 0;
+}
+p{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.color-circle{
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  border: 1px solid black;
+  margin-right: 5px;
+}
+.colourblock{
+  display: flex;
+}
+.category-head{
+  padding-left: 15px;
+}
+.color-circle.red { background-color: red; }
+  .color-circle.blue { background-color: blue; }
+  .color-circle.white { background-color: white; }
+  .color-circle.black { background-color: black; }
