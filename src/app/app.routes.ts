@@ -18,7 +18,12 @@ import { UserprofileComponent } from './layout/user/pages/userprofile/userprofil
 import { NewAddressComponent } from './layout/user/pages/new-address/new-address.component';
 import { UserOrdersComponent } from './layout/user/pages/user-orders/user-orders.component';
 import { SelectAddressComponent } from './layout/user/pages/select-address/select-address.component';
+<<<<<<< HEAD
 import { SettingsPageComponent } from './layout/admin/pages/settings-page/settings-page.component';
+import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
+=======
+import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
+>>>>>>> 36f9e25e962e693ae1d708bc090d6cd0568fca61
 
 
 export const routes: Routes = [
@@ -39,6 +44,10 @@ export const routes: Routes = [
       {
 
         path:'addcart',component:AddtocartpageComponent
+      },
+      {
+
+        path:'addressconfirm',component:AddressConfirmPageComponent
       },
       {
 
