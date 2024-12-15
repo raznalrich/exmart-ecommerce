@@ -7,7 +7,7 @@ import { CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'app-addtocartpage',
   standalone: true,
-  imports: [AddtocartpageComponent, CheckoutbuttonComponent, AddtoCartDeletebtnComponent, AddtoCartLikebtnComponent,CurrencyPipe],
+  imports: [AddtoCartDeletebtnComponent, CurrencyPipe],
   templateUrl: './addtocartpage.component.html',
   styleUrl: './addtocartpage.component.scss'
 })
