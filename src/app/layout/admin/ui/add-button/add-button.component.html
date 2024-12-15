@@ -1,4 +1,5 @@
-<button class="btn-create-new" (click)="addProduct()">
+<button class="btn-create-new" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     <i [class]="button.icon"></i>
     {{button.title}}
 </button>
+<app-add-products></app-add-products>
