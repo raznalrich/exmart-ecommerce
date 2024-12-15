@@ -9,14 +9,14 @@ import { Component, Input } from '@angular/core';
 })
 export class LongButtonComponent {
 
-  @Input() label: string = 'Click Me'; // Button label
-  @Input() type: 'button' | 'submit' | 'reset' = 'button'; // Button type
-  @Input() disabled: boolean = false; // Disabled state
-  @Input() styleClass: string = ''; // Custom CSS classes
-  @Input() icon: string = ''; // Optional icon class (e.g., FontAwesome or Material Icons)
-  @Input() imgSrc: string = ''; // Image source URL
-  @Input() imgAlt: string = 'button image'; // Image alternative text
-  @Input() imgPosition: 'left' | 'right' = 'left'; // Image position (left/right)
+  @Input() label: string = 'Click Me';
+  @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Input() disabled: boolean = false;
+  @Input() styleClass: string = '';
+  @Input() icon: string = '';
+  @Input() imgSrc: string = '';
+  @Input() imgAlt: string = 'button image';
+  @Input() imgPosition: 'left' | 'right' = 'left';
   @Input() bgColor: string = '#ffffff';
-  @Input() textColor: string = '#ffffff'; 
+  @Input() textColor: string = '#ffffff';
 }

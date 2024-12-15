@@ -1,5 +1,4 @@
 .product-list {
-  font-family: Arial, sans-serif;
   width: 300px;
   margin: auto;
 }
@@ -22,11 +21,13 @@
 }
 
 .product-image {
-  width: 40px;
+  img{
+    width: 40px;
   height: 40px;
-  background-color: #ccc;
   border-radius: 4px;
   margin-right: 10px;
+  }
+
 }
 
 .product-info {
@@ -34,17 +35,17 @@
 }
 
 .product-name {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .product-price {
-  font-size: 14px;
+  font-size: 12px;
   color: gray;
 }
 
 hr {
-  border: none;
-  border-top: 1px solid #e0e0e0;
-  margin: 10px 0;
+
+  border-top: 2px solid #8061C3;
+  margin: 10px;
 }
