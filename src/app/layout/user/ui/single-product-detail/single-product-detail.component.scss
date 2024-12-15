@@ -9,11 +9,22 @@
 }
 
 .color-box {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background: lightgray;
+  border: 1px solid black;
   border-radius: 50%;
 }
+
+.color-box:hover {
+border: 2px solid #64A2F5 ;
+}
+
+.color-box.red { background-color: rgb(164, 53, 53); }
+.color-box.blue { background-color: rgb(33, 60, 128); }
+.color-box.green { background-color: rgb(10, 102, 47); }
+.color-box.white { background-color: white; }
+.color-box.black { background-color: black; }
 
 .quantity {
   margin-top: 10px;
@@ -92,6 +103,10 @@ color: black;
   background-color: #007bff; /* Highlight selected size */
   color: white; /* Change text color for selected size */
   border-color: #0056b3; /* Change border color for selected size */
+}
+
+.rating{
+margin-top: 20px;
 }
 
 
