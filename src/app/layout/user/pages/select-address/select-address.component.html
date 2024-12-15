@@ -1,0 +1,17 @@
+<div class="container py-3 border border-primary" style="max-width: 650px; border-radius: 18px; margin-top: 60px;">
+  <div class="mx-auto">
+    <!-- Add New Address Button -->
+    <app-add-address-button
+      [buttonLabel]="'Add New Address'"
+      (add)="onAddAddress()"
+    ></app-add-address-button>
+    <div style="height: 20px;"></div>
+
+    <!-- Address List -->
+    <app-address-list
+      [addresses]="addresses"
+      (edit)="onEditAddress($event)"
+      (delete)="onDeleteAddress($event)"
+    ></app-address-list>
+  </div>
+</div>

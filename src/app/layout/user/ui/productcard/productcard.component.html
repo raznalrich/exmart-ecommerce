@@ -1,0 +1,14 @@
+<div class="card" style="width: 18rem;">
+  <p class="category-head">{{cards.category}}</p>
+  <img src="{{cards.imageUrl}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><strong>{{cards.productName | slice:0:22}}</strong></h5>
+    <div class="colourblock">
+
+      @for(i of cards.colors ; track i){
+        <div class="color-circle" [ngClass]="{'red': i === 'red', 'blue': i === 'blue','white': i === 'white','black': i === 'black'}"></div>    }
+      </div>
+    <p  class="card-text para1">{{cards.price | currency:'INR'}} <button routerLink="/viewproduct/{{cards.id}}" type="button" class="btn btn-outline-primary">View more</button></p>
+
+  </div>
+</div>

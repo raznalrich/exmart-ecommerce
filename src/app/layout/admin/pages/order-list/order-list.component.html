@@ -1,1 +1,27 @@
-<p>order-list works!</p>
+
+<div class="container">
+  <div>
+    <p class="heading">Orders</p>
+  </div>
+
+  <app-searchbar></app-searchbar>
+</div>
+
+<section>
+<div class="box-date">
+  <input class="date-select" type="date">
+</div>
+
+<div class="box-container">
+  <div class="box total-orders"  >
+    <p class="heading ">Total Orders</p>
+    <p class="count">18</p>
+  </div>
+  <div class="box delivered" >
+    <p class="heading">Delivered</p>
+    <p class="count">26</p>
+  </div>
+</div>
+</section>
+<app-orderlist-table [OrderList]="orderlist"></app-orderlist-table>
+
