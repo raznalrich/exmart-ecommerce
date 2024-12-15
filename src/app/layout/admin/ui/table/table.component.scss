@@ -7,37 +7,53 @@
   width: 65vw;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  position: relative;
+  overflow: hidden; /* Prevent unnecessary scroll outside */
+
+  /* Hide scrollbar */
   ::-webkit-scrollbar {
     display: none;
   }
+
   .container-fluid {
     flex: 1;
     overflow-y: auto;
-    padding: 15px;
-    padding: 0;
+    padding-top: 20px; /* Creates space above the table */
+    box-sizing: border-box;
   }
+
   button {
     border: none;
     width: 35px;
     height: 35px;
     border-radius: 10px;
   }
+
   th {
     color: #8061c3;
     font-weight: 700;
   }
+
   td {
     color: gray;
   }
+
   th,
   td {
     text-align: center;
     vertical-align: middle;
   }
+
   thead {
     position: sticky;
-    top: 0;
+    top: 0; /* Sticks at the top */
     z-index: 1020;
+    background-color: white; /* Prevent overlap transparency */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
+  }
+
+  /* Optional: Add spacing for the body */
+  tbody {
+    padding-bottom: 20px; /* Creates room at the bottom */
   }
 }
