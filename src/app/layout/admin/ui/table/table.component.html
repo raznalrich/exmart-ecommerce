@@ -1,0 +1,30 @@
+<div class="body">
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    @for (item of header; track item) {
+                    <th scope="col">{{item}}</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of items; track item) {
+                <tr>
+                    <th scope="row" style="color: black;">{{item.id}}</th>
+                    <td><img src={{item.image}} class="img-fluid rounded-start" alt="" style="width: 40px;">
+                    </td>
+                    <td>{{item.category}}</td>
+                    <td>{{item.product}}</td>
+                    <td>{{item.price}}</td>
+                    <td>
+                        @for (item of icons; track $index) {
+                        <app-button [icon]="item"></app-button>
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
