@@ -4,51 +4,24 @@ import { ApiServiceService } from '../../../../services/api-service.service';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { AddButtonComponent } from '../../ui/add-button/add-button.component';
 import { TableComponent } from '../../ui/table/table.component';
+import { GlobalService } from '../../../../global.service';
+import { SearchbarComponent } from "../../ui/searchbar/searchbar.component";
 
 @Component({
   selector: 'app-productlist',
   standalone: true,
-  imports: [AddButtonComponent, TableComponent],
+  imports: [AddButtonComponent, TableComponent, SearchbarComponent],
   templateUrl: './productlist.component.html',
   styleUrl: './productlist.component.scss',
 })
 export class ProductlistComponent {
+  onClickButton() {
+    console.log('Added product');
+  }
   constructor(public api: ApiServiceService) {}
 
-  items: any = {
-    id: 0,
-    image: '',
-    category: '',
-    product: '',
-    price: 0,
-  };
-
-  header: any = [
-    {
-      id: 1,
-      title: 'Id',
-    },
-    {
-      id: 2,
-      title: 'Image',
-    },
-    {
-      id: 3,
-      title: 'Category',
-    },
-    {
-      id: 4,
-      title: 'Product',
-    },
-    {
-      id: 5,
-      title: 'Price',
-    },
-    {
-      id: 6,
-      title: 'Actions',
-    },
-  ];
+  items: any;
+  header: any = ['Id', 'Image', 'Category', 'Product', 'Price', 'Actions'];
 
   ngOnInit() {
     this.api.getProducts().subscribe((res: any) => {
