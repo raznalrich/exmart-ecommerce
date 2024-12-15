@@ -21,9 +21,9 @@
     <br />
 
     <div class="size-options">
-      <div class="size-buttons">
-        <button>{{ details.product.size }}</button>
-      </div>
+      @for(i of details.product.sizes ; track i){
+      <button class="size-circle">{{ i }}</button>
+    }
     </div>
 
     <div class="quantity">
