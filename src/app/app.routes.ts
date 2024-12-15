@@ -20,6 +20,10 @@ import { UserOrdersComponent } from './layout/user/pages/user-orders/user-orders
 import { SelectAddressComponent } from './layout/user/pages/select-address/select-address.component';
 import { AddProductsComponent } from './layout/admin/pages/add-products/add-products.component';
 
+import { SettingsPageComponent } from './layout/admin/pages/settings-page/settings-page.component';
+
+import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
+
 
 export const routes: Routes = [
   {
@@ -29,9 +33,7 @@ export const routes: Routes = [
           {
             path:'category/:id',component:ProductDisplayingSectionComponent
           },
-          {
-            path:'',redirectTo:'category/garments',pathMatch:'full'
-          }
+
         ],
 
       },
@@ -41,6 +43,10 @@ export const routes: Routes = [
       {
 
         path:'addcart',component:AddtocartpageComponent
+      },
+      {
+
+        path:'addressconfirm',component:AddressConfirmPageComponent
       },
       {
 
@@ -84,7 +90,13 @@ export const routes: Routes = [
       },
       {
         path:'dialoguebox',component:AddProductsComponent
+      },
+      {
+        path:'settings',component:SettingsPageComponent
+
       }
+
+
     ]
   },
   {
