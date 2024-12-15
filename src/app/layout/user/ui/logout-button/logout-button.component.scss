@@ -1,0 +1,13 @@
+button {
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100px;
+  :hover{
+    background-color: grey;
+  }
+}

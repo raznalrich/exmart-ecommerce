@@ -1,0 +1,24 @@
+.main{
+  display: flex;
+}
+.left-section{
+  background-color: #3E68B9;
+  height: 100vh;
+  width: 50%;
+}
+.logo{
+  display: flex;
+  justify-content: center;
+  margin-top: 40%;
+}
+img{
+  height: 300px;
+  width: auto;
+}
+
+.right-section{
+  display: flex;
+  justify-content:center;
+  margin-left: 20rem;
+  margin-top: 15rem;
+}

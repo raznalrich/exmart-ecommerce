@@ -1,0 +1,70 @@
+.adminDashboardContainer
+{
+  z-index: 300000;
+  font-family: 'Montserrat';
+  padding: 20px;
+  margin-top: 10px;
+  overflow: hidden;
+  border: 1px solid #8061c3;
+  border-radius: 20px;
+}
+.greetings{
+  font-size: 30px;
+}
+
+.adminHead{
+  display: flex;
+  gap: 500px;
+  align-items: center;
+}
+.app-admin-values-displaying-button{
+}
+
+.leftTopIcons{
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  padding-bottom: 5px;
+}
+
+.contents{
+  display: flex;
+  gap: 30px;
+}
+
+.rigthTop{
+padding-top: 30px;
+display: flex;
+gap: 25px;
+
+  img{
+    height: 40px;
+    width: 40px;
+  }
+}
+.rightTopLeft{
+  display: flex;
+  text-align: center;
+align-items: center;
+}
+
+.rightTopRight{
+  display: flex;
+  text-align: center;
+align-items: center;
+
+}
+.newOrd{
+  font-weight: 800;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.morebut{
+  background-color: #8061c3;
+  color: white;
+  width: 95px;
+  border-radius: 30px;
+  border: none;
+}
