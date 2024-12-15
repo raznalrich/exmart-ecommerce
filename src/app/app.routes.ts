@@ -18,6 +18,7 @@ import { UserprofileComponent } from './layout/user/pages/userprofile/userprofil
 import { NewAddressComponent } from './layout/user/pages/new-address/new-address.component';
 import { UserOrdersComponent } from './layout/user/pages/user-orders/user-orders.component';
 import { SelectAddressComponent } from './layout/user/pages/select-address/select-address.component';
+import { AddProductsComponent } from './layout/admin/pages/add-products/add-products.component';
 
 import { SettingsPageComponent } from './layout/admin/pages/settings-page/settings-page.component';
 
@@ -88,7 +89,11 @@ export const routes: Routes = [
         path:'viewfeedback',component:ViewFeedbackComponent
       },
       {
+        path:'dialoguebox',component:AddProductsComponent
+      },
+      {
         path:'settings',component:SettingsPageComponent
+
       }
 
 
