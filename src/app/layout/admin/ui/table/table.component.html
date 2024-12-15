@@ -10,6 +10,9 @@
             </thead>
             <tbody>
                 @for (item of items; track item) {
+                    <tr></tr>
+                }
+                @for (item of items; track item) {
                 <tr>
                     <th scope="row" style="color: black;">{{item.id}}</th>
                     <td><img src={{item.image}} class="img-fluid rounded-start" alt="" style="width: 40px;">
