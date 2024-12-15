@@ -1,0 +1,31 @@
+{
+  "addresses": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "badgeName": "Home",
+      "place": "123 Maple Street",
+      "buildingNo": "Apt 4B",
+      "district": "Central District",
+      "city": "Springfield",
+      "state": "Illinois",
+      "country": "USA",
+      "pincode": "62701",
+      "phoneNo": "+1234567890"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "badgeName": "Work",
+      "place": "456 Elm Avenue",
+      "buildingNo": "Office 101",
+      "district": "Downtown",
+      "city": "Chicago",
+      "state": "Illinois",
+      "country": "USA",
+      "pincode": "60616",
+      "phoneNo": "+0987654321"
+    }
+  ]
+}
+

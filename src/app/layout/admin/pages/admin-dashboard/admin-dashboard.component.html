@@ -1,25 +1,29 @@
 <div class="adminDashboardContainer">
  <div class="adminHead">
   <div class="greetings">Welcome <strong>Admin</strong></div>
-  <div class="adminIcon"> <img src="images/Chriswin.png" alt=""></div>
  </div>
  <div class="contents">
     <div class="leftCont">
       <div class="leftTopIcons">
+
+          <app-admin-values-displaying-button
+        [count]="12"
+        [iconSrc]="'icons/graph.png'"
+        [label]="'Pending Orders'">
+        ></app-admin-values-displaying-button>
+
         <app-admin-values-displaying-button
-      [count]="12"
-      [iconSrc]="'icons/graph.png'"
-      [label]="'Pending Orders'">
-      ></app-admin-values-displaying-button>
-      <app-admin-values-displaying-button
-      [count]="2000"
-      [iconSrc]="'icons/graph.png'"
-      [label]="'This month '">
-      ></app-admin-values-displaying-button>
+        [count]="2000"
+        [iconSrc]="'icons/graph.png'"
+        [label]="'This month '">
+        ></app-admin-values-displaying-button>
+
+      </div>
+      <div class="leftBottom">
+        <app-admin-weekly-chart-disp></app-admin-weekly-chart-disp>
+        <!-- <img src="staticimages/grpaphtrail.png" alt=""> -->
       </div>
 
-      <app-admin-weekly-chart-disp></app-admin-weekly-chart-disp>
-      <!-- <img src="staticimages/grpaphtrail.png" alt=""> -->
 
     </div>
 
@@ -33,7 +37,7 @@
           <button class="morebut">more</button>
         </div>
       </div>
-      
+
       <app-admin-recent-orders-in-dash-board></app-admin-recent-orders-in-dash-board>
     </div>
  </div>
