@@ -1,5 +1,4 @@
 .body {
-  // margin: 30px;
   padding: 25px;
   border: 1px solid #8061c3;
   border-radius: 20px;
@@ -12,41 +11,42 @@
   ::-webkit-scrollbar {
     display: none;
   }
-  .container-fluid {
-    flex: 1;
-    overflow-y: auto;
-    padding-top: 20px;
-    box-sizing: border-box;
-  }
-  button {
-    border: none;
-    width: 35px;
-    height: 35px;
-    border-radius: 10px;
-  }
-  table {
-    margin: 0;
-  }
-  th {
-    color: #8061c3;
-    font-weight: 700;
-  }
-  td {
-    color: gray;
-  }
-  th,
-  td {
-    text-align: center;
-    vertical-align: middle;
-  }
-  thead {
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-    background-color: white;
-  }
+}
 
-  tbody {
-    padding-bottom: 20px;
-  }
+.container-fluid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+table {
+  margin: 0;
+  border-collapse: collapse;
+}
+
+th {
+  color: #8061c3;
+  font-weight: 700;
+}
+
+td {
+  color: gray;
+}
+
+th,
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background-color: white;
+}
+
+tbody {
+  padding-bottom: 20px;
 }
