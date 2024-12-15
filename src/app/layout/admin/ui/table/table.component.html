@@ -15,10 +15,10 @@
                 @for (item of items; track item) {
                 <tr>
                     <th scope="row" style="color: black;">{{item.id}}</th>
-                    <td><img src={{item.image}} class="img-fluid rounded-start" alt="" style="width: 40px;">
+                    <td><img src={{item.imageUrl}} class="img-fluid rounded-start" alt="" style="width: 40px;">
                     </td>
                     <td>{{item.category}}</td>
-                    <td>{{item.product}}</td>
+                    <td>{{item.productName}}</td>
                     <td>{{item.price}}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" (click)="service.editProduct(item)"
