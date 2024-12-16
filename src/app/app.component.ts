@@ -24,13 +24,9 @@ import { HomeStaticComponent } from './layout/user/pages/home-static/home-static
 import { CategoryButtonComponent } from './layout/user/ui/category-button/category-button.component';
 import { AddProductsComponent } from './layout/admin/pages/add-products/add-products.component';
 import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
-<<<<<<< HEAD
-import { OrderPopupComponent } from "./layout/admin/ui/order-popup/order-popup.component";
-
-=======
 import { UsersidebarComponent } from './layout/user/ui/usersidebar/usersidebar.component';
 import { ReportPageComponent } from './layout/admin/pages/report-page/report-page.component';
->>>>>>> d95808a52118e21243135443cfbd0ad3dac11f1a
+import { OrderPopupComponent } from "./layout/admin/ui/order-popup/order-popup.component";
 
 @Component({
   selector: 'app-root',
@@ -53,11 +49,6 @@ import { ReportPageComponent } from './layout/admin/pages/report-page/report-pag
     UserOrdersComponent,
     HomeStaticComponent,
     AddProductsComponent,
-<<<<<<< HEAD
-    RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent, SingleproductpageComponent, AddtocartpageComponent, AddressConfirmPageComponent,
-    OrderPopupComponent
-],
-=======
     RouterOutlet,
     HomepageComponent,
     UsernavbarComponent,
@@ -68,8 +59,8 @@ import { ReportPageComponent } from './layout/admin/pages/report-page/report-pag
     SingleproductpageComponent,
     AddtocartpageComponent,
     AddressConfirmPageComponent,
-  ],
->>>>>>> d95808a52118e21243135443cfbd0ad3dac11f1a
+    OrderPopupComponent
+],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
