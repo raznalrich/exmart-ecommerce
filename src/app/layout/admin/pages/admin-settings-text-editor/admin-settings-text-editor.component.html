@@ -1,0 +1,21 @@
+<main>
+  <section class="headers">
+    <div class="textEditorName">Policy Name</div>
+    <div class="exmartLogo"><img src="icons/exMartlogov1.png" alt="exmmartlogo"></div>
+  </section>
+  <div class="saveButton">
+    <app-long-button
+    label="Save Changes"
+    [imgAlt]="'Upload Icon'"
+    [imgPosition]="'left'"
+    [bgColor]="'#64A2F5'"
+    (click)="subbtn()"
+    ></app-long-button>
+  </div>
+  <section class="textEditor">
+    <st-editor [(ngModel)]="content" [config]="config"></st-editor>
+    <router-outlet></router-outlet>
+    <!-- <p style="width: 300px;">{{ content }}</p> -->
+  </section>
+</main>
+
