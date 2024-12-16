@@ -1,10 +1,13 @@
-<div class="container py-3 border border-primary" style="max-width: 650px; border-radius: 18px; margin-top: 60px;">
+<div class="container py-3  " style=" border-radius: 18px; ">
   <div class="mx-auto">
     <!-- Add New Address Button -->
-    <app-add-address-button
+    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <app-add-address-button
       [buttonLabel]="'Add New Address'"
       (add)="onAddAddress()"
     ></app-add-address-button>
+    </button>
+
     <div style="height: 20px;"></div>
 
     <!-- Address List -->
@@ -14,4 +17,22 @@
       (delete)="onDeleteAddress($event)"
     ></app-address-list>
   </div>
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-house-add" style="padding-right: 15px;"></i>Add New Address</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-new-address></app-new-address>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div> -->
+    </div>
+  </div>
+</div>
 </div>
