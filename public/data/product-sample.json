@@ -8,133 +8,133 @@
     },
     {
       "id": 2,
-      "image": "staticimages/item2.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Electronics",
       "product": "Wireless Earbuds",
       "price": 2000
     },
     {
       "id": 3,
-      "image": "staticimages/item3.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Footwear",
       "product": "Running Shoes",
       "price": 1200
     },
     {
       "id": 4,
-      "image": "staticimages/item4.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Garments",
       "product": "Jeans",
       "price": 1500
     },
     {
       "id": 5,
-      "image": "staticimages/item5.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Accessories",
       "product": "Wrist Watch",
       "price": 2500
     },
     {
       "id": 6,
-      "image": "staticimages/item6.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Electronics",
       "product": "Smartphone",
       "price": 15000
     },
     {
       "id": 7,
-      "image": "staticimages/item7.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Footwear",
       "product": "Sandals",
       "price": 800
     },
     {
       "id": 8,
-      "image": "staticimages/item8.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Garments",
       "product": "Jacket",
       "price": 2200
     },
     {
       "id": 9,
-      "image": "staticimages/item9.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Accessories",
       "product": "Sunglasses",
       "price": 1200
     },
     {
       "id": 10,
-      "image": "staticimages/item10.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Electronics",
       "product": "Bluetooth Speaker",
       "price": 1800
     },
     {
       "id": 11,
-      "image": "staticimages/item11.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Garments",
       "product": "Shirt",
       "price": 800
     },
     {
       "id": 12,
-      "image": "staticimages/item12.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Footwear",
       "product": "Loafers",
       "price": 1400
     },
     {
       "id": 13,
-      "image": "staticimages/item13.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Accessories",
       "product": "Leather Wallet",
       "price": 900
     },
     {
       "id": 14,
-      "image": "staticimages/item14.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Electronics",
       "product": "Laptop",
       "price": 55000
     },
     {
       "id": 15,
-      "image": "staticimages/item15.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Footwear",
       "product": "Formal Shoes",
       "price": 2000
     },
     {
       "id": 16,
-      "image": "staticimages/item16.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Garments",
       "product": "Sweater",
       "price": 1600
     },
     {
       "id": 17,
-      "image": "staticimages/item17.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Accessories",
       "product": "Cap",
       "price": 400
     },
     {
       "id": 18,
-      "image": "staticimages/item18.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Electronics",
       "product": "Smartwatch",
       "price": 4000
     },
     {
       "id": 19,
-      "image": "staticimages/item19.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Footwear",
       "product": "Slippers",
       "price": 300
     },
     {
       "id": 20,
-      "image": "staticimages/item20.png",
+      "image": "staticimages/trailShirt.png",
       "category": "Garments",
       "product": "Kurta",
       "price": 1200
