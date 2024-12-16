@@ -25,7 +25,8 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
   padding: 10px;
-  width: 120px;
+  width: 200px;
+  height: 200px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -58,10 +59,7 @@ h1 {
   cursor: pointer;
 }
 
-.category-actions button img {
-  width: 16px;
-  height: 16px;
-}
+
 
 .add-category, .edit-policies {
   margin-top: 20px;
@@ -73,7 +71,7 @@ h1 {
 
 .add-category button, .edit-policies button {
   background: none;
-  border: 1px solid #000;
+  border-color: white !important;
   border-radius: 50%;
   width: 24px;
   height: 24px;
