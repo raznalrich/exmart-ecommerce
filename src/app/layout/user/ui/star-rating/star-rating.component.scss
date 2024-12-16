@@ -1,60 +1,61 @@
-// .star-rating {
-//   position: relative;
-//   font-size: 24px; /* Adjust size as needed */
-//   color: #ddd; /* Unfilled stars color */
-//   display: inline-block;
-// }
-
-// .star-rating::before {
-//   content: "★★★★★"; /* Base stars */
-//   display: block;
-// }
-
-// .filled-stars {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 0;
-//   color: #f5c518;
-//   // color: #e63946;
-//   overflow: hidden;
-//   white-space: nowrap;
-// }
-
-// .filled-stars::before {
-//   content: "★★★★★"; /* Filled stars overlay */
-//   display: block;
-// }
-
-.heart-rating {
+.star-rating {
   position: relative;
-  font-size: 15px; /* Adjust size as needed */
-  color: #ddd; /* Unfilled hearts color */
+  font-size: 20px; /* Adjust size as needed */
+  color: #ddd; /* Unfilled stars color */
   display: inline-block;
 }
 
-.heart-rating::before {
-  // content: "♡♡♡♡♡"; /* Base hearts */
-  // content: "♥ ♥ ♥ ♥ ♥";
-  content: "🤍🤍🤍🤍🤍";
+.star-rating::before {
+  content: "★★★★★"; /* Base stars */
   display: block;
 }
 
-.filled-hearts {
+.filled-stars {
   position: absolute;
   top: 0;
   left: 0;
   width: 0;
-  color: #e63946; /* Filled hearts color */
+  color: #f5c518;
+  // color: #e63946;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.filled-hearts::before {
-// content:"♥ ♥ ♥ ♥ ♥";
-  content: "❤️❤️❤️❤️❤️"; /* Filled hearts overlay */
+.filled-stars::before {
+  content: "★★★★★"; /* Filled stars overlay */
   display: block;
 }
+
+// .heart-rating {
+//   position: relative;
+//   font-size: 20px; /* Adjust size as needed */
+//   color: #ddd; /* Unfilled hearts color */
+//   display: inline-block;
+// }
+
+// .heart-rating::before {
+//   content: "♡♡♡♡♡"; /* Base hearts */
+//   // content: "♥ ♥ ♥ ♥ ♥";
+//   // content: "🤍🤍🤍🤍🤍";
+//   display: block;
+// }
+
+// .filled-hearts {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 0;
+//   color: #e63946; /* Filled hearts color */
+//   overflow: hidden;
+//   white-space: nowrap;
+// }
+
+// .filled-hearts::before {
+// //  content:"♥ ♥ ♥ ♥ ♥";
+// content: "♡♡♡♡♡";
+//   // content: "❤️❤️❤️❤️❤️"; /* Filled hearts overlay */
+//   display: block;
+// }
 
 
 .rate-section{
@@ -65,6 +66,7 @@ display: flex;
 display: flex;
 margin-left: 10px;
 // margin-top: 8px;
+margin-top: 6px;
 color: #3e68b9;
 }
 
