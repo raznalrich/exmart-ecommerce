@@ -16,7 +16,7 @@
 .sidenav .logo-container {
   display: flex;
   align-items: center;
-  padding:1rem 1rem 0 1rem;
+  padding: 1rem 1rem 0 1rem;
   width: 100%;
 }
 .sidenav .logo-container .logo {
@@ -97,4 +97,8 @@
 .active .sidenav-link-icon,
 .active .sidenav-link-text {
   color: #000;
+}
+.logout {
+  margin-top: auto;
+  padding: 3.3rem;
 }
