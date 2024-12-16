@@ -11,7 +11,7 @@ export class OrderButtonComponent {
 
   isAnimating = false;
 
-  NgOnit(){
+  ngOnInit(){
     this.handleOrderClick();
   }
 
@@ -21,9 +21,9 @@ export class OrderButtonComponent {
       this.isAnimating = true;
 
       // Stop animation after 10 seconds
-      setTimeout(() => {
-        this.isAnimating = false;
-      }, 10000);
+      // setTimeout(() => {
+      //   this.isAnimating = false;
+      // }, 10000);
     }
   }
 }
