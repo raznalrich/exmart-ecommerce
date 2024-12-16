@@ -1,13 +1,10 @@
 <div class="page">
     <div class="top">
-        <!-- <form class="mx-auto" style="flex-grow: 1; max-width: 400px;">
-            <input type="search" placeholder="Search here" aria-label="Search"
-                style="width: 100%; border-radius: 10px; height: 40px; padding-left: 10px;">
-        </form> -->
         <app-searchbar></app-searchbar>
         <app-add-button [button]="button"></app-add-button>
     </div>
     <div class="bottom">
         <app-table [header]="header" [items]="items"></app-table>
+        <app-add-products></app-add-products>
     </div>
 </div>
