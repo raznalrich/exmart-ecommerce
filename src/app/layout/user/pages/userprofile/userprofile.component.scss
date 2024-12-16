@@ -1,7 +1,28 @@
-.row1{
-  max-width: 100vw;
+.row1 {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  // align-items: center;
+  height: 100vh;
+
+}
+
+.sidebar-side {
+  width: 15rem;
+  background-color: white;
+}
+
+.second-side {
+  flex: 1;
+  z-index: 4000;
+  overflow-x: auto;
+  max-width: 100%;
+
+}
+
+.container1 {
+
+  max-width: 100%;
+  height: 95vh;
+  border: #3e68b9 1px solid;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 20px;
 }

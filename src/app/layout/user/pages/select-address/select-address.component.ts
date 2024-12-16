@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { AddAddressButtonComponent } from '../../ui/add-address-button/add-address-button.component';
 import { AddressListComponent } from '../../ui/address-list/address-list.component';
+import { NewAddressComponent } from "../new-address/new-address.component";
 
 @Component({
   selector: 'app-select-address',
   standalone: true,
-  imports: [AddAddressButtonComponent, AddressListComponent],
+  imports: [AddAddressButtonComponent, AddressListComponent, NewAddressComponent],
   templateUrl: './select-address.component.html',
   styleUrl: './select-address.component.scss'
 })
@@ -26,14 +27,14 @@ export class SelectAddressComponent {
   ];
 
   onAddAddress() {
-    console.log('Add Address button clicked');
-    // Placeholder logic for adding a new address
-    this.addresses.push({
-      label: 'NEW',
-      name: 'John Doe',
-      phone: '9876543210',
-      address: '123 New Street, City, State, Country',
-    });
+    // console.log('Add Address button clicked');
+    // // Placeholder logic for adding a new address
+    // this.addresses.push({
+    //   label: 'NEW',
+    //   name: 'John Doe',
+    //   phone: '9876543210',
+    //   address: '123 New Street, City, State, Country',
+    // });
   }
 
   onEditAddress(address: any) {
