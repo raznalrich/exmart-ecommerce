@@ -12,6 +12,6 @@ export class AddAddressButtonComponent {
   @Output() add = new EventEmitter<void>();
 
   onAdd() {
-    this.add.emit(); 
+    this.add.emit();
   }
 }
