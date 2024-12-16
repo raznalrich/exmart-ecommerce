@@ -5,5 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
   constructor() {}
-
+  editProduct(item: any) {
+    console.log(item);
+  }
 }

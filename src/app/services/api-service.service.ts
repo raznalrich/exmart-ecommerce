@@ -10,7 +10,8 @@ export class ApiServiceService {
   constructor(private http: HttpClient) {}
 
   getProducts(){
-    return this.http.get('Data/product-sample.json');
+    return this.http.get('Data/productsTrail.json');
+    // return this.http.get('Data/product-sample.json');
   }
 
 
