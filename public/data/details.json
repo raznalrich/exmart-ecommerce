@@ -3,21 +3,12 @@
     "name": "Experion T-shirt",
     "description": "Branded T-shirt",
     "price": 699,
+    "rating": {
+      "rate": 3.5,
+      "count":80
+    },
     "color": "Black",
-    "colors": [
-      {
-        "name": "Black",
-        "code": "#000000"
-      },
-      {
-        "name": "White",
-        "code": "#FFFFFF"
-      },
-      {
-        "name": "Blue",
-        "code": "#0000FF"
-      }
-    ],
+    "colors": ["red", "black", "green"],
     "sizes": ["XS", "S", "M", "L", "XL"],
     "images": [
       "https://via.placeholder.com/500x500?text=Image+1",
@@ -30,10 +21,6 @@
     {
       "title": "Product Details",
       "content": "This is a high-quality branded T-shirt made with 100% cotton. It is durable and provides maximum comfort for everyday use."
-    },
-    {
-      "title": "Delivery & Returns",
-      "content": "Delivery within 3-5 business days. Free returns within 30 days of purchase."
     }
   ]
 }
