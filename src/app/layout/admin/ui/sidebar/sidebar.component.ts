@@ -39,5 +39,11 @@ export class SidebarComponent {
     item:'Feedback',
     image:'bi bi-chat-right-dots'
   },
+  {
+    id:6,
+    routerLink:'viewfeedback',
+    item:'Settings',
+    image:'bi bi-gear'
+  },
 ];
 }
