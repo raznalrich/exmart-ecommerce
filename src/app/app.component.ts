@@ -25,6 +25,7 @@ import { UsersidebarComponent } from './layout/user/ui/usersidebar/usersidebar.c
 import { CategoryButtonComponent } from './layout/user/ui/category-button/category-button.component';
 import { AddProductsComponent } from './layout/admin/pages/add-products/add-products.component';
 import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
+import { OrderPopupComponent } from "./layout/admin/ui/order-popup/order-popup.component";
 
 
 @Component({
@@ -48,8 +49,9 @@ import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm
     UserOrdersComponent,
     HomeStaticComponent,
     AddProductsComponent,
-    RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent,SingleproductpageComponent,AddtocartpageComponent,AddressConfirmPageComponent
-  ],
+    RouterOutlet, HomepageComponent, UsernavbarComponent, SidebarComponent, ProductlistComponent, ThankyoupageComponent, AddButtonComponent, SingleproductpageComponent, AddtocartpageComponent, AddressConfirmPageComponent,
+    OrderPopupComponent
+],
 
 
 

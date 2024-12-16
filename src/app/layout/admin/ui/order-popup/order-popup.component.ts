@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { BillingDetailComponent } from '../billing-detail/billing-detail.component';
+import { ShipmentDetailComponent } from '../shipment-detail/shipment-detail.component';
+import { CustomerDetailComponent } from '../customer-detail/customer-detail.component';
 
 @Component({
   selector: 'app-order-popup',
   standalone: true,
-  imports: [],
+  imports: [ProductDetailComponent, BillingDetailComponent, ShipmentDetailComponent, CustomerDetailComponent],
   templateUrl: './order-popup.component.html',
   styleUrl: './order-popup.component.scss'
 })
