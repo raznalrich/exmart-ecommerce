@@ -31,7 +31,7 @@ export const routes: Routes = [
       {
         path:'home', component: HomeStaticComponent,children:[
           {
-            path:'category/garments',component:ProductDisplayingSectionComponent
+            path:'category/:id',component:ProductDisplayingSectionComponent
           },
 
         ],
