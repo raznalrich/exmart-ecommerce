@@ -101,7 +101,9 @@
   {
     "id": 9,
     "productName": "Samsung Galaxy Buds 2 Pro",
+    "price": 500,
     "category": "appliance",
+    "price": 1999.99,
     "colors": ["black", "White"],
     "sizes": ["Standard"],
     "imageUrl": "https://m.media-amazon.com/images/I/61KVX-MbIUL._SL1500_.jpg",

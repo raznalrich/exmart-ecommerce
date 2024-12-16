@@ -1,4 +1,4 @@
-<div class="container" style="max-width: 600px">
+<div class="container" >
   <form>
     <div class="row g-3">
       <div class="col-md-6">
@@ -51,6 +51,7 @@
       ></app-save-button>
       <app-cancel-button
         [label]="'Cancel'"
+        data-bs-dismiss="modal"
         class="ms-3"
         (clickEvent)="onCancel($event)"
       ></app-cancel-button>

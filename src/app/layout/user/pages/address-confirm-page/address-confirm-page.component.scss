@@ -5,12 +5,17 @@
   cursor: pointer;
   margin-bottom: 40px;
 }
+.address-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
 
 .main{
-margin-left: 20%;
+margin-left: 15rem;
+margin-right: 15rem;
 justify-content: center;
 }
 
-h2{
-margin-top: 20px;
-}
+

@@ -9,10 +9,13 @@
         <li class="sidenav-nav-item">
             <a class="sidenav-nav-link" routerLink={{item.routerLink}} routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact:true}">
-                 <i class="sidenav-link-icon" [class]="item.image"></i>
+                <i class="sidenav-link-icon" [class]="item.image"></i>
                 <span class="sidenav-link-text">{{item.item}}</span>
             </a>
         </li>
         }
+    </div>
+    <div class="logout">
+        <app-logout-button [button]="button"></app-logout-button>
     </div>
 </div>
