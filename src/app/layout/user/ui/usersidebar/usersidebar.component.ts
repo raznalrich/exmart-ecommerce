@@ -30,4 +30,8 @@ export class UsersidebarComponent {
     label: 'Log Out',
     icon: 'bi bi-box-arrow-left',
   };
+  backButton: any = {
+    label: '',
+    icon: 'bi bi-arrow-left-circle',
+  };
 }
