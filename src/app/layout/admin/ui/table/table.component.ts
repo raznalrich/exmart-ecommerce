@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { ButtonComponent } from '../button/button.component';
+import { GlobalService } from '../../../../global.service';
 
 @Component({
   selector: 'app-table',
@@ -10,7 +11,7 @@ import { ButtonComponent } from '../button/button.component';
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
-  constructor(public api: ApiServiceService) {}
+  constructor(public api: ApiServiceService, public service: GlobalService) {}
   @Input() items: any;
   @Input() header: any;
   rowKeys: string[] = [];

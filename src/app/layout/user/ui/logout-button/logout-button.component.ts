@@ -10,6 +10,7 @@ import { Component, Input } from '@angular/core';
 export class LogoutButtonComponent {
   @Input() button: any = {
     label: '',
+    route:'',
     icon: '',
   };
 }
