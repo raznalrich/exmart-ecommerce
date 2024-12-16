@@ -7,7 +7,27 @@ border: none;
 .collapse{
 margin-left: 40px;
 }
+button,div{
+font-size: 15px;
+}
 
+
+
+
+
+
+
+.btn {
+  margin-bottom: 10px;
+}
+
+.collapse {
+  display: none;
+}
+
+.collapse.show {
+  display: block;
+}
 
 
 
