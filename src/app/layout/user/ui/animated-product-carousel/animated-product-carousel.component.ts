@@ -16,7 +16,7 @@ export class AnimatedProductCarouselComponent {
       productImage:'staticimages/pro_tshirt.png',
       author: 'LUNDEV',
       title: 'Tshirt',
-      topic: '399',
+      topic: '₹399',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     {
@@ -24,7 +24,7 @@ export class AnimatedProductCarouselComponent {
       productImage:'staticimages/pro_ear.png',
       author: 'LUNDEV',
       title: 'EarPods ',
-      topic: '399',
+      topic: '₹399',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     {
@@ -32,7 +32,7 @@ export class AnimatedProductCarouselComponent {
       productImage:'staticimages/pro_bag.png',
       author: 'LUNDEV',
       title: 'BackPack ',
-      topic: '399',
+      topic: '₹399',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     // Add more items as needed
