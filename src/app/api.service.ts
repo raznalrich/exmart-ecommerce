@@ -10,6 +10,9 @@ export class ApiService {
   getCardImages() {
     return this.http.get(`Data/carouselImages.json`);
   }
+  // getCardImages() {
+  //   return this.http.get(`data/carouselImages.json`);
+  // }
 
   // getCarouselImages() {
   //   return this.http.get(`Data/carouselImages.json`);
@@ -31,8 +34,7 @@ export class ApiService {
     return this.http.get(`product-sample.json`);
   }
 
-
-getUserAddress(){
-return this.http.get(`Data/address.json`)
-}
+  getUserAddress() {
+    return this.http.get(`Data/address.json`);
+  }
 }

@@ -5,11 +5,16 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { AddButtonComponent } from '../../ui/add-button/add-button.component';
 import { TableComponent } from '../../ui/table/table.component';
 import { GlobalService } from '../../../../global.service';
+import { SearchbarComponent } from "../../ui/searchbar/searchbar.component";
+
+import { AddProductsComponent } from "../add-products/add-products.component";
+
 
 @Component({
   selector: 'app-productlist',
   standalone: true,
-  imports: [AddButtonComponent, TableComponent],
+
+  imports: [AddButtonComponent, TableComponent, SearchbarComponent, AddProductsComponent],
   templateUrl: './productlist.component.html',
   styleUrl: './productlist.component.scss',
 })
