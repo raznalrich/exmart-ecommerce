@@ -1,31 +1,49 @@
-<div class="container">
-  <h2>New Category</h2>
-  <form>
-    <!-- Category Name -->
-    <div>
-      <label for="category-name">Category Name</label>
-      <input
-        type="text"
-        id="category-name"
-        class="input-field"
-        placeholder="Enter category name"
-        required
-      />
-    </div>
+<!-- Button trigger modal -->
+<button type="button" class="add-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <i class="bi bi-plus-circle-fill"></i>
+</button>
 
-    <!-- Category Icons -->
-    <div style="margin-top: 20px;">
-      <label>Category Icon</label>
-      <div class="icon-list">
-        <div class="icon"><img src="" alt="Icon 1"></div>
-        <div class="icon"><img src="" alt="Icon 2"></div>
-        <div class="icon"><img src="" alt="Icon 3"></div>
-        <div class="icon"><img src="" alt="Icon 4"></div>
-        <div class="icon"><img src="" alt="Icon 5"></div>
-        <div class="icon"><img src="" alt="Icon 6"></div>
-        <div class="icon"><img src="" alt="Icon 7"></div>
-        <div class="icon"><img src="" alt="Icon 8"></div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+
+        <div class="container">
+          <h2>New Category</h2>
+          <form>
+            <!-- Category Name -->
+            <div>
+              <label for="category-name">Category Name</label>
+              <input
+                type="text"
+                id="category-name"
+                class="input-field"
+                placeholder="Enter category name"
+                required
+              />
+            </div>
+
+            <!-- Category Icons -->
+            <div style="margin-top: 20px;">
+              <label>Category Icon</label>
+              <div class="icon-list">
+                <div class="icon"><img src="icon1-placeholder.png" alt="Icon 1"></div>
+                <div class="icon"><img src="icon2-placeholder.png" alt="Icon 2"></div>
+                <div class="icon"><img src="icon3-placeholder.png" alt="Icon 3"></div>
+                <div class="icon"><img src="icon4-placeholder.png" alt="Icon 4"></div>
+                <div class="icon"><img src="icon5-placeholder.png" alt="Icon 5"></div>
+                <div class="icon"><img src="icon6-placeholder.png" alt="Icon 6"></div>
+                <div class="icon"><img src="icon7-placeholder.png" alt="Icon 7"></div>
+                <div class="icon"><img src="icon8-placeholder.png" alt="Icon 8"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+
       </div>
+        <button type="button" class="close"  data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
     </div>
-  </form>
+  </div>
 </div>
