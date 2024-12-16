@@ -31,7 +31,7 @@ export const routes: Routes = [
       {
         path:'home', component: HomeStaticComponent,children:[
           {
-            path:'category/:id',component:ProductDisplayingSectionComponent
+            path:'category/garments',component:ProductDisplayingSectionComponent
           },
 
         ],
@@ -69,6 +69,9 @@ export const routes: Routes = [
       {
         path:'addresspage',component:SelectAddressComponent
       },
+      {
+        path:'',redirectTo:'userorder',pathMatch:'full'
+      }
     ]
   },
   {
