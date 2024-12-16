@@ -5,6 +5,9 @@
   font-family: Arial, sans-serif;
 }
 
+.add-btn{
+  all: unset;
+}
 body {
   background-color: #f8f9fa;
   display: flex;
@@ -41,7 +44,7 @@ h2 {
   font-weight: 600;
 }
 
-/* Form styles */
+
 label {
   display: block;
   margin-bottom: 5px;
@@ -103,3 +106,14 @@ label {
 .icon:hover img {
   filter: brightness(0) invert(1);
 }
+
+
+button.close {
+
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
