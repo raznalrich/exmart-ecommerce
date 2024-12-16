@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
 
-    "bootstrap": "^5.3.3",
     "@chartiful/react-native-vertical-bar-graph": "^0.1.2",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.7",
