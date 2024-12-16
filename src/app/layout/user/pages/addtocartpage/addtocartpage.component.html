@@ -1,15 +1,17 @@
-<!-- Main Content -->
 <main class="cart-container">
+
+  <div class="card-items">
+
+
   <!--Left Section-->
   <section class="bag-section">
     <div class="product-card">
       <img src="https://5.imimg.com/data5/HB/VQ/MY-44811379/men-black-plain-t-shirt.jpg" alt="Product Image" class="product-image">
       <div class="product-details">
         <h3>Experion T-Shirt</h3>
-        <p>Branded item</p>
         <p>Color: Black</p>
         <p>Size: XS</p>
-        <p class="price">MRP {{699 | currency:'INR'}}</p>
+        <p class="price">MRP {{299 | currency:'INR'}}</p>
         <div class="actions">
           <app-addto-cart-deletebtn></app-addto-cart-deletebtn>
         </div>
@@ -17,13 +19,35 @@
     </div>
   </section>
 
+  <section class="bag-section">
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/61XuRFe9HJL._AC_UY1100_.jpg" alt="Product Image" class="product-image">
+      <div class="product-details">
+        <h3>Experion Bag</h3>
+        <p>Color: Black</p>
+        <p>: </p>
+        <p class="price">MRP {{699 | currency:'INR'}}</p>
+        <div class="actions">
+          <app-addto-cart-deletebtn></app-addto-cart-deletebtn>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+
+
+
+
   <!--Right Section-->
   <aside class="summary-section">
     <h2>Summary</h2>
     <div class="summary-details">
-      <p><span>Sub Total:</span> <span>{{699 | currency:'INR'}}</span></p>
-      <p><span>Estimated Shipping:</span> <span>{{8 | currency:'INR'}}</span></p>
-      <p class="total"><span>Total:</span> <span>{{707 | currency:'INR'}}</span></p>
+      <p><span>Sub Total:</span> <span>{{998 | currency:'INR'}}</span></p>
+      <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p>
+      <p class="total"><span>Total:</span> <span>{{ 1108| currency:'INR'}}</span></p>
     </div>
     <button class="checkout-btn">Checkout</button>
   </aside>
