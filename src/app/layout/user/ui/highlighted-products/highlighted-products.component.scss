@@ -5,6 +5,7 @@
   background-color: #64A2F5 ;
   padding: 20px;
   font-family: Arial, sans-serif;
+  height: 80vh;
 }
 
 .header {
@@ -27,28 +28,38 @@
   margin-top: 20px;
   gap: 80px;
 }
+.main-image{
+  object-fit: cover;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
 
 .main-image img {
   display: flex;
   justify-content: center;
+  border-radius: 30px;
   align-items: center;
-  width: 400px;
+  width: 350px;
   height: auto;
-  margin-right: 20px;
+  // margin-right: 20px;
 }
 
 .rightside {
 
-  gap: 10px;
+  gap: 5px;
 }
 
 .subImaging{
-  padding-top: 70px;
+  padding-top: 30px;
   display: flex;
   gap: 30px;
+
 }
 .sub-image img {
   width: 215px;
+  border-radius: 20px;
   height: auto;
   border: 1px solid #ccc;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
