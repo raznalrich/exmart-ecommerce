@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AddButtonComponent } from '../../ui/add-button/add-button.component';
+import { SearchbarComponent } from "../../ui/searchbar/searchbar.component";
 
 @Component({
   selector: 'app-report-page',
   standalone: true,
-  imports: [AddButtonComponent],
+  imports: [AddButtonComponent, SearchbarComponent],
   templateUrl: './report-page.component.html',
   styleUrl: './report-page.component.scss',
 })
