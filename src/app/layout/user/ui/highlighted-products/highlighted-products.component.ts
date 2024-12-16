@@ -9,14 +9,14 @@ import { Component } from '@angular/core';
 })
 export class HighlightedProductsComponent {
 
-  mainImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuLKAW3PjIGAAZDosJ0ZoTJuIY0bcAnks4BQ&s'; // Replace with your dynamic URL
+  mainImage = 'staticimages/pro_tshirt.png'; // Replace with your dynamic URL
   subItems = [
     {
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuLKAW3PjIGAAZDosJ0ZoTJuIY0bcAnks4BQ&s', // Replace with dynamic URLs
+      imageUrl: 'https://media.karousell.com/media/photos/products/2023/4/29/gildan_zipup_hoodie_1682750904_29598b39.jpg', // Replace with dynamic URLs
       altText: 'Black Polo Shirt',
     },
     {
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuLKAW3PjIGAAZDosJ0ZoTJuIY0bcAnks4BQ&s', // Replace with dynamic URLs
+      imageUrl: 'https://m.media-amazon.com/images/I/61eYApdaTDL._SL1100_.jpg', // Replace with dynamic URLs
       altText: 'Black Hoodie',
     },
   ];

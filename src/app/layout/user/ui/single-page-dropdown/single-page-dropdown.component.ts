@@ -26,6 +26,7 @@ content:''
      console.log(this.arr);
 
     // console.log(this.details)
+
     });
 
 
