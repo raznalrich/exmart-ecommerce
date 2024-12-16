@@ -1,20 +1,25 @@
-import { Component, Input, Output, output } from '@angular/core';
+import { Component, EventEmitter, Input, output, Output } from '@angular/core';
+import { GlobalService } from '../../../../global.service';
+import { RouterModule } from '@angular/router';
+import { AddProductsComponent } from "../../pages/add-products/add-products.component";
 
 @Component({
   selector: 'app-add-button',
   standalone: true,
-  imports: [],
+  imports: [RouterModule, AddProductsComponent],
   templateUrl: './add-button.component.html',
   styleUrl: './add-button.component.scss',
 })
 export class AddButtonComponent {
-  @Input() button: any = {
-    id: 0,
-    icon: "",
-    title: "",
-  };
-  buttonFunction = Output();
-  addItem(){
+  buttonFunction = output();
+
+  addProduct() {
     this.buttonFunction.emit();
   }
+  constructor(public productService: GlobalService) {}
+  @Input() button: any = {
+    id: 0,
+    icon: '',
+    title: '',
+  };
 }

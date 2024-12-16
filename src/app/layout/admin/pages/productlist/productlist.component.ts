@@ -4,28 +4,27 @@ import { ApiServiceService } from '../../../../services/api-service.service';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { AddButtonComponent } from '../../ui/add-button/add-button.component';
 import { TableComponent } from '../../ui/table/table.component';
+import { GlobalService } from '../../../../global.service';
+import { SearchbarComponent } from "../../ui/searchbar/searchbar.component";
+
+import { AddProductsComponent } from "../add-products/add-products.component";
+
 
 @Component({
   selector: 'app-productlist',
   standalone: true,
-  imports: [AddButtonComponent, TableComponent],
+
+  imports: [AddButtonComponent, TableComponent, SearchbarComponent, AddProductsComponent],
   templateUrl: './productlist.component.html',
   styleUrl: './productlist.component.scss',
 })
 export class ProductlistComponent {
+  onClickButton() {
+    console.log('Added product');
+  }
   constructor(public api: ApiServiceService) {}
 
-  addItem() {
-    throw new Error('Method not implemented.');
-  }
-  items: any = {
-    id: 0,
-    image: '',
-    category: '',
-    product: '',
-    price: 0,
-  };
-
+  items: any;
   header: any = ['Id', 'Image', 'Category', 'Product', 'Price', 'Actions'];
 
   ngOnInit() {
