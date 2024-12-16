@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-animated-product-carousel',
@@ -9,29 +9,30 @@ import { Component } from '@angular/core';
   styleUrl: './animated-product-carousel.component.scss'
 })
 export class AnimatedProductCarouselComponent {
+  @ViewChild('carousel') carousel!: ElementRef;
   sliderItems = [
     {
       image: 'staticimages/img1.png',
       productImage:'staticimages/pro_tshirt.png',
       author: 'LUNDEV',
-      title: 'DESIGN',
-      topic: '399',
+      title: 'Tshirt',
+      topic: '₹399',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     {
       image: 'staticimages/img2.jpg',
       productImage:'staticimages/pro_ear.png',
       author: 'LUNDEV',
-      title: 'DESIGN ',
-      topic: '399',
+      title: 'EarPods ',
+      topic: '₹399',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     {
       image: 'staticimages/img3.png',
       productImage:'staticimages/pro_bag.png',
       author: 'LUNDEV',
-      title: 'DESIGN ',
-      topic: '399',
+      title: 'BackPack ',
+      topic: '₹399',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     // Add more items as needed
@@ -52,16 +53,23 @@ export class AnimatedProductCarouselComponent {
     this.autoPlaySlider();
   }
 
+
   showSlider(type: 'next' | 'prev') {
+    const carouselElement = this.carousel.nativeElement;
+    carouselElement.classList.add(type);
     if (type === 'next') {
       this.sliderItems.push(this.sliderItems.shift()!);
       this.thumbnails.push(this.thumbnails.shift()!);
+
     } else {
       this.sliderItems.unshift(this.sliderItems.pop()!);
       this.thumbnails.unshift(this.thumbnails.pop()!);
+      // carouselElement.classList.add('prev');
     }
     clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {}, this.timeRunning);
+    this.timeout = setTimeout(() => {
+      carouselElement.classList.remove(type);
+    }, this.timeRunning);
 
     clearTimeout(this.runNextAuto);
     this.autoPlaySlider();
