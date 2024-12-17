@@ -5,6 +5,7 @@
   width: 100%;
   .row{
     width: 100%;
+    padding-top: 30px;
     hr{
       color: white;
       border: 2px white solid;
@@ -14,9 +15,11 @@
     }
     ul{
       list-style: none;
+
       li{
         color: white;
         padding-top: 5px;
+      
         i{
           padding-right: 10px;
         }

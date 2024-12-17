@@ -43,7 +43,7 @@ export class SidebarComponent {
     },
     {
       id: 6,
-      routerLink: 'viewfeedback',
+      routerLink: 'settings',
       item: 'Settings',
       image: 'bi bi-gear',
     },
