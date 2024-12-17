@@ -8,6 +8,7 @@
       <th>Status</th>
       <th>Amount</th>
       <th>Items</th>
+      <th>Action</th>
     </tr>
     @for(item of OrderList; track item){
       <tr>
@@ -15,13 +16,15 @@
         <td>{{item.date}}</td>
         <td>{{item.customer}}</td>
         <td>
-          <span class="badge" [class.done]="item.status === 'Done'" [class.pending]="item.status === 'Pending'">
-            {{ item.status }}
-        </span>
+          <select class="status-dropdown" [(ngModel)]="item.status" (change)="updateOrderStatus(item)">
+            <option value="OrderPlaced">OrderPlaced</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Pending">Pending</option>
+          </select>
         </td>
         <td>{{item.amount | currency : "INR"}}</td>
          <td>{{calculateTotalQuantity(item.items)}}</td>
-
+          <td style="text-align: center;"><i class="fa-regular fa-eye"></i></td>
 
       </tr>
     }
