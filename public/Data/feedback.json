@@ -1,34 +1,40 @@
 {
   "employees": [
     {
-      "name": "Riya",
+      "name": "Alex K Willson",
       "feedback": "This is sample feedback for our ExMart website",
-      "image": "assets/riya.jpg"
+      "image": "https://cdn-icons-png.flaticon.com/128/149/149071.png",
+      "productName":"Experion T-shirt"
     },
     {
-      "name": "Kavita",
+      "name": "Athul Krishna",
       "feedback": "This is sample feedback for our ExMart website",
-      "image": "assets/kavita.jpg"
+      "image": "https://cdn-icons-png.flaticon.com/128/149/149071.png",
+      "productName":"Experion Bottle"
     },
     {
-      "name": "Ram",
+      "name": "Asfan MM",
       "feedback": "This is sample feedback for our ExMart website",
-      "image": "assets/ram.jpg"
+      "image": "https://cdn-icons-png.flaticon.com/128/149/149071.png",
+      "productName":"Experion Earbud"
     },
     {
-      "name": "Rasnal",
+      "name": "Krishnaveni A V",
       "feedback": "This is sample feedback for our ExMart website",
-      "image": "assets/rasnal.jpg"
+      "image": "https://cdn-icons-png.flaticon.com/128/149/149071.png",
+      "productName":"Experion Bag"
     },
     {
-      "name": "Kavita",
+      "name": "Hiba Fathima P A",
       "feedback": "This is sample feedback for our ExMart website",
-      "image": "assets/kavita.jpg"
+      "image": "https://cdn-icons-png.flaticon.com/128/149/149071.png",
+      "productName":"Experion Earbud"
     },
     {
-      "name": "Pratheep",
+      "name": "AmrithRaj",
       "feedback": "This is sample feedback for our ExMart website",
-      "image": "assets/pratheep.jpg"
+      "image": "https://cdn-icons-png.flaticon.com/128/149/149071.png",
+      "productName":"Experion T-shirt"
     }
   ]
 }
