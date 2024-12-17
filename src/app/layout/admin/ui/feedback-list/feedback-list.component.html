@@ -1,5 +1,6 @@
 <div class="table table-hover mt-5">
-  <div class="card shadow-sm">
+<div>
+  <!-- <div class="card shadow-sm"> -->
     <!-- <div class="card-header bg-white">
       <h5 class="mb-0">Employee Feedback</h5>
     </div> -->
@@ -8,6 +9,7 @@
         <thead class="text-muted border-bottom">
           <tr>
             <th scope="col">Employee</th>
+            <th scope="col">Product Name</th>
             <th scope="col">Feedback</th>
             <th scope="col" class="text-center">Action</th>
           </tr>
@@ -22,6 +24,9 @@
                 class="rounded-circle me-3 shadow-sm"
               />
               <span class="fw-bold">{{ employee.name }}</span>
+            </td>
+            <td>
+              <p class="mb-0 text-muted">{{ employee.productName }}</p>
             </td>
             <td>
               <p class="mb-0 text-muted">{{ employee.feedback }}</p>
