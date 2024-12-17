@@ -10,20 +10,28 @@
             </thead>
             <tbody>
                 @for (item of items; track item) {
-                    <tr></tr>
+                <tr></tr>
                 }
                 @for (item of items; track item) {
                 <tr>
                     <th scope="row" style="color: black;">{{item.id}}</th>
-                    <td><img src={{item.image}} class="img-fluid rounded-start" alt="" style="width: 40px;">
+                    <td><img src={{item.imageUrl}} class="img-fluid rounded-start" alt="" style="width: 40px;">
                     </td>
                     <td>{{item.category}}</td>
-                    <td>{{item.product}}</td>
+                    <td>{{item.productName}}</td>
                     <td>{{item.price}}</td>
                     <td>
-                        @for (item of icons; track $index) {
-                        <app-button [icon]="item"></app-button>
-                        }
+                        <a class="btn btn-primary btn-sm" (click)="service.editProduct(item)"
+                            style="margin-right: 5px; color: #ffffff; background-color: #5DADE2; border: none;">
+                            <i class="bi bi-pen"></i>
+                        </a>
+                        <a class="btn btn-primary btn-sm"
+                            style="margin-right: 5px; color: #ffffff; background-color: #EC7063; border: none;">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                        <!-- @for (item of icons; track $index) {
+                        <app-button [icon]="item" ></app-button>
+                        } -->
                     </td>
                 </tr>
                 }
