@@ -5,7 +5,7 @@ body {
   font-family: Arial, sans-serif;
 }
 .table-container{
-  max-height: 400px; /* Set the height for the scrollable area */
+  max-height: 340px; /* Set the height for the scrollable area */
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Disable horizontal scrolling if not needed */
 }
@@ -57,4 +57,10 @@ body {
 
 .badge.pending {
   background-color: #ff9800;
+}
+.status-dropdown {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }
