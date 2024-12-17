@@ -1,8 +1,10 @@
 .body {
   padding: 25px;
-  border: 1px solid #8061c3;
+  // border: 1px solid #8061c3;
   // border: none;
   border-radius: 20px;
+  height: 75vh;
+  // width: 65vw;
   height: 70vh;
   width: 65vw;
   display: flex;
@@ -27,6 +29,7 @@ table {
 th {
   color: #8061c3;
   font-weight: 700;
+  // background-color: #faefff;
 }
 
 td {

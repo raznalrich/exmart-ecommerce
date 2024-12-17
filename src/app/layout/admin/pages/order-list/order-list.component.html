@@ -1,7 +1,9 @@
 <div class="container">
 <div class="first-container">
-
+<div class="top">
   <app-searchbar></app-searchbar>
+  <app-date-rangepicker></app-date-rangepicker>
+</div>
   <div class="count-box">
     <app-admin-values-displaying-button
     [count]="28"
@@ -20,16 +22,11 @@
 
 
 
-<div class="box-container">
+<!-- <div class="box-container">
 
-  <div class="box-date">
-    <input class="date-select" type="date">
-  </div>
-  <div class="box-date" >
-    <input class="date-select" type="date">
-  </div>
 
-</div>
+
+</div> -->
 
 </div>
 <app-orderlist-table [OrderList]="orderlist"></app-orderlist-table>
