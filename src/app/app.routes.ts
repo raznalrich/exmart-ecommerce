@@ -33,6 +33,9 @@ export const routes: Routes = [
           {
             path:'category/:id',component:ProductDisplayingSectionComponent
           },
+          {
+            path:'',redirectTo:'category/garments',pathMatch:'full'
+          }
 
         ],
 
