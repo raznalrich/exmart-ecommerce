@@ -34,7 +34,12 @@ export class ApiService {
     return this.http.get(`product-sample.json`);
   }
 
-  getUserAddress() {
-    return this.http.get(`Data/address.json`);
+
+getUserAddress(){
+return this.http.get(`Data/address.json`)
+}
+
+getUserFeedback(){
+  return this.http.get(`Data/feedback.json`)
   }
 }
