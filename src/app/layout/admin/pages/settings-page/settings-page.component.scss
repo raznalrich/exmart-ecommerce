@@ -109,7 +109,12 @@ h2{
   font-size: 8px
 }
 
-/* Keyframe Animations */
+.category-component{
+  display: flex;
+  justify-content: center;
+}
+
+
 @keyframes fadeIn {
   from {
     opacity: 0;
