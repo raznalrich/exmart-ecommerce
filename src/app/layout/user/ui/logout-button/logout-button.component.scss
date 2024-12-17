@@ -1,13 +1,16 @@
 button {
   border: none;
   border-radius: 5px;
-  padding: 8px;
+  background-color: inherit;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  width: 100px;
-  :hover{
-    background-color: grey;
+  width: 100%;
+  height: 50%;
+  color: white;
+  gap: 8px;
+  button i{
+    font-size: 20px;
   }
 }

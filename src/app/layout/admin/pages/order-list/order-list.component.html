@@ -1,7 +1,11 @@
 <div class="container">
 <div class="first-container">
+<div class="top">
+  <div style="display: flex;">
 
-  <app-searchbar></app-searchbar>
+    <app-searchbar></app-searchbar>
+    <app-date-rangepicker></app-date-rangepicker>
+  </div>
   <div class="count-box">
     <app-admin-values-displaying-button
     [count]="28"
@@ -9,27 +13,24 @@
     [label]="'Total Orders'"
     ></app-admin-values-displaying-button>
 
-  <app-admin-values-displaying-button
-  [count]="15"
-  [iconSrc]="'icons/graph.png'"
-  [label]="'Delivered'"
-  ></app-admin-values-displaying-button>
+    <app-admin-values-displaying-button
+    [count]="15"
+     [iconSrc]="'icons/graph.png'"
+    [label]="'Delivered'"
+      ></app-admin-values-displaying-button>
 </div>
 
 </div>
-
-
-
-<div class="box-container">
-
-  <div class="box-date">
-    <input class="date-select" type="date">
-  </div>
-  <div class="box-date" >
-    <input class="date-select" type="date">
-  </div>
-
 </div>
+
+
+
+
+<!-- <div class="box-container">
+
+
+
+</div> -->
 
 </div>
 <app-orderlist-table [OrderList]="orderlist"></app-orderlist-table>

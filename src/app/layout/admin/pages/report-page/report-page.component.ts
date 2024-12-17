@@ -1,30 +1,16 @@
 import { Component } from '@angular/core';
 import { AddButtonComponent } from '../../ui/add-button/add-button.component';
+import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-report-page',
   standalone: true,
-  imports: [AddButtonComponent],
+  imports: [AddButtonComponent, SearchbarComponent],
   templateUrl: './report-page.component.html',
   styleUrl: './report-page.component.scss',
 })
 export class ReportPageComponent {
-  button: any = {
-    id: 1,
-    icon: 'bi bi-file-arrow-down',
-    title: 'Report',
-  };
-
-  header: any = [
-    'Sl No.',
-    'Employee Id',
-    'Employee Name',
-    'Order Id',
-    'Purchase Month',
-    'Order Total',
-    'Remarks',
-  ];
-
   items: any = [
     {
       sl_no: 1,
@@ -106,5 +92,45 @@ export class ReportPageComponent {
       purchase_date: 'June',
       order_total: 320.4,
     },
+  ];
+
+  downloadReport() {
+    console.log('Download Report');
+    // Step 1: Convert JSON to a worksheet
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.items);
+
+    // Step 2: Create a new workbook and append the worksheet
+    const workbook: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+    // Step 3: Save the Excel file
+    XLSX.writeFile(workbook, 'payroll-report.xlsx');
+  }
+
+  worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.items, {
+    header: [
+      'Sl No.',
+      'Employee Id',
+      'Employee Name',
+      'Order Id',
+      'Purchase month',
+      'Order Total',
+    ],
+  });
+
+  button: any = {
+    id: 1,
+    icon: 'bi bi-file-arrow-down',
+    title: 'Report',
+  };
+
+  header: any = [
+    'Sl No.',
+    'Employee Id',
+    'Employee Name',
+    'Order Id',
+    'Purchase Month',
+    'Order Total',
+    'Remarks',
   ];
 }
