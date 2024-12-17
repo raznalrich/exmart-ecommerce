@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SettingPageComponent } from './setting-page.component';
+import { EditPoliciesComponent } from './edit-policies.component';
 
-describe('SettingPageComponent', () => {
-  let component: SettingPageComponent;
-  let fixture: ComponentFixture<SettingPageComponent>;
+describe('EditPoliciesComponent', () => {
+  let component: EditPoliciesComponent;
+  let fixture: ComponentFixture<EditPoliciesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SettingPageComponent]
+      imports: [EditPoliciesComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SettingPageComponent);
+    fixture = TestBed.createComponent(EditPoliciesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
