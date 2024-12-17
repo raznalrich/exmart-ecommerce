@@ -39,10 +39,10 @@
       cursor: pointer;
       transition: background-color 0.2s, transform 0.1s;
       &[type="submit"] {
-        background-color: #007bff;
+        background-color: #8061c3;
         color: #fff;
         &:hover:not(:disabled) {
-          background-color: #0056b3;
+          background-color: #8061c3;
         }
       }
 
