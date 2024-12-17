@@ -1,7 +1,10 @@
 <div class="page">
     <div class="top">
         <app-searchbar></app-searchbar>
-        <app-add-button [button]="button" (buttonFunction)="downloadReport()"></app-add-button>
+        <!-- <app-add-button [button]="button" (buttonFunction)="downloadReport()"></app-add-button> -->
+        <button class="btn-create-new" (click)="downloadReport()">
+            <i class="bi bi-file-arrow-down"></i>{{button.title}}
+        </button>
     </div>
     <div class="body">
         <div class="container-fluid">

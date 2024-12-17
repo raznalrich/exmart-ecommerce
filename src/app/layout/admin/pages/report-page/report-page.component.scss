@@ -1,7 +1,14 @@
-// * {
-//   margin: 0;
-//   padding: 0;
-// }
+button {
+  height: 35px;
+  width: 150px;
+  border-radius: 10px;
+  border: none;
+  background-color: #8061c3;
+  color: white;
+  i{
+    margin-right: 15px;
+  }
+}
 .page {
   .top {
     display: flex;
