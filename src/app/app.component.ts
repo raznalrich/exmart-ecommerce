@@ -26,6 +26,7 @@ import { AddProductsComponent } from './layout/admin/pages/add-products/add-prod
 import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
 import { UsersidebarComponent } from './layout/user/ui/usersidebar/usersidebar.component';
 import { ReportPageComponent } from './layout/admin/pages/report-page/report-page.component';
+import { OrderPopupComponent } from "./layout/admin/ui/order-popup/order-popup.component";
 
 @Component({
   selector: 'app-root',
@@ -58,7 +59,8 @@ import { ReportPageComponent } from './layout/admin/pages/report-page/report-pag
     SingleproductpageComponent,
     AddtocartpageComponent,
     AddressConfirmPageComponent,
-  ],
+    OrderPopupComponent
+],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

@@ -1,42 +1,47 @@
-<h1>Settings Page</h1>
-<section class="categories-section">
-  <h2>Current Categories</h2>
-  <div class="categories">
-    <div class="category-card">
-      <img src="placeholder-tshirt.png" alt="Garments" />
-      <div class="category-name">garments</div>
-      <div class="category-actions">
-        <button><img src="placeholder-edit.png" alt="Edit" /></button>
-        <button><img src="placeholder-delete.png" alt="Delete" /></button>
+
+<div class="main">
+  <h1>Settings Page</h1>
+  <section class="categories-section">
+    <h2>Current Categories</h2>
+    <div class="categories">
+      <div class="category-card">
+        <img src="https://static.thenounproject.com/png/1241514-200.png" alt="Garments" />
+        <div class="category-name"><p>Garments</p></div>
+        <div class="category-actions">
+          <button><i class="bi bi-pencil-square"></i></button>
+          <button><i class="bi bi-trash3"></i></button>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/737/737004.png" alt="Appliances" />
+        <div class="category-name"><p>Appliances</p></div>
+        <div class="category-actions">
+          <button><i class="bi bi-pencil-square"></i></button>
+          <button><i class="bi bi-trash3"></i></button>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/6820/6820171.png" alt="Stationery" />
+        <div class="category-name"><p>Stationery</p></div>
+        <div class="category-actions">
+          <button><i class="bi bi-pencil-square"></i></button>
+          <button><i class="bi bi-trash3"></i></button>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="category-card">
-      <img src="placeholder-mug.png" alt="Appliances" />
-      <div class="category-name">appliances</div>
-      <div class="category-actions">
-        <button><img src="placeholder-edit.png" alt="Edit" /></button>
-        <button><img src="placeholder-delete.png" alt="Delete" /></button>
-      </div>
-    </div>
-
-    <div class="category-card">
-      <img src="placeholder-book.png" alt="Stationery" />
-      <div class="category-name">stationery</div>
-      <div class="category-actions">
-        <button><img src="placeholder-edit.png" alt="Edit" /></button>
-        <button><img src="placeholder-delete.png" alt="Delete" /></button>
-      </div>
+  <div class="add-category">
+    <span>Add new category</span>
+    <div class="category-component">
+      <app-add-new-category></app-add-new-category>
     </div>
   </div>
-</section>
-
-
-<div class="add-category">
-  <span>Add new category</span>
-  <button>+</button>
-</div>
-<div class="edit-policies">
-  <span>Edit policies</span>
-  <button><img src="placeholder-edit.png" alt="Edit" /></button>
+  <div class="edit-policies">
+    <span>Edit policies</span>
+    <!-- <button><i class="bi bi-pen"></i></button> -->
+    <app-edit-policiesapp-edit-policies></app-edit-policiesapp-edit-policies>
+  </div>
 </div>

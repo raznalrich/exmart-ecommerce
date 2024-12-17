@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AddButtonComponent } from '../../ui/add-button/add-button.component';
-import { SearchbarComponent } from "../../ui/searchbar/searchbar.component";
+import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
 
 @Component({
   selector: 'app-report-page',
@@ -10,6 +10,9 @@ import { SearchbarComponent } from "../../ui/searchbar/searchbar.component";
   styleUrl: './report-page.component.scss',
 })
 export class ReportPageComponent {
+  downloadReport() {
+    console.log('Download Report');
+  }
   button: any = {
     id: 1,
     icon: 'bi bi-file-arrow-down',

@@ -1,7 +1,7 @@
 <div class="page">
     <div class="top">
         <app-searchbar></app-searchbar>
-        <app-add-button [button]="button"></app-add-button>
+        <app-add-button [button]="button" (buttonFunction)="downloadReport()"></app-add-button>
     </div>
     <div class="body">
         <div class="container-fluid">

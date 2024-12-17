@@ -4,23 +4,20 @@
   "items": [
     {
       "name": "Experion Jacket",
+      "image": "https://media.karousell.com/media/photos/products/2023/4/29/gildan_zipup_hoodie_1682750904_29598b39.jpg",
       "size": "XL",
       "color": "Black",
       "price": "500"
     },
     {
-      "name": "Urban Sneakers",
+      "name": "Experion Tshirt",
+      "image": "staticimages/pro_tshirt.png",
       "size": "L",
-      "color": "White",
+      "color": "Black",
       "price": "120"
-    },
-    {
-      "name": "Classic Watch",
-      "size": "One Size",
-      "color": "Silver",
-      "price": "250"
     }
+
   ],
-  "totalAmount": "$870",
-  "deliveryCharge": "$30"
+  "totalAmount": "870",
+  "deliveryCharge": "30"
 }
