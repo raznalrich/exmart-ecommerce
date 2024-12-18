@@ -3,7 +3,7 @@
     "order": "001",
     "date": "2024-12-01",
     "customer": "John Doe",
-    "status": "Done",
+    "status": "Delivered",
     "amount": 250.00,
     "items": [
       {
@@ -37,7 +37,7 @@
     "order": "003",
     "date": "2024-12-05",
     "customer": "Mark Johnson",
-    "status": "Done",
+    "status": "Shipped",
     "amount": 120.00,
     "items": [
       {
@@ -63,7 +63,7 @@
     "order": "005",
     "date": "2024-12-07",
     "customer": "Emily Davis",
-    "status": "Done",
+    "status": "Shipped",
     "amount": 60.00,
     "items": [
       {
@@ -76,7 +76,7 @@
     "order": "006",
     "date": "2024-12-08",
     "customer": "Michael Wilson",
-    "status": "Pending",
+    "status": "Shipped",
     "amount": 150.00,
     "items": [
       {
@@ -89,7 +89,7 @@
     "order": "007",
     "date": "2024-12-09",
     "customer": "Jessica Taylor",
-    "status": "Done",
+    "status": "Delivered",
     "amount": 45.00,
     "items": [
       {
@@ -123,7 +123,7 @@
     "order": "009",
     "date": "2024-12-11",
     "customer": "Samantha Lee",
-    "status": "Done",
+    "status": "Delivered",
     "amount": 90.00,
     "items": [
       {
