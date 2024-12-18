@@ -15,7 +15,8 @@ export class SingleCarouselComponent {
 // altText:''
 // }
 
-@Input() carouselImages: { id: number; imageSrc: string }[] = [];
+@Input() carouselImages: { id: number; imageCollectionUrl: string }[] = [];
 @Input() currentImageIndex: number = 0;
+// carouselImages:any
 }
 

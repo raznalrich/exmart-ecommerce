@@ -4,6 +4,7 @@ import { SingleCarouselComponent } from "../../ui/single-carousel/single-carouse
 import { SingleProductDetailComponent } from "../../ui/single-product-detail/single-product-detail.component";
 import { ApiService } from '../../../../api.service';
 import { SinglePageDropdownComponent } from "../../ui/single-page-dropdown/single-page-dropdown.component";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-singleproductpage',
@@ -14,17 +15,26 @@ import { SinglePageDropdownComponent } from "../../ui/single-page-dropdown/singl
 })
 export class SingleproductpageComponent {
   carouselImages: any;
-  card:any
-  constructor(public api: ApiService) {}
+  // card:any
+// data:any
+id:any
+  constructor(public api: ApiService, private activateroute: ActivatedRoute) {}
   ngOnInit() {
-    this.api.getCarouselImages().subscribe((res: any) => {
-      this.carouselImages = res;
-      console.log(this.carouselImages);
-    });
+    // this.api.getCarouselImages().subscribe((res: any) => {
+    //   this.carouselImages = res;
+    //   console.log(this.carouselImages);
+    // });
 
-    this.api.getCardImages().subscribe((res: any) => {
-      this.card = res;
-      // console.log(this.card);
+    // this.api.getCardImages().subscribe((res: any) => {
+    //   this.card = res;
+    //   // console.log(this.card);
+    // });
+    this.id=this.activateroute.snapshot.paramMap.get('id');
+    console.log(this.id);
+
+    this.api.getProductsById(this.id).subscribe((res: any) => {
+      this.carouselImages = res;
+      console.log("name",this.carouselImages[0].imageCollectionUrl);
     });
   }
 }

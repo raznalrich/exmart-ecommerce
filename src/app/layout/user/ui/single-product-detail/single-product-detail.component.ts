@@ -15,26 +15,40 @@ export class SingleProductDetailComponent {
 // colors:any;
   arr:any;
 // details:any
+// @Input()details:any={
+// name:'',
+// description:'',
+// price:'',
+// rating:'',
+// color:'',
+// colors:[],
+// sixes:[],
+// images:[]
+// }
+
 @Input()details:any={
-name:'',
-description:'',
-price:'',
-rating:'',
-color:'',
-colors:[],
-sixes:[],
-images:[]
+    productName:'',
+    price: '',
+    category: '',
+    colors: [],
+    rating:'',
+    color: '',
+    sizes: [],
+    imageUrl: '',
+    imageCollectionUrl: [],
+    capacity: '',
 }
-  constructor(public api: ApiService) {}
-  ngOnInit() {
-   this.details= this.api.getProductDetails().subscribe((res: any) => {
-      this.details = res;
-      // console.log(this.details);
-      this.arr=this.details.product;
-      // console.log(this.arr);
-      // this.colors=this.arr.colors
-      // console.log("colors",this.arr.colors[0].code);
-      console.log("colors",this.arr.colors)
-    });
-}
+
+  // constructor(public api: ApiService) {}
+  // ngOnInit() {
+  //  this.details= this.api.getProductDetails().subscribe((res: any) => {
+  //     this.details = res;
+  //     // console.log(this.details);
+  //     this.arr=this.details.product;
+  //     // console.log(this.arr);
+  //     // this.colors=this.arr.colors
+  //     // console.log("colors",this.arr.colors[0].code);
+  //     console.log("colors",this.arr.colors)
+  //   });
+// }
 }
