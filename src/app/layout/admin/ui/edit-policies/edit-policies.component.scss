@@ -13,7 +13,10 @@ body {
   height: 100vh;
 }
 
-/* Container Styling */
+.policy-btn{
+  all: unset;
+}
+
 .container {
   background-color: #fff;
   max-width: 500px;
@@ -43,7 +46,7 @@ h2 {
   font-weight: 600;
 }
 
-/* Policy Items */
+
 .policy-item {
   display: flex;
   justify-content: space-between;
@@ -78,7 +81,7 @@ h2 {
   height: 100%;
 }
 
-/* Hover Effects */
+
 .policy-item:hover {
   background-color: #f4f4f4;
   border-radius: 8px;
