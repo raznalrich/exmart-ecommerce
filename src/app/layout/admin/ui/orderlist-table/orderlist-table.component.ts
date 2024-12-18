@@ -1,11 +1,14 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BillingDetailComponent } from "../billing-detail/billing-detail.component";
+import { CustomerDetailComponent } from "../customer-detail/customer-detail.component";
+import { OrderPopupComponent } from "../order-popup/order-popup.component";
 
 @Component({
   selector: 'app-orderlist-table',
   standalone: true,
-  imports: [CurrencyPipe,FormsModule],
+  imports: [CurrencyPipe, FormsModule, BillingDetailComponent, CustomerDetailComponent, OrderPopupComponent],
   templateUrl: './orderlist-table.component.html',
   styleUrl: './orderlist-table.component.scss'
 })
