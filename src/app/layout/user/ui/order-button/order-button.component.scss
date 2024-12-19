@@ -357,3 +357,7 @@ body .dribbble img {
   display: block;
   height: 28px;
 }
+.order.fade-out {
+  opacity: 0;
+  transition: opacity 3s ease; /* Adjust the duration as needed */
+}
