@@ -3,7 +3,7 @@
     "order": "001",
     "date": "2024-12-01",
     "customer": "John Doe",
-    "status": "OrderPlaced",
+    "status": "Delivered",
     "amount": 250.00,
     "items": [
       {
@@ -89,7 +89,7 @@
     "order": "007",
     "date": "2024-12-09",
     "customer": "Jessica Taylor",
-    "status": "OrderPlaced",
+    "status": "Delivered",
     "amount": 45.00,
     "items": [
       {
@@ -123,7 +123,7 @@
     "order": "009",
     "date": "2024-12-11",
     "customer": "Samantha Lee",
-    "status": "OrderPlaced",
+    "status": "Delivered",
     "amount": 90.00,
     "items": [
       {
