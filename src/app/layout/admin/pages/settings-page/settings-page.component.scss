@@ -9,10 +9,7 @@ body {
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
 }
 
-.main {
-  text-align: center;
 
-}
 
 h1 {
   font-size: 2.5em;
@@ -31,7 +28,6 @@ h2{
 
 .categories {
   display: flex;
-  justify-content: center;
   gap: 20px;
   margin-top: 70px;
 }
@@ -80,8 +76,8 @@ h2{
 .add-category, .edit-policies {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  // justify-content: center;
+  // align-items: center;
   gap: 10px;
   font-size: 1em;
   animation: fadeIn 1.5s ease-in-out;
@@ -99,6 +95,10 @@ h2{
   font-size: 18px;
   cursor: pointer;
 }
+.category-component{
+  display: flex;
+  justify-content: center;
+}
 
 .edit-policies button {
   border: none;
@@ -112,6 +112,11 @@ h2{
 .category-component{
   display: flex;
   justify-content: center;
+}
+
+
+button{
+  all: unset !important;
 }
 
 
