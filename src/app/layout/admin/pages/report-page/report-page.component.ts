@@ -96,14 +96,9 @@ export class ReportPageComponent {
 
   downloadReport() {
     console.log('Download Report');
-    // Step 1: Convert JSON to a worksheet
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.items);
-
-    // Step 2: Create a new workbook and append the worksheet
     const workbook: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-
-    // Step 3: Save the Excel file
     XLSX.writeFile(workbook, 'payroll-report.xlsx');
   }
 
