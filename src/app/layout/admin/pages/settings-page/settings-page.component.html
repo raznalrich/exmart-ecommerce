@@ -1,11 +1,13 @@
-
 <div class="main">
   <h1>Settings Page</h1>
   <section class="categories-section">
     <h2>Current Categories</h2>
     <div class="categories">
       <div class="category-card">
-        <img src="https://static.thenounproject.com/png/1241514-200.png" alt="Garments" />
+        <img
+          src="https://static.thenounproject.com/png/1241514-200.png"
+          alt="Garments"
+        />
         <div class="category-name"><p>Garments</p></div>
         <div class="category-actions">
           <button><i class="bi bi-pencil-square"></i></button>
@@ -14,7 +16,10 @@
       </div>
 
       <div class="category-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/737/737004.png" alt="Appliances" />
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/737/737004.png"
+          alt="Appliances"
+        />
         <div class="category-name"><p>Appliances</p></div>
         <div class="category-actions">
           <button><i class="bi bi-pencil-square"></i></button>
@@ -23,7 +28,10 @@
       </div>
 
       <div class="category-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/6820/6820171.png" alt="Stationery" />
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/6820/6820171.png"
+          alt="Stationery"
+        />
         <div class="category-name"><p>Stationery</p></div>
         <div class="category-actions">
           <button><i class="bi bi-pencil-square"></i></button>
@@ -36,12 +44,30 @@
   <div class="add-category">
     <span>Add new category</span>
     <div class="category-component">
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="add-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+      >
+        <i class="bi bi-plus-circle-fill"></i>
+      </button>
       <app-add-new-category></app-add-new-category>
     </div>
   </div>
-  <div class="edit-policies">
+  <div class="edit-policies" routerLink = 'texteditor'>
     <span>Edit policies</span>
-    <!-- <button><i class="bi bi-pen"></i></button> -->
+    <!-- Button trigger modal -->
+
+    <button
+      type="button"
+      class="policy-btn"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      <i class="bi bi-pen"></i>
+    </button>
     <app-edit-policiesapp-edit-policies></app-edit-policiesapp-edit-policies>
   </div>
 </div>

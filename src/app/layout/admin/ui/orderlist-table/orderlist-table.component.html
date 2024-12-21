@@ -1,3 +1,16 @@
+<div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"> <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Order Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-order-popup></app-order-popup>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="table-container">
   <table class="styled-table">
     <!-- @for(item of O) -->
@@ -17,14 +30,22 @@
         <td>{{item.customer}}</td>
         <td>
           <select class="status-dropdown" [(ngModel)]="item.status" (change)="updateOrderStatus(item)">
-            <option value="OrderPlaced">OrderPlaced</option>
+            <option value="Delivered">Delivered</option>
             <option value="Shipped">Shipped</option>
             <option value="Pending">Pending</option>
           </select>
         </td>
         <td>{{item.amount | currency : "INR"}}</td>
          <td>{{calculateTotalQuantity(item.items)}}</td>
+<<<<<<< HEAD
           <td style="text-align: center;"><i class="bi bi-eye"></i></td>
+=======
+          <td style="text-align: center;">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+            </td>
+>>>>>>> 9f34702d40254d36125615ced96b2821b0db8c10
 
       </tr>
     }
@@ -32,4 +53,3 @@
 
   </table>
 </div>
-

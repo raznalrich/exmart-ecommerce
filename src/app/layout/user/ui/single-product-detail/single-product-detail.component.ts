@@ -3,6 +3,7 @@ import { ApiService } from '../../../../api.service';
 import { SinglePageDropdownComponent } from '../single-page-dropdown/single-page-dropdown.component';
 import { CommonModule } from '@angular/common';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
+import { GlobalService } from '../../../../global.service';
 
 @Component({
   selector: 'app-single-product-detail',
@@ -25,7 +26,7 @@ colors:[],
 sixes:[],
 images:[]
 }
-  constructor(public api: ApiService) {}
+  constructor(public api: ApiService, public cartService: GlobalService) {}
   ngOnInit() {
    this.details= this.api.getProductDetails().subscribe((res: any) => {
       this.details = res;
