@@ -48,7 +48,7 @@ export class ThankyoupageComponent {
           if (isComplete) {
             this.isContentVisible = true;
           }
-        },1300)
+        },400)
 
       });
     })

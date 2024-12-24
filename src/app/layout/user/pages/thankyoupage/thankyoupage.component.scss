@@ -22,8 +22,8 @@
 
 .MainContainer {
   background-color: rgba(62, 104, 185, 0.9);
-  margin: -150px 100px 50px 100px;
-  border-radius: 20px;
+  margin: -150px 0px 50px 0px;
+  border-radius: 5px;
   text-align: center;
   padding-bottom: 20px;
   transition-delay: 0.3s;
@@ -39,10 +39,11 @@ h1 {
 }
 
 .OrderAmountBox {
-  background-color: #fff;
-  margin: 50px;
+  background-color: #f5f5f5;
+  margin: 50px 20%;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
