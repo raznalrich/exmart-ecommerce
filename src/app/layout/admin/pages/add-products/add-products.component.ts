@@ -32,7 +32,7 @@ export class AddProductsComponent {
         Validators.pattern(/^\d+$/),
       ]),
       // disabled control
-      size: new FormControl({ value: '', disabled: true }),
+      size: new FormControl({ value: '', enabled: true }),
       color: new FormControl(''),
     });
   }

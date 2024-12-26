@@ -23,6 +23,7 @@ import { AddProductsComponent } from './layout/admin/pages/add-products/add-prod
 import { SettingsPageComponent } from './layout/admin/pages/settings-page/settings-page.component';
 
 import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
+import { AdminSettingsTextEditorComponent } from './layout/admin/pages/admin-settings-text-editor/admin-settings-text-editor.component';
 
 
 export const routes: Routes = [
@@ -98,9 +99,14 @@ export const routes: Routes = [
         path:'dialoguebox',component:AddProductsComponent
       },
       {
-        path:'settings',component:SettingsPageComponent
+        path:'settings',component:SettingsPageComponent,children:[
+          {
+            path:'texteditor',component:AdminSettingsTextEditorComponent
+          }
+        ]
 
-      }
+      },
+      
 
 
     ]

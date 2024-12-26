@@ -23,7 +23,7 @@
   },
   {
     "id": 2,
-    "productName": "Hoody Experion branded",
+    "productName": "Hoody Experion brand",
     "price": 399.99,
     "category": "garments",
     "colors": ["white"],
@@ -46,7 +46,7 @@
   },
   {
     "id": 3,
-    "productName": "Jersey Exaperion branded",
+    "productName": "Jersey Experion branded",
     "price": 399.99,
     "category": "garments",
     "colors": ["black", "red"],
