@@ -1,4 +1,5 @@
-<button id="button1" data-bs-toggle="modal" data-bs-target="#confirmationModal" [ngStyle] = "{'background-color': popUp.buttonColor}">
+<button id="button1" data-bs-toggle="modal" data-bs-target="#confirmationModal"
+    [ngStyle]="{'background-color': popUp.buttonColor}">
     {{popUp.buttonTitle}}
 </button>
 
@@ -13,9 +14,14 @@
                 {{popUp.message}}
             </div>
             <div class="modal-footer d-flex justify-content-center border-0">
-                <button type="button" class="btn btn-secondary me-2"
-                    data-bs-dismiss="modal">{{popUp.cancelText}}</button>
-                <button type="button" class="btn btn-primary" (click)="confirmAction">{{popUp.confirmText}}</button>
+                <button type="button" class="btn me-2" data-bs-dismiss="modal"
+                    [ngStyle]="{'background-color': popUp.cancelColor, 'color': '#fff'}">
+                    {{popUp.cancelText}}
+                </button>
+                <button type="button" class="btn" (click)="confirmAction"
+                    [ngStyle]="{'background-color': popUp.confirmColor, 'color': '#fff'}">
+                    {{popUp.confirmText}}
+                </button>
             </div>
         </div>
     </div>

@@ -17,7 +17,9 @@ export class PopUpComponent {
     title: 'Order Confirmation',
     message: 'Do you want to confirm ?',
     cancelText: 'Cancel',
+    cancelColor: 'red',
     confirmText: 'Confirm',
+    confirmColor: 'green'
   };
   confirmAction = output();
   buttonFunction() {

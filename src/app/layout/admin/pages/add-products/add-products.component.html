@@ -8,7 +8,7 @@
                         <div>
                             <label>Images (max 4):</label>
                             @for (item of images.controls; track $index) {
-                            <input type="text" [formControlName]="$index" placeholder="Enter image URL" />
+                            <input type="image" [formControlName]="$index" placeholder="Enter image URL" />
                             <button type="button" (click)="removeImage($index)">Remove</button>
                             }
                             <button type="button" (click)="addImage('')">Add Image</button>
