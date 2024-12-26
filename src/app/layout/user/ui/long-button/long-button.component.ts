@@ -17,6 +17,5 @@ export class LongButtonComponent {
   @Input() imgSrc: string = '';
   @Input() imgAlt: string = 'button image';
   @Input() imgPosition: 'left' | 'right' = 'left';
-  @Input() bgColor: string = '#ffffff';
   @Input() textColor: string = '#ffffff';
 }
