@@ -20,8 +20,6 @@ export class ApiServiceService {
   }
 
 
-
-
   getItemsInOrder() {
     return this.http.get(`Data/OrderDetails.json`)
   }
@@ -31,4 +29,10 @@ export class ApiServiceService {
     return this.http.get('/Data/productsTrail.json');
   }
 
+  getCategory(){
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.get('https://localhost:7150/api/Categories');
+  }
+
+  
 }
