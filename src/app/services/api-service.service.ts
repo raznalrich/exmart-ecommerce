@@ -31,8 +31,8 @@ export class ApiServiceService {
 
   getCategory(){
     const headers = { 'Content-Type': 'application/json' };
-    return this.http.get('https://localhost:7150/api/Categories');
+    return this.http.get('https://localhost:7267/api/Categories');
   }
 
-  
+
 }
