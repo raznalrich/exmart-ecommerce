@@ -1,46 +1,57 @@
-.PeopleBoxes {
-  width: 100%;
-  height: 50vh; /* Full viewport height */
-  overflow: hidden; /* Prevents overflow issues */
+.content-wrapper {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
 }
 
-.PeopleBoxes img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures the image covers the container proportionally */
-  display: block; /* Removes any extra spacing around the image */
+.content-wrapper.show-content {
+  opacity: 1;
+  visibility: visible;
 }
 
-.MainContainer{
+.animated-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.show-content .animated-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.MainContainer {
   background-color: rgba(62, 104, 185, 0.9);
-  margin: 50px 100px;
-  border-radius: 20px;
+  margin: -150px 0px 50px 0px;
+  border-radius: 5px;
   text-align: center;
-  align-items: center;
-  justify-content: center;
   padding-bottom: 20px;
+  transition-delay: 0.3s;
 }
-h1{
-  color: #ffff;
+
+.secondContainer {
+  transition-delay: 0.6s;
+}
+
+h1 {
+  color: #fff;
   padding-top: 20px;
 }
 
-
-
-.OrderAmountBox
-{
-  background-color: #ffff;
-  margin: 50px;
+.OrderAmountBox {
+  background-color: #f5f5f5;
+  margin: 50px 20%;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.inputFields{
-  background-color: #ffff;
-  margin: 50px;
-  margin-top: 20px;
+
+.inputFields {
+  background-color: #fff;
+  margin: 20px 50px 50px;
   padding: 20px;
   border-radius: 20px;
   display: flex;
@@ -48,29 +59,31 @@ h1{
   align-items: center;
   gap: 30px;
 }
-input , textarea{
+
+input, textarea {
   width: 60%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
 }
-button{
-  background-color: rgba(62, 104, 185, 0.9);  /* Matching the MainContainer background color */
-  color: #fff;  /* White text color */
-  border: none;  /* Removing the default border */
-  border-radius: 20px;  /* Rounded corners to match the other elements */
-  padding: 15px 30px;  /* Padding for better button size */
-  font-size: 16px;  /* Set a reasonable font size */
-  cursor: pointer;  /* Indicating that it's clickable */
-  transition: background-color 0.3s ease, transform 0.3s ease;  /* Smooth hover effect */
+
+button {
+  background-color: rgba(62, 104, 185, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 15px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: rgba(62, 104, 185, 1);  /* Darker shade on hover */
-  transform: translateY(-2px);  /* Slight lift effect on hover */
-}
-
-button:focus {
-  outline: none;  /* Removing default focus outline */
+  background-color: rgba(62, 104, 185, 1);
+  transform: translateY(-2px);
 }
 
 button:active {
-  transform: translateY(1px);  /* Slight press effect when the button is clicked */
+  transform: translateY(1px);
 }
