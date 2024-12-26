@@ -27,6 +27,11 @@
     "price": 399.99,
     "category": "garments",
     "colors": ["white"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "https://media.karousell.com/media/photos/products/2023/4/29/gildan_zipup_hoodie_1682750904_29598b39.jpg",
     "imageCollectionUrl": [
@@ -45,6 +50,11 @@
     "price": 399.99,
     "category": "garments",
     "colors": ["black", "red"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["40mm", "44mm"],
     "imageUrl": "https://m.media-amazon.com/images/I/51C2ieRiU9L.jpg",
     "imageCollectionUrl": [
@@ -63,6 +73,11 @@
     "price": 349.99,
     "category": "appliance",
     "colors": ["white", "blue"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "https://m.media-amazon.com/images/I/71RFdy6y6LL._SL1500_.jpg",
     "imageCollectionUrl": [
@@ -81,6 +96,11 @@
     "price": 399.0,
     "category": "stationary",
     "colors": ["blue", "white", "green"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["41mm", "45mm"],
     "imageUrl": "https://m.media-amazon.com/images/I/71zFvtVuP1L._SL1500_.jpg",
     "imageCollectionUrl": [
@@ -99,6 +119,11 @@
     "price": 349.99,
     "category": "stationary",
     "colors": ["Black", "red"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "https://m.media-amazon.com/images/I/41W9B1Ri4hL.jpg",
     "imageCollectionUrl": [
@@ -118,6 +143,11 @@
     "price": 99.99,
     "category": "stationary",
     "colors": ["White", "Black", "Red"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["5", "6", "7", "8", "9", "10", "11", "12"],
     "imageUrl": "https://m.media-amazon.com/images/I/61t0gIsFpjL._SY675_.jpg",
     "imageCollectionUrl": [
@@ -137,6 +167,11 @@
     "category": "appliance",
     "price": 1999.99,
     "colors": ["black", "White"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "https://m.media-amazon.com/images/I/61KVX-MbIUL._SL1500_.jpg",
     "imageCollectionUrl": [
@@ -155,6 +190,11 @@
     "price": 149.99,
     "category": "stationary",
     "colors": ["Black", "White"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": [
       "https://m.media-amazon.com/images/I/61eYApdaTDL._SL1100_.jpg"
@@ -173,6 +213,11 @@
     "price": 149.99,
     "category": "stationary",
     "colors": ["Black", "White"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "staticimages/pro_bag.png",
     "imageCollectionUrl": [

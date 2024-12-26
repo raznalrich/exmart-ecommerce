@@ -14,11 +14,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './singleproductpage.component.scss'
 })
 export class SingleproductpageComponent {
-  carouselImages: any;
-  // card:any
-// data:any
+productDetails:any
 id:any
-  constructor(public api: ApiService, private activateroute: ActivatedRoute) {}
+data:any
+  constructor(public api: ApiService, private route: ActivatedRoute) {}
   ngOnInit() {
     // this.api.getCarouselImages().subscribe((res: any) => {
     //   this.carouselImages = res;
@@ -29,12 +28,13 @@ id:any
     //   this.card = res;
     //   // console.log(this.card);
     // });
-    this.id=this.activateroute.snapshot.paramMap.get('id');
+    this.id=this.route.snapshot.paramMap.get('id');
     console.log(this.id);
 
-    this.api.getProductsById(this.id).subscribe((res: any) => {
-      this.carouselImages = res;
-      console.log("name",this.carouselImages[0].imageCollectionUrl);
+      this.api.getProductsById(this.id).subscribe((res: any) => {
+      this.productDetails = res;
+      // console.log("data",this.data);
+      console.log("imageCollection",this.productDetails[0].imageCollectionUrl);
     });
   }
 }
