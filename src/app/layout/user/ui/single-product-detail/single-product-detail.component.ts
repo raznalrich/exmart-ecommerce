@@ -3,6 +3,7 @@ import { ApiService } from '../../../../api.service';
 import { SinglePageDropdownComponent } from '../single-page-dropdown/single-page-dropdown.component';
 import { CommonModule } from '@angular/common';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
+import { GlobalService } from '../../../../global.service';
 
 @Component({
   selector: 'app-single-product-detail',
@@ -13,7 +14,7 @@ import { StarRatingComponent } from '../star-rating/star-rating.component';
 })
 export class SingleProductDetailComponent {
 @Input() data: any;
-
+constructor(public api: ApiService, public cartService: GlobalService) {}
 ngOnInit(){
 console.log("details",this.data)
 }
