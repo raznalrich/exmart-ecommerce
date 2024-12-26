@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiService {
+  getCategory() {
+    throw new Error('Method not implemented.');
+  }
   constructor(public http: HttpClient) {}
 
   getCardImages() {
