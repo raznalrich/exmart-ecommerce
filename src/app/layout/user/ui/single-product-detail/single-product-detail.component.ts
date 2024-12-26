@@ -7,48 +7,14 @@ import { StarRatingComponent } from '../star-rating/star-rating.component';
 @Component({
   selector: 'app-single-product-detail',
   standalone: true,
-  imports: [SinglePageDropdownComponent,CommonModule,StarRatingComponent],
+  imports: [CommonModule,StarRatingComponent],
   templateUrl: './single-product-detail.component.html',
   styleUrl: './single-product-detail.component.scss'
 })
 export class SingleProductDetailComponent {
-// colors:any;
-  arr:any;
-// details:any
-// @Input()details:any={
-// name:'',
-// description:'',
-// price:'',
-// rating:'',
-// color:'',
-// colors:[],
-// sixes:[],
-// images:[]
-// }
+@Input() data: any;
 
-@Input()details:any={
-    productName:'',
-    price: '',
-    category: '',
-    colors: [],
-    rating:'',
-    color: '',
-    sizes: [],
-    imageUrl: '',
-    imageCollectionUrl: [],
-    capacity: '',
+ngOnInit(){
+console.log("details",this.data)
 }
-
-  // constructor(public api: ApiService) {}
-  // ngOnInit() {
-  //  this.details= this.api.getProductDetails().subscribe((res: any) => {
-  //     this.details = res;
-  //     // console.log(this.details);
-  //     this.arr=this.details.product;
-  //     // console.log(this.arr);
-  //     // this.colors=this.arr.colors
-  //     // console.log("colors",this.arr.colors[0].code);
-  //     console.log("colors",this.arr.colors)
-  //   });
-// }
 }

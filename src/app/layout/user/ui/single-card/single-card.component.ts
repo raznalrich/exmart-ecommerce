@@ -9,16 +9,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SingleCardComponent {
 
-@Input()card:any={
-id:0,
-imageSrc:'',
-altText:''
-}
+@Input()data:any;
 
 // @Input() card: { id: number; imageSrc: string } = { id: 0, imageSrc: '' };
 @Output() cardClicked = new EventEmitter<number>();
 
 onCardClick() {
-  this.cardClicked.emit(this.card.id);
+  this.cardClicked.emit(this.data.id);
 }
+ngOnInit(){
+  console.log("card",this.data.imageCollectionUrl);
+  }
 }
