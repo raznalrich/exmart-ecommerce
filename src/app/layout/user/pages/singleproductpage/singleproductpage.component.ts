@@ -33,8 +33,10 @@ data:any
 
       this.api.getProductsById(this.id).subscribe((res: any) => {
       this.productDetails = res;
+      // console.log("productDetails",this.productDetails );
+
       // console.log("data",this.data);
-      console.log("imageCollection",this.productDetails[0].imageCollectionUrl);
+      // console.log("imageCollectionUrl",this.productDetails[0].imageCollectionUrl);
     });
   }
 }

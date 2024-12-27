@@ -2,11 +2,9 @@
   <div class="product-card">
   <!-- @for (data of card; track data.id) { -->
   <!-- @for(item of data[0].imageCollectionUrl; track data.id){ -->
-  @for (item of productDetails; track item.id;){
-    <!-- <app-single-card [data]="item.productDetails"></app-single-card> -->
+  <!-- @for (item of productDetails; track item.id;){
     <app-single-card [data]="item.productDetails"></app-single-card>
-
-    }
+    } -->
   </div>
   <div class="product-carousel">
 <app-single-carousel [data]="productDetails"></app-single-carousel>

@@ -16,6 +16,6 @@ export class SingleProductDetailComponent {
 @Input() data: any;
 constructor(public api: ApiService, public cartService: GlobalService) {}
 ngOnInit(){
-console.log("details",this.data)
+    console.log("details",this.data)
 }
 }
