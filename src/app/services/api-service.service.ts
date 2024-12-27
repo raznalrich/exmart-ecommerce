@@ -11,6 +11,9 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Product')
     // return this.http.get('Data/productsTrail.json');
   }
+  getAllCategories(){
+    return this.http.get('https://localhost:7267/api/Categories')
+  }
 
 
   getOrderList() {
