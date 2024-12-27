@@ -1,28 +1,18 @@
 <!-- <div class="PeopleBoxes">
 <img src="images\People with boxes flat background.jpg" alt="image not found">
 </div> -->
-<!-- <app-orderconfirmationanimation></app-orderconfirmationanimation> -->
-
+<app-orderconfirmationanimation></app-orderconfirmationanimation>
 <!-- <app-order-tracking-bar></app-order-tracking-bar> -->
-<app-order-confirmation-tick-animation></app-order-confirmation-tick-animation>
+<div class="MainContainer">
 
-<div class="content-wrapper" [class.show-content]="isContentVisible">
-  
-  <div class="MainContainer animated-section">
-    <h1>Your Items in this Order</h1>
-    <app-items-in-order [orders]="orders"></app-items-in-order>
-    <div class="OrderAmountBox">
-      <div>
-        <p>subtotal</p>
-        <p>Delivery Charge</p>
-        <h4><strong>Total Amount</strong></h4>
-      </div>
-      <div style="text-align: end;">
-        <p>₹900</p>
-        <p>₹100</p>
-        <h4><strong>₹1000</strong></h4>
-      </div>
-    </div>
+  <h1>Your Items in this Order</h1>
+
+<app-items-in-order [orders]="orders" ></app-items-in-order>
+
+
+  <div class="OrderAmountBox">
+    <div><p>subtotal</p><p>Delivery Charge</p><h4><strong>Total Amount</strong></h4></div>
+    <div style="text-align: end;"><p>₹900</p><p>₹100</p><h4><strong>₹1000</strong></h4></div>
   </div>
 
   <div class="secondContainer animated-section">
