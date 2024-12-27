@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiService {
+  addCategory(categoryData: any) {
+    throw new Error('Method not implemented.');
+  }
   getCategory() {
     throw new Error('Method not implemented.');
   }
