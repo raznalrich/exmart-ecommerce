@@ -9,8 +9,11 @@ import { Component, Input } from '@angular/core';
 })
 export class SingleCarouselComponent {
 @Input() data: any;
+// productImages:any;
 
 ngOnInit(){
-console.log("carousel",this.data.imageCollectionUrl);
+// console.log("carousel",this.data.productImages[0].imageUrl);
+console.log("carousel",this.data);
+
 }
 }

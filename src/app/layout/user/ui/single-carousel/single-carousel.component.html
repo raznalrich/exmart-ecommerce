@@ -14,11 +14,11 @@
   </button> -->
   </div>
   <div class="carousel-inner">
-    @for (item of data[0].imageCollectionUrl; track item.id; let ind=$index)
+    @for (item of data; track item.id; let ind=$index)
     {
     <div class="carousel-item " [class]="ind===0 ? 'active' : ''">
 <!-- <div class="carousel-item" [class.active]=""ind = currentImageIndex> -->
-      <img [src]='item' class="d-block" alt="...">
+      <img [src]='item.imageUrl' class="d-block" alt="...">
     </div>
     }
   </div>
