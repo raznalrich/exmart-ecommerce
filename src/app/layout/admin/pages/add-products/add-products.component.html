@@ -1,68 +1,73 @@
-<div class="formGroup">
-    <div class="container">
-        <form [formGroup]="addProduct" (ngSubmit)="onSubmit()">
-            <!-- Images -->
-            <div>
-                <label>Images (max 4):</label>
-                @for (item of images.controls; track $index) {
-                <input type="text" [formControlName]="$index" placeholder="Enter image URL" />
-                <button type="button" (click)="removeImage($index)">Remove</button>
-                }
-                <button type="button" (click)="addImage('')">Add Image</button>
-            </div>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container">
+                    <form [formGroup]="addProduct" (ngSubmit)="onSubmit()">
+                        <div>
+                            <label>Images (max 4):</label>
+                            @for (item of images.controls; track $index) {
+                            <input type="image" [formControlName]="$index" placeholder="Enter image URL" />
+                            <button type="button" (click)="removeImage($index)">Remove</button>
+                            }
+                            <button type="button" (click)="addImage('')">Add Image</button>
+                        </div>
+                        <div>
+                            <label>Name:</label>
+                            <input type="text" formControlName="name" placeholder="Enter product name" />
+                            @if (addProduct.get('name')?.touched && addProduct.get('name')?.invalid)
+                            {
+                            @if (addProduct.get('name')?.hasError('required')) {
+                            <small>
+                                <div class="alert alert-danger" style="margin: 5px;">Name is a required field</div>
+                            </small>
+                            }
+                            }
+                        </div>
 
-            <!-- Name -->
-            <div>
-                <label>Name:</label>
-                <input type="text" formControlName="name" placeholder="Enter product name" />
-                @if (addProduct.get('name')?.touched && addProduct.get('name')?.invalid)
-                {
-                @if (addProduct.get('name')?.hasError('required')) {
-                <small>
-                    <div class="alert alert-danger" style="margin: 5px;">Name is a required field</div>
-                </small>
-                }
-                }
-            </div>
+                        <!-- Category -->
+                        <div>
+                            <label>Category:</label>
+                            <select formControlName="category">
+                                @for (item of categories; track $index)
+                                {
+                                <option [value]="item">{{ item }}</option>
+                                }
+                            </select>
+                        </div>
 
-            <!-- Category -->
-            <div>
-                <label>Category:</label>
-                <select formControlName="category">
-                    @for (item of categories; track $index)
-                    {
-                    <option [value]="item">{{ item }}</option>
-                    }
-                </select>
-            </div>
+                        <!-- Description -->
+                        <div>
+                            <label>Description:</label>
+                            <textarea formControlName="description" placeholder="Enter product description"></textarea>
+                        </div>
 
-            <!-- Description -->
-            <div>
-                <label>Description:</label>
-                <textarea formControlName="description" placeholder="Enter product description"></textarea>
-            </div>
+                        <!-- Price -->
+                        <div>
+                            <label>Price (in ₹):</label>
+                            <input type="text" formControlName="price" placeholder="Enter price" />
+                        </div>
 
-            <!-- Price -->
-            <div>
-                <label>Price (in ₹):</label>
-                <input type="text" formControlName="price" placeholder="Enter price" />
+                        <!-- Size (Visible only for garments) -->
+                        @if (addProduct.get('category')?.value === 'Garments') {
+                        <label>Size:</label>
+                        <select formControlName="size">
+                            @for (item of sizes; track $index)
+                            {
+                            <option [value]="item">{{ item }}</option>
+                            }
+                        </select>
+                        }
+                        <div>
+                            <label>Color:</label>
+                            <input type="text" formControlName="color" placeholder="Enter color" />
+                        </div>
+                        <button type="submit" [disabled]="addProduct.invalid">Submit</button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </form>
+                </div>
             </div>
-
-            <!-- Size (Visible only for garments) -->
-            @if (addProduct.get('category')?.value === 'Garments') {
-            <label>Size:</label>
-            <select formControlName="size">
-                @for (item of sizes; track $index)
-                {
-                <option [value]="item">{{ item }}</option>
-                }
-            </select>
-            }
-            <div>
-                <label>Color:</label>
-                <input type="text" formControlName="color" placeholder="Enter color" />
-            </div>
-            <button type="submit" [disabled]="addProduct.invalid">Submit</button>
-        </form>
+        </div>
     </div>
 </div>

@@ -1,1 +1,42 @@
-<p>report-page works!</p>
+<div class="page">
+    <div class="top">
+        <app-searchbar></app-searchbar>
+        <!-- <app-add-button [button]="button" (buttonFunction)="downloadReport()"></app-add-button> -->
+        <button class="btn-create-new" (click)="downloadReport()">
+            <i class="bi bi-file-arrow-down"></i>{{button.title}}
+        </button>
+    </div>
+    <div class="body">
+        <div class="container-fluid">
+            <table class="table">
+                <thead>
+                    <tr>
+                        @for (item of header; track item) {
+                        <th scope="col">{{item}}</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of items; track item) {
+                    <tr></tr>
+                    }
+                    @for (item of items; track item) {
+                    <tr>
+                        <td scope="row">{{item.sl_no}}</td>
+                        <td>{{item.employee_id}}</td>
+                        <td>{{item.employee_name}}</td>
+                        <td>{{item.order_id}}</td>
+                        <td>{{item.purchase_date}}</td>
+                        <td>{{item.order_total}}</td>
+                        <td>
+                            <form>
+                                <input type="text" placeholder="Courier Charges">
+                            </form>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

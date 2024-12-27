@@ -1,1 +1,4 @@
-<button class="btn-create-new"><i [class] ="button.icon"></i>{{button.title}}</button>
+<button class="btn-create-new" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="buttonFunction">
+    <i [class]="button.icon"></i>
+    {{button.title}}
+</button>

@@ -1,3 +1,16 @@
+<div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"> <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Order Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-order-popup></app-order-popup>
+      </div>
+    </div>
+  </div>
+</div>
+<app-confirm-modal></app-confirm-modal>
 <div class="table-container">
   <table class="styled-table">
     <!-- @for(item of O) -->
@@ -8,20 +21,32 @@
       <th>Status</th>
       <th>Amount</th>
       <th>Items</th>
+      <th>Action</th>
     </tr>
     @for(item of OrderList; track item){
       <tr>
         <td>{{item.order}}</td>
         <td>{{item.date}}</td>
         <td>{{item.customer}}</td>
+
         <td>
-          <span class="badge" [class.done]="item.status === 'Done'" [class.pending]="item.status === 'Pending'">
-            {{ item.status }}
-        </span>
+          <button type="button">
+
+          <select class="status-dropdown" [(ngModel)]="item.status" (change)="updateOrderStatus(item)">
+            <option value="Delivered" >Delivered</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Pending">Pending</option>
+          </select>
+
+        </button>
         </td>
         <td>{{item.amount | currency : "INR"}}</td>
          <td>{{calculateTotalQuantity(item.items)}}</td>
-
+          <td style="text-align: center;">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+            </td>
 
       </tr>
     }
@@ -29,4 +54,3 @@
 
   </table>
 </div>
-
