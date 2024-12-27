@@ -8,14 +8,9 @@ import { Component, Input } from '@angular/core';
   styleUrl: './single-carousel.component.scss'
 })
 export class SingleCarouselComponent {
+@Input() data: any;
 
-// @Input() carouselImages:any={
-// id:0,
-// imageSrc:'',
-// altText:''
-// }
-
-@Input() carouselImages: { id: number; imageSrc: string }[] = [];
-@Input() currentImageIndex: number = 0;
+ngOnInit(){
+console.log("carousel",this.data.imageCollectionUrl);
 }
-
+}
