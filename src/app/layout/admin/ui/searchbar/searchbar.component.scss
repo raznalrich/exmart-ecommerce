@@ -3,7 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  // margin: 20px;
+
 }
 .search-icon{
   position: absolute;
@@ -13,7 +14,7 @@
 
 .search-input {
   width: 400px;
-  padding: 10px 15px;
+  padding: 10px 15px 10px 45px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 10px;

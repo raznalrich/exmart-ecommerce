@@ -7,14 +7,14 @@ $order-dark: #343a40;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 50vh;
   background-color: $order-gray;
 }
 
 .confirmation {
   text-align: center;
   padding: 20px;
-  background-color: $order-white;
+  // background-color: $order-white;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   animation: fadeIn 1s ease-in-out;

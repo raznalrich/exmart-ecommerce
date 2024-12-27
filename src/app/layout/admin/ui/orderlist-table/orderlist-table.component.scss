@@ -8,12 +8,13 @@ body {
   max-height: 400px; /* Set the height for the scrollable area */
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Disable horizontal scrolling if not needed */
+}::-webkit-scrollbar {
+  display: none;
 }
 .styled-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 10px;
-  margin: 20px 0;
 }
 
 .styled-table th {
@@ -24,7 +25,7 @@ body {
   background-color: #f8f8f8;
   font-weight: bold;
   border-bottom: 2px solid #ddd;
-  z-index: 1;
+  z-index: 100;
 }
 
 .styled-table td {
@@ -57,4 +58,10 @@ body {
 
 .badge.pending {
   background-color: #ff9800;
+}
+.status-dropdown {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }

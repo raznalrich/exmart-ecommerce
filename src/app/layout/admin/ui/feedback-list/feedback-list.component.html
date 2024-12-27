@@ -1,0 +1,46 @@
+<div class="table table-hover mt-5">
+<div>
+  <!-- <div class="card shadow-sm"> -->
+    <!-- <div class="card-header bg-white">
+      <h5 class="mb-0">Employee Feedback</h5>
+    </div> -->
+    <div class="card-body scrollable-card">
+      <table class="table table-borderless align-middle">
+        <thead class="text-muted border-bottom">
+          <tr>
+            <th scope="col">Employee</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Feedback</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(employee of arr; track employee){
+          <tr class="border-bottom hover-row">
+            <td class="d-flex align-items-center">
+              <img
+                [src]="employee.image"
+                alt="Profile Picture"
+                class="rounded-circle me-3 shadow-sm"
+              />
+              <span class="fw-bold">{{ employee.name }}</span>
+            </td>
+            <td>
+              <p class="mb-0 text-muted">{{ employee.productName }}</p>
+            </td>
+            <td>
+              <p class="mb-0 text-muted">{{ employee.feedback }}</p>
+            </td>
+            <td class="text-center">
+              <i
+                class="bi bi-send-fill action-icon"
+                title="Send Feedback"
+              ></i>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

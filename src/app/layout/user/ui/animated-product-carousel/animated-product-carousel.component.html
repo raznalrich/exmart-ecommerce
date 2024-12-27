@@ -1,4 +1,4 @@
-<div class="carousel">
+<div #carousel class="carousel">
   <!-- list item -->
   <div class="list">
     <div *ngFor="let item of sliderItems" class="item">
@@ -7,10 +7,11 @@
         <div class="overlay"></div>
       </div>
       <div class="content">
+
         <div class="author">{{ item.author }}</div>
         <div class="title">{{ item.title }}</div>
         <div class="topic">{{ item.topic }}</div>
-        <div class="des">{{ item.description }}</div>
+        <!-- <div class="des">{{ item.description }}</div> -->
         <div class="buttons">
           <button (click)="seeMore(item)">BUY NOW</button>
           <button (click)="subscribe(item)">VIEW MORE</button>
@@ -22,11 +23,12 @@
   <!-- list thumbnail -->
   <div class="thumbnail">
     <div *ngFor="let thumbnail of thumbnails" class="item">
-      <img [src]="thumbnail.image" alt="Thumbnail">
-      <div class="content">
-        <div class="title">{{ thumbnail.title }}</div>
-        <div class="description">{{ thumbnail.description }}</div>
-      </div>
+        <img [src]="thumbnail.image" alt="Thumbnail">
+        <div class="content">
+          <div class="title">{{ thumbnail.title }}</div>
+          <!-- <div class="description">{{ thumbnail.description }}</div> -->
+        </div>
+
     </div>
   </div>
 

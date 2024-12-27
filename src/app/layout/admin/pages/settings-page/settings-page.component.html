@@ -1,0 +1,48 @@
+<div class="main">
+  <section class="categories-section">
+    <h2>Current Categories</h2>
+    <div class="categories">
+      @for(item of category;track item){
+        <div class="category-card">
+          <img
+            src={{item.iconPath}}
+            alt="Icon"
+          />
+          <div class="category-name"><p>{{item.categoryName}}</p></div>
+          <div class="category-actions">
+            <button><i class="bi bi-pencil-square"></i></button>
+            <button><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <div class="add-category">
+    <div class="category-component">
+      <button
+        type="button"
+        class="add-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#exam"
+      >
+      </button>
+      <app-add-new-category></app-add-new-category>
+    </div>
+  </div>
+  <div class="edit-policies">
+    <!-- <span>Edit policies</span> -->
+    <!-- Button trigger modal -->
+
+    <button
+      type="button"
+      class="policy-btn"
+      data-bs-toggle="modal"
+      data-bs-target="#static"
+    >
+    </button>
+
+
+    <app-edit-policiesapp-edit-policies></app-edit-policiesapp-edit-policies>
+  </div>
+</div>
