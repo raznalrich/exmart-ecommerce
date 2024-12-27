@@ -6,6 +6,9 @@ import { map } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
+  getCategory() {
+    throw new Error('Method not implemented.');
+  }
   constructor(public http: HttpClient) {}
 
   getCardImages() {
