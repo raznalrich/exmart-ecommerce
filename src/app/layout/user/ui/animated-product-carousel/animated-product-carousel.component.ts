@@ -9,6 +9,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrl: './animated-product-carousel.component.scss'
 })
 export class AnimatedProductCarouselComponent {
+  carouselElement(carouselElement: any) {
+    throw new Error('Method not implemented.');
+  }
   @ViewChild('carousel') carousel!: ElementRef;
   sliderItems = [
     {
