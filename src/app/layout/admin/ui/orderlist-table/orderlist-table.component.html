@@ -31,15 +31,14 @@
 
         <td>
           <button type="button">
-
           <select class="status-dropdown" [(ngModel)]="item.status" (change)="updateOrderStatus(item)">
             <option value="Delivered" >Delivered</option>
             <option value="Shipped">Shipped</option>
             <option value="Pending">Pending</option>
           </select>
-
         </button>
         </td>
+        
         <td>{{item.amount | currency : "INR"}}</td>
          <td>{{calculateTotalQuantity(item.items)}}</td>
           <td style="text-align: center;">
@@ -50,7 +49,5 @@
 
       </tr>
     }
-
-
   </table>
 </div>
