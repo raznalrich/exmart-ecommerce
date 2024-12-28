@@ -24,7 +24,7 @@ interface Item {
 @Component({
   selector: 'app-thankyoupage',
   standalone: true,
-  imports: [ItemsInOrderComponent, OrderConfirmationTickAnimationComponent],
+  imports: [ItemsInOrderComponent, OrderConfirmationTickAnimationComponent, OrderconfirmationanimationComponent],
   templateUrl: './thankyoupage.component.html',
   styleUrl: './thankyoupage.component.scss'
 })
