@@ -1,12 +1,31 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiServiceService {
   constructor(private http: HttpClient) {}
+  cartcount = signal(0);
+  cartid = signal<any[]>([]);
+  totalcartprice = signal(0);
 
+  addcartcount(id:number){
+    this.cartcount.update(value => value + 1);
+
+    // this.cartid.update(items => [...items, id]);
+    this.cartid.update(value => [...value,id]);
+    console.log(this.cartid());
+    // this.gettotalprice();
+
+  }
+
+  removecartcount(id: number) {
+
+    this.cartcount.update(value => value - 1 );
+    this.cartid.update(value => value.filter(item => item !== id));
+    // this.gettotalprice();
+  }
   getProducts(){
     return this.http.get('https://localhost:7267/api/Product')
     // return this.http.get('Data/productsTrail.json');
