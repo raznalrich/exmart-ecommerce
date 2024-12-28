@@ -9,9 +9,7 @@ import { OrderListComponent } from './layout/admin/pages/order-list/order-list.c
 import { ReportPageComponent } from './layout/admin/pages/report-page/report-page.component';
 import { ViewFeedbackComponent } from './layout/admin/pages/view-feedback/view-feedback.component';
 import { LoginComponent } from './layout/authentication/login/login.component';
-
 import { AddtocartpageComponent } from './layout/user/pages/addtocartpage/addtocartpage.component';
-
 import { ProductDisplayingSectionComponent } from './layout/user/ui/product-displaying-section/product-displaying-section.component';
 import { ProductlistComponent } from './layout/admin/pages/productlist/productlist.component';
 import { UserprofileComponent } from './layout/user/pages/userprofile/userprofile.component';
@@ -35,7 +33,7 @@ export const routes: Routes = [
             path:'category/:id',component:ProductDisplayingSectionComponent
           },
           {
-            path:'',redirectTo:'category/garments',pathMatch:'full'
+            path:'',redirectTo:'category/1',pathMatch:'full'
           }
 
         ],
@@ -106,9 +104,6 @@ export const routes: Routes = [
         ]
 
       },
-      
-
-
     ]
   },
   {
