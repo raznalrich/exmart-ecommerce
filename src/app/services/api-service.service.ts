@@ -11,13 +11,26 @@ export class ApiServiceService {
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
 
-  addcartcount(id:number){
-    this.cartcount.update(value => value + 1);
+  addToCart(id:number){
+    // this.cartcount.update(value => value + 1);
 
     // this.cartid.update(items => [...items, id]);
-    this.cartid.update(value => [...value,id]);
-    console.log(this.cartid());
+    // this.cartid.update(value => [...value,id]);
+    // console.log(this.cartid());
     // this.gettotalprice();
+    let data = {
+      productId: id,  // Changed from 'name' to 'categoryName'
+      userId: 1      // Changed from 'icon' to 'iconPath'
+    };
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http.post("https://localhost:7267/api/addtocart", data, { headers }).pipe(
+      catchError(error => {
+        console.log('Error details:', error.error);
+        throw error;
+      })
+    );
 
   }
 
@@ -26,6 +39,26 @@ export class ApiServiceService {
     this.cartcount.update(value => value - 1 );
     this.cartid.update(value => value.filter(item => item !== id));
     // this.gettotalprice();
+  }
+  gettotalprice() {
+    const cartIds = this.cartid();
+    this.getProducts().subscribe((res:any)=> {
+      if (!Array.isArray(res)) {
+        console.error('Invalid products data', res);
+        return;
+      }
+
+      const cartProducts = res.filter(product => cartIds.includes(product.id));
+
+      const totalPrice = cartProducts.reduce((sum, product) => sum + product.price, 0);
+
+      this.totalcartprice.set(totalPrice);
+
+      console.log('Total Price:', this.totalcartprice());
+    });
+  }
+  getCartList(){
+    return this.http.get('https://localhost:7267/api/addtocart/GetCart')
   }
   getProducts(){
     return this.http.get('https://localhost:7267/api/Product')
