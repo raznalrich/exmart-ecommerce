@@ -5,16 +5,19 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { AddButtonComponent } from '../../ui/add-button/add-button.component';
 import { TableComponent } from '../../ui/table/table.component';
 import { GlobalService } from '../../../../global.service';
-import { SearchbarComponent } from "../../ui/searchbar/searchbar.component";
-
-import { AddProductsComponent } from "../add-products/add-products.component";
-
+import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
+import { AddProductsComponent } from '../add-products/add-products.component';
 
 @Component({
   selector: 'app-productlist',
   standalone: true,
 
-  imports: [AddButtonComponent, TableComponent, SearchbarComponent, AddProductsComponent],
+  imports: [
+    AddButtonComponent,
+    TableComponent,
+    SearchbarComponent,
+    AddProductsComponent,
+  ],
   templateUrl: './productlist.component.html',
   styleUrl: './productlist.component.scss',
 })
@@ -30,6 +33,7 @@ export class ProductlistComponent {
   ngOnInit() {
     this.api.getProducts().subscribe((res: any) => {
       this.items = res;
+      console.log(this.items);
     });
   }
 
