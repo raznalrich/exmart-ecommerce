@@ -21,8 +21,11 @@ export class ProductDisplayingSectionComponent {
   ngOnInit(){
     this.paramSubscription = this.route.paramMap.subscribe(paramMap => {
       this.id = paramMap.get('id');
-      this.data = this.api.getproduct().subscribe((res:any)=>{
-        this.data = res.filter((item: any) => item.category === this.id);
+      console.log(this.id);
+
+      this.data = this.api.getProducts().subscribe((res:any)=>{
+        this.data = res.
+        filter((item: any) => item.categoryId == this.id);
         console.log(this.data);
 
       })
