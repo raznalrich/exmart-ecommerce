@@ -4,5 +4,7 @@ export interface popUp {
   title: string;
   message: string;
   cancelText: string;
+  cancelColor:string;
   confirmText: string;
+  confirmColor:string;
 }

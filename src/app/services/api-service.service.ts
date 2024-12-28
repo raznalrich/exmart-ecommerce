@@ -1,6 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-
-
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 
@@ -11,8 +9,11 @@ export class ApiServiceService {
   constructor(private http: HttpClient) {}
 
   getProducts(){
-    return this.http.get('Data/productsTrail.json');
-    // return this.http.get('Data/product-sample.json');
+    return this.http.get('https://localhost:7267/api/Product')
+    // return this.http.get('Data/productsTrail.json');
+  }
+  getAllCategories(){
+    return this.http.get('https://localhost:7267/api/Categories')
   }
 
 

@@ -15,12 +15,11 @@ import { LongButtonComponent } from "../../../user/ui/long-button/long-button.co
 })
 export class AdminSettingsTextEditorComponent {
   title = 'texteditor';
-  content = '';
+  content: string = '';
   config: EditorConfig = {
     placeholder: 'Enter the details here...',
     buttons: ST_BUTTONS,
   };
-
   subbtn() {
     alert("Added");
   }
