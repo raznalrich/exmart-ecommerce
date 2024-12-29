@@ -61,8 +61,11 @@
     <div class="summary-details">
       <p><span>Sub Total:</span> <span>{{998 | currency:'INR'}}</span></p>
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
+      <p class="total"><span>Total:</span> <span>{{ 998| currency:'INR'}}</span></p>
+      <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
       <p class="total"><span>Total:</span> <span>{{ 1108| currency:'INR'}}</span></p>
     </div>
+    <button class="checkout-btn" routerLink="/addressconfirm">Proceed to buy</button>
     <div class="button">
       <app-long-button
       label="Proceed to buy"
