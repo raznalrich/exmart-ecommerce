@@ -24,6 +24,7 @@ import { SettingsPageComponent } from './layout/admin/pages/settings-page/settin
 
 import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
 import { AdminSettingsTextEditorComponent } from './layout/admin/pages/admin-settings-text-editor/admin-settings-text-editor.component';
+import { OrderPreviewPageComponent } from './layout/user/pages/order-preview-page/order-preview-page.component';
 
 
 export const routes: Routes = [
@@ -45,17 +46,16 @@ export const routes: Routes = [
         path:'viewproduct/:id',component:SingleproductpageComponent
       },
       {
-
         path:'addcart',component:AddtocartpageComponent
       },
       {
-
         path:'addressconfirm',component:AddressConfirmPageComponent
       },
       {
-
+        path: 'orderPreview',component:OrderPreviewPageComponent
+      },
+      {
         path:"thankyou", component:ThankyoupageComponent
-
       },
       {
         path:'',redirectTo:'home',pathMatch:'full'
@@ -106,7 +106,7 @@ export const routes: Routes = [
         ]
 
       },
-      
+
 
 
     ]

@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
-import { CheckoutbuttonComponent } from "../../ui/checkoutbutton/checkoutbutton.component";
-import { AddtoCartDeletebtnComponent } from "../../ui/addto-cart-deletebtn/addto-cart-deletebtn.component";
-import { AddtoCartLikebtnComponent } from "../../ui/addto-cart-likebtn/addto-cart-likebtn.component";
-import { CurrencyPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { LongButtonComponent } from "../../ui/long-button/long-button.component";
+import { AddtoCartDeletebtnComponent } from "../../ui/addto-cart-deletebtn/addto-cart-deletebtn.component";
+import { CurrencyPipe } from '@angular/common';
 import { ProductDisplayingBarComponent } from "../../ui/product-displaying-bar/product-displaying-bar.component";
 
 @Component({
-  selector: 'app-addtocartpage',
+  selector: 'app-order-preview-page',
   standalone: true,
-  imports: [AddtoCartDeletebtnComponent, CurrencyPipe, RouterLink, LongButtonComponent, ProductDisplayingBarComponent],
-  templateUrl: './addtocartpage.component.html',
-  styleUrl: './addtocartpage.component.scss'
+  imports: [LongButtonComponent, CurrencyPipe, ProductDisplayingBarComponent],
+  templateUrl: './order-preview-page.component.html',
+  styleUrl: './order-preview-page.component.scss'
 })
-export class AddtocartpageComponent {
+export class OrderPreviewPageComponent {
 
   CartItems = [
     {

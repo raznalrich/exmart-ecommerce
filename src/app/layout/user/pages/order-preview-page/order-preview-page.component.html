@@ -1,0 +1,30 @@
+<div class="main">
+
+<div class="leftSide">
+  @for(items of CartItems; track items.id ){
+
+    <app-product-displaying-bar
+      [productImage]="items.itemImage || 'default-image-path.png'"
+      [productName]="items.itemName"
+      [productColor]="items.color"
+      [productSize]="items.size"
+      [productPrice]="items.rate">
+    </app-product-displaying-bar>
+
+  }
+</div>
+<div class="rightSide">
+    <h2>Order Details</h2>
+    <div class="summary-details">
+      <p><span>Sub Total:</span> <span>{{998 | currency:'INR'}}</span></p>
+      <p class="total"><span>Total:</span> <span>{{ 1108| currency:'INR'}}</span></p>
+    </div>
+    <div class="button">
+      <app-long-button
+      label="Confirm Order"
+      routerLink="/thankyou"
+      ></app-long-button>
+    </div>
+</div>
+
+</div>

@@ -25,6 +25,19 @@
       "country": "India",
       "pincode": "682102",
       "phoneNo": "+91 987654321"
+    },
+    {
+      "id": 3,
+      "name": "Employee Home Address",
+      "badgeName": "Home",
+      "place": "Kerala",
+      "buildingNo": "House Name",
+      "district": "Trivandram",
+      "city": "Trivandrum",
+      "state": "Kerala",
+      "country": "India",
+      "pincode": "682000",
+      "phoneNo": "+91 91823 XXXXX"
     }
   ]
 }
