@@ -1,4 +1,14 @@
-<div class="container1">
+<div class="container">
+  @for (category of categories; track category.id) {
+    <app-category-button
+      [iconSrc]="category.iconSrc"
+      [label]="category.label"
+      [routerLink]="category.routerLink"
+    ></app-category-button>
+  }
+</div>
+
+<!-- <div class="container1">
   <app-category-button
   [iconSrc]="'icons/garments.png'"
   [label]="'garments'"
@@ -18,5 +28,4 @@
   routerLink="/home/category/stationary"
 
   ></app-category-button>
-
-</div>
+</div> -->
