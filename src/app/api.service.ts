@@ -59,8 +59,5 @@ getUserFeedback(){
       map((data:any)=>{
         const filterddata = data.filter((item:any)=> item.id == id)
         return filterddata;
-
-      })
-    );
-  }
+      }));}
 }
