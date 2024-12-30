@@ -6,6 +6,9 @@ import { map } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
+  addCategory(categoryData: any) {
+    throw new Error('Method not implemented.');
+  }
   getCategory() {
     throw new Error('Method not implemented.');
   }
@@ -52,12 +55,17 @@ getUserFeedback(){
   // }
 
   getProductsById(id:number){
-    return this.http.get(`/Data/productsTrail.json`).pipe(
-      map((data:any)=>{
-        const filterddata = data.filter((item:any)=> item.id == id)
-        return filterddata;
+    // return this.http.get(`/Data/productsTrail.json`).pipe(
+    //   map((data:any)=>{
+    //     const filterddata = data.filter((item:any)=> item.id == id)
+    //     return filterddata;
 
-      })
-    );
+    //   })
+    // );
+    return this.http.get(`https://localhost:7267/api/Product/GetProductById?id=${id}`);
   }
+
+  getImagesByProductId(id:number){
+  return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
+}
 }

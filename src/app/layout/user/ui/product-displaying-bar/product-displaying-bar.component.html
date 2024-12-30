@@ -1,0 +1,19 @@
+<div class="product-card">
+  <img [src]="productImage" [alt]="productName" class="product-image">
+  <div class="product-details">
+    <div class="product-name-col">
+
+      <h3>{{ productName }}</h3>
+
+    </div>
+
+    <div class="actions">
+      <div class="col">
+        <p>Color: {{ productColor }}</p>
+        <p>Size: {{ productSize }}</p>
+        <p class="price">{{ productPrice | currency: 'INR' }}</p>
+      </div>
+      <app-addto-cart-deletebtn></app-addto-cart-deletebtn>
+    </div>
+  </div>
+</div>
