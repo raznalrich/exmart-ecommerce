@@ -29,8 +29,7 @@ export class SettingsPageComponent {
 
   }
 
-
-
-
-
+  deleteCategory(item:any){
+    this.api.categoryDeletion(item.id)
+  }
 }

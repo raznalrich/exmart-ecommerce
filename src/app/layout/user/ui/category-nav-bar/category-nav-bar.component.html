@@ -1,11 +1,31 @@
 <div class="container1">
-  @for(i of CategoryList;track i){
+  @for (category of CategoryList; track category) {
     <app-category-button
-    [iconSrc]="i.iconPath"
-    [label]="i.categoryName"
-    [routerLink]="'/home/category/' + i.id"
+      [iconSrc]="category.iconPath"
+      [label]="category.categoryName"
+      [routerLink]="'/home/category/'+category.id"
     ></app-category-button>
   }
-  
-
 </div>
+
+<!-- <div class="container1">
+  <app-category-button
+  [iconSrc]="'icons/garments.png'"
+  [label]="'garments'"
+  routerLink="/home/category/garments"
+  ></app-category-button>
+
+  <app-category-button
+  [iconSrc]="'icons/appliance.png'"
+  [label]="'appliances'"
+  routerLink="/home/category/appliance"
+
+  ></app-category-button>
+
+  <app-category-button
+  [iconSrc]="'icons/stationary.png'"
+  [label]="'stationary'"
+  routerLink="/home/category/stationary"
+
+  ></app-category-button>
+</div> -->

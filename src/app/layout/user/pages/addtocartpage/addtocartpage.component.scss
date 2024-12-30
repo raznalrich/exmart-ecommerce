@@ -16,6 +16,7 @@ body {
   flex-direction: column;
   padding-left: 10px;
 }
+
 .cart-container {
   display: flex;
   gap: 20px;
@@ -28,6 +29,7 @@ body {
 
 
 .bag-section {
+  
   flex: 2;
 }
 
@@ -79,12 +81,12 @@ body {
   width: 100%;
 }
 
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
+// .detail-row {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   gap: 10px;
+// }
 
 .product-details h3 {
   font-size: 14px;
@@ -114,7 +116,7 @@ body {
 
 .action-btn {
   padding: 6px 10px;
-  font-size: 12px; 
+  font-size: 12px;
   border-radius: 5px;
   border: 1px solid #ddd;
   background-color: white;
@@ -165,7 +167,17 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
-
+.app-long-button{
+  background-color: #3E68B9 !important;
+  color: #fff;
+  width: 100% !important;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .checkout-btn {
   background-color: #3E68B9;
   color: #fff;
@@ -175,14 +187,14 @@ body {
   background-color: #333;
 }
 
-.purchase-btn {
-  background-color: #3E68B9;
-  color: #ffffff;
-}
+// .purchase-btn {
+//   background-color: #3E68B9;
+//   color: #ffffff;
+// }
 
-.purchase-btn:hover {
-  background-color: #333;
-}
+// .purchase-btn:hover {
+//   background-color: #333;
+// }
 
 @keyframes slideIn {
   from {
