@@ -1,9 +1,9 @@
-<div class="container">
-  @for (category of categories; track category.id) {
+<div class="container1">
+  @for (category of CategoryList; track category) {
     <app-category-button
-      [iconSrc]="category.iconSrc"
-      [label]="category.label"
-      [routerLink]="category.routerLink"
+      [iconSrc]="category.iconPath"
+      [label]="category.categoryName"
+      [routerLink]="'/home/category/'+category.id"
     ></app-category-button>
   }
 </div>

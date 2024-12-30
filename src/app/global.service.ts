@@ -7,6 +7,7 @@ import { ApiServiceService } from './services/api-service.service';
 export class GlobalService {
   constructor(public api:ApiServiceService) {}
   cartCount = signal(0);
+  signalCartList = signal<any[]>([])
   cartList:any[]=[];
   editProduct(item: any) {
     console.log(item);
@@ -17,7 +18,8 @@ export class GlobalService {
   getCartCount(){
       this.api.getCartList().subscribe(
         (data:any)=>{
-          this.cartList = data.filter((item:any) => item.userId === 1);;
+          this.cartList = data.filter((item:any) => item.userId === 1);
+          this.signalCartList.set(this.cartList);
           this.cartCount.update((value)=> value + this.cartList.length);
         }
       )
