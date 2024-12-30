@@ -17,7 +17,7 @@ export class ApiServiceService {
 
 
   getOrderList() {
-    return this.http.get(`Data/OrderList.json`)
+    return this.http.get(`https://localhost:7267/api/Order/orders/details`)
   }
 
 
