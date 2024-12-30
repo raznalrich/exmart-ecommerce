@@ -1,8 +1,8 @@
 <div class="productDisplayingSection">
   <div class="productGriding">
-    @for(f of data;track f){
+    @for(card of data;track card){
 
-      <app-productcard [cards]="f"></app-productcard>
+      <app-productcard [cards]="card"></app-productcard>
     }
 
   </div>

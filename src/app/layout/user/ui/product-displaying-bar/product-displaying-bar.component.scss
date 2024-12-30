@@ -36,9 +36,16 @@
   .product-details {
     display: flex;
     flex-direction: row;
+
     gap: 6px;
     font-size: 12px;
     width: 100%;
+    .product-name-col{
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 
   .col{
