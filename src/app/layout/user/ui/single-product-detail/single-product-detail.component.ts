@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-single-product-detail',
   standalone: true,
-  imports: [CommonModule,StarRatingComponent],
+  imports: [CommonModule],
   templateUrl: './single-product-detail.component.html',
   styleUrl: './single-product-detail.component.scss'
 })
