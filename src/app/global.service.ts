@@ -15,7 +15,11 @@ export class GlobalService {
   addToCart() {
     this.cartCount.update((value) => value + 1);
   }
+  zerocart(){
+    this.cartCount.set(0);
+  }
   getCartCount(){
+    this.zerocart();
       this.api.getCartList().subscribe(
         (data:any)=>{
           this.cartList = data.filter((item:any) => item.userId === 1);
