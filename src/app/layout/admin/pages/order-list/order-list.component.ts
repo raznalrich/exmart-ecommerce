@@ -23,7 +23,7 @@ export class OrderListComponent {
   ngOnInit(){
     this.api.getOrderList().subscribe((res:any)=>{
      this.orderlist = res;
-      console.log(this.orderlist)
+      console.log("orderlist" , this.orderlist)
     })
 
   }
