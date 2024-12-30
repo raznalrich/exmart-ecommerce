@@ -11,7 +11,7 @@ export class ApiServiceService {
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
 
-  addToCart(id:number){
+  addToCart(id:number,userId:number){
     // this.cartcount.update(value => value + 1);
 
     // this.cartid.update(items => [...items, id]);
@@ -19,9 +19,11 @@ export class ApiServiceService {
     // console.log(this.cartid());
     // this.gettotalprice();
     let data = {
+      cartId: 1,
       productId: id,  // Changed from 'name' to 'categoryName'
-      userId: 1      // Changed from 'icon' to 'iconPath'
+      userId: userId      // Changed from 'icon' to 'iconPath'
     };
+console.log(data);
 
     const headers = { 'Content-Type': 'application/json' };
 

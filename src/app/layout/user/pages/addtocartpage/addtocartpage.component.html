@@ -3,17 +3,21 @@
   <div class="card-items">
 
     <section class="bag-section">
-      @for(items of CartItems; track items.id ){
+      @if(CartItems!=null){
+        @for(items of CartItems; track items ){
+          <!-- <img [src]="items[0].imageUrl" [alt]="items.productName" /> -->
 
-        <app-product-displaying-bar
-          [productImage]="items.itemImage || 'default-image-path.png'"
-          [productName]="items.itemName"
-          [productColor]="items.color"
-          [productSize]="items.size"
-          [productPrice]="items.rate">
-        </app-product-displaying-bar>
+          <app-product-displaying-bar
+            [productImage]="items[0].imageUrl || 'images/box not packed.png'"
+            [productName]="items[0].productName"
+            [productColor]="items.color"
+            [productSize]="items.size"
+            [productPrice]="items[0].price">
+          </app-product-displaying-bar>
 
+        }
       }
+
     </section>
 
 
@@ -59,13 +63,16 @@
   <aside class="summary-section">
     <h2>Summary</h2>
     <div class="summary-details">
-      <p><span>Sub Total:</span> <span>{{998 | currency:'INR'}}</span></p>
+      <!-- <p><span>No of Items:</span> <span>{{global.cartCount()}}</span></p> -->
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
-      <p class="total"><span>Total:</span> <span>{{ 998| currency:'INR'}}</span></p>
+       @for(numberOfItems of CartItems; track numberOfItems){
+
+        <p><span>{{numberOfItems[0].productName}}</span> <span>{{numberOfItems[0].price | currency:'INR'}}</span></p>
+       }
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
-      <p class="total"><span>Total:</span> <span>{{ 1108| currency:'INR'}}</span></p>
+      <p class="total"><span>Total:</span> <span>{{ totalPrice| currency:'INR'}}</span></p>
     </div>
-    <button class="checkout-btn" routerLink="/addressconfirm">Proceed to buy</button>
+    <!-- <button class="checkout-btn" routerLink="/addressconfirm">Proceed to buy</button> -->
     <div class="button">
       <app-long-button
       label="Proceed to buy"
