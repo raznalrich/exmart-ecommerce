@@ -21,4 +21,25 @@ ngOnInit(){
       // console.log(this.CategoryList);
     });
 }
+  categories = [
+    {
+      id:1,
+      iconSrc: 'icons/garments.png',
+      label: 'garments',
+      routerLink: '/home/category/garments'
+    },
+    {
+      id:2,
+      iconSrc: 'icons/appliance.png',
+      label: 'appliances',
+      routerLink: '/home/category/appliance'
+    },
+    {
+      id:3,
+      iconSrc: 'icons/stationary.png',
+      label: 'stationary',
+      routerLink: '/home/category/stationary'
+    }
+  ];
+
 }
