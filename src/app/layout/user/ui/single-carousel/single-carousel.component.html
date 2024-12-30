@@ -14,7 +14,7 @@
   </button> -->
   </div>
   <div class="carousel-inner">
-    @for (item of imgcollection.imageCollectionUrl; track item; let ind=$index)
+    @for (item of imgcollection[0].imageCollectionUrl; track item; let ind=$index)
     {
     <div class="carousel-item " [class]="ind===0 ? 'active' : ''">
 <!-- <div class="carousel-item" [class.active]=""ind = currentImageIndex> -->
