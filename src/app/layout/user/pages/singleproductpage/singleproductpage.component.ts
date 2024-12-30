@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-singleproductpage',
   standalone: true,
   imports: [
-    SingleCardComponent,
+
     SingleCarouselComponent,
     SingleProductDetailComponent,
     SinglePageDropdownComponent,
@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SingleproductpageComponent {
   productDetails: any;
-  productImages: any;
+  productImages: any[]=[];
   id: any;
   data: any;
   constructor(public api: ApiService, private route: ActivatedRoute) {}
@@ -41,7 +41,7 @@ export class SingleproductpageComponent {
       this.productDetails = res;
       // console.log('productDetails', this.productDetails);
 
-      // console.log("imageCollectionUrl",this.productDetails[0].imageCollectionUrl);
+      // console.log("imageCollectionUrl",this.productDetails.imageCollectionUrl);
     });
 
     this.api.getImagesByProductId(this.id).subscribe((res: any) => {
