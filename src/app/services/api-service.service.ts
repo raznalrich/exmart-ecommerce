@@ -1,15 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
+export interface Product {
+  name: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class ApiServiceService {
   constructor(private http: HttpClient) {}
   cartcount = signal(0);
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
+
 
   addToCart(id:number,userId:number){
     // this.cartcount.update(value => value + 1);
@@ -65,6 +70,9 @@ console.log(data);
   getProducts(){
     return this.http.get('https://localhost:7267/api/Product')
     // return this.http.get('Data/productsTrail.json');
+  }
+  searchProducts(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`https://localhost:7267/api/Product/search?name=${encodeURIComponent(query)}`);
   }
   getAllCategories(){
     return this.http.get('https://localhost:7267/api/Categories')
