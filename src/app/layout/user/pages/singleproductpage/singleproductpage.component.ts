@@ -5,6 +5,7 @@ import { SingleProductDetailComponent } from '../../ui/single-product-detail/sin
 import { ApiService } from '../../../../api.service';
 import { SinglePageDropdownComponent } from '../../ui/single-page-dropdown/single-page-dropdown.component';
 import { ActivatedRoute } from '@angular/router';
+import { ApiServiceService } from '../../../../services/api-service.service';
 
 @Component({
   selector: 'app-singleproductpage',
@@ -23,7 +24,7 @@ export class SingleproductpageComponent {
   productImages: any[]=[];
   id: any;
   data: any;
-  constructor(public api: ApiService, private route: ActivatedRoute) {}
+  constructor(public api: ApiServiceService, private route: ActivatedRoute) {}
   ngOnInit() {
     // this.api.getCarouselImages().subscribe((res: any) => {
     //   this.carouselImages = res;
