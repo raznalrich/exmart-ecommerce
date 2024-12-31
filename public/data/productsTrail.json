@@ -2,12 +2,20 @@
   {
     "id": 1,
     "productName": "Experion Tshirt",
-    "price": 1499.00,
+    "price": 1499.0,
     "category": "garments",
     "colors": ["red", "black"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["15.6 inches"],
     "imageUrl": "staticimages/pro_tshirt.png",
-    "imageCollectionUrl": ["https://assets.ajio.com/medias/sys_master/root/20240202/XzVa/65bd163a8cdf1e0df5e313a0/-1117Wx1400H-442273276-black-MODEL7.jpg", "https://assets.ajio.com/medias/sys_master/root/20240202/T3LR/65bd18b616fd2c6e6ad4ea90/-473Wx593H-442273276-black-MODEL2.jpg,https://assets.ajio.com/medias/sys_master/root/20240202/0iIg/65bd0e568cdf1e0df5e2e7f1/-473Wx593H-442273276-black-MODEL6.jpg"],
+    "imageCollectionUrl": [
+      "https://assets.ajio.com/medias/sys_master/root/20240202/XzVa/65bd163a8cdf1e0df5e313a0/-1117Wx1400H-442273276-black-MODEL7.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20240202/T3LR/65bd18b616fd2c6e6ad4ea90/-473Wx593H-442273276-black-MODEL2.jpg,https://assets.ajio.com/medias/sys_master/root/20240202/0iIg/65bd0e568cdf1e0df5e2e7f1/-473Wx593H-442273276-black-MODEL6.jpg"
+    ],
     "capacity": 512,
     "createdAt": "2023-11-22T13:37:00Z",
     "updatedAt": "2023-11-23T15:22:00Z",
@@ -15,13 +23,22 @@
   },
   {
     "id": 2,
-    "productName": "Hoody Experion branded",
+    "productName": "Hoody Experion brand",
     "price": 399.99,
     "category": "garments",
     "colors": ["white"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "https://media.karousell.com/media/photos/products/2023/4/29/gildan_zipup_hoodie_1682750904_29598b39.jpg",
-    "imageCollectionUrl": ["https://m.media-amazon.com/images/I/51XQKBTbJ7L._SX569_.jpg", "https://m.media-amazon.com/images/I/51U6dpsRaFL._SX569_.jpg","https://m.media-amazon.com/images/I/51Nd4BLQelL._SX569_.jpg"],
+    "imageCollectionUrl": [
+      "https://m.media-amazon.com/images/I/51XQKBTbJ7L._SX569_.jpg",
+      "https://m.media-amazon.com/images/I/51U6dpsRaFL._SX569_.jpg",
+      "https://m.media-amazon.com/images/I/51Nd4BLQelL._SX569_.jpg"
+    ],
     "capacity": 825,
     "createdAt": "2023-11-22T13:37:00Z",
     "updatedAt": "2023-11-23T15:22:00Z",
@@ -29,13 +46,22 @@
   },
   {
     "id": 3,
-    "productName": "Jersey Exaperion branded",
+    "productName": "Jersey Experion branded",
     "price": 399.99,
     "category": "garments",
     "colors": ["black", "red"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["40mm", "44mm"],
     "imageUrl": "https://m.media-amazon.com/images/I/51C2ieRiU9L.jpg",
-    "imageCollectionUrl": ["https://m.media-amazon.com/images/I/915Qebmr9XL._SX679_.jpg","https://m.media-amazon.com/images/I/91vvEsvUq5L._SX679_.jpg","https://m.media-amazon.com/images/I/91RWzNCIEhL._SX679_.jpg"],
+    "imageCollectionUrl": [
+      "https://m.media-amazon.com/images/I/915Qebmr9XL._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/91vvEsvUq5L._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/91RWzNCIEhL._SX679_.jpg"
+    ],
     "capacity": 32,
     "createdAt": "2023-11-22T13:37:00Z",
     "updatedAt": "2023-11-23T15:22:00Z",
@@ -47,9 +73,18 @@
     "price": 349.99,
     "category": "appliance",
     "colors": ["white", "blue"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "https://m.media-amazon.com/images/I/71RFdy6y6LL._SL1500_.jpg",
-    "imageCollectionUrl": [",https://m.media-amazon.com/images/I/61F5lcvJHLL._SX522_.jpg","https://m.media-amazon.com/images/I/61vBE3t4x1L._SX522_.jpg","https://m.media-amazon.com/images/I/71QZbcvD65L._SX522_.jpg"],
+    "imageCollectionUrl": [
+      ",https://m.media-amazon.com/images/I/61F5lcvJHLL._SX522_.jpg",
+      "https://m.media-amazon.com/images/I/61vBE3t4x1L._SX522_.jpg",
+      "https://m.media-amazon.com/images/I/71QZbcvD65L._SX522_.jpg"
+    ],
     "capacity": 64,
     "createdAt": "2023-11-22T13:37:00Z",
     "updatedAt": "2023-11-23T15:22:00Z",
@@ -58,12 +93,21 @@
   {
     "id": 5,
     "productName": "Water Bottle",
-    "price": 399.00,
+    "price": 399.0,
     "category": "stationary",
     "colors": ["blue", "white", "green"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["41mm", "45mm"],
     "imageUrl": "https://m.media-amazon.com/images/I/71zFvtVuP1L._SL1500_.jpg",
-    "imageCollectionUrl": ["https://m.media-amazon.com/images/I/51caXIXHv0L._SX679_.jpg","https://m.media-amazon.com/images/I/614uQNgsIbL._SX679_.jpg","https://m.media-amazon.com/images/I/616+eQhVmFL._SX679_.jpg"],
+    "imageCollectionUrl": [
+      "https://m.media-amazon.com/images/I/51caXIXHv0L._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/614uQNgsIbL._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/616+eQhVmFL._SX679_.jpg"
+    ],
     "capacity": 32,
     "createdAt": "2023-11-22T13:37:00Z",
     "updatedAt": "2023-11-23T15:22:00Z",
@@ -75,9 +119,18 @@
     "price": 349.99,
     "category": "stationary",
     "colors": ["Black", "red"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "https://m.media-amazon.com/images/I/41W9B1Ri4hL.jpg",
-    "imageCollectionUrl": ["https://m.media-amazon.com/images/I/51zrU3wXApL._SX679_.jpg","https://m.media-amazon.com/images/I/61h02o8qvAL._SX679_.jpg","https://m.media-amazon.com/images/I/71kg31YtFHL._SX679_.jpg"],
+    "imageCollectionUrl": [
+      "https://m.media-amazon.com/images/I/51zrU3wXApL._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/61h02o8qvAL._SX679_.jpg",
+      "https://m.media-amazon.com/images/I/71kg31YtFHL._SX679_.jpg"
+    ],
     "capacity": 1,
     "createdAt": "2023-11-22T13:37:00Z",
     "updatedAt": "2023-11-23T15:22:00Z",
@@ -90,9 +143,18 @@
     "price": 99.99,
     "category": "stationary",
     "colors": ["White", "Black", "Red"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["5", "6", "7", "8", "9", "10", "11", "12"],
     "imageUrl": "https://m.media-amazon.com/images/I/61t0gIsFpjL._SY675_.jpg",
-    "imageCollectionUrl": ["https://m.media-amazon.com/images/I/61ZkbRBEBvL._SY675_.jpg","https://m.media-amazon.com/images/I/81rLH99Wj2L._SY675_.jpg","https://m.media-amazon.com/images/I/61R2cfPmcSL._SY675_.jpg"],
+    "imageCollectionUrl": [
+      "https://m.media-amazon.com/images/I/61ZkbRBEBvL._SY675_.jpg",
+      "https://m.media-amazon.com/images/I/81rLH99Wj2L._SY675_.jpg",
+      "https://m.media-amazon.com/images/I/61R2cfPmcSL._SY675_.jpg"
+    ],
     "capacity": null,
     "createdAt": "2023-11-22T13:37:00Z",
     "updatedAt": "2023-11-23T15:22:00Z",
@@ -105,9 +167,18 @@
     "category": "appliance",
     "price": 1999.99,
     "colors": ["black", "White"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "https://m.media-amazon.com/images/I/61KVX-MbIUL._SL1500_.jpg",
-    "imageCollectionUrl": ["https://m.media-amazon.com/images/I/61lEskbCaoL._SY450_.jpg","https://m.media-amazon.com/images/I/51wp23mi8qL._SY450_.jpg","https://m.media-amazon.com/images/I/71YCCEPBguL._SY450_.jpg"],
+    "imageCollectionUrl": [
+      "https://m.media-amazon.com/images/I/61lEskbCaoL._SY450_.jpg",
+      "https://m.media-amazon.com/images/I/51wp23mi8qL._SY450_.jpg",
+      "https://m.media-amazon.com/images/I/71YCCEPBguL._SY450_.jpg"
+    ],
     "capacity": null,
     "createdAt": "2023-11-22T13:37:00Z",
     "updatedAt": "2023-11-23T15:22:00Z",
@@ -119,9 +190,20 @@
     "price": 149.99,
     "category": "stationary",
     "colors": ["Black", "White"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
-    "imageUrl": ["https://m.media-amazon.com/images/I/61eYApdaTDL._SL1100_.jpg"],
-    "imageCollectionUrl": ["https://m.media-amazon.com/images/I/516HwL0zZhL._SY450_.jpg","https://m.media-amazon.com/images/I/6190STfffwL._SY450_.jpg","https://m.media-amazon.com/images/I/61Lo553SSIL._SY450_.jpg"],
+    "imageUrl": [
+      "https://m.media-amazon.com/images/I/61eYApdaTDL._SL1100_.jpg"
+    ],
+    "imageCollectionUrl": [
+      "https://m.media-amazon.com/images/I/516HwL0zZhL._SY450_.jpg",
+      "https://m.media-amazon.com/images/I/6190STfffwL._SY450_.jpg",
+      "https://m.media-amazon.com/images/I/61Lo553SSIL._SY450_.jpg"
+    ],
     "capacity": null,
     "createdAt": "2023-11-22T13:37:00Z"
   },
@@ -131,11 +213,18 @@
     "price": 149.99,
     "category": "stationary",
     "colors": ["Black", "White"],
+    "rating": {
+      "rate": 3.5,
+      "count": 30
+    },
+    "color": "Black",
     "sizes": ["Standard"],
     "imageUrl": "staticimages/pro_bag.png",
-    "imageCollectionUrl": ["https://example.com/gproxsuperlight_1.jpg", "https://example.com/gproxsuperlight_2.jpg"],
+    "imageCollectionUrl": [
+      "https://example.com/gproxsuperlight_1.jpg",
+      "https://example.com/gproxsuperlight_2.jpg"
+    ],
     "capacity": null,
     "createdAt": "2023-11-22T13:37:00Z"
   }
-
 ]
