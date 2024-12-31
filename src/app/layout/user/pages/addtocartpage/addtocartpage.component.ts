@@ -9,6 +9,7 @@ import { ProductDisplayingBarComponent } from "../../ui/product-displaying-bar/p
 import { ApiService } from '../../../../api.service';
 import { forkJoin } from 'rxjs';
 import { GlobalService } from '../../../../global.service';
+import { ApiServiceService } from '../../../../services/api-service.service';
 
 @Component({
   selector: 'app-addtocartpage',
@@ -22,7 +23,7 @@ export class AddtocartpageComponent {
 id:any
 data:any
 totalPrice: number = 0;
-  constructor(public api: ApiService, private route: ActivatedRoute,public global:GlobalService) {}
+  constructor(public api: ApiServiceService, private route: ActivatedRoute,public global:GlobalService) {}
 
   // CartItems = [
   //   {
