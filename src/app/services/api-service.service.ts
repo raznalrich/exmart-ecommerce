@@ -19,8 +19,11 @@ export class ApiServiceService {
     // console.log(this.cartid());
     // this.gettotalprice();
     let data = {
-      cartId: 1,
-      productId: id,  // Changed from 'name' to 'categoryName'
+      // cartId: 1,
+      productId: id,
+      sizeId:1,
+      colorId:1,
+      quantity:1,
       userId: userId      // Changed from 'icon' to 'iconPath'
     };
 console.log(data);
@@ -69,7 +72,12 @@ console.log(data);
   getAllCategories(){
     return this.http.get('https://localhost:7267/api/Categories')
   }
-
+  getColorById(id:number){
+    return this.http.get(`https://localhost:7267/api/Config/GetColorById?id=${id}`)
+  }
+  getSizeById(id:number){
+    return this.http.get(`https://localhost:7267/api/Config/GetSizeById?id=${id}`)
+  }
 
   getOrderList() {
     return this.http.get(`Data/OrderList.json`)

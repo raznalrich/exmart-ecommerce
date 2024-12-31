@@ -9,7 +9,16 @@ import { ProductDisplayingBarComponent } from "../../ui/product-displaying-bar/p
 import { ApiService } from '../../../../api.service';
 import { forkJoin } from 'rxjs';
 import { GlobalService } from '../../../../global.service';
-
+interface ProductDetails {
+  id: number;
+  name: string;
+  primaryImageUrl: string;
+  price: number;
+  colorId: number;
+  sizeId: number;
+  color?: string;
+  size?: string;
+}
 @Component({
   selector: 'app-addtocartpage',
   standalone: true,
@@ -24,65 +33,51 @@ data:any
 totalPrice: number = 0;
   constructor(public api: ApiService, private route: ActivatedRoute,public global:GlobalService) {}
 
-  // CartItems = [
-  //   {
-  //     id:1,
-  //     itemName: 'T Shirt',
-  //     itemImage: '',
-  //     color: 'Black',
-  //     size: 'M',
-  //     rate: 299.00
-  //   },
-  //   {
-  //     id:2,
-  //     itemName: 'T Shirt',
-  //     color: 'white',
-  //     size: 'XXL',
-  //     rate: 399.00
-  //   },
-  //   {
-  //     id:3,
-  //     itemName: 'T Shirt',
-  //     color: 'Red',
-  //     size: 'M',
-  //     rate: 99.00
-  //   }
-  // ]
-  CartItems: any[] = []; // Array to store fetched product details
-productIds: number[] = [1, 2, 3]; // Collection of product IDs
+  CartItems: ProductDetails[] = []; // Array to store fetched product details
+productIds: number[] = []; // Collection of product IDs
   ngOnInit(){
     // this.api.getProductsById(this.id).subscribe((res: any) => {
     //   this.productDetails = res;
     //   // console.log("data",this.data);
 
     // });
-    this.productIds = this.global.signalCartList().map(item => item.productId);
-    console.log('product id',this.productIds);
+    const cartItems = this.global.signalCartList();
+    this.productIds = cartItems.map(item => item.productId);
 
-    this.fetchCartItems();
+    console.log('Cart list:', cartItems);
+    console.log('Product IDs:', this.productIds);
+
+    this.fetchCartItems(cartItems);
     // console.log(this.CartItems);
   }
 
-  fetchCartItems() {
-    const requests = this.productIds.map((id) => this.api.getProductsById(id)); // Create an array of HTTP observables
+  fetchCartItems(cartItems: any[]) {
+    const requests = this.productIds.map((id) => this.api.getProductsById(id));
 
-    // Use forkJoin to wait for all requests to complete
     forkJoin(requests).subscribe(
       (responses: any[]) => {
-        // Save all fetched product details into CartItems
-        this.CartItems = responses.map((res, index) => ({
-          id: this.productIds[index],
-          ...res, // Spread the response data
-        }));
+        // Map responses with cart item details including color and size
+        this.CartItems = responses.map((res, index) => {
+          const cartItem = cartItems.find(item => item.productId === this.productIds[index]);
+          return {
+            id: this.productIds[index],
+            ...res,
+            colorId: cartItem?.colorId,
+            sizeId: cartItem?.sizeId
+          };
+        });
+
         this.calculateTotalPrice();
         console.log('Updated Cart Items:', this.CartItems);
-        // console.log('Updated Cart Items:', this.CartItems);
       },
       (error) => {
         console.error('Error fetching product details:', error);
       }
     );
   }
+
+  // ... rest of the code remains the same ...
+
   calculateTotalPrice() {
     this.totalPrice = this.CartItems.reduce((total, product) => total + (product.price || 0), 0);
     console.log(this.totalPrice);
