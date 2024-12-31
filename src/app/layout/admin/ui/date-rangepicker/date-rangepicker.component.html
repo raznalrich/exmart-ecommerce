@@ -7,6 +7,7 @@
     <i class="bi bi-calendar"></i>
   </button>
   <ul class="dropdown-menu p-3">
+    <form [formGroup]="form">
     <li class="mb-2">
       <label for="startDate" class="form-label">Start Date</label>
       <input
@@ -40,5 +41,6 @@
         Apply
       </button>
     </li>
+  </form>
   </ul>
 </div>
