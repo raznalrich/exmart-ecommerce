@@ -1,11 +1,16 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BillingDetailComponent } from "../billing-detail/billing-detail.component";
+import { CustomerDetailComponent } from "../customer-detail/customer-detail.component";
+import { OrderPopupComponent } from "../order-popup/order-popup.component";
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-orderlist-table',
   standalone: true,
-  imports: [CurrencyPipe,FormsModule],
+  imports: [CurrencyPipe, FormsModule, BillingDetailComponent, CustomerDetailComponent, OrderPopupComponent,ConfirmModalComponent],
   templateUrl: './orderlist-table.component.html',
   styleUrl: './orderlist-table.component.scss'
 })
@@ -19,7 +24,8 @@ export class OrderlistTableComponent {
   }
 
   updateOrderStatus(order: any): void {
-    console.log('Order status updated:', order);
+    const modal = new bootstrap.Modal(document.getElementById('confirm_modal'));
+    modal.show();
   }
 
   calculateTotalQuantity(items: any[]): number {
