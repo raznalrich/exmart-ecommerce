@@ -1,22 +1,22 @@
 <main class="cart-container">
 
+
   <div class="card-items">
 
     <section class="bag-section">
-      @if(CartItems!=null){
         @for(items of CartItems; track items ){
           <!-- <img [src]="items[0].imageUrl" [alt]="items.productName" /> -->
 
           <app-product-displaying-bar
             [productImage]="items.primaryImageUrl || 'images/box not packed.png'"
             [productName]="items.name"
-            [productColor]="'black'"
-            [productSize]="'xl'"
+            [productColor]="items.colorId"
+            [productSize]="items.sizeId"
             [productPrice]="items.price">
           </app-product-displaying-bar>
 
         }
-      }
+
 
     </section>
 
@@ -81,4 +81,7 @@
     </div>
     <!-- <button class="checkout-btn" routerLink="/addressconfirm">Checkout</button> -->
   </aside>
+
+
 </main>
+
