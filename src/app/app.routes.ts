@@ -23,6 +23,7 @@ import { SettingsPageComponent } from './layout/admin/pages/settings-page/settin
 import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm-page/address-confirm-page.component';
 import { AdminSettingsTextEditorComponent } from './layout/admin/pages/admin-settings-text-editor/admin-settings-text-editor.component';
 import { OrderPreviewPageComponent } from './layout/user/pages/order-preview-page/order-preview-page.component';
+import { SeeAllProductsPageComponent } from './layout/user/pages/see-all-products-page/see-all-products-page.component';
 
 
 export const routes: Routes = [
@@ -30,6 +31,7 @@ export const routes: Routes = [
     path:'',component: HomepageComponent,children:[
       {
         path:'home', component: HomeStaticComponent,children:[
+
           {
             path:'category/:id',component:ProductDisplayingSectionComponent
           },
@@ -42,6 +44,9 @@ export const routes: Routes = [
       },
       {
         path:'viewproduct/:id',component:SingleproductpageComponent
+      },
+      {
+        path: 'seeAllProducts',component: SeeAllProductsPageComponent
       },
       {
         path:'addcart',component:AddtocartpageComponent

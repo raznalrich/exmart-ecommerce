@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductcardComponent } from "../productcard/productcard.component";
 import { ApiServiceService } from '../../../../services/api-service.service';
@@ -7,7 +7,7 @@ import { ApiServiceService } from '../../../../services/api-service.service';
 @Component({
   selector: 'app-product-displaying-section',
   standalone: true,
-  imports: [ProductcardComponent],
+  imports: [ProductcardComponent,RouterLink],
   templateUrl: './product-displaying-section.component.html',
   styleUrl: './product-displaying-section.component.scss'
 })
