@@ -15,7 +15,7 @@
   <table class="styled-table">
     <!-- @for(item of O) -->
     <tr>
-      <th>Order</th>
+      <th>Order Id</th>
       <th>Date</th>
       <th>Customer</th>
       <th>Status</th>
@@ -25,23 +25,22 @@
     </tr>
     @for(item of OrderList; track item){
       <tr>
-        <td>{{item.order}}</td>
-        <td>{{item.date}}</td>
-        <td>{{item.customer}}</td>
+        <td>{{item.orderId}}</td>
+        <td>{{item.orderDate}}</td>
+        <td>{{item.customerName}}</td>
 
         <td>
           <button type="button">
-
           <select class="status-dropdown" [(ngModel)]="item.status" (change)="updateOrderStatus(item)">
             <option value="Delivered" >Delivered</option>
             <option value="Shipped">Shipped</option>
             <option value="Pending">Pending</option>
           </select>
-
         </button>
         </td>
-        <td>{{item.amount | currency : "INR"}}</td>
-         <td>{{calculateTotalQuantity(item.items)}}</td>
+
+        <td>{{item.totalAmount | currency : "INR"}}</td>
+         <td>{{item.totalItems}}</td>
           <td style="text-align: center;">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="fa-regular fa-eye"></i>
@@ -50,7 +49,5 @@
 
       </tr>
     }
-
-
   </table>
 </div>
