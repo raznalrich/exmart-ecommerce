@@ -6,11 +6,27 @@ import { GlobalService } from '../../../../global.service';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
+  toggleStates: { [key: number]: boolean } = {};
+
+  ngOnInit(): void {
+    this.items.forEach((items: any) => {
+      this.toggleStates[items.id] = false;
+    });
+  }
+
+  toggleStatus(isActive: any) {
+    // this.toggleStates[itemId] = !this.toggleStates[itemId];
+    // console.log(
+    //   `Toggled status for item ${itemId}: ${
+    //     this.toggleStates[itemId] ? 'Active' : 'Inactive'
+    //   }`
+    // );
+  }
   constructor(public api: ApiServiceService, public service: GlobalService) {}
   @Input() items: any;
   @Input() header: any;
