@@ -8,11 +8,11 @@
           <!-- <img [src]="items[0].imageUrl" [alt]="items.productName" /> -->
 
           <app-product-displaying-bar
-            [productImage]="items[0].imageUrl || 'images/box not packed.png'"
-            [productName]="items[0].productName"
-            [productColor]="items.color"
-            [productSize]="items.size"
-            [productPrice]="items[0].price">
+            [productImage]="items.primaryImageUrl || 'images/box not packed.png'"
+            [productName]="items.name"
+            [productColor]="'black'"
+            [productSize]="'xl'"
+            [productPrice]="items.price">
           </app-product-displaying-bar>
 
         }
@@ -67,7 +67,7 @@
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
        @for(numberOfItems of CartItems; track numberOfItems){
 
-        <p><span>{{numberOfItems[0].productName}}</span> <span>{{numberOfItems[0].price | currency:'INR'}}</span></p>
+        <p><span>{{numberOfItems.name}}</span> <span>{{numberOfItems.price | currency:'INR'}}</span></p>
        }
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
       <p class="total"><span>Total:</span> <span>{{ totalPrice| currency:'INR'}}</span></p>

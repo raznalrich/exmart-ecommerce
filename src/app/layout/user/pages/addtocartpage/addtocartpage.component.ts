@@ -51,11 +51,11 @@ totalPrice: number = 0;
   CartItems: any[] = []; // Array to store fetched product details
 productIds: number[] = [1, 2, 3]; // Collection of product IDs
   ngOnInit(){
-    this.api.getProductsById(this.id).subscribe((res: any) => {
-      this.productDetails = res;
-      // console.log("data",this.data);
+    // this.api.getProductsById(this.id).subscribe((res: any) => {
+    //   this.productDetails = res;
+    //   // console.log("data",this.data);
 
-    });
+    // });
     this.productIds = this.global.signalCartList().map(item => item.productId);
     console.log('product id',this.productIds);
 
@@ -84,7 +84,7 @@ productIds: number[] = [1, 2, 3]; // Collection of product IDs
     );
   }
   calculateTotalPrice() {
-    this.totalPrice = this.CartItems.reduce((total, product) => total + (product[0].price || 0), 0);
+    this.totalPrice = this.CartItems.reduce((total, product) => total + (product.price || 0), 0);
     console.log(this.totalPrice);
 
   }
