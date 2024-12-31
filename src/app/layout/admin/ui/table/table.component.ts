@@ -11,21 +11,31 @@ import { GlobalService } from '../../../../global.service';
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
-  toggleStates: { [key: number]: boolean } = {};
-
-  ngOnInit(): void {
-    this.items.forEach((items: any) => {
-      this.toggleStates[items.id] = false;
+  toggleStatus(item: any) {
+    this.api.toggelProductStatus(item.id).subscribe({
+      next: (isActive: boolean) => {
+        item.isActive = isActive;
+        this.loadProducts();
+        console.log(
+          `Product ${item.name} is now ${isActive ? 'Active' : 'Inactive'}`
+        );
+      },
+      error: (err) => {
+        console.error(`Error toggling status for product ${item.name}:`, err);
+      },
     });
   }
 
-  toggleStatus(isActive: any) {
-    // this.toggleStates[itemId] = !this.toggleStates[itemId];
-    // console.log(
-    //   `Toggled status for item ${itemId}: ${
-    //     this.toggleStates[itemId] ? 'Active' : 'Inactive'
-    //   }`
-    // );
+  // Method to fetch the latest products list from the backend
+  loadProducts(): void {
+    this.api.getProducts().subscribe({
+      next: (products) => {
+        this.items = products; // Update the local product list
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      },
+    });
   }
   constructor(public api: ApiServiceService, public service: GlobalService) {}
   @Input() items: any;
