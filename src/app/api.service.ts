@@ -36,8 +36,12 @@ return this.http.get(`Data/address.json`)
 }
 
 getUserFeedback(){
-  return this.http.get(`Data/feedback.json`)
+  return this.http.get(`https://localhost:7267/api/FeedBack`)
   }
+
+// getUserFeedback(userId:number){
+//   return this.http.get(`https://localhost:7267/api/Feedback/ByUserId?userId=${userId}`);
+// }
 
   // getProductsById(id:any){
   //   return this.http.get(`Data/productTrail.json/${id}`)
