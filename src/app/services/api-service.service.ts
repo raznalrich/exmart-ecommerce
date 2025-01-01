@@ -111,4 +111,8 @@ console.log(data);
       })
     );
   }
+
+  updateOrderStatus(OrderListDTO:any){
+    return this.http.put(`https://localhost:7267/api/Order/updatestatus`,OrderListDTO);
+  }
 }
