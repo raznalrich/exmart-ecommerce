@@ -1,15 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
+export interface Product {
+  name: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class ApiServiceService {
   constructor(private http: HttpClient) {}
   cartcount = signal(0);
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
+
 
   addToCart(id:number,userId:number){
     // this.cartcount.update(value => value + 1);
@@ -19,8 +24,11 @@ export class ApiServiceService {
     // console.log(this.cartid());
     // this.gettotalprice();
     let data = {
-      cartId: 1,
-      productId: id,  // Changed from 'name' to 'categoryName'
+      // cartId: 1,
+      productId: id,
+      sizeId:1,
+      colorId:1,
+      quantity:1,
       userId: userId      // Changed from 'icon' to 'iconPath'
     };
 console.log(data);
@@ -66,10 +74,18 @@ console.log(data);
     return this.http.get('https://localhost:7267/api/Product')
     // return this.http.get('Data/productsTrail.json');
   }
+  searchProducts(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`https://localhost:7267/api/Product/search?name=${encodeURIComponent(query)}`);
+  }
   getAllCategories(){
     return this.http.get('https://localhost:7267/api/Categories')
   }
-
+  getColorById(id:number){
+    return this.http.get(`https://localhost:7267/api/Config/GetColorById?id=${id}`)
+  }
+  getSizeById(id:number){
+    return this.http.get(`https://localhost:7267/api/Config/GetSizeById?id=${id}`)
+  }
 
   getOrderList() {
     return this.http.get(`https://localhost:7267/api/Order/orders/details`)
@@ -110,6 +126,22 @@ console.log(data);
         throw error;
       })
     );
+  }
+
+  getProductsById(id:number){
+    // return this.http.get(`/Data/productsTrail.json`).pipe(
+    //   map((data:any)=>{
+    //     const filterddata = data.filter((item:any)=> item.id == id)
+    //     return filterddata;
+
+    //   })
+    // );
+    return this.http.get(`https://localhost:7267/api/Product/GetProductById?id=${id}`);
+  }
+
+  getImagesByProductId(id:number){
+  return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
+}
   }
 
   updateOrderStatus(OrderListDTO:any){

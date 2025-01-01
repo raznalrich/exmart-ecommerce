@@ -1,0 +1,29 @@
+<div class="cAllContainer">
+  <div class="heading">All products in exMart</div>
+  <div class="content">
+    <div class="leftOptions">
+      <div class="filters">Filters</div>
+
+      @for (category of categories; track category) {
+        <div class="category-item">
+          <label>
+            <input
+              type="checkbox"
+              [checked]="selectedCategories.has(category)"
+              (change)="toggleCategory(category)"
+            >
+            {{ category }}
+          </label>
+        </div>
+      } 
+
+    </div>
+    <div class="productGrid">
+          @for(card of allProList;track card){
+            <app-productcard [cards]="card"></app-productcard>
+          }
+    </div>
+  </div>
+</div>
+
+
