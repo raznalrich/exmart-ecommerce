@@ -2,21 +2,41 @@
 <img src="images\People with boxes flat background.jpg" alt="image not found">
 </div> -->
 <!-- <app-orderconfirmationanimation></app-orderconfirmationanimation> -->
+
 <app-order-confirmation-tick-animation></app-order-confirmation-tick-animation>
 <!-- <app-order-tracking-bar></app-order-tracking-bar> -->
-<div class="MainContainer">
-
-  <h1>Your Items in this Order</h1>
-
-<app-items-in-order [orders]="orders" ></app-items-in-order>
+<div class="MainContainer" [class.show-content]="isContentVisible">
 
 
-  <div class="OrderAmountBox">
-    <div><p>subtotal</p><p>Delivery Charge</p><h4><strong>Total Amount</strong></h4></div>
-    <div style="text-align: end;"><p>₹900</p><p>₹100</p><h4><strong>₹1000</strong></h4></div>
+<div class="itemsInOrder">
+
+  <app-items-in-order [orders]="orders" ></app-items-in-order>
+
+</div>
+
+
+
+
+    <!-- <div><p>subtotal</p><p>Delivery Charge</p><h4><strong>Total Amount</strong></h4></div>
+    <div style="text-align: end;"><p>₹900</p><p>₹100</p><h4><strong>₹1000</strong></h4></div> -->
+
+    <div class="rightSide">
+      <h2>Order Details</h2>
+      <div class="summary-details">
+        <p><span>Sub Total:</span> <span>{{998 | currency:'INR'}}</span></p>
+        <p class="total"><span>Total:</span> <span>{{ 1108| currency:'INR'}}</span></p>
+      </div>
+      <div class="button">
+        <app-long-button
+        label="Home"
+        routerLink="/addressconfirm"
+        ></app-long-button>
+      </div>
+  </div>
   </div>
 
-  <div class="secondContainer animated-section">
+
+  <div class="secondContainer ">
     <h1>Let Us Know Your Feedback</h1>
     <div class="inputFields">
       <input type="text" name="name" id="name" placeholder="Name">
@@ -31,4 +51,4 @@
       <button>Send</button>
     </div>
   </div>
-</div>
+
