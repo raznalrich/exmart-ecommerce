@@ -82,17 +82,20 @@ export class ApiServiceService {
   getCartList() {
     return this.http.get('https://localhost:7267/api/addtocart/GetCart');
   }
-  // getProducts(){
-  //   return this.http.get('https://localhost:7267/api/Product')
-  // }
+
   toggelProductStatus(id: number) {
     const url = `https://localhost:7267/api/Product/toggle-status/${id}`;
     return this.http.put<boolean>(url, {});
   }
+
   getProducts() {
     return this.http.get('https://localhost:7267/api/Product');
-    // return this.http.get('Data/productsTrail.json');
   }
+  getOrderDetails() {
+    return this.http.get('https://localhost:7267/api/Order/orders/details');
+  }
+
+
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
     const orderPayload = {
         userId: userId,
