@@ -21,8 +21,22 @@ export class SingleProductDetailComponent {
 @Input() data: any;
 id: any;
 @Input() userId:any;
+colorId:any
+sizeId:any
+qunatity:any
   private paramSubscription!: Subscription;
 constructor(private route: ActivatedRoute,public api: ApiService, public cartService: GlobalService,public apis : ApiServiceService) {}
+
+handleColorSelect(res: any) {
+  console.log('Selected color:', res);
+  this.colorId = res.id;
+}
+
+handleSizeSelect(res: any) {
+  console.log('Selected size:', res);
+  this.sizeId = res.id;
+}
+
 ngOnInit(){
 // console.log("details",this.data)
 this.paramSubscription = this.route.paramMap.subscribe(paramMap => {
@@ -36,7 +50,7 @@ addtocart() {
   this.userId = 1; // Replace with dynamic userId if needed
   console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
 
-  this.apis.addToCart(this.id, this.userId).subscribe(
+  this.apis.addToCart(this.id, this.userId,this.colorId,this.sizeId,this.qunatity).subscribe(
     (response) => {
       console.log('Item added to cart successfully:', response);
       this.cartService.getCartCount();
