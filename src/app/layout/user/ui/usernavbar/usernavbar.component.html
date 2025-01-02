@@ -10,7 +10,7 @@
                 <input type="search" placeholder="Search products" aria-label="Search"
                     style="width: 100%; border-radius: 10px; height: 35px; border: none; padding-left: 10px;">
             </form> -->
-            <div class="search-container">
+            <div class="search-container" clickOutside (clickOutside)="closeDropdown()">
               <form>
                 <input
                   type="search"
@@ -28,11 +28,11 @@
                 </div>
               }
 
-              <!-- @if (error()) {
+              @if (error()) {
                 <div class="error-message">
                   {{ error() }}
                 </div>
-              } -->
+              }
 
               @if (searchTerm && filteredProducts().length > 0) {
                 <div class="dropdown-container">
@@ -40,7 +40,7 @@
                     <div
                       class="dropdown-item"
                       (click)="selectProduct(product)"
-                      routerLink="/viewproduct/{{product.name}}">
+                      routerLink="viewproduct/{{product.id}}">
                       {{ product.name }}
                     </div>
                   }
@@ -54,7 +54,7 @@
                 </div>
               }
 
-              @if (searchTerm && filteredProducts().length === 0 && !isLoading()) {
+              @if (searchTerm && filteredProducts().length === 0 && !isLoading() && dropdownVisible()) {
                 <div class="no-results">
                   No products found
                 </div>

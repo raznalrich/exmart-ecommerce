@@ -1,9 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-export interface Product {
-  name: string;
+
+
+import { Product } from '../layout/user/interfaces/productInterface';
+export interface CartItem {
+  productId: number;
+  quantity: number;
+  sizeId: number;
+  colorId: number;
+  userId:number;
 }
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -86,6 +95,23 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Order/orders/details');
   }
 
+
+  placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
+    const orderPayload = {
+        userId: userId,
+        addressId: addressId,
+        orderItems: cartItems.map(item => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            sizeId: item.sizeId,
+            colorId: item.colorId,
+        })),
+    };
+    console.log(orderPayload);
+
+
+    return this.http.post('https://localhost:7267/api/Order/placeorder', orderPayload);
+}
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
       `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
@@ -106,7 +132,9 @@ export class ApiServiceService {
       `https://localhost:7267/api/Config/GetSizeById?id=${id}`
     );
   }
-
+  getAddressByUserId(id:number){
+    return this.http.get(`https://localhost:7267/api/Users/${id}`)
+  }
   getOrderList() {
     return this.http.get(`https://localhost:7267/api/Order/orders/details`);
     return this.http.get(`Data/OrderList.json`);
@@ -164,9 +192,11 @@ export class ApiServiceService {
     );
   }
 
-  getImagesByProductId(id: number) {
-    return this.http.get(
-      `https://localhost:7267/api/ProductImage/ByProduct/${id}`
-    );
+  getImagesByProductId(id:number){
+  return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
+}
+
+  updateOrderStatus(OrderListDTO:any){
+    return this.http.put(`https://localhost:7267/api/Order/updatestatus`,OrderListDTO);
   }
 }
