@@ -1,23 +1,30 @@
 import { Component, Input } from '@angular/core';
 import { SingleCardComponent } from '../../ui/single-card/single-card.component';
-import { SingleCarouselComponent } from "../../ui/single-carousel/single-carousel.component";
-import { SingleProductDetailComponent } from "../../ui/single-product-detail/single-product-detail.component";
+import { SingleCarouselComponent } from '../../ui/single-carousel/single-carousel.component';
+import { SingleProductDetailComponent } from '../../ui/single-product-detail/single-product-detail.component';
 import { ApiService } from '../../../../api.service';
-import { SinglePageDropdownComponent } from "../../ui/single-page-dropdown/single-page-dropdown.component";
+import { SinglePageDropdownComponent } from '../../ui/single-page-dropdown/single-page-dropdown.component';
 import { ActivatedRoute } from '@angular/router';
+import { ApiServiceService } from '../../../../services/api-service.service';
 
 @Component({
   selector: 'app-singleproductpage',
   standalone: true,
-  imports: [SingleCardComponent, SingleCarouselComponent, SingleProductDetailComponent, SinglePageDropdownComponent],
+  imports: [
+
+    SingleCarouselComponent,
+    SingleProductDetailComponent,
+    SinglePageDropdownComponent,
+  ],
   templateUrl: './singleproductpage.component.html',
-  styleUrl: './singleproductpage.component.scss'
+  styleUrl: './singleproductpage.component.scss',
 })
 export class SingleproductpageComponent {
-productDetails:any
-id:any
-data:any
-  constructor(public api: ApiService, private route: ActivatedRoute) {}
+  productDetails: any;
+  productImages: any[]=[];
+  id: any;
+  data: any;
+  constructor(public api: ApiServiceService, private route: ActivatedRoute) {}
   ngOnInit() {
     // this.api.getCarouselImages().subscribe((res: any) => {
     //   this.carouselImages = res;
@@ -28,13 +35,19 @@ data:any
     //   this.card = res;
     //   // console.log(this.card);
     // });
-    this.id=this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
 
-      this.api.getProductsById(this.id).subscribe((res: any) => {
+    this.api.getProductsById(this.id).subscribe((res: any) => {
       this.productDetails = res;
-      // console.log("data",this.data);
-      console.log("imageCollection",this.productDetails[0].imageCollectionUrl);
+      // console.log('productDetails', this.productDetails);
+
+      // console.log("imageCollectionUrl",this.productDetails.imageCollectionUrl);
+    });
+
+    this.api.getImagesByProductId(this.id).subscribe((res: any) => {
+      this.productImages = res;
+      console.log('productImages', this.productImages);
     });
   }
 }

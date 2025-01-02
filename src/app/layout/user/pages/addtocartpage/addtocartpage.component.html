@@ -1,10 +1,28 @@
 <main class="cart-container">
 
+
   <div class="card-items">
+
+    <section class="bag-section">
+        @for(items of CartItems; track items ){
+          <!-- <img [src]="items[0].imageUrl" [alt]="items.productName" /> -->
+
+          <app-product-displaying-bar
+            [productImage]="items.primaryImageUrl || 'images/box not packed.png'"
+            [productName]="items.name"
+            [productColor]="items.colorId"
+            [productSize]="items.sizeId"
+            [productPrice]="items.price">
+          </app-product-displaying-bar>
+
+        }
+
+
+    </section>
 
 
   <!--Left Section-->
-  <section class="bag-section">
+  <!-- <section class="bag-section">
     <div class="product-card">
       <img src="https://5.imimg.com/data5/HB/VQ/MY-44811379/men-black-plain-t-shirt.jpg" alt="Product Image" class="product-image">
       <div class="product-details">
@@ -38,23 +56,32 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 </div>
-
-
-
-
-
-
 
   <!--Right Section-->
   <aside class="summary-section">
     <h2>Summary</h2>
     <div class="summary-details">
-      <p><span>Sub Total:</span> <span>{{998 | currency:'INR'}}</span></p>
-      <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p>
-      <p class="total"><span>Total:</span> <span>{{ 1108| currency:'INR'}}</span></p>
+      <!-- <p><span>No of Items:</span> <span>{{global.cartCount()}}</span></p> -->
+      <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
+       @for(numberOfItems of CartItems; track numberOfItems){
+
+        <p><span>{{numberOfItems.name}}</span> <span>{{numberOfItems.price | currency:'INR'}}</span></p>
+       }
+      <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
+      <p class="total"><span>Total:</span> <span>{{ totalPrice| currency:'INR'}}</span></p>
     </div>
-    <button class="checkout-btn" routerLink="/addressconfirm">Checkout</button>
+    <!-- <button class="checkout-btn" routerLink="/addressconfirm">Proceed to buy</button> -->
+    <div class="button">
+      <app-long-button
+      label="Proceed to buy"
+      routerLink="/addressconfirm"
+      ></app-long-button>
+    </div>
+    <!-- <button class="checkout-btn" routerLink="/addressconfirm">Checkout</button> -->
   </aside>
+
+
 </main>
+

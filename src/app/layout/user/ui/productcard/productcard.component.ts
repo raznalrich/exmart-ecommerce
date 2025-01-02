@@ -14,14 +14,5 @@ export class ProductcardComponent {
 color: any;
   constructor(public api:ApiServiceService){}
 
-  @Input() cards:any={
-    category:'',
-colors:[],
-id:0,
-imageUrl:'',
-name:'',
-price:0,
-size:'',
-type:''
-  }
+  @Input() cards:any
 }
