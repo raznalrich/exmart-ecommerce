@@ -46,7 +46,7 @@ export class SingleProductDetailComponent {
 
   onQuantityChange() {
     console.log('Updated Quantity:', this.quantity );
-    this.addtocart()
+    // this.addtocart()
   }
 
   ngOnInit() {
