@@ -1,24 +1,29 @@
 import { Component } from '@angular/core';
 import { LongButtonComponent } from "../long-button/long-button.component";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ApiServiceService } from '../../../../services/api-service.service';
 
 @Component({
   selector: 'app-web-feedback-section',
   standalone: true,
-  imports: [LongButtonComponent],
+  imports: [LongButtonComponent,ReactiveFormsModule],
   templateUrl: './web-feedback-section.component.html',
   styleUrl: './web-feedback-section.component.scss'
 })
 export class WebFeedbackSectionComponent {
 
-  feedback: string = '';
+  constructor(private api:ApiServiceService){}
+  
+  webfeedbackForm = new FormGroup({
+
+    feedback: new FormControl('')
+  });
 
   submitFeedback() {
-    if (this.feedback) {
-      console.log('Feedback submitted:', this.feedback);
-      alert('Thank you for your feedback!');
-      this.feedback = ''; // Reset the input
+    if (this.webfeedbackForm.valid) {
+      console.log('Feedback submitted:', this.webfeedbackForm.value.feedback);
     } else {
-      alert('Please enter your feedback!');
+      this.webfeedbackForm.markAllAsTouched();
     }
   }
 
