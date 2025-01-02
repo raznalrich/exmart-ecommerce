@@ -8,6 +8,7 @@ export class GlobalService {
   constructor(public api:ApiServiceService) {}
   cartCount = signal(0);
   signalCartList = signal<any[]>([])
+  selectedAddressId = signal<string>('');
   cartList:any[]=[];
   editProduct(item: any) {
     console.log(item);

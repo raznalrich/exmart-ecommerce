@@ -5,6 +5,7 @@ import { AddressCardComponent } from '../../ui/address-card/address-card.compone
 import { ApiService } from '../../../../api.service';
 import { RouterLink } from '@angular/router';
 import { LongButtonComponent } from "../../ui/long-button/long-button.component";
+import { ApiServiceService } from '../../../../services/api-service.service';
 
 @Component({
   selector: 'app-address-confirm-page',
@@ -14,5 +15,26 @@ import { LongButtonComponent } from "../../ui/long-button/long-button.component"
   styleUrl: './address-confirm-page.component.scss'
 })
 export class AddressConfirmPageComponent {
+    constructor(public api:ApiServiceService){}
+  
+  @Input()address:any={
+    name:'',
+    badgeName:'',
+    place:'',
+    buildingNo:'',
+    pincode:'',
+    city:'',
+    district:'',
+    stste:'',
+    country:'',
+    phoneNo:''
+    }
+    ngOnInit() {
+      this.address= this.api.getAddressByUserId(1).subscribe((res: any) => {
+         this.address = res;
 
+         console.log(this.address);
+         // console.log("Name : ",this.arr[0].name);
+     }
+   )}
 }

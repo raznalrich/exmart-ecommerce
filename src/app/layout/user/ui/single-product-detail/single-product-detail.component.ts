@@ -7,11 +7,13 @@ import { GlobalService } from '../../../../global.service';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { ColorButtonComponent } from "../color-button/color-button.component";
+import { SizeButtonComponent } from '../size-button/size-button.component';
 
 @Component({
   selector: 'app-single-product-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent],
   templateUrl: './single-product-detail.component.html',
   styleUrl: './single-product-detail.component.scss'
 })
@@ -22,12 +24,14 @@ id: any;
   private paramSubscription!: Subscription;
 constructor(private route: ActivatedRoute,public api: ApiService, public cartService: GlobalService,public apis : ApiServiceService) {}
 ngOnInit(){
-console.log("details",this.data)
+// console.log("details",this.data)
 this.paramSubscription = this.route.paramMap.subscribe(paramMap => {
   const idParam = paramMap.get('id');
   this.id = idParam ? Number(idParam) : null;
 })
+
 }
+
 addtocart() {
   this.userId = 1; // Replace with dynamic userId if needed
   console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
@@ -42,4 +46,6 @@ addtocart() {
     }
   );
 }
+
+
 }
