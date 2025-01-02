@@ -15,21 +15,21 @@
           </tr>
         </thead>
         <tbody>
-          @for(employee of arr; track employee){
+          @for(item of feedback; track item){
           <tr class="border-bottom hover-row">
             <td class="d-flex align-items-center">
               <img
-                [src]="employee.image"
+                src="https://cdn-icons-png.flaticon.com/128/149/149071.png"
                 alt="Profile Picture"
                 class="rounded-circle me-3 shadow-sm"
               />
-              <span class="fw-bold">{{ employee.name }}</span>
+              <span class="fw-bold">{{ item.userName }}</span>
             </td>
             <td>
-              <p class="mb-0 text-muted">{{ employee.productName }}</p>
+              <p class="mb-0 text-muted">{{ item.productName }}</p>
             </td>
             <td>
-              <p class="mb-0 text-muted">{{ employee.feedback }}</p>
+              <p class="mb-0 text-muted">{{ item.feedBack }}</p>
             </td>
             <td class="text-center">
               <i
