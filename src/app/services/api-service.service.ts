@@ -161,10 +161,12 @@ export class ApiServiceService {
       `https://localhost:7267/api/Product/GetProductById?id=${id}`
     );
   }
+  
+  getImagesByProductId(id:number){
+  return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
+}
 
-  getImagesByProductId(id: number) {
-    return this.http.get(
-      `https://localhost:7267/api/ProductImage/ByProduct/${id}`
-    );
+  updateOrderStatus(OrderListDTO:any){
+    return this.http.put(`https://localhost:7267/api/Order/updatestatus`,OrderListDTO);
   }
 }
