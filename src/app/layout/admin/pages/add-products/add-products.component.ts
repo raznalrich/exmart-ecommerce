@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./add-products.component.scss'],
 })
 export class AddProductsComponent {
+  isModalVisible = true;
   addProduct!: FormGroup;
   categories = [
     { id: 1, label: 'Garments' },
@@ -156,6 +157,8 @@ export class AddProductsComponent {
         this.apiService.addProduct(payload).subscribe({
           next: (res) => {
             console.log('Product added successfully:', res);
+            this.isModalVisible = false; // Close the modal
+
           },
           error: (err) => {
             console.error('Error adding product:', err);

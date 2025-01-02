@@ -3,10 +3,10 @@
     <i class="bi bi-truck"></i> Shipment Details
   </h6>
   <div class="order-details" style="margin-top: 25px;line-height: 18px;font-size: small;">
-    <p><strong>2186 Joyce Street Rocky Mount</strong></p>
-    <p>House No: <strong>21/B</strong></p>
-    <p>City: <strong>Trivandrum</strong></p>
-    <p>Pin Code: <strong>695581</strong></p>
-    <p>State: <strong>Kerala</strong></p>
+    <p><strong>{{OrderDetailsByID.addressLine}}</strong></p>
+
+    <p>City: <strong>{{OrderDetailsByID.city}}</strong></p>
+    <p>Pin Code: <strong>{{OrderDetailsByID.zipCode}}</strong></p>
+    <p>State: <strong>{{OrderDetailsByID.state}}</strong></p>
   </div>
 </div>

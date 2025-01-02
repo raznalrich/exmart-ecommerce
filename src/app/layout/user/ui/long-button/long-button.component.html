@@ -1,8 +1,21 @@
 <button
+(click)="onButtonClick()"
   [type]="type"
   [class]="styleClass"
   [disabled]="disabled"
+  [ngStyle]="{
+    color: textColor,
+    backgroundColor: backgroundColor,
+    border: border
+  }"
 >
+<!-- (mouseenter)="hovered = true"
+  (mouseleave)="hovered = false"
+  [ngStyle]="hovered ? {
+    color: hoverTextColor,
+    backgroundColor: hoverBackgroundColor,
+    border: hoverBorder
+  } : null" -->
   @if (imgSrc && imgPosition === 'left') {
     <img
       [src]="imgSrc"

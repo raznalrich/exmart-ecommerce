@@ -5,14 +5,20 @@ button {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
-  height: 40px;
-  width: 170px;
+  height: 7vh;
+  width: 100%;
   cursor: pointer;
   gap: 10px;
   color: white;
+  background-color: #3E68B9;
 
   img{
     width: 20px;
     height: 20px;
   }
+}
+button:hover {
+  background-color: white;
+  border: #3E68B9 1px solid;
+  color: #3E68B9;
 }
