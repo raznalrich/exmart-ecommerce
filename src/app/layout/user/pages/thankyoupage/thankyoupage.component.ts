@@ -5,6 +5,7 @@ import { OrderTrackingBarComponent } from "../../ui/order-tracking-bar/order-tra
 import { OrderconfirmationanimationComponent } from "../../ui/orderconfirmationanimation/orderconfirmationanimation.component";
 import { OrderConfirmationTickAnimationComponent } from "../../ui/order-confirmation-tick-animation/order-confirmation-tick-animation.component";
 import { AnimationStateService } from '../../../../services/animation-state.service';
+import { WebFeedbackSectionComponent } from "../../ui/web-feedback-section/web-feedback-section.component";
 
 interface Order {
   orderId: string;
@@ -24,7 +25,7 @@ interface Item {
 @Component({
   selector: 'app-thankyoupage',
   standalone: true,
-  imports: [ItemsInOrderComponent, OrderConfirmationTickAnimationComponent, OrderconfirmationanimationComponent],
+  imports: [ItemsInOrderComponent, OrderConfirmationTickAnimationComponent, OrderconfirmationanimationComponent, WebFeedbackSectionComponent],
   templateUrl: './thankyoupage.component.html',
   styleUrl: './thankyoupage.component.scss'
 })
