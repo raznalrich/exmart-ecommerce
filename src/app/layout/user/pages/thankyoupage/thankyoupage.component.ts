@@ -7,6 +7,7 @@ import { OrderConfirmationTickAnimationComponent } from "../../ui/order-confirma
 import { AnimationStateService } from '../../../../services/animation-state.service';
 import { LongButtonComponent } from "../../ui/long-button/long-button.component";
 import { CurrencyPipe } from '@angular/common';
+import { WebFeedbackSectionComponent } from "../../ui/web-feedback-section/web-feedback-section.component";
 
 interface Order {
   orderId: string;
@@ -26,7 +27,7 @@ interface Item {
 @Component({
   selector: 'app-thankyoupage',
   standalone: true,
-  imports: [ItemsInOrderComponent, OrderConfirmationTickAnimationComponent, OrderconfirmationanimationComponent, LongButtonComponent, CurrencyPipe],
+  imports: [ItemsInOrderComponent, OrderConfirmationTickAnimationComponent, LongButtonComponent, CurrencyPipe, WebFeedbackSectionComponent],
   templateUrl: './thankyoupage.component.html',
   styleUrl: './thankyoupage.component.scss'
 })
