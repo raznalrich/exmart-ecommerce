@@ -9,19 +9,31 @@ import { ApiService } from '../../../../api.service';
   styleUrl: './feedback-list.component.scss'
 })
 export class FeedbackListComponent {
-  arr:any;
-  userFeed:any={
-  name:'',
-  feedback:'',
-  image:''
-      }
-    constructor(public api: ApiService) {}
-    ngOnInit() {
-      this.api.getUserFeedback().subscribe((res: any) => {
-        this.userFeed = res;
-        this.arr = this.userFeed.employees;
-       console.log(this.arr);
-      console.log("Name",this.arr[0].name)
-      });
-  }
+  // arr:any;
+  // userFeed:any={
+  // name:'',
+  // feedback:'',
+  // image:'',
+  // userId:''
+  //     }
+  //   constructor(public api: ApiService) {}
+  //   ngOnInit() {
+  //     this.api.getUserFeedback().subscribe((res: any) => {
+  //       this.userFeed = res;
+  //       this.arr = this.userFeed.employees;
+  //      console.log(this.arr);
+  //     console.log("Name",this.arr[0].name)
+  //     });
+  // }
+
+  feedback:any []=[]
+    constructor(public api: ApiService){}
+
+    ngOnInit(){
+      this.api.getUserFeedback().subscribe((res:any)=>{
+       this.feedback = res;
+        console.log(this.feedback)
+      })
+
+    }
 }
