@@ -2,41 +2,19 @@
   <section class="categories-section">
     <h2>Current Categories</h2>
     <div class="categories">
-      <div class="category-card">
-        <img
-          src="https://static.thenounproject.com/png/1241514-200.png"
-          alt="Garments"
-        />
-        <div class="category-name"><p>Garments</p></div>
-        <div class="category-actions">
-          <button><i class="bi bi-pencil-square"></i></button>
-          <button><i class="bi bi-trash3"></i></button>
+      @for(item of category;track item){
+        <div class="category-card">
+          <img
+            src={{item.iconPath}}
+            alt="Icon"
+          />
+          <div class="category-name"><p>{{item.categoryName}}</p></div>
+          <div class="category-actions">
+            <button><i class="bi bi-pencil-square"></i></button>
+            <button (click)="deleteCategory(item)"><i class="bi bi-trash3"></i></button>
+          </div>
         </div>
-      </div>
-
-      <div class="category-card">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/737/737004.png"
-          alt="Appliances"
-        />
-        <div class="category-name"><p>Appliances</p></div>
-        <div class="category-actions">
-          <button><i class="bi bi-pencil-square"></i></button>
-          <button><i class="bi bi-trash3"></i></button>
-        </div>
-      </div>
-
-      <div class="category-card">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/6820/6820171.png"
-          alt="Stationery"
-        />
-        <div class="category-name"><p>Stationery</p></div>
-        <div class="category-actions">
-          <button><i class="bi bi-pencil-square"></i></button>
-          <button><i class="bi bi-trash3"></i></button>
-        </div>
-      </div>
+      }
     </div>
   </section>
 
@@ -63,8 +41,6 @@
       data-bs-target="#static"
     >
     </button>
-
-
     <app-edit-policiesapp-edit-policies></app-edit-policiesapp-edit-policies>
   </div>
 </div>
