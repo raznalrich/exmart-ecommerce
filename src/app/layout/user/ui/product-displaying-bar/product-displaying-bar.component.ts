@@ -43,5 +43,6 @@ export class ProductDisplayingBarComponent {
       console.error('Error fetching size:', error);
     }
   });
+
  }
 }
