@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DateRangepickerComponent } from './date-rangepicker.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('DateRangepickerComponent', () => {
   let component: DateRangepickerComponent;
@@ -8,7 +8,7 @@ describe('DateRangepickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DateRangepickerComponent]
+      imports: [DateRangepickerComponent, ReactiveFormsModule]
     })
     .compileComponents();
 
@@ -19,5 +19,10 @@ describe('DateRangepickerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should initialize form controls', () => {
+    expect(component.form.get('startDate')).toBeTruthy();
+    expect(component.form.get('endDate')).toBeTruthy();
   });
 });

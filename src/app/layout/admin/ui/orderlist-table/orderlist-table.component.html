@@ -1,21 +1,76 @@
-<div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg"> <div class="modal-content">
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="confirmModal"
+  tabindex="-1"
+  aria-labelledby="modalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Order Details</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="modalLabel">Confirm Status Change</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        <app-order-popup></app-order-popup>
+        Are you sure you want to update the status for this order to
+        <strong>{{ getStatusName(selectedStatus) }}</strong>?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="confirmStatusChange()"
+          data-bs-dismiss="modal"
+        >
+          Confirm
+        </button>
       </div>
     </div>
   </div>
 </div>
-<app-confirm-modal></app-confirm-modal>
+             <!-- Modal for Order details -->
+<div
+  class="modal fade"
+  id="orderDetailModal"
+  tabindex="-1"
+  aria-labelledby="modalLabel"
+  aria-hidden="true"
+>
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+  ></button>
+
+<div class="modal-body">
+  <app-order-popup [OrderDetailById]="OrderDetailsByID"></app-order-popup>
+</div>
+</div>
+</div>
+</div>
+
+
 <div class="table-container">
   <table class="styled-table">
     <!-- @for(item of O) -->
     <tr>
-      <th>Order</th>
+      <th>Order Id</th>
       <th>Date</th>
       <th>Customer</th>
       <th>Status</th>
@@ -25,32 +80,29 @@
     </tr>
     @for(item of OrderList; track item){
       <tr>
-        <td>{{item.order}}</td>
-        <td>{{item.date}}</td>
-        <td>{{item.customer}}</td>
+        <td>{{item.orderId}}</td>
+        <td>{{item.orderDate | date : "YYYY-MM-dd"}}</td>
+        <td>{{item.customerName}}</td>
 
         <td>
-          <button type="button">
-
-          <select class="status-dropdown" [(ngModel)]="item.status" (change)="updateOrderStatus(item)">
-            <option value="Delivered" >Delivered</option>
-            <option value="Shipped">Shipped</option>
-            <option value="Pending">Pending</option>
+          <select class="status-dropdown"
+                  [(ngModel)]="item.status"
+                  (change)="openConfirmationModal(item)">
+            <option [ngValue]="1">Pending</option>
+            <option [ngValue]="2">Shipped</option>
+            <option [ngValue]="3">Delivered</option>
           </select>
-
-        </button>
         </td>
-        <td>{{item.amount | currency : "INR"}}</td>
-         <td>{{calculateTotalQuantity(item.items)}}</td>
+
+        <td>{{item.totalAmount | currency : "INR"}}</td>
+         <td>{{item.totalItems}}</td>
           <td style="text-align: center;">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId)">
               <i class="fa-regular fa-eye"></i>
             </button>
             </td>
 
       </tr>
     }
-
-
   </table>
 </div>
