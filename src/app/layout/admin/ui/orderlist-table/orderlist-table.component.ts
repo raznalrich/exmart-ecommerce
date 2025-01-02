@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BillingDetailComponent } from "../billing-detail/billing-detail.component";
@@ -8,10 +8,11 @@ import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component'
 import { ApiServiceService } from '../../../../services/api-service.service';
 declare var bootstrap: any;
 
+
 @Component({
   selector: 'app-orderlist-table',
   standalone: true,
-  imports: [CurrencyPipe, FormsModule, BillingDetailComponent, CustomerDetailComponent, OrderPopupComponent,ConfirmModalComponent],
+  imports: [CurrencyPipe, FormsModule, OrderPopupComponent, DatePipe],
   templateUrl: './orderlist-table.component.html',
   styleUrl: './orderlist-table.component.scss'
 })
@@ -21,17 +22,14 @@ export class OrderlistTableComponent {
   selectedStatus: number = 0;
   selectedOrder: any = null;
 
+  OrderDetailsByID : any
+
   constructor(public api:ApiServiceService){}
 
   ngOnInit(){
     console.log("from order table component")
     console.log(this.OrderList)
 
-  }
-
-  updateOrderStatus(order: any): void {
-    const modal = new bootstrap.Modal(document.getElementById('confirm_modal'));
-    modal.show();
   }
 
   // Open the modal and store the selected item and status
@@ -42,6 +40,10 @@ export class OrderlistTableComponent {
     const modalInstance = new bootstrap.Modal(modalElement!);
     modalInstance.show();
   }
+
+  // openActionModal(OrderId : number) {
+  //   const modalElement = document.getElementById('')
+  // }
 
   // Utility function to get status name for display
   getStatusName(statusId: number): string {
@@ -68,6 +70,18 @@ export class OrderlistTableComponent {
       })
 }
 
+  }
+
+  openOrderDetailModal(orderId:any){
+
+    this.api.GetOrderDetailById(orderId).subscribe((res:any)=>{
+        this.OrderDetailsByID = res
+        console.log(this.OrderDetailsByID)
+    })
+
+    const modalElement = document.getElementById('orderDetailModal');
+    const modalInstance = new bootstrap.Modal(modalElement!);
+    modalInstance.show();
   }
 
 }

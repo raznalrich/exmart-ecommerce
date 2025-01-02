@@ -82,17 +82,20 @@ export class ApiServiceService {
   getCartList() {
     return this.http.get('https://localhost:7267/api/addtocart/GetCart');
   }
-  // getProducts(){
-  //   return this.http.get('https://localhost:7267/api/Product')
-  // }
+
   toggelProductStatus(id: number) {
     const url = `https://localhost:7267/api/Product/toggle-status/${id}`;
     return this.http.put<boolean>(url, {});
   }
+
   getProducts() {
     return this.http.get('https://localhost:7267/api/Product');
-    // return this.http.get('Data/productsTrail.json');
   }
+  getOrderDetails() {
+    return this.http.get('https://localhost:7267/api/Order/orders/details');
+  }
+
+
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
     const orderPayload = {
         userId: userId,
@@ -133,7 +136,7 @@ export class ApiServiceService {
     return this.http.get(`https://localhost:7267/api/Users/${id}`)
   }
   getOrderList() {
-    return this.http.get(`https://localhost:7267/api/Order/orders/details`);
+    return this.http.get(`https://localhost:7267/api/Order/orders/List`);
     return this.http.get(`Data/OrderList.json`);
   }
 
@@ -195,5 +198,9 @@ export class ApiServiceService {
 
   updateOrderStatus(OrderListDTO:any){
     return this.http.put(`https://localhost:7267/api/Order/updatestatus`,OrderListDTO);
+  }
+
+  GetOrderDetailById(orderid:any){
+    return this.http.get(`https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`)
   }
 }

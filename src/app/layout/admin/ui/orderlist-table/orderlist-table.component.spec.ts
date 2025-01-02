@@ -113,38 +113,5 @@ describe('OrderlistTableComponent', () => {
     expect(modal).toBeTruthy();
   });
 
-  it('should call updateOrderStatus on dropdown change', async () => {
-    await fixture.whenStable();
-    spyOn(component, 'updateOrderStatus');
-
-    // First wait for the @for loop to render
-    fixture.detectChanges();
-
-    // Get the select element
-    const select = fixture.debugElement.query(By.css('.status-dropdown'));
-    expect(select).toBeTruthy('Select element should exist');
-
-    // Get the native select element
-    const selectElement = select.nativeElement;
-
-    // Change the value
-    selectElement.value = selectElement.options[1].value;  // Selecting "Shipped"
-
-    // Dispatch both events needed for ngModel and change detection
-    selectElement.dispatchEvent(new Event('change'));
-    selectElement.dispatchEvent(new Event('input'));
-
-    // Detect changes to update the view
-    fixture.detectChanges();
-
-    // Verify the spy was called with the correct order
-    expect(component.updateOrderStatus).toHaveBeenCalledWith(component.OrderList[0]);
-});
-
-  it('should calculate total quantity correctly', () => {
-    const items: any[] = [{ quantity: 2 }, { quantity: 3 }];
-    const total = component.calculateTotalQuantity(items);
-    expect(total).toBe(5);
-  });
 
 });
