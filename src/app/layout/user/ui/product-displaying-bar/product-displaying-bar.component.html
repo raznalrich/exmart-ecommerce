@@ -9,8 +9,8 @@
 
     <div class="actions">
       <div class="col">
-        <p>Color: {{ productColor }}</p>
-        <p>Size: {{ productSize }}</p>
+        <p >Color: <strong>{{ color }}</strong></p>
+        <p>Size:<strong> {{ size }}</strong></p>
         <p class="price">{{ productPrice | currency: 'INR' }}</p>
       </div>
       <app-addto-cart-deletebtn></app-addto-cart-deletebtn>
