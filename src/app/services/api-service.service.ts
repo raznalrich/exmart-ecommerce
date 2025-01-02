@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-export interface Product {
-  name: string;
-}
+
+
+import { Product } from '../layout/user/interfaces/productInterface';
 export interface CartItem {
   productId: number;
   quantity: number;
@@ -11,6 +11,8 @@ export interface CartItem {
   colorId: number;
   userId:number;
 }
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -186,7 +188,7 @@ export class ApiServiceService {
       `https://localhost:7267/api/Product/GetProductById?id=${id}`
     );
   }
-  
+
   getImagesByProductId(id:number){
   return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
 }
