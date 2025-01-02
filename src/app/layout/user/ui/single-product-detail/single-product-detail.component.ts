@@ -7,59 +7,70 @@ import { GlobalService } from '../../../../global.service';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { ColorButtonComponent } from "../color-button/color-button.component";
+import { ColorButtonComponent } from '../color-button/color-button.component';
 import { SizeButtonComponent } from '../size-button/size-button.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-single-product-detail',
   standalone: true,
-  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent],
+  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent, FormsModule],
   templateUrl: './single-product-detail.component.html',
-  styleUrl: './single-product-detail.component.scss'
+  styleUrl: './single-product-detail.component.scss',
 })
 export class SingleProductDetailComponent {
-@Input() data: any;
-id: any;
-@Input() userId:any;
-colorId:any
-sizeId:any
-qunatity:any
+  @Input() data: any;
+  id: any;
+  @Input() userId: any;
+  colorId: any;
+  sizeId: any;
+  quantity: number=1;
   private paramSubscription!: Subscription;
-constructor(private route: ActivatedRoute,public api: ApiService, public cartService: GlobalService,public apis : ApiServiceService) {}
+  constructor(
+    private route: ActivatedRoute,
+    public api: ApiService,
+    public cartService: GlobalService,
+    public apis: ApiServiceService
+  ) {}
 
-handleColorSelect(res: any) {
-  console.log('Selected color:', res);
-  this.colorId = res.id;
-}
+  handleColorSelect(res: any) {
+    console.log('Selected color:', res);
+    this.colorId = res.id;
+  }
 
-handleSizeSelect(res: any) {
-  console.log('Selected size:', res);
-  this.sizeId = res.id;
-}
+  handleSizeSelect(res: any) {
+    console.log('Selected size:', res);
+    console.log('Quantity', this.quantity);
+    this.sizeId = res.id;
+  }
 
-ngOnInit(){
-// console.log("details",this.data)
-this.paramSubscription = this.route.paramMap.subscribe(paramMap => {
-  const idParam = paramMap.get('id');
-  this.id = idParam ? Number(idParam) : null;
-})
+  onQuantityChange() {
+    console.log('Updated Quantity:', this.quantity );
+    this.addtocart()
+  }
 
-}
+  ngOnInit() {
+    // console.log("details",this.data)
+    this.paramSubscription = this.route.paramMap.subscribe((paramMap) => {
+      const idParam = paramMap.get('id');
+      this.id = idParam ? Number(idParam) : null;
+    });
+  }
 
-addtocart() {
-  this.userId = 1; // Replace with dynamic userId if needed
-  console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
+  addtocart() {
+    this.userId = 1; // Replace with dynamic userId if needed
+    console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
 
-  this.apis.addToCart(this.id, this.userId,this.colorId,this.sizeId,this.qunatity).subscribe(
-    (response) => {
-      console.log('Item added to cart successfully:', response);
-      this.cartService.getCartCount();
-    },
-    (error) => {
-      console.error('Error adding item to cart:', error);
-    }
-  );
-}
-
-
+    this.apis
+      .addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
+      .subscribe(
+        (response) => {
+          console.log('Item added to cart successfully:', response);
+          this.cartService.getCartCount();
+        },
+        (error) => {
+          console.error('Error adding item to cart:', error);
+        }
+      );
+  }
 }
