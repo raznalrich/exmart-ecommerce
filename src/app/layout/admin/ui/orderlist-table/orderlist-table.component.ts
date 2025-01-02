@@ -5,6 +5,7 @@ import { BillingDetailComponent } from "../billing-detail/billing-detail.compone
 import { CustomerDetailComponent } from "../customer-detail/customer-detail.component";
 import { OrderPopupComponent } from "../order-popup/order-popup.component";
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { ApiServiceService } from '../../../../services/api-service.service';
 declare var bootstrap: any;
 
 @Component({
@@ -17,6 +18,11 @@ declare var bootstrap: any;
 export class OrderlistTableComponent {
   @Input() OrderList:any;
 
+  selectedStatus: number = 0;
+  selectedOrder: any = null;
+
+  constructor(public api:ApiServiceService){}
+
   ngOnInit(){
     console.log("from order table component")
     console.log(this.OrderList)
@@ -28,9 +34,40 @@ export class OrderlistTableComponent {
     modal.show();
   }
 
-  calculateTotalQuantity(items: any[]): number {
-    return items.reduce((total, item) => total + item.quantity, 0);
+  // Open the modal and store the selected item and status
+  openConfirmationModal(item: any) {
+    this.selectedOrder = item; // Store the selected item (order)
+    this.selectedStatus = item.status
+    const modalElement = document.getElementById('confirmModal');
+    const modalInstance = new bootstrap.Modal(modalElement!);
+    modalInstance.show();
   }
 
+  // Utility function to get status name for display
+  getStatusName(statusId: number): string {
+    const statusMap: { [key: number]: string } = {
+      1: 'Pending',
+      2: 'Shipped',
+      3: 'Delivered',
+    };
+    return statusMap[statusId] || 'Unknown';
+  }
+
+  confirmStatusChange() {
+
+    if (this.selectedOrder && this.selectedStatus !== null) {
+      const OrderListDTO = {
+        orderId: this.selectedOrder.orderId,
+        productStatusId: this.selectedStatus
+      };
+      console.log(OrderListDTO)
+      this.api.updateOrderStatus(OrderListDTO).subscribe((res:any)=>{
+
+        console.log(res)
+
+      })
+}
+
+  }
 
 }
