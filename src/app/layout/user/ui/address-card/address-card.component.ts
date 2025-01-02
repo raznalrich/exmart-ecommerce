@@ -1,7 +1,9 @@
 
-import { Component, Input,Output, EventEmitter } from '@angular/core';
+import { Component, Input,Output, EventEmitter, signal } from '@angular/core';
 import { AddressBadgeComponent } from '../address-badge/address-badge.component';
 import { ApiService } from '../../../../api.service';
+import { ApiServiceService } from '../../../../services/api-service.service';
+import { GlobalService } from '../../../../global.service';
 
 @Component({
   selector: 'app-address-card',
@@ -11,11 +13,11 @@ import { ApiService } from '../../../../api.service';
   styleUrl: './address-card.component.scss'
 })
 export class AddressCardComponent {
-  constructor(public api:ApiService){}
-
+  constructor(public api:ApiServiceService,public global:GlobalService){}
+  // selectedAddressId = signal<string>('');
 @Input()address:any={
 name:'',
-badgeName:'',
+addressTypeName:0,
 place:'',
 buildingNo:'',
 pincode:'',
@@ -26,12 +28,21 @@ country:'',
 phoneNo:''
 }
 arr:any;
-  ngOnInit() {
-   this.address= this.api.getUserAddress().subscribe((res: any) => {
-      this.address = res;
-      this.arr = this.address.addresses
-      console.log(this.arr);
-      console.log("Name : ",this.arr[0].name);
+handleRadioChange(event: Event): void {
+  const target = event.target as HTMLInputElement;
+  if (target.checked) {
+    this.global.selectedAddressId.set(target.id);
+    console.log('Selected Address ID:', this.global.selectedAddressId());
   }
-)}
+}
+  ngOnInit() {
+  //  this.address= this.api.getAddressByUserId(1).subscribe((res: any) => {
+  //     this.address = res;
+
+  //     console.log(this.address);
+  //     // console.log("Name : ",this.arr[0].name);
+  // }
+  console.log(this.address);
+
+}
 }
