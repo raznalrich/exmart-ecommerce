@@ -116,6 +116,11 @@ export class ApiServiceService {
       )}`
     );
   }
+  sendMail(email:any,subject:string,body:string){
+    return this.http.post(
+      `https://localhost:7267/api/email?receptor=${email}&subject=${subject}&body=${body}`,
+      null
+    );  }
   getAllCategories() {
     return this.http.get('https://localhost:7267/api/Categories');
   }

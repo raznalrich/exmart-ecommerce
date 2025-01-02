@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../../../api.service';
+import { FeedbackReplayComponent } from "../feedback-replay/feedback-replay.component";
+import { AddNewCategoryComponent } from "../add-new-category/add-new-category.component";
+
 
 @Component({
   selector: 'app-feedback-list',
   standalone: true,
-  imports: [],
+  imports: [FeedbackReplayComponent, AddNewCategoryComponent],
   templateUrl: './feedback-list.component.html',
   styleUrl: './feedback-list.component.scss'
 })
