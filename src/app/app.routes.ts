@@ -46,7 +46,11 @@ export const routes: Routes = [
         path:'viewproduct/:id',component:SingleproductpageComponent
       },
       {
-        path: 'seeAllProducts',component: SeeAllProductsPageComponent
+        path: 'seeAllProducts',component: SeeAllProductsPageComponent,children:[
+          {
+            path: 'seeAllProducts/category/:id', component: SeeAllProductsPageComponent
+          }
+        ],
       },
       {
         path:'addcart',component:AddtocartpageComponent

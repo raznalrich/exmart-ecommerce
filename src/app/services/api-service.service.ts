@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-export interface Product {
-  name: string;
-}
+import { Product } from '../layout/user/interfaces/productInterface';
+
+
+
 
 @Injectable({
   providedIn: 'root',
