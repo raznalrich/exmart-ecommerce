@@ -1,0 +1,31 @@
+.size-options {
+  display: flex;
+  gap: 10px; /* Space between circles */
+}
+
+.size-circle {
+  width: 30px; /* Adjust size as needed */
+  height: 30px; /* Make height equal to width for a circle */
+  border-radius: 50%; /* This makes it a circle */
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0; /* Light gray background */
+  border: 1px solid #ccc; /* Optional border */
+  font-size: 14px; /* Adjust font size as needed */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.size-circle:hover {
+  background-color: #007bff; /* Change background on hover */
+  color: white; /* Change text color on hover */
+  border-color: #0056b3; /* Change border color on hover */
+}
+
+.size-circle.selected {
+  background-color: #007bff; /* Highlight selected size */
+  color: white; /* Change text color for selected size */
+  border-color: #0056b3; /* Change border color for selected size */
+}
