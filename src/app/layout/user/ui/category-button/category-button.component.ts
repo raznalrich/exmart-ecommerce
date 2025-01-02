@@ -9,7 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class CategoryButtonComponent {
 
-  @Input() iconSrc: string = ''; // Path to the icon image
-  @Input() label: string = 'Button'; // Label text
-
+  @Input() iconSrc: string = '';
+  @Input() label: string = 'Button';
 }

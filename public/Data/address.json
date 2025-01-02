@@ -2,29 +2,42 @@
   "addresses": [
     {
       "id": 1,
-      "name": "John Doe",
-      "badgeName": "Home",
-      "place": "123 Maple Street",
-      "buildingNo": "Apt 4B",
-      "district": "Central District",
-      "city": "Springfield",
-      "state": "Illinois",
-      "country": "USA",
-      "pincode": "62701",
-      "phoneNo": "+1234567890"
+      "name": "Kochi Office",
+      "badgeName": "Work",
+      "place": "Infopark",
+      "buildingNo": "Athulya Building",
+      "district": "Ernakulam",
+      "city": "Kakkanad",
+      "state": "Kerala",
+      "country": "India",
+      "pincode": "683102",
+      "phoneNo": "+91 9999999999"
     },
     {
       "id": 2,
-      "name": "Jane Smith",
+      "name": "Trivandram Office",
       "badgeName": "Work",
-      "place": "456 Elm Avenue",
-      "buildingNo": "Office 101",
-      "district": "Downtown",
-      "city": "Chicago",
-      "state": "Illinois",
-      "country": "USA",
-      "pincode": "60616",
-      "phoneNo": "+0987654321"
+      "place": "Technopark",
+      "buildingNo": "Gayathri Building",
+      "district": "Trivandram",
+      "city": "Kazhakuttam",
+      "state": "Kerala",
+      "country": "India",
+      "pincode": "682102",
+      "phoneNo": "+91 987654321"
+    },
+    {
+      "id": 3,
+      "name": "Employee Home Address",
+      "badgeName": "Home",
+      "place": "Kerala",
+      "buildingNo": "House Name",
+      "district": "Trivandram",
+      "city": "Trivandrum",
+      "state": "Kerala",
+      "country": "India",
+      "pincode": "682000",
+      "phoneNo": "+91 91823 XXXXX"
     }
   ]
 }

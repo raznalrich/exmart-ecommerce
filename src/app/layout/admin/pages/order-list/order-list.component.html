@@ -1,31 +1,29 @@
 <div class="container">
 <div class="first-container">
 <div class="top">
-  <app-searchbar></app-searchbar>
-  <app-date-rangepicker></app-date-rangepicker>
-</div>
+  <div style="display: flex;">
+
+    <app-searchbar></app-searchbar>
+    <app-date-rangepicker></app-date-rangepicker>
+  </div>
   <div class="count-box">
     <app-admin-values-displaying-button
     [count]="28"
-    [iconSrc]="'icons/graph.png'"
+    [iconSrc]="'icons/clipboard.png'"
     [label]="'Total Orders'"
     ></app-admin-values-displaying-button>
 
-  <app-admin-values-displaying-button
-  [count]="15"
-  [iconSrc]="'icons/graph.png'"
-  [label]="'Delivered'"
-  ></app-admin-values-displaying-button>
+    <app-admin-values-displaying-button
+    [count]="15"
+     [iconSrc]="'icons/delivered (1).png'"
+    [label]="'Delivered'"
+      ></app-admin-values-displaying-button>
 </div>
 
 </div>
-
-
+</div>
 
 <!-- <div class="box-container">
-
-
-
 </div> -->
 
 </div>

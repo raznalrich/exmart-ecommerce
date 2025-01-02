@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, output, Output } from '@angular/core';
 import { GlobalService } from '../../../../global.service';
 import { RouterModule } from '@angular/router';
-import { AddProductsComponent } from "../../pages/add-products/add-products.component";
+import { AddProductsComponent } from '../../pages/add-products/add-products.component';
 
 @Component({
   selector: 'app-add-button',
   standalone: true,
-  imports: [RouterModule, AddProductsComponent],
+  imports: [RouterModule],
   templateUrl: './add-button.component.html',
   styleUrl: './add-button.component.scss',
 })
