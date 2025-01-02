@@ -69,15 +69,27 @@
 
         <p><span>{{numberOfItems.name}}</span> <span>{{numberOfItems.price | currency:'INR'}}</span></p>
        }
+      @if(selectedAddress==1||selectedAddress==2){
+        <p class="total"><span>Shipping : </span> <span>{{ '50'| currency:'INR'}}</span></p>
+       }
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
       <p class="total"><span>Total:</span> <span>{{ totalPrice| currency:'INR'}}</span></p>
     </div>
     <!-- <button class="checkout-btn" routerLink="/addressconfirm">Proceed to buy</button> -->
     <div class="button">
-      <app-long-button
-      label="Proceed to buy"
-      routerLink="/addressconfirm"
+      @if(selectedAddress){
+        <app-long-button
+      label="Confirm Purchase"
+ (buttonClick)="placeOrder()"
       ></app-long-button>
+      }
+      @else {
+        <app-long-button
+        label="Proceed to buy"
+        routerLink="/addressconfirm"
+        ></app-long-button>
+      }
+
     </div>
     <!-- <button class="checkout-btn" routerLink="/addressconfirm">Checkout</button> -->
   </aside>

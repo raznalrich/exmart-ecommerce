@@ -4,6 +4,13 @@ import { catchError, Observable } from 'rxjs';
 export interface Product {
   name: string;
 }
+export interface CartItem {
+  productId: number;
+  quantity: number;
+  sizeId: number;
+  colorId: number;
+  userId:number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -74,6 +81,22 @@ console.log(data);
     return this.http.get('https://localhost:7267/api/Product')
     // return this.http.get('Data/productsTrail.json');
   }
+  placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
+    const orderPayload = {
+        userId: userId,
+        addressId: addressId,
+        orderItems: cartItems.map(item => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            sizeId: item.sizeId,
+            colorId: item.colorId,
+        })),
+    };
+    console.log(orderPayload);
+
+
+    return this.http.post('https://localhost:7267/api/Order/placeorder', orderPayload);
+}
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(`https://localhost:7267/api/Product/search?name=${encodeURIComponent(query)}`);
   }
@@ -86,7 +109,9 @@ console.log(data);
   getSizeById(id:number){
     return this.http.get(`https://localhost:7267/api/Config/GetSizeById?id=${id}`)
   }
-
+  getAddressByUserId(id:number){
+    return this.http.get(`https://localhost:7267/api/Users/${id}`)
+  }
   getOrderList() {
     return this.http.get(`https://localhost:7267/api/Order/orders/details`)
   }
