@@ -32,10 +32,18 @@ export class AddProductsComponent {
         Validators.pattern(/^\d+$/),
       ]),
       // disabled control
-      size: new FormControl({ value: '', disabled: true }),
+      size: new FormControl({ value: '', enabled: true }),
       color: new FormControl(''),
     });
   }
+
+  onFileSelected(event: Event, index: number): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.images.at(index).setValue(file);
+    }
+  }
+
   addImage(url: string) {
     if (this.images.length < 4) {
       this.images.push(new FormControl(url, Validators.required));

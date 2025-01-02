@@ -1,9 +1,10 @@
+import { NgStyle } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-long-button',
   standalone: true,
-  imports: [],
+  imports: [NgStyle],
   templateUrl: './long-button.component.html',
   styleUrl: './long-button.component.scss'
 })
@@ -17,6 +18,12 @@ export class LongButtonComponent {
   @Input() imgSrc: string = '';
   @Input() imgAlt: string = 'button image';
   @Input() imgPosition: 'left' | 'right' = 'left';
-  @Input() bgColor: string = '#ffffff';
   @Input() textColor: string = '#ffffff';
+  @Input() backgroundColor: string = '#3E68B9';
+  @Input() border: string = 'none';
+
+    // Hover styles
+    @Input() hoverTextColor: string = '#3E68B9';
+    @Input() hoverBackgroundColor: string = '#ffffff';
+    @Input() hoverBorder: string = '1px solid #3E68B9';
 }

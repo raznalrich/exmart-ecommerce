@@ -1,0 +1,46 @@
+<div class="table table-hover mt-5">
+<div>
+  <!-- <div class="card shadow-sm"> -->
+    <!-- <div class="card-header bg-white">
+      <h5 class="mb-0">Employee Feedback</h5>
+    </div> -->
+    <div class="card-body scrollable-card">
+      <table class="table table-borderless align-middle">
+        <thead class="text-muted border-bottom">
+          <tr>
+            <th scope="col">Employee</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Feedback</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(item of feedback; track item){
+          <tr class="border-bottom hover-row">
+            <td class="d-flex align-items-center">
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/149/149071.png"
+                alt="Profile Picture"
+                class="rounded-circle me-3 shadow-sm"
+              />
+              <span class="fw-bold">{{ item.userName }}</span>
+            </td>
+            <td>
+              <p class="mb-0 text-muted">{{ item.productName }}</p>
+            </td>
+            <td>
+              <p class="mb-0 text-muted">{{ item.feedBack }}</p>
+            </td>
+            <td class="text-center">
+              <i
+                class="bi bi-send-fill action-icon"
+                title="Send Feedback"
+              ></i>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

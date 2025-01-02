@@ -1,42 +1,46 @@
-<h1>Settings Page</h1>
-<section class="categories-section">
-  <h2>Current Categories</h2>
-  <div class="categories">
-    <div class="category-card">
-      <img src="placeholder-tshirt.png" alt="Garments" />
-      <div class="category-name">garments</div>
-      <div class="category-actions">
-        <button><img src="placeholder-edit.png" alt="Edit" /></button>
-        <button><img src="placeholder-delete.png" alt="Delete" /></button>
-      </div>
+<div class="main">
+  <section class="categories-section">
+    <h2>Current Categories</h2>
+    <div class="categories">
+      @for(item of category;track item){
+        <div class="category-card">
+          <img
+            src={{item.iconPath}}
+            alt="Icon"
+          />
+          <div class="category-name"><p>{{item.categoryName}}</p></div>
+          <div class="category-actions">
+            <button><i class="bi bi-pencil-square"></i></button>
+            <button (click)="deleteCategory(item)"><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+      }
     </div>
+  </section>
 
-    <div class="category-card">
-      <img src="placeholder-mug.png" alt="Appliances" />
-      <div class="category-name">appliances</div>
-      <div class="category-actions">
-        <button><img src="placeholder-edit.png" alt="Edit" /></button>
-        <button><img src="placeholder-delete.png" alt="Delete" /></button>
-      </div>
-    </div>
-
-    <div class="category-card">
-      <img src="placeholder-book.png" alt="Stationery" />
-      <div class="category-name">stationery</div>
-      <div class="category-actions">
-        <button><img src="placeholder-edit.png" alt="Edit" /></button>
-        <button><img src="placeholder-delete.png" alt="Delete" /></button>
-      </div>
+  <div class="add-category">
+    <div class="category-component">
+      <button
+        type="button"
+        class="add-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#exam"
+      >
+      </button>
+      <app-add-new-category></app-add-new-category>
     </div>
   </div>
-</section>
+  <div class="edit-policies">
+    <!-- <span>Edit policies</span> -->
+    <!-- Button trigger modal -->
 
-
-<div class="add-category">
-  <span>Add new category</span>
-  <button>+</button>
-</div>
-<div class="edit-policies">
-  <span>Edit policies</span>
-  <button><img src="placeholder-edit.png" alt="Edit" /></button>
+    <button
+      type="button"
+      class="policy-btn"
+      data-bs-toggle="modal"
+      data-bs-target="#static"
+    >
+    </button>
+    <app-edit-policiesapp-edit-policies></app-edit-policiesapp-edit-policies>
+  </div>
 </div>

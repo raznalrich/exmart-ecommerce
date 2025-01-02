@@ -3,22 +3,25 @@
 }
 .left-section{
   background-color: #3E68B9;
+  // background-image: url('');
   height: 100vh;
   width: 50%;
 }
 .logo{
   display: flex;
   justify-content: center;
-  margin-top: 40%;
+  margin-top: 20%;
+
 }
 img{
-  height: 300px;
+  height: 250px;
   width: auto;
+  margin-bottom: 4rem;
 }
 
 .right-section{
   display: flex;
   justify-content:center;
-  margin-left: 20rem;
-  margin-top: 15rem;
+  margin-left: 10rem;
+  margin-top: 5.5rem;
 }

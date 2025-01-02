@@ -27,12 +27,12 @@ export class UsersidebarComponent {
 
   button: any = {
     label: 'Log Out',
-    route:'',
+    route: '',
     icon: 'bi bi-box-arrow-left',
   };
   backButton: any = {
     label: '',
-    route:'HomeStaticComponent',
+    route: 'HomeStaticComponent',
     icon: 'bi bi-arrow-left-circle',
   };
 }

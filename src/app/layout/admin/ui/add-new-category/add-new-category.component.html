@@ -1,0 +1,85 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatergoryModal">
+  <span>Add new category</span><i class="bi bi-clipboard-plus"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addCatergoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <h2>New Category</h2>
+          <form [formGroup]="categoryForm"  (ngSubmit)="saveCategory()">
+            <div>
+              <label for="category-name">Category Name</label>
+              <input
+                type="text"
+                id="category-name"
+                class="input-field"
+                formControlName="name"
+                placeholder="Enter category name"
+                required
+              />
+            </div>
+
+            <div style="margin-top: 20px;">
+              <label>Category Icon</label>
+              <div class="icon-list">
+                <input
+                  type="radio"
+                  name="icon"
+                  id="icon1"
+                  class="icon-input"
+                  (change)="onIconSelect('https://cdn-icons-png.flaticon.com/512/3724/3724720.png')"
+                />
+                <label for="icon1" class="icon">
+                  <img src="https://cdn-icons-png.flaticon.com/512/3724/3724720.png" alt="Icon 1" />
+                </label>
+
+                <input type="radio" name="icon" id="icon3" class="icon-input"
+                (change)="onIconSelect('https://cdn-icons-png.flaticon.com/512/8694/8694414.png')"
+                >
+                      <label for="icon3" class="icon">
+                          <img src="https://cdn-icons-png.flaticon.com/512/8694/8694414.png" alt="Icon 3">
+                      </label>
+
+                      <input type="radio" name="icon" id="icon4" class="icon-input"
+                      (change)="onIconSelect('https://cdn2.iconfinder.com/data/icons/modern-future-technology-2/128/devices-laptop-tablet-phone2-512.png')">
+                      <label for="icon4" class="icon">
+                          <img src="https://cdn2.iconfinder.com/data/icons/modern-future-technology-2/128/devices-laptop-tablet-phone2-512.png" alt="Icon 4">
+                      </label>
+
+                      <input type="radio" name="icon" id="icon5" class="icon-input"
+                      (change)="onIconSelect('https://img.pikbest.com/element_our/20230314/bg/50b936af08408.png!sw800')">
+                      <label for="icon5" class="icon">
+                          <img src="https://img.pikbest.com/element_our/20230314/bg/50b936af08408.png!sw800" alt="Icon 5">
+                      </label>
+
+                      <input type="radio" name="icon" id="icon6" class="icon-input"
+                      (change)="onIconSelect('https://www.iconpacks.net/icons/1/free-smartphone-icon-695-thumb.png')">
+                      
+                      <label for="icon6" class="icon">
+                          <img src="https://www.iconpacks.net/icons/1/free-smartphone-icon-695-thumb.png" alt="Icon 6">
+                      </label>
+              </div>
+            </div>
+          </form>
+
+
+
+      </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveCategory()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
