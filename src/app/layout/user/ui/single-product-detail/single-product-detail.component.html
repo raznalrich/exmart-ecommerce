@@ -1,27 +1,27 @@
 <!-- @for (item of data; track item.id;){ -->
 <div class="product-details">
-  <h3 style="font-size: 20px"><strong>{{ data.name }}</strong></h3>
+  <h3 style="font-size: 20px">
+    <strong>{{ data.name }}</strong>
+  </h3>
   <div style="font-size: 15px">
     <p>{{ data.description }}</p>
     <p>{{ data.brand }}</p>
     <p>
       <strong>MRP ₹{{ data.price }}</strong>
     </p>
-    <p><strong>Colour:</strong> {{ data.color }}</p>
-
     <div class="color-options">
-      @for(i of data.color ; track i){
-        <button class="color-box" [ngClass]="{'red': i === 'red', 'blue': i === 'blue','white': i === 'white','black': i === 'black','green': i === 'green'}"></button>
-      }
-      </div>
-    <br />
-
-    <div class="size-options">
-      @for(i of data.size ; track i){
-      <button class="size-circle">{{ i }}</button>
+    @for(ColorId of data.colorId; track ColorId){
+    <!-- {{data.colorId}} -->
+    <app-color-button [ColorId]="ColorId"></app-color-button>
     }
     </div>
-
+    <br />
+    <div class="size-options">
+    @for(SizeId of data.sizeId; track SizeId){
+    <!-- {{data.sizeId}} -->
+      <app-size-button [SizeId]="SizeId"></app-size-button>
+    }
+  </div>
     <div class="quantity">
       <label for="quantity"></label>
       <input type="number" id="quantity" placeholder="1" min="1" [value]="1" />
@@ -30,7 +30,7 @@
       <!-- <app-star-rating [rating]="data.rating"></app-star-rating> -->
     </div>
     <div class="actions">
-      <button class="add-to-bag-btn"  (click)="addtocart()">Add to Bag</button>
+      <button class="add-to-bag-btn" (click)="addtocart()">Add to Bag</button>
     </div>
   </div>
 </div>
