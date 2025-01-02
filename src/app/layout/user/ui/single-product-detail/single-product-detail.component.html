@@ -12,14 +12,14 @@
     <div class="color-options">
     @for(ColorId of data.colorId; track ColorId){
     <!-- {{data.colorId}} -->
-    <app-color-button [ColorId]="ColorId"></app-color-button>
+    <app-color-button [ColorId]="ColorId" (colorSelected)="handleColorSelect($event)"></app-color-button>
     }
     </div>
     <br />
     <div class="size-options">
     @for(SizeId of data.sizeId; track SizeId){
     <!-- {{data.sizeId}} -->
-      <app-size-button [SizeId]="SizeId"></app-size-button>
+      <app-size-button [SizeId]="SizeId" (sizeSelected)="handleSizeSelect($event)"></app-size-button>
     }
   </div>
     <div class="quantity">
