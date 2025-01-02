@@ -1,4 +1,3 @@
-@for (data of arr; track data) {
   <div
     class="card mb-2 border border-primary"
     style="max-width: 100%; border-radius: 12px"
@@ -12,19 +11,20 @@
         <input
         type="radio"
         name="userOption"
-        id="userAddress"
-        value="userName"
+        [id]="address.id"
+        [value]="address.id"
+        (change)="handleRadioChange($event)"
       />
       </div>
       <div>
-        <h5 class="card-title mb-1" style="font-size: 1rem">{{data.name}}</h5>
-        <p class="card-text mb-1" style="font-size: 0.9rem">{{data.phoneNo}}</p>
+        <h5 class="card-title mb-1" style="font-size: 1rem">{{address.addressLine}}</h5>
+        <p class="card-text mb-1" style="font-size: 0.9rem">{{address.phoneNo}}</p>
         <p class="card-text text-muted" style="font-size: 0.85rem">
-      {{data.buildingNo}}, {{data.place}}, {{data.city}}, {{data.district}}, {{data.state}}, {{data.country}}<br>{{data.pincode}}
+      {{address.buildingNo}}, {{address.place}}, {{address.city}}, {{address.district}}, {{address.state}}, {{address.country}}<br>{{address.zipCode}}
         </p>
       </div>
     </div>
-      <app-address-badge badgeName="{{data.badgeName}}"></app-address-badge>
+      <app-address-badge badgeName="{{address.badgeName}}"></app-address-badge>
     </div>
     <!-- <div class="d-flex" style="margin-left: 35px;">
       <button
@@ -38,4 +38,4 @@
       </button>
     </div> -->
   </div>
-}
+
