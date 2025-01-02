@@ -12,6 +12,13 @@
     display: none;
   }
 }
+.btn-success {
+  background-color: #28b463;
+}
+
+.btn-danger {
+  background-color: #ec7063;
+}
 .container-fluid {
   flex: 1;
   overflow-y: auto;
@@ -26,7 +33,6 @@ table {
 th {
   color: #8061c3;
   font-weight: 700;
-  // background-color: #faefff;
 }
 
 td {
