@@ -5,6 +5,9 @@ import { OrderTrackingBarComponent } from "../../ui/order-tracking-bar/order-tra
 import { OrderconfirmationanimationComponent } from "../../ui/orderconfirmationanimation/orderconfirmationanimation.component";
 import { OrderConfirmationTickAnimationComponent } from "../../ui/order-confirmation-tick-animation/order-confirmation-tick-animation.component";
 import { AnimationStateService } from '../../../../services/animation-state.service';
+import { LongButtonComponent } from "../../ui/long-button/long-button.component";
+import { CurrencyPipe } from '@angular/common';
+import { WebFeedbackSectionComponent } from "../../ui/web-feedback-section/web-feedback-section.component";
 
 interface Order {
   orderId: string;
@@ -24,7 +27,7 @@ interface Item {
 @Component({
   selector: 'app-thankyoupage',
   standalone: true,
-  imports: [ItemsInOrderComponent, OrderConfirmationTickAnimationComponent, OrderconfirmationanimationComponent, ],
+  imports: [ItemsInOrderComponent, OrderConfirmationTickAnimationComponent, LongButtonComponent, CurrencyPipe, WebFeedbackSectionComponent],
   templateUrl: './thankyoupage.component.html',
   styleUrl: './thankyoupage.component.scss'
 })
@@ -32,6 +35,7 @@ export class ThankyoupageComponent {
 
   orders: Order[] = [];
   isContentVisible = false;
+  ContentVisible = true;
 
   constructor(private api:ApiServiceService,
       private animationStateService:AnimationStateService
@@ -47,8 +51,9 @@ export class ThankyoupageComponent {
         setTimeout(() => {
           if (isComplete) {
             this.isContentVisible = true;
+            this.ContentVisible = false;
           }
-        },400)
+        },1000)
 
       });
     })
