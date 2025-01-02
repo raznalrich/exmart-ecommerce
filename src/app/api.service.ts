@@ -17,13 +17,6 @@ export class ApiService {
   getCardImages() {
     return this.http.get(`Data/carouselImages.json`);
   }
-  // getCardImages() {
-  //   return this.http.get(`data/carouselImages.json`);
-  // }
-
-  // getCarouselImages() {
-  //   return this.http.get(`Data/carouselImages.json`);
-  // }
 
   getProductDetails() {
     return this.http.get(`Data/details.json`);
@@ -32,10 +25,6 @@ export class ApiService {
   getCarouselImages() {
     return this.http.get(`Data/carouselImages.json`);
   }
-
-  // getProductDetails() {
-  //   return this.http.get(`data/details.json`);
-  // }
 
   getProducts() {
     return this.http.get(`product-sample.json`);
@@ -47,14 +36,18 @@ return this.http.get(`Data/address.json`)
 }
 
 getUserFeedback(){
-  return this.http.get(`Data/feedback.json`)
+  return this.http.get(`https://localhost:7267/api/FeedBack`)
   }
+
+// getUserFeedback(userId:number){
+//   return this.http.get(`https://localhost:7267/api/Feedback/ByUserId?userId=${userId}`);
+// }
 
   // getProductsById(id:any){
   //   return this.http.get(`Data/productTrail.json/${id}`)
   // }
 
-  getProductsById(id:number){
+  // getProductsById(id:number){
     // return this.http.get(`/Data/productsTrail.json`).pipe(
     //   map((data:any)=>{
     //     const filterddata = data.filter((item:any)=> item.id == id)
@@ -62,10 +55,10 @@ getUserFeedback(){
 
     //   })
     // );
-    return this.http.get(`https://localhost:7267/api/Product/GetProductById?id=${id}`);
-  }
+    // return this.http.get(`https://localhost:7267/api/Product/GetProductById?id=${id}`);
+  // }
 
-  getImagesByProductId(id:number){
-  return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
-}
+//   getImagesByProductId(id:number){
+//   return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
+// }
 }

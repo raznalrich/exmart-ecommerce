@@ -59,7 +59,7 @@ productIds: number[] = []; // Collection of product IDs
   }
 
   fetchCartItems(cartItems: any[]) {
-    const requests = this.productIds.map((id) => this.api.getProductsById(id));
+    const requests = this.productIds.map((id) => this.apis.getProductsById(id));
 
     forkJoin(requests).subscribe(
       (responses: any[]) => {
