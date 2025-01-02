@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../../global.service';
@@ -23,6 +23,17 @@ export class ColorButtonComponent {
     private route: ActivatedRoute,
     public global: GlobalService
   ) {}
+
+//   @Output() colorSelected = new EventEmitter<string>();
+
+//   onColorSelect(colorId: string) {
+//     this.colorSelected.emit(colorId);
+//   }
+// selectedColor: string = '';
+
+// handleColorSelect(colorId: string) {
+//   this.selectedColor = colorId;
+// }
 
   ngOnInit() {
     //Fetch color details
