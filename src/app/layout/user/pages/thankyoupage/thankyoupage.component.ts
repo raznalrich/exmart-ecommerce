@@ -34,6 +34,7 @@ export class ThankyoupageComponent {
 
   orders: Order[] = [];
   isContentVisible = false;
+  ContentVisible = true;
 
   constructor(private api:ApiServiceService,
       private animationStateService:AnimationStateService
@@ -49,8 +50,9 @@ export class ThankyoupageComponent {
         setTimeout(() => {
           if (isComplete) {
             this.isContentVisible = true;
+            this.ContentVisible = false;
           }
-        },400)
+        },1000)
 
       });
     })

@@ -5,7 +5,8 @@
 
 <app-order-confirmation-tick-animation></app-order-confirmation-tick-animation>
 <!-- <app-order-tracking-bar></app-order-tracking-bar> -->
-<div class="MainContainer" [class.show-content]="isContentVisible">
+<div class="MainContainer animated-section" [class.show-content]="isContentVisible"
+                                            [class.animated-section]="ContentVisible">
 
 
 <div class="itemsInOrder">
@@ -13,9 +14,6 @@
   <app-items-in-order [orders]="orders" ></app-items-in-order>
 
 </div>
-
-
-
 
     <!-- <div><p>subtotal</p><p>Delivery Charge</p><h4><strong>Total Amount</strong></h4></div>
     <div style="text-align: end;"><p>₹900</p><p>₹100</p><h4><strong>₹1000</strong></h4></div> -->
