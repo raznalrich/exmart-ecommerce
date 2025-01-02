@@ -106,7 +106,7 @@ export class ApiServiceService {
   }
 
   getOrderList() {
-    return this.http.get(`https://localhost:7267/api/Order/orders/details`);
+    return this.http.get(`https://localhost:7267/api/Order/orders/List`);
     return this.http.get(`Data/OrderList.json`);
   }
 
@@ -161,12 +161,16 @@ export class ApiServiceService {
       `https://localhost:7267/api/Product/GetProductById?id=${id}`
     );
   }
-  
+
   getImagesByProductId(id:number){
   return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
 }
 
   updateOrderStatus(OrderListDTO:any){
     return this.http.put(`https://localhost:7267/api/Order/updatestatus`,OrderListDTO);
+  }
+
+  GetOrderDetailById(orderid:any){
+    return this.http.get(`https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`)
   }
 }
