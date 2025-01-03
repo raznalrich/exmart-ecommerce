@@ -23,7 +23,7 @@ export class ApiServiceService {
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
 
-  addToCart(id: number, userId: number) {
+  addToCart(id: number, userId: number,colorId:number,sizeId:number,quantity:number) {
     // this.cartcount.update(value => value + 1);
 
     // this.cartid.update(items => [...items, id]);
@@ -33,9 +33,9 @@ export class ApiServiceService {
     let data = {
       // cartId: 1,
       productId: id,
-      sizeId: 1,
-      colorId: 1,
-      quantity: 1,
+      sizeId: sizeId,
+      colorId: colorId,
+      quantity: quantity,
       userId: userId, // Changed from 'icon' to 'iconPath'
     };
     console.log(data);
@@ -51,7 +51,14 @@ export class ApiServiceService {
         })
       );
   }
-
+  deleteFromCart(productId: number, userId: number): Observable<any> {
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart`, {
+      params: {
+        productId: productId.toString(),
+        userId: userId.toString()
+      }
+    });
+  }
   removecartcount(id: number) {
     this.cartcount.update((value) => value - 1);
     this.cartid.update((value) => value.filter((item) => item !== id));
@@ -82,17 +89,20 @@ export class ApiServiceService {
   getCartList() {
     return this.http.get('https://localhost:7267/api/addtocart/GetCart');
   }
-  // getProducts(){
-  //   return this.http.get('https://localhost:7267/api/Product')
-  // }
+
   toggelProductStatus(id: number) {
     const url = `https://localhost:7267/api/Product/toggle-status/${id}`;
     return this.http.put<boolean>(url, {});
   }
+
   getProducts() {
     return this.http.get('https://localhost:7267/api/Product');
-    // return this.http.get('Data/productsTrail.json');
   }
+  getOrderDetails() {
+    return this.http.get('https://localhost:7267/api/Order/orders/details');
+  }
+
+
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
     const orderPayload = {
         userId: userId,
@@ -116,6 +126,11 @@ export class ApiServiceService {
       )}`
     );
   }
+  sendMail(email:any,subject:string,body:string){
+    return this.http.post(
+      `https://localhost:7267/api/email?receptor=${email}&subject=${subject}&body=${body}`,
+      null
+    );  }
   getAllCategories() {
     return this.http.get('https://localhost:7267/api/Categories');
   }
@@ -133,8 +148,12 @@ export class ApiServiceService {
     return this.http.get(`https://localhost:7267/api/Users/${id}`)
   }
   getOrderList() {
-    return this.http.get(`https://localhost:7267/api/Order/orders/List`);
-    return this.http.get(`Data/OrderList.json`);
+    return this.http.get(`https://localhost:7267/api/Order/orders/details`);
+    // return this.http.get(`Data/OrderList.json`);
+  }
+  getAllOrderList() {
+    return this.http.get(`https://localhost:7267/api/Order/getallorders`);
+    // return this.http.get(`Data/OrderList.json`);
   }
 
   getItemsInOrder() {
