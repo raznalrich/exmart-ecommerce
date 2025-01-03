@@ -25,6 +25,7 @@ export class SingleProductDetailComponent {
   colorId: any;
   sizeId: any;
   quantity: number=1;
+message:string='';
   private paramSubscription!: Subscription;
   constructor(
     private route: ActivatedRoute,
@@ -57,9 +58,29 @@ export class SingleProductDetailComponent {
     });
   }
 
+  checkSelection() {
+    if (!this.colorId || !this.sizeId) {
+        this.message = 'Please select both size and color before adding to the cart.';
+    } else {
+        this.message = '';
+    }
+}
+
   addtocart() {
     this.userId = 1; // Replace with dynamic userId if needed
     console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
+
+    // // Check if color and size are selected
+    // if (!this.colorId && !this.sizeId) {
+    //     alert('Please select both color and size before adding to the cart.'); // Alert message
+    //     return; // Exit the method if selections are not made
+    // } else if (!this.colorId) {
+    //     alert('Please select a color before adding to the cart.'); // Alert message for missing color
+    //     return; // Exit the method if color is not selected
+    // } else if (!this.sizeId) {
+    //     alert('Please select a size before adding to the cart.'); // Alert message for missing size
+    //     return; // Exit the method if size is not selected
+    // }
 
     this.apis
       .addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
@@ -67,6 +88,7 @@ export class SingleProductDetailComponent {
         (response) => {
           console.log('Item added to cart successfully:', response);
           this.cartService.getCartCount();
+          alert('Product added to cart!'); // Alert message
         },
         (error) => {
           console.error('Error adding item to cart:', error);
