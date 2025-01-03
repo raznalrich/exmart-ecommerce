@@ -1,40 +1,37 @@
+<!-- @for (item of data; track item.id;){ -->
 <div class="product-details">
-  <h3 style="font-size: 20px"><strong>{{ details.product?.name }}</strong></h3>
+  <h3 style="font-size: 20px">
+    <strong>{{ data.name }}</strong>
+  </h3>
   <div style="font-size: 15px">
-    <p>{{ details.product?.description }}</p>
+    <p>{{ data.description }}</p>
+    <p>{{ data.brand }}</p>
     <p>
-      <strong>MRP ₹{{ details.product?.price }}</strong>
+      <strong>MRP ₹{{ data.price }}</strong>
     </p>
-    <p><strong>Colour:</strong> {{ details.product?.color }}</p>
-
     <div class="color-options">
-      @for(i of details.product.colors ; track i){
-        <button class="color-box" [ngClass]="{'red': i === 'red', 'blue': i === 'blue','white': i === 'white','black': i === 'black','green': i === 'green'}"></button>
-      }
-      </div>
-    <!-- <div class="color-options">
-      <button class="color-box">
-        <div [ngStyle]="{ 'background-color': arr.colors }"></div>
-        {{ details.product.colors}}
-      </button>
-    </div> -->
-    <br />
-
-    <div class="size-options">
-      @for(i of details.product.sizes ; track i){
-      <button class="size-circle">{{ i }}</button>
+    @for(ColorId of data.colorId; track ColorId){
+    <!-- {{data.colorId}} -->
+    <app-color-button [ColorId]="ColorId" (colorSelected)="handleColorSelect($event)" [ngClass]="{'active': colorId == ColorId}"></app-color-button>
     }
     </div>
-
+    <br />
+    <div class="size-options">
+    @for(SizeId of data.sizeId; track SizeId){
+    <!-- {{data.sizeId}} -->
+      <app-size-button [SizeId]="SizeId" (sizeSelected)="handleSizeSelect($event)" [ngClass]="{'active': sizeId == SizeId}"></app-size-button>
+    }
+  </div>
     <div class="quantity">
       <label for="quantity"></label>
-      <input type="number" id="quantity" placeholder="1" min="1" [value]="1" />
+      <input type="number" id="quantity" placeholder="1" min="1" [value]="1" [(ngModel)]="quantity" (ngModelChange)="onQuantityChange()"/>
     </div>
     <div class="rating">
-      <app-star-rating [rating]="details.product.rating"></app-star-rating>
+      <!-- <app-star-rating [rating]="data.rating"></app-star-rating> -->
     </div>
     <div class="actions">
-      <button class="add-to-bag-btn"  (click)="cartService.addToCart()">Add to Bag</button>
+      <button class="add-to-bag-btn" (click)="addtocart()">Add to Bag</button>
     </div>
   </div>
 </div>
+<!-- } -->

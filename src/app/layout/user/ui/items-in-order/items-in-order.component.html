@@ -1,14 +1,19 @@
+
 <div class="OrderDetails">
+  <h1>Your Items in this Order</h1>
   @for(item of orders.items; track item){
-    <div class="eachOrderDetails">
+    <div class="eachOrderDetails" >
       <div><img src="{{item.image}}" alt="image not found"></div>
-      <div class="OrderDetailsText">
-        <h3>{{item.name}}</h3>
-        <p>Size : {{item.size}}</p>
-        <p>color : {{item.color}}</p>
+      <div class="OrderDetailsText" >
+        <h3><strong>{{item.name}}</strong></h3>
+        <strong>
+          <p>Size : {{item.size}}</p>
+          <p>color : {{item.color}}</p>
+        </strong>
       </div>
-      <div>{{item.price | currency: "INR"}}</div>
+      <div><p><strong>{{item.price | currency: "INR"}}</strong></p></div>
     </div>
+    <div class="vertical-line"></div>
   }
 
 </div>

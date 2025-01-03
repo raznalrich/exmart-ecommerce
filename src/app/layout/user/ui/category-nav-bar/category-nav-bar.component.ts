@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { CategoryButtonComponent } from "../category-button/category-button.component";
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ApiServiceService } from '../../../../services/api-service.service';
+
 
 @Component({
   selector: 'app-category-nav-bar',
@@ -10,5 +12,34 @@ import { RouterLink } from '@angular/router';
   styleUrl: './category-nav-bar.component.scss'
 })
 export class CategoryNavBarComponent {
+@Input() CategoryList : any;
+  constructor(public api: ApiServiceService, private route: ActivatedRoute) {}
+
+ngOnInit(){
+    this.api.getAllCategories().subscribe((res: any) => {
+      this.CategoryList = res;
+      // console.log(this.CategoryList);
+    });
+}
+  categories = [
+    {
+      id:1,
+      iconSrc: 'icons/garments.png',
+      label: 'garments',
+      routerLink: '/home/category/garments'
+    },
+    {
+      id:2,
+      iconSrc: 'icons/appliance.png',
+      label: 'appliances',
+      routerLink: '/home/category/appliance'
+    },
+    {
+      id:3,
+      iconSrc: 'icons/stationary.png',
+      label: 'stationary',
+      routerLink: '/home/category/stationary'
+    }
+  ];
 
 }

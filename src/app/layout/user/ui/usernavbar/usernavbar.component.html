@@ -6,10 +6,63 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <form class="mx-auto" style="flex-grow: 1; max-width: 500px;">
+            <!-- <form class="mx-auto" style="flex-grow: 1; max-width: 500px;">
                 <input type="search" placeholder="Search products" aria-label="Search"
                     style="width: 100%; border-radius: 10px; height: 35px; border: none; padding-left: 10px;">
-            </form>
+            </form> -->
+            <div class="search-container" clickOutside (clickOutside)="closeDropdown()">
+              <form>
+                <input
+                  type="search"
+                  [ngModel]="searchTerm"
+                  (ngModelChange)="onSearch($event)"
+                  name="search"
+                  placeholder="Search products"
+                  aria-label="Search"
+                  class="search-input">
+              </form>
+
+              @if (isLoading()) {
+                <div class="loading-indicator">
+                  Searching...
+                </div>
+              }
+
+              @if (error()) {
+                <div class="error-message">
+                  {{ error() }}
+                </div>
+              }
+
+              @if (searchTerm && filteredProducts().length > 0) {
+                <div class="dropdown-container">
+                  @for (product of visibleProducts(); track product.name) {
+                    <div
+                      class="dropdown-item"
+                      (click)="selectProduct(product)"
+                      routerLink="viewproduct/{{product.id}}">
+                      {{ product.name }}
+                    </div>
+                  }
+                  @if (filteredProducts().length > 3 && !showingAll()) {
+                    <div
+                      class="show-more-button"
+                      routerLink="/seeAllProducts">
+                      Show More
+                    </div>
+                  }
+                </div>
+              }
+
+              @if (searchTerm && filteredProducts().length === 0 && !isLoading() && dropdownVisible()) {
+                <div class="no-results">
+                  No products found
+                </div>
+              }
+            </div>
+
+            <!-- territory of search ends -->
+
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex flex-row align-items-center gap-3">
                 <li class="nav-item">
                     <img routerLink="" src="images/home.webp" alt="home" style="width: 30px;">
@@ -17,7 +70,7 @@
                 <li class="nav-item position-relative">
                     <button type="button" class="btn btn-icon">
                         <img routerLink="addcart" src="images/cart.webp" alt="cart" class="icon-img" width="30px">
-                        <span class="badge position-absolute custom-badge">{{cartAdd.cart()}}</span>
+                        <span class="badge position-absolute custom-badge">{{cartAdd.cartCount()}}</span>
                     </button>
                 </li>
                 <li class="nav-item">

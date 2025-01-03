@@ -4,38 +4,73 @@ import { SinglePageDropdownComponent } from '../single-page-dropdown/single-page
 import { CommonModule } from '@angular/common';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { GlobalService } from '../../../../global.service';
+import { ApiServiceService } from '../../../../services/api-service.service';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { ColorButtonComponent } from '../color-button/color-button.component';
+import { SizeButtonComponent } from '../size-button/size-button.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-single-product-detail',
   standalone: true,
-  imports: [SinglePageDropdownComponent,CommonModule,StarRatingComponent],
+  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent, FormsModule],
   templateUrl: './single-product-detail.component.html',
-  styleUrl: './single-product-detail.component.scss'
+  styleUrl: './single-product-detail.component.scss',
 })
 export class SingleProductDetailComponent {
-// colors:any;
-  arr:any;
-// details:any
-@Input()details:any={
-name:'',
-description:'',
-price:'',
-rating:'',
-color:'',
-colors:[],
-sixes:[],
-images:[]
-}
-  constructor(public api: ApiService, public cartService: GlobalService) {}
+  @Input() data: any;
+  id: any;
+  @Input() userId: any;
+  colorId: any;
+  sizeId: any;
+  quantity: number=1;
+  private paramSubscription!: Subscription;
+  constructor(
+    private route: ActivatedRoute,
+    public api: ApiService,
+    public cartService: GlobalService,
+    public apis: ApiServiceService
+  ) {}
+
+  handleColorSelect(res: any) {
+    console.log('Selected color:', res);
+    this.colorId = res.id;
+  }
+
+  handleSizeSelect(res: any) {
+    console.log('Selected size:', res);
+    console.log('Quantity', this.quantity);
+    this.sizeId = res.id;
+  }
+
+  onQuantityChange() {
+    console.log('Updated Quantity:', this.quantity );
+    // this.addtocart()
+  }
+
   ngOnInit() {
-   this.details= this.api.getProductDetails().subscribe((res: any) => {
-      this.details = res;
-      // console.log(this.details);
-      this.arr=this.details.product;
-      // console.log(this.arr);
-      // this.colors=this.arr.colors
-      // console.log("colors",this.arr.colors[0].code);
-      console.log("colors",this.arr.colors)
+    // console.log("details",this.data)
+    this.paramSubscription = this.route.paramMap.subscribe((paramMap) => {
+      const idParam = paramMap.get('id');
+      this.id = idParam ? Number(idParam) : null;
     });
-}
+  }
+
+  addtocart() {
+    this.userId = 1; // Replace with dynamic userId if needed
+    console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
+
+    this.apis
+      .addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
+      .subscribe(
+        (response) => {
+          console.log('Item added to cart successfully:', response);
+          this.cartService.getCartCount();
+        },
+        (error) => {
+          console.error('Error adding item to cart:', error);
+        }
+      );
+  }
 }
