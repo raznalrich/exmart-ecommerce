@@ -17,23 +17,13 @@ export class ColorButtonComponent {
   color: any = '';
 
   @Input() ColorId: any;
+  @Output() colorSelected = new EventEmitter<any>();
   paramSubscription: any;
   constructor(
     public api: ApiServiceService,
     private route: ActivatedRoute,
     public global: GlobalService
   ) {}
-
-//   @Output() colorSelected = new EventEmitter<string>();
-
-//   onColorSelect(colorId: string) {
-//     this.colorSelected.emit(colorId);
-//   }
-// selectedColor: string = '';
-
-// handleColorSelect(colorId: string) {
-//   this.selectedColor = colorId;
-// }
 
   ngOnInit() {
     //Fetch color details
@@ -47,6 +37,13 @@ export class ColorButtonComponent {
       error: (error) => {
         console.error('Error fetching color:', error);
       },
+    });
+  }
+
+  onColorSelect() {
+    this.colorSelected.emit({
+      id: this.ColorId,
+      name: this.color
     });
   }
 }
