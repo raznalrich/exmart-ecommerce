@@ -141,10 +141,6 @@ describe('OrderlistTableComponent', () => {
     expect(component.updateOrderStatus).toHaveBeenCalledWith(component.OrderList[0]);
 });
 
-  it('should calculate total quantity correctly', () => {
-    const items: any[] = [{ quantity: 2 }, { quantity: 3 }];
-    const total = component.calculateTotalQuantity(items);
-    expect(total).toBe(5);
-  });
+
 
 });

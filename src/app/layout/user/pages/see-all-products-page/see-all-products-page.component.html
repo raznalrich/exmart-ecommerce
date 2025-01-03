@@ -17,7 +17,6 @@
     </div> -->
     <div class="productGrid">
       @for (product of displayedProducts; track product.id) {
-        <!-- <p>{{product.name}}</p> -->
         <app-productcard [cards]="product"></app-productcard>
       }
     </div>
