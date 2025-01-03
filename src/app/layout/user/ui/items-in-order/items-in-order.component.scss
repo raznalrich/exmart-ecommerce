@@ -1,19 +1,18 @@
 .OrderDetails{
-  background-color: #ffff;
-  margin: 50px 100px;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
+  gap: 1rem;
 }
 .eachOrderDetails{
   display: flex;
   flex-direction: row;
+  width: 100%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .OrderDetailsText{
   text-align: start;
@@ -21,4 +20,10 @@
 }
 img{
   width: 150px;
+}
+
+.vertical-line{
+
+  border: 1px;
+
 }

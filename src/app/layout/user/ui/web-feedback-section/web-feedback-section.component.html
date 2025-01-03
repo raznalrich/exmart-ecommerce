@@ -6,11 +6,11 @@
   </div>
 
   <div class="form">
-    <form (ngSubmit)="submitFeedback()">
+    <form [formGroup]="webfeedbackForm" (ngSubmit)="submitFeedback()">
       <input
         type="text"
         placeholder="enter your feedback"
-        name="feedback" />
+        formControlName="feedback" />
     </form>
 
     <div class="button">
@@ -18,7 +18,7 @@
       label="Submit"
       [imgAlt]="'Upload Icon'"
       [imgPosition]="'left'"
-      [bgColor]="'#64A2F5'"
+      (click)="submitFeedback()"
       ></app-long-button>
 
     </div>
