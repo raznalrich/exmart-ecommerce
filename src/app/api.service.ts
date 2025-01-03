@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -29,29 +29,17 @@ export class ApiService {
   getProducts() {
     return this.http.get(`product-sample.json`);
   }
-  private baseUrl = 'https://localhost:7267/api';
 
-  addProduct(payload: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Product/add-product`, payload);
-  }
 
-uploadImage(file: File) {
-  const formData = new FormData();
-  formData.append('file', file);
-
-  return this.http.post<{ imageUrl: string }>(`${this.baseUrl}/ImageUpload/upload-image`, formData);
+getUserAddress(){
+return this.http.get(`Data/address.json`)
 }
-
-
-  getUserAddress() {
-    return this.http.get(`Data/address.json`);
-  }
 
 getUserFeedback(){
   return this.http.get(`https://localhost:7267/api/FeedBack`)
   }
 
-
+  
 
 // getUserFeedback(userId:number){
 //   return this.http.get(`https://localhost:7267/api/Feedback/ByUserId?userId=${userId}`);
