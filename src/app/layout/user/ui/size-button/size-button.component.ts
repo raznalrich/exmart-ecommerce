@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../../global.service';
@@ -16,6 +16,8 @@ export class SizeButtonComponent {
   sizeName: any = '';
 
   @Input() SizeId: any;
+  @Output() sizeSelected = new EventEmitter<any>();
+
   paramSubscription: any;
   constructor(
     public api: ApiServiceService,
@@ -37,5 +39,11 @@ export class SizeButtonComponent {
     console.error('Error fetching size:', error);
   },
 });
+}
+onSizeSelect() {
+  this.sizeSelected.emit({
+    id: this.SizeId,
+    name: this.sizeName
+  });
 }
 }
