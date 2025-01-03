@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductDisplayingBarComponent {
   @Input() productImage: string = '';
+  @Input() productId:number =0;
   @Input() productName: string = '';
   @Input() productColor: number = 0;
   @Input() productSize: number = 0;
@@ -45,4 +46,16 @@ export class ProductDisplayingBarComponent {
   });
 
  }
+ removeFromCart(productId: number, userId: number) {
+  this.api.deleteFromCart(productId, userId).subscribe({
+    next: (response) => {
+      console.log('Item removed successfully');
+      // Handle success (e.g., show notification, refresh cart)
+    },
+    error: (error) => {
+      console.error('Error removing item:', error);
+      // Handle error (e.g., show error message)
+    }
+  });
+}
 }

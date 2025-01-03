@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { OrderSectionComponent } from '../../ui/order-section/order-section.component';
+import { ApiServiceService } from '../../../../services/api-service.service';
 
 @Component({
   selector: 'app-user-orders',
@@ -9,16 +10,9 @@ import { OrderSectionComponent } from '../../ui/order-section/order-section.comp
   styleUrl: './user-orders.component.scss'
 })
 export class UserOrdersComponent {
-  inTransitOrders = [
-    {
-      title: 'HOODIE',
-      type: 'woolen',
-      size: 'Medium',
-      imageUrl: 'https://media.karousell.com/media/photos/products/2023/4/29/gildan_zipup_hoodie_1682750904_29598b39.jpg',
-      status: 'Shipped',
-      statusIcon: 'bi bi-truck',
-    },
-  ];
+  constructor(public api:ApiServiceService){}
+
+  inTransitOrders = [ ];
 
   orderHistory = [
     {
@@ -38,4 +32,15 @@ export class UserOrdersComponent {
       statusIcon: 'bi bi-box-check',
     },
   ];
+  orderlist:any[]=[];
+
+userId:number = 1;
+  ngOnInit() {
+    this.api.getAllOrderList().subscribe((res: any) => {
+      this.inTransitOrders = res.filter((order: { userId: number; }) => order.userId == this.userId);
+      console.log("filtered orders", this.inTransitOrders);
+    });
+  }
+
+
 }
