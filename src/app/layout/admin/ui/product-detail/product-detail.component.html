@@ -1,6 +1,7 @@
 <div class="row mb-4">
+  @for(item of OrderDetailsByID.orderItems; track item){
   <div class="col-md-11 border p-3 rounded bg-light" style="width: 910px;">
-    @for(item of OrderDetailsByID.orderItems; track item){
+
       <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
           <img
@@ -24,6 +25,7 @@
           </p>
         </div>
       </div>
-    }
+
   </div>
+}
 </div>
