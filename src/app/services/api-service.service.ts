@@ -23,7 +23,7 @@ export class ApiServiceService {
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
 
-  addToCart(id: number, userId: number) {
+  addToCart(id: number, userId: number,colorId:number,sizeId:number,quantity:number) {
     // this.cartcount.update(value => value + 1);
 
     // this.cartid.update(items => [...items, id]);
@@ -33,9 +33,9 @@ export class ApiServiceService {
     let data = {
       // cartId: 1,
       productId: id,
-      sizeId: 1,
-      colorId: 1,
-      quantity: 1,
+      sizeId: sizeId,
+      colorId: colorId,
+      quantity: quantity,
       userId: userId, // Changed from 'icon' to 'iconPath'
     };
     console.log(data);
