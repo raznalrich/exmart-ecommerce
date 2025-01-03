@@ -10,9 +10,13 @@
 
 
 <div class="itemsInOrder">
-
-  <app-items-in-order [orders]="orders" ></app-items-in-order>
-
+  @for(items of CartItems; track items ){
+  <app-items-in-order [productImage]="items.primaryImageUrl || 'images/box not packed.png'"
+  [productName]="items.name"
+  [productColor]="items.colorId"
+  [productSize]="items.sizeId"
+  [productPrice]="items.price"></app-items-in-order>
+  }
 </div>
 
     <!-- <div><p>subtotal</p><p>Delivery Charge</p><h4><strong>Total Amount</strong></h4></div>
@@ -21,8 +25,18 @@
     <div class="rightSide">
       <h2>Order Details</h2>
       <div class="summary-details">
-        <p><span>Sub Total:</span> <span>{{998 | currency:'INR'}}</span></p>
-        <p class="total"><span>Total:</span> <span>{{ 1108| currency:'INR'}}</span></p>
+        @for(numberOfItems of CartItems; track numberOfItems){
+
+          <p><span>{{numberOfItems.name}}</span> <span>{{numberOfItems.price | currency:'INR'}}</span></p>
+         }
+        @if(selectedAddress==1||selectedAddress==2){
+          <p class="total"><span>Shipping : </span> <span>{{ '0'| currency:'INR'}}</span></p>
+         }
+         @else if (selectedAddress==3) {
+          <p class="total"><span>Shipping : </span> <span>{{ '50'| currency:'INR'}}</span></p>
+
+         }
+        <p class="total"><span>Total:</span> <span>{{ totalPrice| currency:'INR'}}</span></p>
       </div>
       <div class="button">
         <app-long-button

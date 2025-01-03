@@ -51,7 +51,14 @@ export class ApiServiceService {
         })
       );
   }
-
+  deleteFromCart(productId: number, userId: number): Observable<any> {
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart`, {
+      params: {
+        productId: productId.toString(),
+        userId: userId.toString()
+      }
+    });
+  }
   removecartcount(id: number) {
     this.cartcount.update((value) => value - 1);
     this.cartid.update((value) => value.filter((item) => item !== id));
@@ -119,6 +126,11 @@ export class ApiServiceService {
       )}`
     );
   }
+  sendMail(email:any,subject:string,body:string){
+    return this.http.post(
+      `https://localhost:7267/api/email?receptor=${email}&subject=${subject}&body=${body}`,
+      null
+    );  }
   getAllCategories() {
     return this.http.get('https://localhost:7267/api/Categories');
   }
@@ -136,8 +148,12 @@ export class ApiServiceService {
     return this.http.get(`https://localhost:7267/api/Users/${id}`)
   }
   getOrderList() {
-    return this.http.get(`https://localhost:7267/api/Order/orders/List`);
-    return this.http.get(`Data/OrderList.json`);
+    return this.http.get(`https://localhost:7267/api/Order/orders/details`);
+    // return this.http.get(`Data/OrderList.json`);
+  }
+  getAllOrderList() {
+    return this.http.get(`https://localhost:7267/api/Order/getallorders`);
+    // return this.http.get(`Data/OrderList.json`);
   }
 
   getItemsInOrder() {
