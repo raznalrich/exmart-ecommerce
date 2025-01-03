@@ -51,7 +51,14 @@ export class ApiServiceService {
         })
       );
   }
-
+  deleteFromCart(productId: number, userId: number): Observable<any> {
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart`, {
+      params: {
+        productId: productId.toString(),
+        userId: userId.toString()
+      }
+    });
+  }
   removecartcount(id: number) {
     this.cartcount.update((value) => value - 1);
     this.cartid.update((value) => value.filter((item) => item !== id));

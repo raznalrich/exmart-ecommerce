@@ -87,15 +87,18 @@ productIds: number[] = []; // Collection of product IDs
 
   calculateTotalPrice() {
     this.totalPrice = this.CartItems.reduce((total, product) => total + (product.price || 0), 0);
-    if(this.selectedAddress){
+    if(this.selectedAddress==3){
 
       this.totalPrice = this.totalPrice+50;
     }
     console.log(this.totalPrice);
 
   }
-
+  setOrderFromCart() {
+    this.global.signalOrderList.set([...this.cartItemList]);
+  }
   placeOrder() {
+this.setOrderFromCart();
     this.apis.placeOrder(1, this.selectedAddress, this.cartItemList)
         .subscribe({
             next: response => {
