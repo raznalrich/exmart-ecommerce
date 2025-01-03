@@ -41,7 +41,31 @@
     </div>
   </div>
 </div>
-<app-confirm-modal></app-confirm-modal>
+             <!-- Modal for Order details -->
+<div
+  class="modal fade"
+  id="orderDetailModal"
+  tabindex="-1"
+  aria-labelledby="modalLabel"
+  aria-hidden="true"
+>
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+  ></button>
+
+<div class="modal-body">
+  <app-order-popup [OrderDetailById]="OrderDetailsByID"></app-order-popup>
+</div>
+</div>
+</div>
+</div>
+
+
 <div class="table-container">
   <table class="styled-table">
     <!-- @for(item of O) -->
@@ -57,7 +81,7 @@
     @for(item of OrderList; track item){
       <tr>
         <td>{{item.orderId}}</td>
-        <td>{{item.orderDate}}</td>
+        <td>{{item.orderDate | date : "YYYY-MM-dd"}}</td>
         <td>{{item.customerName}}</td>
 
         <td>
@@ -73,7 +97,7 @@
         <td>{{item.totalAmount | currency : "INR"}}</td>
          <td>{{item.totalItems}}</td>
           <td style="text-align: center;">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId)">
               <i class="fa-regular fa-eye"></i>
             </button>
             </td>

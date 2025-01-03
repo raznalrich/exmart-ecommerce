@@ -23,7 +23,7 @@ export class ApiServiceService {
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
 
-  addToCart(id: number, userId: number) {
+  addToCart(id: number, userId: number,colorId:number,sizeId:number,quantity:number) {
     // this.cartcount.update(value => value + 1);
 
     // this.cartid.update(items => [...items, id]);
@@ -33,9 +33,9 @@ export class ApiServiceService {
     let data = {
       // cartId: 1,
       productId: id,
-      sizeId: 1,
-      colorId: 1,
-      quantity: 1,
+      sizeId: sizeId,
+      colorId: colorId,
+      quantity: quantity,
       userId: userId, // Changed from 'icon' to 'iconPath'
     };
     console.log(data);
@@ -136,7 +136,7 @@ export class ApiServiceService {
     return this.http.get(`https://localhost:7267/api/Users/${id}`)
   }
   getOrderList() {
-    return this.http.get(`https://localhost:7267/api/Order/orders/details`);
+    return this.http.get(`https://localhost:7267/api/Order/orders/List`);
     return this.http.get(`Data/OrderList.json`);
   }
 
@@ -198,5 +198,9 @@ export class ApiServiceService {
 
   updateOrderStatus(OrderListDTO:any){
     return this.http.put(`https://localhost:7267/api/Order/updatestatus`,OrderListDTO);
+  }
+
+  GetOrderDetailById(orderid:any){
+    return this.http.get(`https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`)
   }
 }
