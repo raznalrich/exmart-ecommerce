@@ -15,38 +15,36 @@ import { DatePipe } from '@angular/common';
 export class ReportPageComponent {
   constructor(public api: ApiServiceService) {}
   items: any = [];
-  filteredItems: any = [...this.items];
+  filteredItems: any = [];
 
   ngOnInit() {
     this.api.getOrderDetails().subscribe((res: any) => {
       this.items = res.map((item: any) => ({
         ...item,
-        orderDate: new Date(item.orderDate).toISOString().split('T')[0],
+        purchase_date: new Date(item.orderDate || item.purchase_date)
+          .toISOString()
+          .split('T')[0],
       }));
       this.filteredItems = [...this.items];
       console.log(this.filteredItems);
     });
   }
 
-  startDate: any;
-  endDate: any;
-
   onDateRangeSelected(dateRange: { startDate: string; endDate: string }) {
     const { startDate, endDate } = dateRange;
 
     if (startDate && endDate) {
+      const start = new Date(startDate);
+      start.setHours(0, 0, 0, 0);
+
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59, 999);
+
       this.filteredItems = this.items.filter((item: any) => {
         try {
           const purchaseDate = new Date(item.purchase_date);
-          const start = new Date(startDate);
-          const end = new Date(endDate);
-
-          if (
-            isNaN(purchaseDate.getTime()) ||
-            isNaN(start.getTime()) ||
-            isNaN(end.getTime())
-          ) {
-            console.warn('Invalid date found:', { purchaseDate, start, end });
+          if (!purchaseDate || isNaN(purchaseDate.getTime())) {
+            console.warn('Invalid purchase date:', item.purchase_date);
             return false;
           }
 
