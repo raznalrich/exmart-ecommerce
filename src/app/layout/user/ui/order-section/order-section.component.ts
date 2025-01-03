@@ -12,12 +12,9 @@ export class OrderSectionComponent {
   @Input() title: string = '';
   @Input() icon: string = ''; // Bootstrap icon class
   @Input() maxHeight: string = '200px'; // Maximum height of the section
-  @Input() items: {
-    title: string;
-    type: string;
-    size: string;
-    imageUrl: string;
-    status: string;
-    statusIcon: string;
-  }[] = [];
+  @Input() items:any[] = [];
+  ngOnInit(){
+    console.log(this.items);
+
+  }
 }
