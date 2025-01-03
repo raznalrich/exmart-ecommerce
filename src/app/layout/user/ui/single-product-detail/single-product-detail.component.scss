@@ -8,23 +8,23 @@
   gap: 10px;
 }
 
-.color-box {
-  width: 30px;
-  height: 30px;
-  background: lightgray;
-  border: 1px solid black;
-  border-radius: 50%;
-}
+// .color-box {
+//   width: 30px;
+//   height: 30px;
+//   background: lightgray;
+//   border: 1px solid black;
+//   border-radius: 50%;
+// }
 
-.color-box:hover {
-border: 2px solid #64A2F5 ;
-}
+// .color-box:hover {
+// border: 2px solid #64A2F5 ;
+// }
 
-.color-box.red { background-color: rgb(164, 53, 53); }
-.color-box.blue { background-color: rgb(33, 60, 128); }
-.color-box.green { background-color: rgb(10, 102, 47); }
-.color-box.white { background-color: white; }
-.color-box.black { background-color: black; }
+// .color-box.red { background-color: rgb(164, 53, 53); }
+// .color-box.blue { background-color: rgb(33, 60, 128); }
+// .color-box.green { background-color: rgb(10, 102, 47); }
+// .color-box.white { background-color: white; }
+// .color-box.black { background-color: black; }
 
 .quantity {
   margin-top: 10px;
@@ -73,35 +73,46 @@ border: #64A2F5 1px solid;
   gap: 10px; /* Space between circles */
 }
 
-.size-circle {
-  width: 30px; /* Adjust size as needed */
-  height: 30px; /* Make height equal to width for a circle */
-  border-radius: 50%; /* This makes it a circle */
-  display: flex;
-  margin-bottom: 10px;
-  align-items: center;
-  justify-content: center;
-  background-color: #f0f0f0; /* Light gray background */
-  border: 1px solid #ccc; /* Optional border */
-  font-size: 14px; /* Adjust font size as needed */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+// .size-circle {
+//   width: 30px; /* Adjust size as needed */
+//   height: 30px; /* Make height equal to width for a circle */
+//   border-radius: 50%; /* This makes it a circle */
+//   display: flex;
+//   margin-bottom: 10px;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: #f0f0f0; /* Light gray background */
+//   border: 1px solid #ccc; /* Optional border */
+//   font-size: 14px; /* Adjust font size as needed */
+//   cursor: pointer;
+//   transition: background-color 0.3s ease;
+// }
 
-.size-circle:hover {
-  background-color: #007bff; /* Change background on hover */
-  color: white; /* Change text color on hover */
-  border-color: #0056b3; /* Change border color on hover */
-}
+// .size-circle:hover {
+//   background-color: #007bff; /* Change background on hover */
+//   color: white; /* Change text color on hover */
+//   border-color: #0056b3; /* Change border color on hover */
+// }
 
-.size-circle.selected {
-  background-color: #007bff; /* Highlight selected size */
-  color: white; /* Change text color for selected size */
-  border-color: #0056b3; /* Change border color for selected size */
-}
+// .size-circle.selected {
+//   background-color: #007bff; /* Highlight selected size */
+//   color: white; /* Change text color for selected size */
+//   border-color: #0056b3; /* Change border color for selected size */
+// }
 
 .rating{
 margin-top: 20px;
 }
 
+.active {
+  background-color: #007bff;; /* Highlight selected size */
+  color: #007bff;; /* Change text color for selected size */
+  border-color: #007bff;; /* Change border color for selected size */
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
