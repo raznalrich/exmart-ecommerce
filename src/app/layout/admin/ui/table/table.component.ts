@@ -11,35 +11,31 @@ import { GlobalService } from '../../../../global.service';
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
+  constructor(public api: ApiServiceService, public service: GlobalService) {}
+  @Input() items: any;
+  @Input() header: any;
+
   toggleStatus(item: any) {
     this.api.toggelProductStatus(item.id).subscribe({
       next: (isActive: boolean) => {
-        item.isActive = isActive;
-        this.loadProducts();
-        console.log(
-          `Product ${item.name} is now ${isActive ? 'Active' : 'Inactive'}`
-        );
+        item.isActive = !item.isActive;
+        // item.isActive = isActive;
       },
-      error: (err) => {
-        console.error(`Error toggling status for product ${item.name}:`, err);
-      },
+      error: (err) => console.error(err),
     });
   }
 
-  // Method to fetch the latest products list from the backend
   loadProducts(): void {
     this.api.getProducts().subscribe({
       next: (products) => {
-        this.items = products; // Update the local product list
+        this.items = products;
       },
       error: (err) => {
         console.error('Error fetching products:', err);
       },
     });
   }
-  constructor(public api: ApiServiceService, public service: GlobalService) {}
-  @Input() items: any;
-  @Input() header: any;
+
   rowKeys: string[] = [];
   icons: any = [
     {
