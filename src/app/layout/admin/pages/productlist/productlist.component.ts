@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { products } from '../../interface/product-display.interface';
 import { ApiServiceService } from '../../../../services/api-service.service';
+import { ButtonComponent } from '../../ui/button/button.component';
 import { AddButtonComponent } from '../../ui/add-button/add-button.component';
 import { TableComponent } from '../../ui/table/table.component';
+import { GlobalService } from '../../../../global.service';
 import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
 import { AddProductsComponent } from '../add-products/add-products.component';
 
@@ -25,7 +28,7 @@ export class ProductlistComponent {
   constructor(public api: ApiServiceService) {}
 
   items: any;
-  header: any = ['Id', 'Image', 'Category', 'Product', 'Price', 'Actions'];
+  header: any = ['Sl No.', 'Image', 'Category', 'Product', 'Price', 'Actions'];
 
   ngOnInit() {
     this.api.getProducts().subscribe((res: any) => {

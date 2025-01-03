@@ -12,19 +12,19 @@
     <div class="color-options">
     @for(ColorId of data.colorId; track ColorId){
     <!-- {{data.colorId}} -->
-    <app-color-button [ColorId]="ColorId"></app-color-button>
+    <app-color-button [ColorId]="ColorId" (colorSelected)="handleColorSelect($event)" [ngClass]="{'active': colorId == ColorId}"></app-color-button>
     }
     </div>
     <br />
     <div class="size-options">
     @for(SizeId of data.sizeId; track SizeId){
     <!-- {{data.sizeId}} -->
-      <app-size-button [SizeId]="SizeId"></app-size-button>
+      <app-size-button [SizeId]="SizeId" (sizeSelected)="handleSizeSelect($event)" [ngClass]="{'active': sizeId == SizeId}"></app-size-button>
     }
   </div>
     <div class="quantity">
       <label for="quantity"></label>
-      <input type="number" id="quantity" placeholder="1" min="1" [value]="1" />
+      <input type="number" id="quantity" placeholder="1" min="1" [value]="1" [(ngModel)]="quantity" (ngModelChange)="onQuantityChange()"/>
     </div>
     <div class="rating">
       <!-- <app-star-rating [rating]="data.rating"></app-star-rating> -->
