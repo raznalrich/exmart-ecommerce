@@ -59,7 +59,7 @@ export class ReportPageComponent {
   }
 
   downloadReport() {
-    console.log('Download Report');
+    // console.log('Download Report');
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
       this.filteredItems
     );
