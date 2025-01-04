@@ -14,11 +14,15 @@
       @for (data of address; track data) {
       <app-profile-address-card
         [address]="data"
-        (edit)="onEdit(address)"
-        (delete)="onDelete(address)"
       ></app-profile-address-card>
       }
     </div>
+
+<!-- <app-profile-address-card
+(edit)="onEdit(address)"
+(delete)="onDelete(address)">
+</app-profile-address-card> -->
+
     <!-- Modal -->
     <div
       class="modal fade"

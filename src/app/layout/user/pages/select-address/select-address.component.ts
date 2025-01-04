@@ -35,7 +35,7 @@ export class SelectAddressComponent {
    )}
 
   onAddAddress() {
-    // console.log('Add Address button clicked');
+    console.log('Add Address button clicked');
     // // Placeholder logic for adding a new address
     // this.addresses.push({
     //   label: 'NEW',
@@ -51,7 +51,7 @@ export class SelectAddressComponent {
   }
 
   onDeleteAddress(address: any) {
-    // console.log('Delete Address:', address);
+    console.log('Delete Address:', address);
     // // Placeholder logic for deleting an address
     // this.address = this.address.filter(a => a !== address);
   }

@@ -145,7 +145,8 @@ export class ApiServiceService {
     );
   }
   getAddressByUserId(id:number){
-    return this.http.get(`https://localhost:7267/api/Users/${id}`)
+    // return this.http.get(`https://localhost:7267/api/Users/${id}`)
+    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
   }
 
   getOrderList() {
