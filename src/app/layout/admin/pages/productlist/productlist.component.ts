@@ -28,7 +28,7 @@ export class ProductlistComponent {
   constructor(public api: ApiServiceService) {}
 
   items: any;
-  header: any = ['Id', 'Image', 'Category', 'Product', 'Price', 'Actions'];
+  header: any = ['Sl No.', 'Image', 'Category', 'Product', 'Price', 'Actions'];
 
   ngOnInit() {
     this.api.getProducts().subscribe((res: any) => {

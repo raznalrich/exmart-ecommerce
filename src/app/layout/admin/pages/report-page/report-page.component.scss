@@ -5,18 +5,26 @@ button {
   border: none;
   background-color: #8061c3;
   color: white;
-  i{
+  i {
     margin-right: 15px;
   }
 }
 .page {
   .top {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
-    // margin-right: 150px;
+    align-items: center;
     margin-top: 20px;
+  }
+
+  .left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .right {
+    margin-left: auto;
   }
   .body {
     // margin: 30px;
@@ -53,7 +61,7 @@ button {
     thead {
       position: sticky;
       top: 0;
-      z-index: 1020;
+      z-index: 800;
       background-color: #ccc;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
       // border: 1px grey solid;
@@ -62,7 +70,7 @@ button {
       border-radius: 10px;
       border: 1px solid #ccc;
       padding: 5px;
-      ::placeholder{
+      ::placeholder {
         font-size: smaller;
       }
     }

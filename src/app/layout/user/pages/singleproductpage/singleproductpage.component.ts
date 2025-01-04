@@ -45,8 +45,8 @@ export class SingleproductpageComponent {
       // console.log("imageCollectionUrl",this.productDetails.imageCollectionUrl);
     });
 
-    this.api.getImagesByProductId(this.id).subscribe((res: any) => {
-      this.productImages = res;
+    this.api.getImagesByProductId(this.id).subscribe((response: any) => {
+      this.productImages = response;
       console.log('productImages', this.productImages);
     });
   }

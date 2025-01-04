@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CategoryButtonComponent } from '../category-button/category-button.component';
 import { LogoutButtonComponent } from '../logout-button/logout-button.component';
 
 @Component({

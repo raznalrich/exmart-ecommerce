@@ -1,19 +1,38 @@
-/* Styling the dropdown button */
 .dropdown .btn {
-  // background-color: #007bff; /* Blue background */
-  color: black; /* White text */
+  color: black;
   font-weight: bold;
-  padding: 10px 20px; /* Spacing inside the button */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Hover effect */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Button hover and focus effects */
+button[type="button"] {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 4px;
+ }
+ 
+ button:first-child {
+  background-color: white;
+  color: #8061c3;
+  border: 1px solid #8061c3;
+ }
+ 
+ button:last-child {
+  background-color: #8061c3;
+  color: white;
+  border: none;
+ }
+ 
+ button:hover {
+  opacity: 0.9;
+ }
 .dropdown .btn:hover,
 .dropdown .btn:focus{
-  transform: translateY(-3px); /* Slight lift effect */
+  transform: translateY(-3px);
 }
 
 /* Styling the dropdown menu */
