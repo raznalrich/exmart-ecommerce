@@ -1,18 +1,26 @@
-import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { ApiServiceService } from '../../../../services/api-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-single-carousel',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './single-carousel.component.html',
   styleUrl: './single-carousel.component.scss'
 })
 export class SingleCarouselComponent {
-@Input() imgcollection: any[]=[];
-newdata:any
+  @Input() imgcollection: any[] = [];
+  // productImages:any[]=[]
+  // constructor(public api: ApiServiceService, private route: ActivatedRoute) {}
 
-ngOnInit(){
-// console.log("carousel",this.data[0].imageCollectionUrl);
-// this.newdata = this.data[0]
-}
+  // ngOnInit() {
+  //   this.api.getImagesByProductId(3).subscribe((response: any) => {
+  //     this.productImages = response;
+  //     console.log('productImages', this.productImages);
+  //   });
+  // }
+
+
 }
