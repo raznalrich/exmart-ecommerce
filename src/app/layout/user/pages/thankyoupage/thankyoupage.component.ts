@@ -9,7 +9,7 @@ import { LongButtonComponent } from "../../ui/long-button/long-button.component"
 import { CurrencyPipe } from '@angular/common';
 import { WebFeedbackSectionComponent } from "../../ui/web-feedback-section/web-feedback-section.component";
 import { GlobalService } from '../../../../global.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../../../api.service';
 import { forkJoin } from 'rxjs';
 interface ProductDetails {
@@ -40,7 +40,7 @@ interface Item {
 @Component({
   selector: 'app-thankyoupage',
   standalone: true,
-  imports: [ItemsInOrderComponent, OrderConfirmationTickAnimationComponent, LongButtonComponent, CurrencyPipe, WebFeedbackSectionComponent],
+  imports: [RouterLink,ItemsInOrderComponent, OrderConfirmationTickAnimationComponent, LongButtonComponent, CurrencyPipe, WebFeedbackSectionComponent],
   templateUrl: './thankyoupage.component.html',
   styleUrl: './thankyoupage.component.scss'
 })
