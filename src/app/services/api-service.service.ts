@@ -150,7 +150,7 @@ export class ApiServiceService {
   }
 
   getOrderList() {
-    return this.http.get(`https://localhost:7267/api/Order/orders/details`);
+    return this.http.get(`https://localhost:7267/api/Order/orders/List`);
     // return this.http.get(`Data/OrderList.json`);
   }
   getAllOrderList() {
