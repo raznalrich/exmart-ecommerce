@@ -1,40 +1,55 @@
-<div class="container py-3  " style=" border-radius: 18px; ">
+<div class="container py-3" style="border-radius: 18px">
   <div class="mx-auto">
     <!-- Add New Address Button -->
     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-
-
       <app-add-address-button
-      [buttonLabel]="'Add New Address'"
-      (add)="onAddAddress()"
-    ></app-add-address-button>
+        [buttonLabel]="'Add New Address'"
+        (add)="onAddAddress()"
+      ></app-add-address-button>
     </button>
 
-    <div style="height: 20px;"></div>
+    <div style="height: 20px"></div>
 
-    <!-- Address List -->
-    <app-address-list
-      [addresses]="addresses"
-      (edit)="onEditAddress($event)"
-      (delete)="onDeleteAddress($event)"
-    ></app-address-list>
-  </div>
-  <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-house-add" style="padding-right: 15px;"></i>Add New Address</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <app-new-address></app-new-address>
-      </div>
-      <!-- <div class="modal-footer">
+    <div class="card border-0 p-2" style="max-height: 380px; overflow-y: auto">
+      @for (data of address; track data) {
+      <app-profile-address-card
+        [address]="data"
+        (edit)="onEdit(address)"
+        (delete)="onDelete(address)"
+      ></app-profile-address-card>
+      }
+    </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              <i class="bi bi-house-add" style="padding-right: 15px">
+                Add New Address
+              </i>
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <app-new-address></app-new-address>
+          </div>
+          <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
       </div> -->
+        </div>
+      </div>
     </div>
   </div>
-</div>
 </div>
