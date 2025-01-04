@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 
@@ -126,11 +126,24 @@ export class ApiServiceService {
       )}`
     );
   }
-  sendMail(email:any,subject:string,body:string){
+  // sendMail(email:any,subject:string,body:string){
+  //   return this.http.post(
+  //     `https://localhost:7267/api/email?receptor=${email}&subject=${subject}&body=${body}`,
+  //     null
+  //   );  }
+  sendMail(email: string, subject: string, body: string) {
+    const params = new HttpParams()
+      .set('receptor', email)
+      .set('subject', subject)
+      .set('body', body)
+      .set('isBodyHtml', 'true');  // Adding HTML flag as parameter
+
     return this.http.post(
-      `https://localhost:7267/api/email?receptor=${email}&subject=${subject}&body=${body}`,
-      null
-    );  }
+      'https://localhost:7267/api/email',
+      null,
+      { params }
+    );
+  }
   getAllCategories() {
     return this.http.get('https://localhost:7267/api/Categories');
   }
