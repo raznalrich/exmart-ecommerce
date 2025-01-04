@@ -1,30 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AddAddressButtonComponent } from '../../ui/add-address-button/add-address-button.component';
-import { AddressListComponent } from '../../ui/address-list/address-list.component';
 import { NewAddressComponent } from "../new-address/new-address.component";
+import { ProfileAddressCardComponent } from '../../ui/profile-address-card/profile-address-card.component';
+import { ApiServiceService } from '../../../../services/api-service.service';
 
 @Component({
   selector: 'app-select-address',
   standalone: true,
-  imports: [AddAddressButtonComponent, AddressListComponent, NewAddressComponent],
+  imports: [AddAddressButtonComponent, NewAddressComponent, ProfileAddressCardComponent],
   templateUrl: './select-address.component.html',
   styleUrl: './select-address.component.scss'
 })
 export class SelectAddressComponent {
-  addresses = [
-    {
-      label: 'HOME',
-      name: 'Hitesh Lal',
-      phone: '9544539125',
-      address: 'Kalluparavilayil, KRA 82, AKG Lane, Kallampally, Thiruvananthapuram, Kerala, India',
-    },
-    {
-      label: 'WORK',
-      name: 'Rahul Mehra',
-      phone: '9544531234',
-      address: 'Office Complex, MG Road, Kochi, Kerala, India',
-    },
-  ];
+    constructor(public api:ApiServiceService){}
+ @Input()address:any={
+    name:'',
+    badgeName:'',
+    place:'',
+    buildingNo:'',
+    pincode:'',
+    city:'',
+    district:'',
+    state:'',
+    country:'',
+    phoneNo:''
+    }
+    ngOnInit() {
+      this.address= this.api.getAddressByUserId(1).subscribe((res: any) => {
+         this.address = res;
+
+         console.log(this.address);
+         // console.log("Name : ",this.arr[0].name);
+     }
+   )}
 
   onAddAddress() {
     // console.log('Add Address button clicked');
@@ -37,14 +45,14 @@ export class SelectAddressComponent {
     // });
   }
 
-  onEditAddress(address: any) {
-    console.log('Edit Address:', address);
+  onEditAddress(data: any) {
+    console.log('Edit Address:', data);
     // Placeholder logic for editing an address
   }
 
   onDeleteAddress(address: any) {
-    console.log('Delete Address:', address);
-    // Placeholder logic for deleting an address
-    this.addresses = this.addresses.filter(a => a !== address);
+    // console.log('Delete Address:', address);
+    // // Placeholder logic for deleting an address
+    // this.address = this.address.filter(a => a !== address);
   }
 }
