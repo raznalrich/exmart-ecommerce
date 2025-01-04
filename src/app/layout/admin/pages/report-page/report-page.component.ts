@@ -47,7 +47,6 @@ export class ReportPageComponent {
             console.warn('Invalid purchase date:', item.purchase_date);
             return false;
           }
-
           return purchaseDate >= start && purchaseDate <= end;
         } catch (error) {
           console.error('Date parsing error:', error);
