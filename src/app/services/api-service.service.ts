@@ -152,8 +152,15 @@ export class ApiServiceService {
       `https://localhost:7267/api/Config/GetSizeById?id=${id}`
     );
   }
-  getAddressByUserId(id: number) {
-    return this.http.get(`https://localhost:7267/api/Users/${id}`);
+
+  getAddressByUserId(id:number){
+    // return this.http.get(`https://localhost:7267/api/Users/${id}`)
+    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
+  }
+
+  getOrderList() {
+    return this.http.get(`https://localhost:7267/api/Order/orderItem/List`);
+    // return this.http.get(`Data/OrderList.json`);
   }
 
   getAllOrderList() {

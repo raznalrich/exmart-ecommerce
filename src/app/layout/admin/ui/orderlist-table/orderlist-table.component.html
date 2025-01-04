@@ -70,19 +70,19 @@
   <table class="styled-table">
     <!-- @for(item of O) -->
     <tr>
-      <th>Order Id</th>
+      <th>Order Item Id</th>
       <th>Date</th>
-      <th>Customer</th>
+      <th>Product</th>
       <th>Status</th>
       <th>Amount</th>
-      <th>Items</th>
+      <th>Quantity</th>
       <th>Action</th>
     </tr>
     @for(item of OrderList; track item){
       <tr>
-        <td>{{item.orderId}}</td>
+        <td>{{item.orderItemId}}</td>
         <td>{{item.orderDate | date : "YYYY-MM-dd"}}</td>
-        <td>{{item.customerName}}</td>
+        <td>{{item.productName}}</td>
 
         <td>
           <select class="status-dropdown"
@@ -94,8 +94,8 @@
           </select>
         </td>
 
-        <td>{{item.totalAmount | currency : "INR"}}</td>
-         <td>{{item.totalItems}}</td>
+        <td>{{item.amount | currency : "INR"}}</td>
+         <td>{{item.quantity}}</td>
           <td style="text-align: center;">
             <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId)">
               <i class="fa-regular fa-eye"></i>
