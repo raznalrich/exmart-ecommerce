@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent {
+@Input() OrderDetailsByID : any
 
 }

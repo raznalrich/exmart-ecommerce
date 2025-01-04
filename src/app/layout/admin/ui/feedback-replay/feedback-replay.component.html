@@ -13,12 +13,14 @@
       </div>
       <div class="modal-body" >
         <div class="replay-box">
-            <textarea class="feedback-input" placeholder="Reply to the feedback"></textarea>
+            <textarea class="feedback-input" placeholder="Reply to the feedback"
+            [(ngModel)]="replayText"
+            ></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" title="send"><i class="bi bi-send-plus"></i></button>
+        <button type="button" class="btn btn-primary" title="send"  (click)="onSendReplay()"><i class="bi bi-send-plus"></i></button>
       </div>
     </div>
   </div>

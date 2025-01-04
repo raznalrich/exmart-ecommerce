@@ -1,7 +1,5 @@
 .body {
   padding: 25px;
-  // border: 1px solid #8061c3;
-  // border: none;
   border-radius: 20px;
   height: 75vh;
   display: flex;
@@ -12,13 +10,27 @@
     display: none;
   }
 }
-.btn-success {
+
+.btn-status {
+  min-width: 38px;
+  padding: 6px;
+  border: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-status.active {
   background-color: #28b463;
 }
 
-.btn-danger {
+.btn-status.inactive {
   background-color: #ec7063;
 }
+
+.btn-status i {
+  color: white;
+}
+
 .container-fluid {
   flex: 1;
   overflow-y: auto;

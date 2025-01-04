@@ -10,17 +10,17 @@
       ></button>
     </div> -->
     <div class="card-body" style="padding: 30px">
-      <app-product-detail></app-product-detail>
+      <app-product-detail [OrderDetailsByID]="OrderDetailById"></app-product-detail>
 
       <div class="row text-center" style="gap: 10px">
         <div class="col">
-          <app-customer-detail></app-customer-detail>
+          <app-customer-detail [OrderDetailsByID]="OrderDetailById"></app-customer-detail>
         </div>
         <div class="col">
-          <app-billing-detail></app-billing-detail>
+          <app-billing-detail [OrderDetailsByID]="OrderDetailById"></app-billing-detail>
         </div>
         <div class="col">
-          <app-shipment-detail></app-shipment-detail>
+          <app-shipment-detail [OrderDetailsByID]="OrderDetailById"></app-shipment-detail>
         </div>
       </div>
 
