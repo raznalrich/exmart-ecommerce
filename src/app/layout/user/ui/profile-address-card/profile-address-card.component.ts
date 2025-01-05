@@ -1,3 +1,4 @@
+import { AddAddressDTO } from './../../../../services/api-service.service';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,56 +11,50 @@ import { GlobalService } from '../../../../global.service';
   standalone: true,
   imports: [AddressBadgeComponent, AddressCardComponent],
   templateUrl: './profile-address-card.component.html',
-  styleUrl: './profile-address-card.component.scss'
+  styleUrl: './profile-address-card.component.scss',
 })
 export class ProfileAddressCardComponent {
-  // id:any;
-  // @Input() label: string = '';
-  // @Input() name: string = '';
-  // @Input() phone: string = '';
-  // @Input() address: string = '';
-
-  @Output() edit = new EventEmitter<void>();
-  @Output() delete = new EventEmitter<void>();
-constructor(public apis: ApiServiceService, private route: ActivatedRoute, public global: GlobalService){}
-@Input()address:any={
-  name:'',
-  addressTypeName:0,
-  place:'',
-  buildingNo:'',
-  pincode:'',
-  city:'',
-  district:'',
-  stste:'',
-  country:'',
-  phoneNo:''
-  }
+  constructor(
+    public apis: ApiServiceService,
+    private route: ActivatedRoute,
+    public global: GlobalService
+  ) {}
+  @Input() address: any= {
+    name: '',
+    addressTypeName: 0,
+    place: '',
+    buildingNo: '',
+    pincode: '',
+    city: '',
+    district: '',
+    stste: '',
+    country: '',
+    phoneNo: '',
+  };
+  @Output() edit = new EventEmitter<{id:number,data:any}>();
+  @Output() delete = new EventEmitter<number>();
 
   onEdit() {
-    this.edit.emit();
+const updateData={
+id:this.address.id,
+data:{
+  name: this.address.name,
+  addressTypeName: this.address.addressTypeName,
+  place: this.address.place,
+  buildingNo: this.address.buildingNo,
+  pincode: this.address.pincode,
+  city: this.address.city,
+  district: this.address.district,
+  state: this.address.state,
+  country: this.address.country,
+  phoneNo: this.address.phoneNo,
+}
+}
+    this.edit.emit(updateData);
+
   }
 
   onDelete() {
-    this.delete.emit();
-  }
-
-  arr:any;
-  handleRadioChange(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    if (target.checked) {
-      this.global.selectedAddressId.set(target.id);
-      console.log('Selected Address ID:', this.global.selectedAddressId());
-    }
-  }
-
-    ngOnInit() {
-    //  this.address= this.api.getAddressByUserId(1).subscribe((res: any) => {
-    //     this.address = res;
-
-    //     console.log(this.address);
-    //     // console.log("Name : ",this.arr[0].name);
-    // }
-    console.log(this.address);
-
+    this.delete.emit(this.address.id);
   }
 }

@@ -14,6 +14,8 @@
       @for (data of address; track data) {
       <app-profile-address-card
         [address]="data"
+        (edit)="onEdit($event.id, $event.data)"
+(delete)="onDelete($event)"
       ></app-profile-address-card>
       }
     </div>

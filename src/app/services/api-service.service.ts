@@ -12,7 +12,16 @@ export interface CartItem {
   userId:number;
 }
 
-
+export interface AddAddressDTO {
+  userId: number;
+  addressTypeId: number;
+  isPrimary: boolean;
+  addressLine: string;
+  city: string;
+  district: string;
+  state: string;
+  zipCode: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -144,9 +153,21 @@ export class ApiServiceService {
       `https://localhost:7267/api/Config/GetSizeById?id=${id}`
     );
   }
+
+  // addAddress(address: AddAddressDTO){
+  //   return this.http.post(`https://localhost:7267/api/Users/addAddress`);
+  // }
+
   getAddressByUserId(id:number){
-    // return this.http.get(`https://localhost:7267/api/Users/${id}`)
     return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
+  }
+
+  editAddressById(id:number,addAddressDTO:any){
+    return this.http.get(`https://localhost:7267/api/Users/editAddress/${id}`,addAddressDTO)
+  }
+
+  deleteAddressById(id:number){
+    return this.http.delete(`https://localhost:7267/api/Users/DeleteAddress/${id}`)
   }
 
   getOrderList() {

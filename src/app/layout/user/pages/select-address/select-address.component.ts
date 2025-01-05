@@ -25,14 +25,74 @@ export class SelectAddressComponent {
     country:'',
     phoneNo:''
     }
-    ngOnInit() {
-      this.address= this.api.getAddressByUserId(1).subscribe((res: any) => {
-         this.address = res;
+    // ngOnInit() {
+      // this.address= this.api.getAddressByUserId(1).subscribe((res: any) => {
+      //    this.address = res;
 
-         console.log(this.address);
+      //    console.log(this.address);
          // console.log("Name : ",this.arr[0].name);
-     }
-   )}
+    //  }
+  //  )}
+
+// In your component file
+ngOnInit() {
+  this.api.getAddressByUserId(1).subscribe((res: any) => {
+    this.address = res.filter((item: any) =>
+      item.badgeName === 'Home' || item.badgeName === 'Other'
+    );
+    console.log(this.address);
+  });
+
+this.refreshAddressList()
+}
+
+
+onEdit(id: number, AddAddressDTO: any) {
+  this.api.editAddressById(id, AddAddressDTO).subscribe({
+    next: (response: any) => {
+      console.log('Address updated successfully', response);
+      // Refresh the address list
+      this.refreshAddressList();
+    },
+    error: (error) => {
+      console.error('Error updating address', error);
+      // Handle error appropriately
+    }
+  });
+}
+
+refreshAddressList() {
+  this.api.getAddressByUserId(1).subscribe((res: any) => {
+    this.address = res.filter((item: any) =>
+      ['home', 'other'].includes(item.addressTypeName.toLowerCase())
+    );
+  });
+}
+
+onDelete(id: number) {
+  if (confirm('Are you sure you want to delete this address?')) {
+    this.api.deleteAddressById(id).subscribe({
+      next: () => {
+        this.refreshAddressList();
+      },
+      error: (error) => {
+        console.error('Error deleting address', error);
+      }
+    });
+  }
+}
+
+
+
+  // ngOnInit() {
+  //   this.api.getAddressByUserId(1).subscribe((res: any) => {
+  //     this.address = res.filter((item: any) =>
+  //       this.address.badgeName.toLowerCase() !== 'home'.toLowerCase()
+  //     );
+  //     console.log(this.address);
+  //   });
+  // }
+
 
   onAddAddress() {
     console.log('Add Address button clicked');
