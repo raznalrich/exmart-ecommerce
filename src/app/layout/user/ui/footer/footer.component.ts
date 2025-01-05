@@ -9,9 +9,9 @@ import { ApiServiceService } from '../../../../services/api-service.service';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-  private emailTemplate: string = '';
+  emailTemplate: string = '';
   constructor(public api:ApiServiceService){
-// this.loadTemplate();
+this.loadTemplate();
   }
   private generateEmailContent(): string {
     return `
@@ -66,7 +66,7 @@ private async loadTemplate() {
     const emailContent = this.generateEmailContent();
     console.log(emailContent);
 
-    this.api.sendMail('raznalrich@gmail.com', 'Order confirmed', emailContent)
+    this.api.sendMail('raznalrich@gmail.com', 'Order confirmed', this.emailTemplate)
     .subscribe({
       next: (response) => {
         console.log('Email sent successfully', response);
