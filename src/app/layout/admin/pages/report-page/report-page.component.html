@@ -26,12 +26,11 @@
                     }
                     @for (item of filteredItems; track item) {
                     <tr>
-                        <!-- <td scope="row">{{item.sl_no}}</td> -->
                         <td scope="row">{{ filteredItems.indexOf(item) + 1 }}</td>
                         <td>{{item.customerId}}</td>
                         <td>{{item.customerName}}</td>
                         <td>{{item.orderId}}</td>
-                        <td>{{item.orderDate | date:"YYYY-MM-dd"}}</td>
+                        <td>{{item.orderDate | date : "dd-MM-YYYY"}}</td>
                         <td>{{item.totalAmount}}</td>
                     </tr>
                     }

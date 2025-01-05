@@ -101,7 +101,7 @@ export class UsernavbarComponent {
     this._products.set([]);
     this._showingAll.set(false);
     this._dropdownVisible.set(false);
-    // this.router.navigate([`viewproduct/{id}`,product.id]);   // the is the code typed for navigating again
+    // this.router.navigate([`viewproduct/{id}`,product.id]);
   }
 
   showAllOptions() {

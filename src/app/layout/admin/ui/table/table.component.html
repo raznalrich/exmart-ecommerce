@@ -14,7 +14,8 @@
                 }
                 @for (item of items; track item) {
                 <tr>
-                    <th scope="row" style="color: black;">{{item.id}}</th>
+                    <!-- <td scope="row">{{items.indexOf(item) + 1}}</td> -->
+                    <td scope="row">{{item.id}}</td>
                     <td><img src={{item.primaryImageUrl}} class="img-fluid rounded-start" alt="" style="width: 40px;">
                     </td>
                     <td>{{item.categoryId}}</td>
@@ -25,9 +26,11 @@
                             style="margin-right: 5px; color: #ffffff; background-color: #5DADE2; border: none;">
                             <i class="bi bi-pen"></i>
                         </a>
-                        <button type="button" class="btn btn-sm" [class.btn-success]="item.isActive"
-                            [class.btn-danger]="!item.isActive" (click)="toggleStatus(item)">
-                            <i class="bi" Class="item.isActive ? 'bi-check-circle' : 'bi-x-circle'"></i>
+                        <button type="button" class="btn btn-sm"
+                            [style.background-color]="item.isActive ? '#28b463' : '#ec7063'"
+                            (click)="toggleStatus(item)">
+                            <i class="bi" [class]="item.isActive ? 'bi-check-circle' : 'bi-x-circle'"
+                                style="color: white"></i>
                         </button>
                     </td>
                 </tr>
