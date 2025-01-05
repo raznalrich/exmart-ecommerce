@@ -3,6 +3,7 @@
     <div class="card-body scrollable-card">
       <table class="table table-borderless align-middle">
         <thead class="text-muted border-bottom">
+          <!-- <app-user-orders [tabs]="['Product','Website']"></app-user-orders> -->
           <tr>
             <th scope="col">Employee</th>
             <th scope="col">Product Name</th>
@@ -28,10 +29,7 @@
               <p class="mb-0 text-muted">{{ item.feedBack }}</p>
             </td>
             <button class="replay-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              <div class="replay-modal">
 
-                <app-feedback-replay></app-feedback-replay>
-              </div>
             <td class="text-center">
               <i
                 class="bi bi-send-fill action-icon"
@@ -39,6 +37,10 @@
               ></i>
             </td>
           </button>
+          <div class="replay-modal">
+
+            <app-feedback-replay></app-feedback-replay>
+          </div>
           </tr>
           }
         </tbody>

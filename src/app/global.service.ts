@@ -1,13 +1,16 @@
 import { Injectable, signal } from '@angular/core';
 import { ApiServiceService } from './services/api-service.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalService {
-  constructor(public api:ApiServiceService) {}
+  constructor(public api:ApiServiceService,private router: Router) {}
+  userId = signal(0);
   cartCount = signal(0);
   signalCartList = signal<any[]>([])
+  signalOrderList = signal<any[]>([])
   selectedAddressId = signal<string>('');
   cartList:any[]=[];
   editProduct(item: any) {
@@ -18,6 +21,17 @@ export class GlobalService {
   }
   zerocart(){
     this.cartCount.set(0);
+  }
+  getUserId(){
+    const userId = localStorage.getItem('userId');
+if (userId) {
+  console.log('Retrieved User ID:', userId);
+  this.userId.set(Number(userId))
+} else {
+  console.error('No User ID found in localStorage');
+  this.router.navigate(['/login']);
+
+}
   }
   getCartCount(){
     this.zerocart();

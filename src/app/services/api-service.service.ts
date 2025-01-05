@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-
 
 import { Product } from '../layout/user/interfaces/productInterface';
 export interface CartItem {
@@ -9,21 +8,28 @@ export interface CartItem {
   quantity: number;
   sizeId: number;
   colorId: number;
-  userId:number;
+  userId: number;
 }
-
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiServiceService {
+  map(arg0: (order: any) => { CustomerID: any; CustomerName: any; OrderDate: string; OrderID: any; TotalItems: any; TotalAmount: any; Status: any; }) {
+    throw new Error('Method not implemented.');
+  }
   constructor(private http: HttpClient) {}
   cartcount = signal(0);
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
 
-  addToCart(id: number, userId: number,colorId:number,sizeId:number,quantity:number) {
+  addToCart(
+    id: number,
+    userId: number,
+    colorId: number,
+    sizeId: number,
+    quantity: number
+  ) {
     // this.cartcount.update(value => value + 1);
 
     // this.cartid.update(items => [...items, id]);
@@ -51,7 +57,14 @@ export class ApiServiceService {
         })
       );
   }
-
+  deleteFromCart(productId: number, userId: number): Observable<any> {
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart`, {
+      params: {
+        productId: productId.toString(),
+        userId: userId.toString(),
+      },
+    });
+  }
   removecartcount(id: number) {
     this.cartcount.update((value) => value - 1);
     this.cartid.update((value) => value.filter((item) => item !== id));
@@ -92,31 +105,50 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Product');
   }
   getOrderDetails() {
-    return this.http.get('https://localhost:7267/api/Order/orders/details');
+    return this.http.get('https://localhost:7267/api/Order/orders/List');
   }
-
 
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
     const orderPayload = {
-        userId: userId,
-        addressId: addressId,
-        orderItems: cartItems.map(item => ({
-            productId: item.productId,
-            quantity: item.quantity,
-            sizeId: item.sizeId,
-            colorId: item.colorId,
-        })),
+      userId: userId,
+      addressId: addressId,
+      orderItems: cartItems.map((item) => ({
+        productId: item.productId,
+        quantity: item.quantity,
+        sizeId: item.sizeId,
+        colorId: item.colorId,
+      })),
     };
     console.log(orderPayload);
 
-
-    return this.http.post('https://localhost:7267/api/Order/placeorder', orderPayload);
-}
+    return this.http.post(
+      'https://localhost:7267/api/Order/placeorder',
+      orderPayload
+    );
+  }
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
       `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
         query
       )}`
+    );
+  }
+  // sendMail(email:any,subject:string,body:string){
+  //   return this.http.post(
+  //     `https://localhost:7267/api/email?receptor=${email}&subject=${subject}&body=${body}`,
+  //     null
+  //   );  }
+  sendMail(email: string, subject: string, body: string) {
+    const params = new HttpParams()
+      .set('receptor', email)
+      .set('subject', subject)
+      .set('body', body)
+      .set('isBodyHtml', 'true');  // Adding HTML flag as parameter
+
+    return this.http.post(
+      'https://localhost:7267/api/email',
+      null,
+      { params }
     );
   }
   getAllCategories() {
@@ -127,17 +159,53 @@ export class ApiServiceService {
       `https://localhost:7267/api/Config/GetColorById?id=${id}`
     );
   }
+  checkUserIdIsExisted(id:number){
+    return this.http.get(`https://localhost:7267/api/Users/CheckUserExisted/${id}`);
+  }
+  IsAdmin(id:number){
+    return this.http.get(`https://localhost:7267/api/Admin/Check/${id}`);
+  }
+  returnIdFromEmail(email:string){
+    return this.http.get(`https://localhost:7267/api/Users/ReturnIdfromemail/${email}`);
+  }
+  addNewUser(email:string,name:string,phone:string){
+    let data = {
+      email: email, // Changed from 'name' to 'categoryName'
+      name: name, // Changed from 'icon' to 'iconPath'
+      phone:phone,
+      orders: [], // Provide empty array
+  feedbacks: [] // Provide empty array
+    };
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http
+      .post('https://localhost:7267/api/Users', data, { headers })
+      .pipe(
+        catchError((error) => {
+          console.log('Error details:', error.error);
+          throw error;
+        })
+      );
+  }
   getSizeById(id: number) {
     return this.http.get(
       `https://localhost:7267/api/Config/GetSizeById?id=${id}`
     );
   }
+
   getAddressByUserId(id:number){
-    return this.http.get(`https://localhost:7267/api/Users/${id}`)
+    // return this.http.get(`https://localhost:7267/api/Users/${id}`)
+    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
   }
+
   getOrderList() {
-    return this.http.get(`https://localhost:7267/api/Order/orders/List`);
-    return this.http.get(`Data/OrderList.json`);
+    return this.http.get(`https://localhost:7267/api/Order/orderItem/List`);
+    // return this.http.get(`Data/OrderList.json`);
+  }
+
+  getAllOrderList() {
+    return this.http.get(`https://localhost:7267/api/Order/getallorders`);
   }
 
   getItemsInOrder() {
@@ -184,7 +252,6 @@ export class ApiServiceService {
     //   map((data:any)=>{
     //     const filterddata = data.filter((item:any)=> item.id == id)
     //     return filterddata;
-
     //   })
     // );
     return this.http.get(
@@ -192,15 +259,22 @@ export class ApiServiceService {
     );
   }
 
-  getImagesByProductId(id:number){
-  return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
-}
-
-  updateOrderStatus(OrderListDTO:any){
-    return this.http.put(`https://localhost:7267/api/Order/updatestatus`,OrderListDTO);
+  getImagesByProductId(id: number) {
+    return this.http.get(
+      `https://localhost:7267/api/ProductImage/ByProduct/${id}`
+    );
   }
 
-  GetOrderDetailById(orderid:any){
-    return this.http.get(`https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`)
+  updateOrderStatus(OrderListDTO: any) {
+    return this.http.put(
+      `https://localhost:7267/api/Order/updatestatus`,
+      OrderListDTO
+    );
+  }
+
+  GetOrderDetailById(orderid: any) {
+    return this.http.get(
+      `https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`
+    );
   }
 }
