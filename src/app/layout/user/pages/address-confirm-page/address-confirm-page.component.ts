@@ -16,7 +16,7 @@ import { ApiServiceService } from '../../../../services/api-service.service';
 })
 export class AddressConfirmPageComponent {
     constructor(public api:ApiServiceService){}
-  
+
   @Input()address:any={
     name:'',
     badgeName:'',
@@ -25,7 +25,7 @@ export class AddressConfirmPageComponent {
     pincode:'',
     city:'',
     district:'',
-    stste:'',
+    state:'',
     country:'',
     phoneNo:''
     }
