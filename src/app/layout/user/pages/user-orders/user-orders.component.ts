@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { OrderSectionComponent } from '../../ui/order-section/order-section.component';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UserOrdersComponent {
   constructor(public api:ApiServiceService){}
-  tabs = ['In Transit', 'Pending'];
+  @Input() tabs = ['In Transit', 'Pending'];
   activeTab = 'In Transit';
   inTransitOrders: any[] = [];
   orderHistorylist: any[] = [];
