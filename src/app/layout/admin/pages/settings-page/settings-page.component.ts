@@ -5,11 +5,12 @@ import { RouterLink } from '@angular/router';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../../../api.service';
+import { AddBannerComponent } from "../../ui/add-banner/add-banner.component";
 
 @Component({
   selector: 'app-settings-page',
   standalone: true,
-  imports: [AddNewCategoryComponent, EditPoliciesComponent,RouterLink],
+  imports: [AddNewCategoryComponent, EditPoliciesComponent, RouterLink, AddBannerComponent],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss'
 })

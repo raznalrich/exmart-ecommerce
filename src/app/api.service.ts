@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { Product } from './layout/user/interfaces/productInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -29,10 +30,37 @@ export class ApiService {
   getProducts() {
     return this.http.get(`product-sample.json`);
   }
+  private baseUrl = 'https://localhost:7267/api';
 
-getUserAddress(){
-return this.http.get(`Data/address.json`)
+  addProduct(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Product/add-product`, payload);
+  }
+
+  addBanner(payload: any): Observable<any> {
+     return this.http.post(`${this.baseUrl}/Banner`, payload)
+  }
+
+uploadImage(file: File) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  return this.http.post<{ imageUrl: string }>(`${this.baseUrl}/ImageUpload/upload-image`, formData);
 }
+
+
+
+  searchProducts(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
+        query
+      )}`
+    );
+  }
+
+
+  getUserAddress() {
+    return this.http.get(`Data/address.json`);
+  }
 
 getUserFeedback(){
   return this.http.get(`https://localhost:7267/api/FeedBack`)
