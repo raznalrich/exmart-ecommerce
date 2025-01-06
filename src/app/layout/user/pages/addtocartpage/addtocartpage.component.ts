@@ -113,13 +113,18 @@ productIds: number[] = []; // Collection of product IDs
   // ... rest of the code remains the same ...
 
   calculateTotalPrice() {
-    this.totalPrice = this.CartItems.reduce((total, product) => total + (product.price || 0), 0);
-    if(this.selectedAddress==3){
+    this.totalPrice = this.CartItems.reduce((total, product) => {
+      // Find the corresponding cart item to get the quantity
+      const cartItem = this.cartItemList.find((item: any) => item.productId === product.id);
+      const quantity = cartItem ? cartItem.quantity : 0;
+      return total + (product.price * quantity);
+    }, 0);
 
-      this.totalPrice = this.totalPrice+50;
+    // Add delivery charge if address is 3
+    if (this.selectedAddress == 3) {
+      this.totalPrice = this.totalPrice + 50;
     }
     console.log(this.totalPrice);
-
   }
   setOrderFromCart() {
     this.global.signalOrderList.set([...this.cartItemList]);
