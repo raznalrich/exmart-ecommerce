@@ -1,0 +1,6 @@
+<div class="feedback-form">
+  <form [formGroup]="productFeedbackForm" (ngSubmit)="submitProductFeedback()" >
+    <input type="text" id="feedback" name="feedback" placeholder="Enter your feedback" formControlName="feedback">
+    <button type="submit">Submit</button>
+  </form>
+</div>

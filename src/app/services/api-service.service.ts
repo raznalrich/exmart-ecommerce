@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 
@@ -133,10 +133,22 @@ export class ApiServiceService {
       )}`
     );
   }
-  sendMail(email: any, subject: string, body: string) {
+  // sendMail(email:any,subject:string,body:string){
+  //   return this.http.post(
+  //     `https://localhost:7267/api/email?receptor=${email}&subject=${subject}&body=${body}`,
+  //     null
+  //   );  }
+  sendMail(email: string, subject: string, body: string) {
+    const params = new HttpParams()
+      .set('receptor', email)
+      .set('subject', subject)
+      .set('body', body)
+      .set('isBodyHtml', 'true');  // Adding HTML flag as parameter
+
     return this.http.post(
-      `https://localhost:7267/api/email?receptor=${email}&subject=${subject}&body=${body}`,
-      null
+      'https://localhost:7267/api/email',
+      null,
+      { params }
     );
   }
   getAllCategories() {
@@ -147,13 +159,49 @@ export class ApiServiceService {
       `https://localhost:7267/api/Config/GetColorById?id=${id}`
     );
   }
+  checkUserIdIsExisted(id:number){
+    return this.http.get(`https://localhost:7267/api/Users/CheckUserExisted/${id}`);
+  }
+  IsAdmin(id:number){
+    return this.http.get(`https://localhost:7267/api/Admin/Check/${id}`);
+  }
+  returnIdFromEmail(email:string){
+    return this.http.get(`https://localhost:7267/api/Users/ReturnIdfromemail/${email}`);
+  }
+  addNewUser(email:string,name:string,phone:string){
+    let data = {
+      email: email, // Changed from 'name' to 'categoryName'
+      name: name, // Changed from 'icon' to 'iconPath'
+      phone:phone,
+      orders: [], // Provide empty array
+  feedbacks: [] // Provide empty array
+    };
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http
+      .post('https://localhost:7267/api/Users', data, { headers })
+      .pipe(
+        catchError((error) => {
+          console.log('Error details:', error.error);
+          throw error;
+        })
+      );
+  }
   getSizeById(id: number) {
     return this.http.get(
       `https://localhost:7267/api/Config/GetSizeById?id=${id}`
     );
   }
-  getAddressByUserId(id: number) {
-    return this.http.get(`https://localhost:7267/api/Users/${id}`);
+
+  getAddressByUserId(id:number){
+    // return this.http.get(`https://localhost:7267/api/Users/${id}`)
+    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
+  }
+
+  getOrderList() {
+    return this.http.get(`https://localhost:7267/api/Order/orderItem/List`);
+    // return this.http.get(`Data/OrderList.json`);
   }
 
   getAllOrderList() {
