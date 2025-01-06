@@ -55,6 +55,7 @@ this.global.getUserId();
   this.api.deleteFromCart(productId, userId).subscribe({
     next: (response) => {
       console.log('Item removed successfully');
+      this.global.getCartCount();
       // Handle success (e.g., show notification, refresh cart)
     },
     error: (error) => {
