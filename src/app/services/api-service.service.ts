@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import { catchError, Observable, switchMap } from 'rxjs';
 
 
 import { Product } from '../layout/user/interfaces/productInterface';
@@ -10,6 +10,11 @@ export interface CartItem {
   sizeId: number;
   colorId: number;
   userId:number;
+}
+interface PolicyUpdate {
+  id: number;
+  tndCheading: string;
+  tndCcontent: string;
 }
 
 
@@ -218,5 +223,34 @@ export class ApiServiceService {
 
   GetOrderDetailById(orderid:any){
     return this.http.get(`https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`)
+  }
+
+  GetPolicy(){
+    return this.http.get(`https://localhost:7267/api/Policy`)
+  }
+  GetPolicyById(id:number){
+    return this.http.get(`https://localhost:7267/api/Policy/${id}`);
+  }
+  UpdatePolicy(id:number,policyContent:string){
+
+    return this.GetPolicyById(id).pipe(
+      switchMap((existingPolicy: any) => {
+        const updatePayload: PolicyUpdate = {
+          id: id,
+          tndCheading: existingPolicy.tndCheading, // Preserve the existing heading
+          tndCcontent: policyContent
+        };
+        return this.http.put(`https://localhost:7267/api/Policy/${id}`, updatePayload);
+      })
+    );
+
+
+
+    // const payload = {
+    //   tndCcontent: policyContent
+    // };
+    // return this.http.put(`https://localhost:7267/api/Policy/${id}`, payload);
+
+    // return this.http.put(`https://localhost:7267/api/Policy/${id}`,policyContent);
   }
 }
