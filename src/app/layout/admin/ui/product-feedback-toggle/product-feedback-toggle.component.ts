@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product-feedback-toggle',
@@ -9,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class ProductFeedbackToggleComponent {
 
+  @Output() filterChange = new EventEmitter<string>();
+  activeFilter: string = 'all';
+
+  setFilter(filter: string) {
+    this.activeFilter = filter;
+    this.filterChange.emit(filter);
+  }
 }
