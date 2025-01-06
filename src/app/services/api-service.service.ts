@@ -3,6 +3,20 @@ import { Injectable, signal } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
+
+export interface OrderEmailContext {
+  orderId: string;
+  customerName: string;
+  items: Array<{
+    productName: string;
+    quantity: number;
+    price: number;
+    subtotal: number;
+  }>;
+  totalAmount: number;
+  shippingAddress: string;
+  orderDate: Date;
+}
 export interface CartItem {
   productId: number;
   quantity: number;
@@ -114,9 +128,12 @@ export class ApiServiceService {
       addressId: addressId,
       orderItems: cartItems.map((item) => ({
         productId: item.productId,
+        productName:'',
         quantity: item.quantity,
         sizeId: item.sizeId,
+        sizeName:'',
         colorId: item.colorId,
+        colorName:''
       })),
     };
     console.log(orderPayload);
