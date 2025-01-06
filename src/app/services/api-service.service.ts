@@ -1,14 +1,33 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import { catchError, Observable, switchMap } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
+
+export interface OrderEmailContext {
+  orderId: string;
+  customerName: string;
+  items: Array<{
+    productName: string;
+    quantity: number;
+    price: number;
+    subtotal: number;
+  }>;
+  totalAmount: number;
+  shippingAddress: string;
+  orderDate: Date;
+}
 export interface CartItem {
   productId: number;
   quantity: number;
   sizeId: number;
   colorId: number;
   userId: number;
+}
+interface PolicyUpdate {
+  id: number;
+  tndCheading: string;
+  tndCcontent: string;
 }
 
 @Injectable({
@@ -124,9 +143,12 @@ export class ApiServiceService {
       addressId: addressId,
       orderItems: cartItems.map((item) => ({
         productId: item.productId,
+        productName:'',
         quantity: item.quantity,
         sizeId: item.sizeId,
+        sizeName:'',
         colorId: item.colorId,
+        colorName:''
       })),
     };
     console.log(orderPayload);
@@ -285,5 +307,34 @@ export class ApiServiceService {
     return this.http.get(
       `https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`
     );
+  }
+
+  GetPolicy(){
+    return this.http.get(`https://localhost:7267/api/Policy`)
+  }
+  GetPolicyById(id:number){
+    return this.http.get(`https://localhost:7267/api/Policy/${id}`);
+  }
+  UpdatePolicy(id:number,policyContent:string){
+
+    return this.GetPolicyById(id).pipe(
+      switchMap((existingPolicy: any) => {
+        const updatePayload: PolicyUpdate = {
+          id: id,
+          tndCheading: existingPolicy.tndCheading, // Preserve the existing heading
+          tndCcontent: policyContent
+        };
+        return this.http.put(`https://localhost:7267/api/Policy/${id}`, updatePayload);
+      })
+    );
+
+
+
+    // const payload = {
+    //   tndCcontent: policyContent
+    // };
+    // return this.http.put(`https://localhost:7267/api/Policy/${id}`, payload);
+
+    // return this.http.put(`https://localhost:7267/api/Policy/${id}`,policyContent);
   }
 }

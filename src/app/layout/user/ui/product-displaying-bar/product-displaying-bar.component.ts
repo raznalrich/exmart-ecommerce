@@ -3,6 +3,7 @@ import { AddtoCartDeletebtnComponent } from "../addto-cart-deletebtn/addto-cart-
 import { CurrencyPipe } from '@angular/common';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from '../../../../global.service';
 
 @Component({
   selector: 'app-product-displaying-bar',
@@ -18,10 +19,14 @@ export class ProductDisplayingBarComponent {
   @Input() productColor: number = 0;
   @Input() productSize: number = 0;
   @Input() productPrice: number = 0;
+  userId:any;
   color:any;
   size:any;
- constructor(public api: ApiServiceService, private route: ActivatedRoute) {}
+ constructor(public api: ApiServiceService, private route: ActivatedRoute,public global:GlobalService) {
+this.global.getUserId();
+ }
  ngOnInit(){
+  this.userId = this.global.userId();
   this.api.getColorById(this.productColor).subscribe({
     next: (colorData) => {
       this.color = colorData;
@@ -50,6 +55,7 @@ export class ProductDisplayingBarComponent {
   this.api.deleteFromCart(productId, userId).subscribe({
     next: (response) => {
       console.log('Item removed successfully');
+      this.global.getCartCount();
       // Handle success (e.g., show notification, refresh cart)
     },
     error: (error) => {

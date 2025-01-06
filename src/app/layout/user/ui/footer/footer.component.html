@@ -38,7 +38,24 @@
     </div>
   </div>
   <div class="row text-center">
-    <p><strong>Terms and conditions | Shipping policy | Payment policy</strong></p>
+    <div class="policyTabs">
+      <div (click)="navigateToPolicy('terms')" [class.active]="router.url.includes('terms')">
+        Terms and conditions
+      </div> |
+      <div (click)="navigateToPolicy('shipping')" [class.active]="router.url.includes('shipping')"
+        class="ShipPo">
+        Shipping policy
+      </div> |
+      <div (click)="navigateToPolicy('payment')" [class.active]="router.url.includes('payment')"
+        class="payPo">
+        Payment policy
+      </div>
+    </div>
+
+    <!-- <section class="policyTabs">
+   <div>Terms and conditions</div> | <div class="ShipPo">Shipping policy</div>  | <div class="payPo">Payment policy</div>
+    </section> -->
+
     <hr>
     <p>© 2024 HR department Experion global</p>
   </div>
