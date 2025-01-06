@@ -3,59 +3,48 @@
     <h2>Current Categories</h2>
     <div class="categories">
       @for(item of category;track item){
-        <div class="category-card">
-          <img
-            src={{item.iconPath}}
-            alt="Icon"
-          />
-          <div class="category-name"><p>{{item.categoryName}}</p></div>
-          <div class="category-actions">
-            <button><i class="bi bi-pencil-square"></i></button>
-            <button (click)="deleteCategory(item)"><i class="bi bi-trash3"></i></button>
-          </div>
+      <div class="category-card">
+        <img src="{{ item.iconPath }}" alt="Icon" />
+        <div class="category-name">
+          <p>{{ item.categoryName }}</p>
         </div>
+        <div class="category-actions">
+          <button><i class="bi bi-pencil-square"></i></button>
+          <button (click)="deleteCategory(item)">
+            <i class="bi bi-trash3"></i>
+          </button>
+        </div>
+      </div>
       }
+      <div class="add">
+          <app-add-new-category></app-add-new-category>
+      </div>
     </div>
   </section>
 
-  <div class="add-category">
-    <div class="category-component">
-      <!-- <button
-        type="button"
-        class="add-btn"
-        data-bs-toggle="modal"
-        data-bs-target="#exam"
-      >
-      </button> -->
-      <app-add-new-category></app-add-new-category>
+  <h2>Current Banners</h2>
+
+  <div class="categories">
+    @for(item of category;track item){
+    <div class="category-card">
+      <img src="{{ item.iconPath }}" alt="Icon" />
+      <div class="category-name">
+        <p>{{ item.categoryName }}</p>
+      </div>
+      <div class="category-actions">
+        <button><i class="bi bi-pencil-square"></i></button>
+        <button (click)="deleteCategory(item)">
+          <i class="bi bi-trash3"></i>
+        </button>
+      </div>
     </div>
-  </div>
-
-
-  <div class="add-banner">
-    <div class="banner-component">
-      <!-- <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#bannermodal"
-      >
-      </button> -->
-      <app-add-banner></app-add-banner>
+    }
+    <div class="add">
+        <app-add-banner></app-add-banner>
     </div>
   </div>
 
   <div class="edit-policies">
-    <!-- <span>Edit policies</span> -->
-    <!-- Button trigger modal -->
-
-    <!-- <button
-      type="button"
-      class="policy-btn"
-      data-bs-toggle="modal"
-      data-bs-target="#static"
-    >
-    </button> -->
     <app-edit-policiesapp-edit-policies></app-edit-policiesapp-edit-policies>
   </div>
 </div>

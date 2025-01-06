@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs';
 import { map, Observable } from 'rxjs';
 import { Product } from './layout/user/interfaces/productInterface';
 
@@ -66,13 +67,27 @@ getUserFeedback(){
   return this.http.get(`https://localhost:7267/api/FeedBack`)
   }
 
+  saveUserFeedback(item: any) {
+    let data = {
+      feedback: item.feedback ,// Mapping 'text' from the input to 'feedbackText' for the API
+      userId: item.userId, // Mapping 'userId' from the input
+      productName: item.productName
 
 
-// getUserFeedback(userId:number){
-//   return this.http.get(`https://localhost:7267/api/Feedback/ByUserId?userId=${userId}`);
-// saveUserFeedback(){
-//   return this.http.post(``)
-// }
+    };
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http
+      .post('https://localhost:7267/api/FeedBack', data, { headers })
+      .pipe(
+        catchError((error) => {
+          console.log('Error details:', error.error);
+          throw error;
+        })
+      );
+  }
+
 
   // getProductsById(id:any){
   //   return this.http.get(`Data/productTrail.json/${id}`)
