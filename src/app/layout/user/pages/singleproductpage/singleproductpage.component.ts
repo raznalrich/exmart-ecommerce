@@ -26,6 +26,7 @@ export class SingleproductpageComponent {
   data: any;
   constructor(public api: ApiServiceService, private route: ActivatedRoute) {}
   ngOnInit() {
+    
     // this.api.getCarouselImages().subscribe((res: any) => {
     //   this.carouselImages = res;
     //   console.log(this.carouselImages);
