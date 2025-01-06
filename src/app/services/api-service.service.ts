@@ -122,6 +122,10 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Order/orders/List');
   }
 
+  getOrderDetailsById(id:number){
+    return this.http.get(`
+    https://localhost:7267/api/Order/orders/detailsbyid/${id}`);
+  }
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
     const orderPayload = {
       userId: userId,

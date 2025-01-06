@@ -24,6 +24,7 @@ import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm
 import { AdminSettingsTextEditorComponent } from './layout/admin/pages/admin-settings-text-editor/admin-settings-text-editor.component';
 import { OrderPreviewPageComponent } from './layout/user/pages/order-preview-page/order-preview-page.component';
 import { SeeAllProductsPageComponent } from './layout/user/pages/see-all-products-page/see-all-products-page.component';
+import { TrackExmartComponent } from './layout/user/pages/track-exmart/track-exmart.component';
 
 
 export const routes: Routes = [
@@ -64,6 +65,7 @@ export const routes: Routes = [
       {
         path:"thankyou", component:ThankyoupageComponent
       },
+
       {
         path:'',redirectTo:'home',pathMatch:'full'
       }
@@ -120,6 +122,9 @@ export const routes: Routes = [
   },
   {
     path:'login',component:LoginComponent
+  },
+   {
+    path:"trackexmart/:id",component:TrackExmartComponent
   }
 
 ];
