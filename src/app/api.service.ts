@@ -58,7 +58,9 @@ getUserFeedback(){
         })
       );
   }
-
+  getAllFeedback(){
+    return this.http.get(`https://localhost:7267/api/FeedBack/all`);
+  }
 
   // getProductsById(id:any){
   //   return this.http.get(`Data/productTrail.json/${id}`)
