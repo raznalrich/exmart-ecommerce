@@ -24,7 +24,15 @@ export interface CartItem {
   colorId: number;
   userId: number;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+}
+interface PolicyUpdate {
+  id: number;
+  tndCheading: string;
+  tndCcontent: string;
+>>>>>>> Stashed changes
 }
 interface PolicyUpdate {
   id: number;
