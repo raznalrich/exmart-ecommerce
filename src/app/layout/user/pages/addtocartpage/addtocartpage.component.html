@@ -85,8 +85,13 @@
       <!-- <p><span>No of Items:</span> <span>{{global.cartCount()}}</span></p> -->
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
        @for(numberOfItems of CartItems; track numberOfItems){
+        @for(numOfCartItems of cartItemList;track numOfCartItems){
+          @if(numberOfItems.id == numOfCartItems.productId){
 
-        <p><span>{{numberOfItems.name}}</span> <span>{{numberOfItems.price | currency:'INR'}}</span></p>
+            <p><span>{{numberOfItems.name}} x <strong>{{numOfCartItems.quantity}}</strong></span> <span>{{numberOfItems.price * numOfCartItems.quantity | currency:'INR'}}</span></p>
+          }
+        }
+
        }
       @if(selectedAddress==1||selectedAddress==2){
         <p class="total"><span>Shipping : </span> <span>{{ '0'| currency:'INR'}}</span></p>
