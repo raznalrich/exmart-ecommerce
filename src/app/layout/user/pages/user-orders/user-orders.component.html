@@ -1,20 +1,70 @@
+<nav class="bg-gray-100 p-4 ">
+  <ul class="nav nav-tabs">
+    <li class="nav-item" *ngFor="let tab of tabs">
+      <a [class]="'nav-link active' + (activeTab === tab ? 'bg-blue-500 text-black border' : 'hover:bg-gray-200')" aria-current="page" (click)="setActiveTab(tab)" >
+        @if(tab === 'In Transit'){
+          <i [class]="'bi bi-truck'"></i>
+        }
+        @else {
+          <i [class]="'bi bi-box'"></i>
+        }
+        {{ tab }}</a>
+      <!-- <button
+        [class]="'px-4 py-2 rounded ' + (activeTab === tab ? 'bg-blue-500 text-white' : 'hover:bg-gray-200')"
+        (click)="setActiveTab(tab)">
+        {{ tab }}
+      </button> -->
+    </li>
+  </ul>
+</nav>
 <div
-  class="container py-4 border "
-  style=" border-radius: 24px; padding: 30px;"
+  class="container   "
+  style=" border-radius: 14px; padding: 5px"
 >
-  <app-order-section
-    title="In Transit"
-    icon="bi bi-truck"
-    maxHeight="200px"
-    [items]="inTransitOrders"
-  ></app-order-section>
+<div [ngSwitch]="activeTab">
+  <div *ngSwitchCase="'In Transit'">
+    @if(!isLoading&&!error){
 
-  <div class="mt-4">
-    <app-order-section
-      title="Order History"
-      icon="bi bi-box"
-      maxHeight="300px"
-      [items]="orderHistory"
-    ></app-order-section>
+      <app-order-section
+      title="In Transit"
+      icon="bi bi-truck"
+      maxHeight="100vh"
+      [items]="inTransitOrders"
+      ></app-order-section>
+
+  }
+  @if(isLoading){
+    <!-- <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div> -->
+    <p class="placeholder-glow">
+      <span class="placeholder col-12"></span>
+    </p>
+  }
+    <!-- <app-order-section
+      title="In Transit"
+      icon="bi bi-truck"
+      maxHeight="200px"
+      [items]="inTransitOrders">
+    </app-order-section> -->
+  </div>
+  <div *ngSwitchCase="'Pending'">
+    @if(!isLoading&&!error){
+
+      <app-order-section
+      title="In delivered"
+      icon="bi bi-truck"
+      maxHeight="100vh"
+      [items]="orderHistorylist">
+    </app-order-section>
+  }
+  @if(isLoading){
+    <!-- <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div> -->
+    <p class="placeholder-glow">
+      <span class="placeholder col-12"></span>
+    </p>
+  }
   </div>
 </div>

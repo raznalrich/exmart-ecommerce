@@ -17,7 +17,7 @@ declare var bootstrap: any;
   styleUrl: './orderlist-table.component.scss'
 })
 export class OrderlistTableComponent {
-  @Input() OrderList:any;
+  @Input() OrderList:any [] = [];
 
   selectedStatus: number = 0;
   selectedOrder: any = null;
@@ -59,7 +59,7 @@ export class OrderlistTableComponent {
 
     if (this.selectedOrder && this.selectedStatus !== null) {
       const OrderListDTO = {
-        orderId: this.selectedOrder.orderId,
+        orderItemId: this.selectedOrder.orderItemId,
         productStatusId: this.selectedStatus
       };
       console.log(OrderListDTO)
@@ -77,6 +77,7 @@ export class OrderlistTableComponent {
     this.api.GetOrderDetailById(orderId).subscribe((res:any)=>{
         this.OrderDetailsByID = res
         console.log(this.OrderDetailsByID)
+        console.log(this.OrderDetailsByID.orderItems)
     })
 
     const modalElement = document.getElementById('orderDetailModal');
