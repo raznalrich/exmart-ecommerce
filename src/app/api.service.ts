@@ -67,6 +67,13 @@ getUserFeedback(){
   return this.http.get(`https://localhost:7267/api/FeedBack`)
   }
 
+
+
+// getUserFeedback(userId:number){
+//   return this.http.get(`https://localhost:7267/api/Feedback/ByUserId?userId=${userId}`);
+// saveUserFeedback(){
+//   return this.http.post(``)
+// }
   saveUserFeedback(item: any) {
     let data = {
       feedback: item.feedback ,// Mapping 'text' from the input to 'feedbackText' for the API
@@ -87,7 +94,9 @@ getUserFeedback(){
         })
       );
   }
-
+  getAllFeedback(){
+    return this.http.get(`https://localhost:7267/api/FeedBack/all`);
+  }
 
   // getProductsById(id:any){
   //   return this.http.get(`Data/productTrail.json/${id}`)
@@ -107,4 +116,11 @@ getUserFeedback(){
 //   getImagesByProductId(id:number){
 //   return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
 // }
+
 }
+function saveUserFeedback(item: any, any: any) {
+  throw new Error('Function not implemented.');
+}
+
+
+
