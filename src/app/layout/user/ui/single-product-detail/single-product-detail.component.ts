@@ -10,11 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 import { ColorButtonComponent } from '../color-button/color-button.component';
 import { SizeButtonComponent } from '../size-button/size-button.component';
 import { FormsModule } from '@angular/forms';
+import { LongButtonComponent } from "../long-button/long-button.component";
+import { WebFeedbackSectionComponent } from "../web-feedback-section/web-feedback-section.component";
+import { ProductFeedbackComponent } from "../product-feedback/product-feedback.component";
 
 @Component({
   selector: 'app-single-product-detail',
   standalone: true,
-  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent, FormsModule],
+  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent, FormsModule, WebFeedbackSectionComponent, ProductFeedbackComponent],
   templateUrl: './single-product-detail.component.html',
   styleUrl: './single-product-detail.component.scss',
 })
