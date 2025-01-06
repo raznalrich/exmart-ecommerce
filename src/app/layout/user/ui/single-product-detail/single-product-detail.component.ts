@@ -10,11 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 import { ColorButtonComponent } from '../color-button/color-button.component';
 import { SizeButtonComponent } from '../size-button/size-button.component';
 import { FormsModule } from '@angular/forms';
+import { LongButtonComponent } from "../long-button/long-button.component";
+import { WebFeedbackSectionComponent } from "../web-feedback-section/web-feedback-section.component";
+import { ProductFeedbackComponent } from "../product-feedback/product-feedback.component";
 
 @Component({
   selector: 'app-single-product-detail',
   standalone: true,
-  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent, FormsModule],
+  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent, FormsModule, WebFeedbackSectionComponent, ProductFeedbackComponent],
   templateUrl: './single-product-detail.component.html',
   styleUrl: './single-product-detail.component.scss',
 })
@@ -32,7 +35,9 @@ message:string='';
     public api: ApiService,
     public cartService: GlobalService,
     public apis: ApiServiceService
-  ) {}
+  ) {
+    cartService.getUserId();
+  }
 
   handleColorSelect(res: any) {
     console.log('Selected color:', res);
@@ -56,6 +61,7 @@ message:string='';
       const idParam = paramMap.get('id');
       this.id = idParam ? Number(idParam) : null;
     });
+    this.userId = this.cartService.userId();
   }
 
   checkSelection() {
@@ -67,7 +73,7 @@ message:string='';
 }
 
   addtocart() {
-    this.userId = 1; // Replace with dynamic userId if needed
+   // Replace with dynamic userId if needed
     console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
 
     // // Check if color and size are selected
