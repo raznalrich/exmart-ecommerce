@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule ,Validators} from '@angular/forms';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { Router } from '@angular/router';
-import * as bootstrap from 'bootstrap'
+// import * as bootstrap from 'bootstrap'
 
 @Component({
   selector: 'app-login-form',
@@ -41,8 +41,8 @@ export class LoginFormComponent {
         if(userId==null){
           const modalElement = document.getElementById('exampleModal');
           if(modalElement){
-            const modal = new bootstrap.Modal(modalElement);
-            modal.show();
+            // const modal = new bootstrap.Modal(modalElement);
+            // modal.show();
           }
           else{
             console.error('modal element not found');

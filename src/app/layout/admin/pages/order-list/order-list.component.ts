@@ -25,7 +25,7 @@ export class OrderListComponent {
   orderlist: any[] = [];
   constructor(public api: ApiServiceService) {}
   ngOnInit() {
-    this.api.getOrderDetails().subscribe((res: any) => {
+    this.api.getOrderList().subscribe((res: any) => {
       this.orderlist = res;
       console.log('orderlist', this.orderlist);
     });
@@ -37,29 +37,27 @@ export class OrderListComponent {
 
     // Step 2: Add Columns (Headers)
     worksheet.columns = [
-      { header: 'Customer ID', key: 'customerId', width: 15 },
-      { header: 'Customer Name', key: 'customerName', width: 25 },
-      { header: 'Order Date', key: 'orderDate', width: 15 },
-      { header: 'Order ID', key: 'orderId', width: 10 },
-      { header: 'Total Items', key: 'totalItems', width: 12 },
-      { header: 'Total Amount', key: 'totalAmount', width: 15 },
-      { header: 'Status', key: 'status', width: 15 }, // Dropdown column
+      { header: 'Order Item Id', key: 'orderItemId', width: 15 },
+      { header: 'Date', key: 'orderDate', width: 20 },
+      { header: 'Product', key: 'productName', width: 25 },
+      { header: 'Status', key: 'status', width: 15 },
+      { header: 'Amount', key: 'amount', width: 15 },
+      { header: 'Quantity', key: 'quantity', width: 10 },
     ];
 
-    // Step 3: Add Rows (API Data)
+    // Step 3: Map API Data to Columns
     const data = this.orderlist.map((order) => ({
-      customerId: order.customerId,
-      customerName: order.customerName,
+      orderItemId: order.orderItemId,
       orderDate: new Date(order.orderDate).toLocaleDateString(),
-      orderId: order.orderId,
-      totalItems: order.totalItems,
-      totalAmount: order.totalAmount.toFixed(2),
+      productName: order.productName,
       status:
         order.status === 1
           ? 'Pending'
           : order.status === 2
           ? 'Shipped'
           : 'Delivered',
+      amount: order.amount.toFixed(2),
+      quantity: order.quantity,
     }));
 
     data.forEach((row) => worksheet.addRow(row));
