@@ -1,6 +1,11 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bannermodal">
+  <span>Add Banner</span><i class="bi bi-clipboard-plus"></i>
+</button>
+
 <div
-  *ngIf="isModalVisible"
-  class="modal fade show d-block"
+  class="modal fade"
+  id="bannermodal"
+  #bannerModal
   tabindex="-1"
   aria-labelledby="addBannerModalLabel"
   aria-hidden="true"
@@ -60,7 +65,7 @@
             <input
               type="text"
               class="form-control"
-              [value]="selectedProduct?.name || ''"
+              [value]="selectedProduct.name || ''"
               readonly
             />
           </div>
@@ -102,6 +107,7 @@
               type="button"
               class="btn btn-secondary"
               (click)="closeModal()"
+              aria-label="Close"
             >
               Close
             </button>
