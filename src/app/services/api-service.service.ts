@@ -13,6 +13,7 @@ export interface OrderEmailContext {
     price: number;
     subtotal: number;
   }>;
+
   totalAmount: number;
   shippingAddress: string;
   orderDate: Date;
@@ -23,29 +24,13 @@ export interface CartItem {
   sizeId: number;
   colorId: number;
   userId: number;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
 }
-interface PolicyUpdate {
-  id: number;
-  tndCheading: string;
-  tndCcontent: string;
->>>>>>> Stashed changes
-}
-interface PolicyUpdate {
-  id: number;
-  tndCheading: string;
-  tndCcontent: string;
->>>>>>> Stashed changes
-}
+
 interface PolicyUpdate {
   id: number;
   tndCheading: string;
   tndCcontent: string;
 }
-<<<<<<< HEAD
 
 export interface AddAddressDTO {
   userId: number;
@@ -55,10 +40,7 @@ export interface AddAddressDTO {
   city: string;
   district: string;
   state: string;
-  zipCode: string;
 }
-=======
->>>>>>> c16255f0ed45ed35b47a0df08f9c0120da810c43
 
 @Injectable({
   providedIn: 'root',
@@ -67,8 +49,6 @@ export class ApiServiceService {
   map(
     arg0: (order: any) => {
       CustomerID: any;
-      CustomerName: any;
-      OrderDate: string;
       OrderID: any;
       TotalItems: any;
       TotalAmount: any;
@@ -256,18 +236,12 @@ export class ApiServiceService {
     );
   }
 
-<<<<<<< HEAD
   addAddress(address: AddAddressDTO){
     return this.http.post(`https://localhost:7267/api/Users/addAddress`,address);
   }
 
   getAddressByUserId(id:number){
     return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
-=======
-  getAddressByUserId(id: number) {
-    // return this.http.get(`https://localhost:7267/api/Users/${id}`)
-    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`);
->>>>>>> c16255f0ed45ed35b47a0df08f9c0120da810c43
   }
 
   getAddressById(id:number){
