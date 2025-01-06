@@ -1,0 +1,5 @@
+@for(policy of policyContent; track policy.id){
+  <div class="policy-item"  data-bs-dismiss="modal" aria-label="Close" (click)="openPolicy(policy.id)" >
+    <span class="policy-name">{{policy.tndCheading}}</span>
+  </div>
+}
