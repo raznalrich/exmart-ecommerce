@@ -24,8 +24,10 @@ import { AddressConfirmPageComponent } from './layout/user/pages/address-confirm
 import { AdminSettingsTextEditorComponent } from './layout/admin/pages/admin-settings-text-editor/admin-settings-text-editor.component';
 import { OrderPreviewPageComponent } from './layout/user/pages/order-preview-page/order-preview-page.component';
 import { SeeAllProductsPageComponent } from './layout/user/pages/see-all-products-page/see-all-products-page.component';
+import { EditPoliciesComponent } from './layout/admin/ui/edit-policies/edit-policies.component';
+import { PolicyPageComponent } from './layout/user/pages/policy-page/policy-page.component';
+import { PolicyContentComponent } from './layout/user/ui/policy-content/policy-content.component';
 import { TrackExmartComponent } from './layout/user/pages/track-exmart/track-exmart.component';
-
 
 export const routes: Routes = [
   {
@@ -38,11 +40,22 @@ export const routes: Routes = [
           },
           {
             path:'',redirectTo:'category/1',pathMatch:'full'
-          }
-
+          },
         ],
 
       },
+      {
+        path: 'policies',
+        component: PolicyPageComponent,
+        children: [
+          { path: '', redirectTo: 'terms', pathMatch: 'full' },
+          { path: ':type', component: PolicyContentComponent }
+        ]
+      },
+
+      // {
+      //   path: 'policy/:id',component:PolicyPageComponent
+      // },
       {
         path:'viewproduct/:id',component:SingleproductpageComponent
       },
@@ -108,16 +121,11 @@ export const routes: Routes = [
         path:'dialoguebox',component:AddProductsComponent
       },
       {
-        path:'settings',component:SettingsPageComponent,children:[
-          {
-            path:'texteditor',component:AdminSettingsTextEditorComponent
-          }
-        ]
-
+        path:'settings',component:SettingsPageComponent
       },
-
-
-
+      {
+        path:'texteditor/:id',component:AdminSettingsTextEditorComponent
+      }
     ]
   },
   {
