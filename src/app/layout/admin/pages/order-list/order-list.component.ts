@@ -6,7 +6,6 @@ import { AdminValuesDisplayingButtonComponent } from '../../ui/admin-values-disp
 import { DateRangepickerComponent } from '../../ui/date-rangepicker/date-rangepicker.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import * as ExcelJS from 'exceljs';
-import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 
 @Component({
