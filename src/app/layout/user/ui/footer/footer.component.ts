@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiServiceService } from '../../../../services/api-service.service';
 
 @Component({
@@ -79,4 +80,9 @@ private async loadTemplate() {
 
   }
 
+  constructor(public router: Router) {}
+
+  navigateToPolicy(type: string) {
+    this.router.navigate(['/policies', type]);
+  }
 }

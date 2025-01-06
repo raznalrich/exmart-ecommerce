@@ -6,11 +6,13 @@
     <div class="leftCont">
       <div class="leftTopIcons">
 
-          <app-admin-values-displaying-button
-        [count]="12"
+        <p>Pending Orders: {{pendingOrdersCount}}</p>
+      <p>Total Pending Amount: {{pendingOrdersAmount }}</p>
+          <!-- <app-admin-values-displaying-button
+        [count]={{pendingOrdersCount}}
         [iconSrc]="'icons/graph.png'"
         [label]="'Pending Orders'">
-        ></app-admin-values-displaying-button>
+        ></app-admin-values-displaying-button> -->
 
         <app-admin-values-displaying-button
         [count]="2000"
