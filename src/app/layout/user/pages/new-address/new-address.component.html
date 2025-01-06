@@ -1,11 +1,11 @@
-<div class="container" >
+<!-- <div class="container" >
   <form>
     <div class="row g-3">
       <div class="col-md-6">
         <app-text-input
-          label="Email"
-          id="inputEmail4"
-          type="email"
+          label="Name"
+          id="inputName"
+          type="name"
         ></app-text-input>
       </div>
       <div class="col-md-6">
@@ -15,11 +15,14 @@
         <app-text-input
           label="Address"
           id="inputAddress"
-          placeholder="1234 Main St"
+          placeholder="House No/Building No"
         ></app-text-input>
       </div>
       <div class="col-md-6">
         <app-text-input label="City" id="inputCity"></app-text-input>
+      </div>
+      <div class="col-md-6">
+        <app-text-input label="District" id="inputDistrict"></app-text-input>
       </div>
       <div class="col-md-4">
         <app-select-input
@@ -43,8 +46,8 @@
       </div>
     </div>
 
-    <div class="col-12 d-flex justify-content-end mt-3">
-      <app-save-button
+    <div class="col-12 d-flex justify-content-end mt-3"> -->
+      <!-- <app-save-button
 
         [label]="'Save'"
         (clickEvent)="onSave($event)"
@@ -54,8 +57,65 @@
         data-bs-dismiss="modal"
         class="ms-3"
         (clickEvent)="onCancel($event)"
-      ></app-cancel-button>
-    </div>
+      ></app-cancel-button> -->
+    <!-- </div>
 
   </form>
-</div>
+</div> -->
+
+
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" formControlName="name">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Address Type</label>
+    <select class="form-select" formControlName="addressTypeName">
+      <option value="Home">Home</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Building No</label>
+    <input type="text" class="form-control" formControlName="buildingNo">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">City</label>
+    <input type="text" class="form-control" formControlName="city">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">District</label>
+    <input type="text" class="form-control" formControlName="district">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">State</label>
+    <input type="text" class="form-control" formControlName="state">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Pincode</label>
+    <input type="text" class="form-control" formControlName="pincode">
+  </div>
+
+  <!-- <div class="mb-3">
+    <label class="form-label">Phone Number</label>
+    <input type="text" class="form-control" formControlName="phoneNo">
+    <div *ngIf="addressForm.get('phoneNo')?.errors?.['pattern']" class="text-danger">
+      Please enter a valid 10-digit phone number
+    </div>
+  </div> -->
+
+  <div class="d-flex justify-content-end gap-2">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="addressForm.valid || isSubmitting">
+      <span class="spinner-border spinner-border-sm me-2" *ngIf="isSubmitting"></span>
+      {{ editMode ? 'Update' : 'Save' }} Address
+    </button>
+  </div>
+</form>

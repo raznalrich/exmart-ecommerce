@@ -31,26 +31,11 @@ export class ProfileAddressCardComponent {
     country: '',
     phoneNo: '',
   };
-  @Output() edit = new EventEmitter<{id:number,data:any}>();
+  @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
 
   onEdit() {
-const updateData={
-id:this.address.id,
-data:{
-  name: this.address.name,
-  addressTypeName: this.address.addressTypeName,
-  place: this.address.place,
-  buildingNo: this.address.buildingNo,
-  pincode: this.address.pincode,
-  city: this.address.city,
-  district: this.address.district,
-  state: this.address.state,
-  country: this.address.country,
-  phoneNo: this.address.phoneNo,
-}
-}
-    this.edit.emit(updateData);
+    this.edit.emit(this.address.id);
 
   }
 

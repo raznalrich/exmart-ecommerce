@@ -154,16 +154,20 @@ export class ApiServiceService {
     );
   }
 
-  // addAddress(address: AddAddressDTO){
-  //   return this.http.post(`https://localhost:7267/api/Users/addAddress`);
-  // }
+  addAddress(address: AddAddressDTO){
+    return this.http.post(`https://localhost:7267/api/Users/addAddress`,address);
+  }
 
   getAddressByUserId(id:number){
     return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
   }
 
+  getAddressById(id:number){
+    return this.http.get(`https://localhost:7267/api/Users/getAddressById/${id}`)
+  }
+
   editAddressById(id:number,addAddressDTO:any){
-    return this.http.get(`https://localhost:7267/api/Users/editAddress/${id}`,addAddressDTO)
+    return this.http.patch(`https://localhost:7267/api/Users/editAddress/${id}`,addAddressDTO)
   }
 
   deleteAddressById(id:number){
