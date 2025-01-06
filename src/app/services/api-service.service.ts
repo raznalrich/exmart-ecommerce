@@ -3,6 +3,20 @@ import { Injectable, signal } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
+
+export interface OrderEmailContext {
+  orderId: string;
+  customerName: string;
+  items: Array<{
+    productName: string;
+    quantity: number;
+    price: number;
+    subtotal: number;
+  }>;
+  totalAmount: number;
+  shippingAddress: string;
+  orderDate: Date;
+}
 export interface CartItem {
   productId: number;
   quantity: number;
@@ -114,9 +128,12 @@ export class ApiServiceService {
       addressId: addressId,
       orderItems: cartItems.map((item) => ({
         productId: item.productId,
+        productName:'',
         quantity: item.quantity,
         sizeId: item.sizeId,
+        sizeName:'',
         colorId: item.colorId,
+        colorName:''
       })),
     };
     console.log(orderPayload);
@@ -158,6 +175,35 @@ export class ApiServiceService {
     return this.http.get(
       `https://localhost:7267/api/Config/GetColorById?id=${id}`
     );
+  }
+  checkUserIdIsExisted(id:number){
+    return this.http.get(`https://localhost:7267/api/Users/CheckUserExisted/${id}`);
+  }
+  IsAdmin(id:number){
+    return this.http.get(`https://localhost:7267/api/Admin/Check/${id}`);
+  }
+  returnIdFromEmail(email:string){
+    return this.http.get(`https://localhost:7267/api/Users/ReturnIdfromemail/${email}`);
+  }
+  addNewUser(email:string,name:string,phone:string){
+    let data = {
+      email: email, // Changed from 'name' to 'categoryName'
+      name: name, // Changed from 'icon' to 'iconPath'
+      phone:phone,
+      orders: [], // Provide empty array
+  feedbacks: [] // Provide empty array
+    };
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http
+      .post('https://localhost:7267/api/Users', data, { headers })
+      .pipe(
+        catchError((error) => {
+          console.log('Error details:', error.error);
+          throw error;
+        })
+      );
   }
   getSizeById(id: number) {
     return this.http.get(
