@@ -31,6 +31,8 @@ export class ReportPageComponent {
   }
 
   onDateRangeSelected(dateRange: { startDate: string; endDate: string }) {
+console.log("button clicked");
+
     const { startDate, endDate } = dateRange;
 
     if (startDate && endDate) {
@@ -47,7 +49,6 @@ export class ReportPageComponent {
             console.warn('Invalid purchase date:', item.purchase_date);
             return false;
           }
-
           return purchaseDate >= start && purchaseDate <= end;
         } catch (error) {
           console.error('Date parsing error:', error);
@@ -60,7 +61,7 @@ export class ReportPageComponent {
   }
 
   downloadReport() {
-    console.log('Download Report');
+    // console.log('Download Report');
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
       this.filteredItems
     );

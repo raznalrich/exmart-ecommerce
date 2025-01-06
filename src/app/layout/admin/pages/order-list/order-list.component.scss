@@ -1,30 +1,45 @@
 body {
   font-family: Arial, sans-serif;
 }
-.container{
+.right {
+  padding-left: 10px;
+  padding-right: 10px;
+  gap: 5px;
+  button {
+    height: 40px;
+    width: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #8061c3;
+    color: white;
+    i {
+      margin-right: 3px;
+    }
+  }
+}
+
+.container {
   display: flex;
   flex-direction: row;
   padding: 20px;
 }
-.first-container{
+.first-container {
   display: flex;
-  // flex-direction: column;
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  .top{
+  .top {
     display: flex;
     width: 100%;
     justify-content: space-between;
     // align-items: center;
   }
-
 }
-.second-container{
+.second-container {
   display: flex;
   flex-direction: column;
 }
-.count-box{
+.count-box {
   display: flex;
   // flex-direction: row;
   justify-items: end;
@@ -33,21 +48,19 @@ body {
   gap: 1rem;
 }
 
-.date-select{
+.date-select {
   border-radius: 10px;
   padding: 10px;
 }
 
-
-
-.box-container{
+.box-container {
   display: flex;
   flex-direction: column;
   gap: 50px;
   margin-left: 6rem;
   margin: 2rem;
 }
-.box-date{
+.box-date {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -57,7 +70,7 @@ body {
   padding: 5px;
 }
 
-.box{
+.box {
   width: 250px;
   height: auto;
   // border: 1px solid black;
@@ -71,14 +84,14 @@ body {
   padding-top: 10px;
   padding: 5px;
 }
-.box .heading{
+.box .heading {
   font-size: larger;
 }
-.box .count{
+.box .count {
   font-size: 40px;
   font-weight: 700;
 }
-.heading{
+.heading {
   font-size: 1.2rem;
   margin: 10px 0 0;
   font-size: xx-large;
@@ -89,8 +102,12 @@ body {
 }
 
 .delivered {
-  background: linear-gradient(135deg, rgba(118, 219, 161, 0.8705882353), rgb(121 200 109 / 17%));
+  background: linear-gradient(
+    135deg,
+    rgba(118, 219, 161, 0.8705882353),
+    rgb(121 200 109 / 17%)
+  );
 }
-.total-orders  :hover{
+.total-orders :hover {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }

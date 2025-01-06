@@ -30,7 +30,7 @@
                         <td>{{item.customerId}}</td>
                         <td>{{item.customerName}}</td>
                         <td>{{item.orderId}}</td>
-                        <td>{{item.orderDate}}</td>
+                        <td>{{item.orderDate | date : "dd-MM-YYYY"}}</td>
                         <td>{{item.totalAmount}}</td>
                     </tr>
                     }

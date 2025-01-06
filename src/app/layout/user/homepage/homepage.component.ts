@@ -15,5 +15,6 @@ export class HomepageComponent {
 constructor(public global:GlobalService){}
 ngOnInit(){
   this.global.getCartCount();
+  this.global.getUserId();
 }
 }
