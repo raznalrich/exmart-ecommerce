@@ -4,17 +4,8 @@ import { ApiServiceService } from '../../../../services/api-service.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CategoryButtonComponent } from "../../ui/category-button/category-button.component";
 import { CommonModule } from '@angular/common';
+import { Category, Product } from '../../interfaces/productInterface';
 
-interface Product {
-  categoryName: string;
-  id: number;
-  name: string;
-  category: string;
-}
-interface Category {
-  id: number;
-  categoryName: string;
-}
 
 @Component({
   selector: 'app-see-all-products-page',
@@ -41,15 +32,15 @@ ngOnInit(){
   this.api.getProducts().subscribe((res: any) => {
     this.allProList = res;
     this.displayedProducts = [...this.allProList];
-    // console.log(this.allProList)
-    console.log('DisplayedPro API:', this.displayedProducts);
+    console.log('DisplayedPro API v1:',this.allProList)
+    // console.log('DisplayedPro API:', this.displayedProducts);
   });
 
-    this.api.getAllCategories().subscribe((res: any) => {
-      this.CategoryList = res;
-      console.log('Categories API:', this.CategoryList);
-    });
-    this.filterProducts();
+    // this.api.getAllCategories().subscribe((res: any) => {
+    //   this.CategoryList = res;
+    //   console.log('Categories API:', this.CategoryList);
+    // });
+    // this.filterProducts();
   }
   toggleCategory(categoryName: string) {
     if (this.selectedCategories.has(categoryName)) {

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import { catchError, Observable, switchMap } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
 
@@ -24,12 +24,27 @@ export interface CartItem {
   colorId: number;
   userId: number;
 }
+interface PolicyUpdate {
+  id: number;
+  tndCheading: string;
+  tndCcontent: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiServiceService {
-  map(arg0: (order: any) => { CustomerID: any; CustomerName: any; OrderDate: string; OrderID: any; TotalItems: any; TotalAmount: any; Status: any; }) {
+  map(
+    arg0: (order: any) => {
+      CustomerID: any;
+      CustomerName: any;
+      OrderDate: string;
+      OrderID: any;
+      TotalItems: any;
+      TotalAmount: any;
+      Status: any;
+    }
+  ) {
     throw new Error('Method not implemented.');
   }
   constructor(private http: HttpClient) {}
@@ -164,13 +179,9 @@ export class ApiServiceService {
       .set('receptor', email)
       .set('subject', subject)
       .set('body', body)
-      .set('isBodyHtml', 'true');  // Adding HTML flag as parameter
+      .set('isBodyHtml', 'true'); // Adding HTML flag as parameter
 
-    return this.http.post(
-      'https://localhost:7267/api/email',
-      null,
-      { params }
-    );
+    return this.http.post('https://localhost:7267/api/email', null, { params });
   }
   getAllCategories() {
     return this.http.get('https://localhost:7267/api/Categories');
@@ -180,22 +191,26 @@ export class ApiServiceService {
       `https://localhost:7267/api/Config/GetColorById?id=${id}`
     );
   }
-  checkUserIdIsExisted(id:number){
-    return this.http.get(`https://localhost:7267/api/Users/CheckUserExisted/${id}`);
+  checkUserIdIsExisted(id: number) {
+    return this.http.get(
+      `https://localhost:7267/api/Users/CheckUserExisted/${id}`
+    );
   }
-  IsAdmin(id:number){
+  IsAdmin(id: number) {
     return this.http.get(`https://localhost:7267/api/Admin/Check/${id}`);
   }
-  returnIdFromEmail(email:string){
-    return this.http.get(`https://localhost:7267/api/Users/ReturnIdfromemail/${email}`);
+  returnIdFromEmail(email: string) {
+    return this.http.get(
+      `https://localhost:7267/api/Users/ReturnIdfromemail/${email}`
+    );
   }
-  addNewUser(email:string,name:string,phone:string){
+  addNewUser(email: string, name: string, phone: string) {
     let data = {
       email: email, // Changed from 'name' to 'categoryName'
       name: name, // Changed from 'icon' to 'iconPath'
-      phone:phone,
+      phone: phone,
       orders: [], // Provide empty array
-  feedbacks: [] // Provide empty array
+      feedbacks: [], // Provide empty array
     };
 
     const headers = { 'Content-Type': 'application/json' };
@@ -215,14 +230,14 @@ export class ApiServiceService {
     );
   }
 
-  getAddressByUserId(id:number){
+  getAddressByUserId(id: number) {
     // return this.http.get(`https://localhost:7267/api/Users/${id}`)
-    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
+    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`);
   }
 
   getOrderList() {
     return this.http.get(`https://localhost:7267/api/Order/orderItem/List`);
-    // return this.http.get(`Data/OrderList.json`);
+    // return this.http.get('https://localhost:7267/api/Order/orders/List');
   }
 
   getAllOrderList() {
@@ -297,5 +312,34 @@ export class ApiServiceService {
     return this.http.get(
       `https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`
     );
+  }
+
+  GetPolicy(){
+    return this.http.get(`https://localhost:7267/api/Policy`)
+  }
+  GetPolicyById(id:number){
+    return this.http.get(`https://localhost:7267/api/Policy/${id}`);
+  }
+  UpdatePolicy(id:number,policyContent:string){
+
+    return this.GetPolicyById(id).pipe(
+      switchMap((existingPolicy: any) => {
+        const updatePayload: PolicyUpdate = {
+          id: id,
+          tndCheading: existingPolicy.tndCheading, // Preserve the existing heading
+          tndCcontent: policyContent
+        };
+        return this.http.put(`https://localhost:7267/api/Policy/${id}`, updatePayload);
+      })
+    );
+
+
+
+    // const payload = {
+    //   tndCcontent: policyContent
+    // };
+    // return this.http.put(`https://localhost:7267/api/Policy/${id}`, payload);
+
+    // return this.http.put(`https://localhost:7267/api/Policy/${id}`,policyContent);
   }
 }
