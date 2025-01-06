@@ -17,7 +17,7 @@
       </div>
       }
       <div class="add">
-          <app-add-new-category></app-add-new-category>
+        <app-add-new-category></app-add-new-category>
       </div>
     </div>
   </section>
@@ -25,22 +25,22 @@
   <h2>Current Banners</h2>
 
   <div class="categories">
-    @for(item of category;track item){
+    @for(item of banners;track item){
     <div class="category-card">
-      <img src="{{ item.iconPath }}" alt="Icon" />
+      <img [src]="item.imageUrl" alt="Banner" />
       <div class="category-name">
-        <p>{{ item.categoryName }}</p>
+        <p>{{ item.productName }}</p>
       </div>
       <div class="category-actions">
         <button><i class="bi bi-pencil-square"></i></button>
-        <button (click)="deleteCategory(item)">
+        <button (click)="deleteBanner(item)">
           <i class="bi bi-trash3"></i>
         </button>
       </div>
     </div>
     }
     <div class="add">
-        <app-add-banner></app-add-banner>
+      <app-add-banner [bannerCount]="banners.length"></app-add-banner>
     </div>
   </div>
 

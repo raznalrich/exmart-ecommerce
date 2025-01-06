@@ -1,4 +1,10 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bannermodal">
+<button
+  *ngIf="bannerCount < 3"
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#bannermodal"
+>
   <i class="bi bi-plus"></i>
 </button>
 
