@@ -20,44 +20,44 @@ export class ApiService {
 
   // Fetch all categories
   getAllCategories(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/Categories`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get<any[]>(`${this.baseUrl}/Categories`)
+      .pipe(catchError(this.handleError));
   }
 
   // Fetch all sizes (Corrected Endpoint)
   getAllSizes(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/Config/GetAllSizes`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get<any[]>(`${this.baseUrl}/Config/GetAllSizes`)
+      .pipe(catchError(this.handleError));
   }
 
   // Fetch all colors (Corrected Endpoint)
   getAllColors(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/Config/GetAllColors`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get<any[]>(`${this.baseUrl}/Config/GetAllColors`)
+      .pipe(catchError(this.handleError));
   }
 
   // Fetch card images from local JSON
   getCardImages(): Observable<any> {
-    return this.http.get(`Data/carouselImages.json`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(`Data/carouselImages.json`)
+      .pipe(catchError(this.handleError));
   }
 
   // Fetch product details from local JSON
   getProductDetails(): Observable<any> {
-    return this.http.get(`Data/details.json`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(`Data/details.json`)
+      .pipe(catchError(this.handleError));
   }
 
   // Fetch carousel images from local JSON
   getCarouselImages(): Observable<any> {
-    return this.http.get(`Data/carouselImages.json`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(`Data/carouselImages.json`)
+      .pipe(catchError(this.handleError));
   }
 
   // Fetch products from local JSON
@@ -67,9 +67,9 @@ export class ApiService {
 
   // Add a new product
   addProduct(payload: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Product/add-product`, payload).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .post(`${this.baseUrl}/Product/add-product`, payload)
+      .pipe(catchError(this.handleError));
   }
 
   addBanner(payload: any): Observable<any> {
@@ -80,11 +80,18 @@ uploadImage(file: File) {
   const formData = new FormData();
   formData.append('file', file);
 
-    return this.http.post<{ imageUrl: string }>(
-      `${this.baseUrl}/ImageUpload/upload-image`,
-      formData
-    ).pipe(
-      catchError(this.handleError)
+    return this.http
+      .post<{ imageUrl: string }>(
+        `${this.baseUrl}/ImageUpload/upload-image`,
+        formData
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  updateProduct(productId: number, productData: any): Observable<any> {
+    return this.http.put(
+      `https://localhost:7267/api/Product/Update/${productId}`,
+      productData
     );
   }
 
@@ -100,23 +107,23 @@ uploadImage(file: File) {
 
   // Fetch user address from local JSON
   getUserAddress(): Observable<any> {
-    return this.http.get(`Data/address.json`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(`Data/address.json`)
+      .pipe(catchError(this.handleError));
   }
 
   // Fetch user feedback
   getUserFeedback(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/FeedBack`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(`${this.baseUrl}/FeedBack`)
+      .pipe(catchError(this.handleError));
   }
 
   // Save user feedback
   saveUserFeedback(item: any): Observable<any> {
     const data = {
-      feedback: item.feedback,       // Mapping 'feedback' from input
-      userId: item.userId,           // Mapping 'userId' from input
+      feedback: item.feedback, // Mapping 'feedback' from input
+      userId: item.userId, // Mapping 'userId' from input
       productName: item.productName, // Mapping 'productName' from input
     };
 

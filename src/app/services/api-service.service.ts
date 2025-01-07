@@ -1,9 +1,17 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError, Observable, switchMap } from 'rxjs';
+import { catchError, map, Observable, switchMap } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
-
+interface AddressResponse {
+  id: number;
+  addressLine: string;
+  city: string;
+  district: string;
+  state: string;
+  zipCode: string;
+  // ... other fields
+}
 export interface OrderEmailContext {
   orderId: string;
   customerName: string;
@@ -134,12 +142,20 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Product');
   }
   getOrderDetails() {
-    return this.http.get('https://localhost:7267/api/Order/orderItem/List');
+    return this.http.get('https://localhost:7267/api/Order/orders/List');
+    // return this.http.get('https://localhost:7267/api/Order/orderItem/List');
   }
 
   getOrderDetailsById(id:number){
     return this.http.get(`
     https://localhost:7267/api/Order/orders/detailsbyid/${id}`);
+  }
+  updateOrderStatusbyid(orderId: number): Observable<any> {
+    const baseUrl = 'https://localhost:7267/api';
+    return this.http.put(
+      `${baseUrl}/Order/updatestatusbyidonly/${orderId}`,
+      null  // No body needed for this request
+    );
   }
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
     const orderPayload = {
@@ -161,6 +177,15 @@ export class ApiServiceService {
       'https://localhost:7267/api/Order/placeorder',
       orderPayload
     );
+  }
+
+  getAddressById(id: number): Observable<string> {
+    return this.http.get<AddressResponse>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+      .pipe(
+        map(response => {
+          return `${response.addressLine} , ${response.city} , ${response.district} , ${response.state} , ${response.zipCode}`;
+        })
+      );
   }
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(

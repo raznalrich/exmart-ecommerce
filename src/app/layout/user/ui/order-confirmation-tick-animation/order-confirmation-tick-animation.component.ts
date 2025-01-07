@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AnimationStateService } from '../../../../services/animation-state.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { AnimationStateService } from '../../../../services/animation-state.serv
   styleUrl: './order-confirmation-tick-animation.component.scss'
 })
 export class OrderConfirmationTickAnimationComponent {
+  @Input() text = ''
 
   isContentVisible = false;
   animationComplete = false;
