@@ -256,12 +256,23 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Categories');
   }
 
+  getAllBanners(){
+    return this.http.get('https://localhost:7267/api/Banner')
+  }
+
   categoryDeletion(id: any) {
     this.http
       .delete(`https://localhost:7267/api/Categories/${id}`)
       .subscribe((res) => {
         console.log(res);
       });
+  }
+
+  bannerDelete(id:any) {
+    this.http.delete(`https://localhost:7267/api/Banner/${id}`)
+    .subscribe((res) => {
+      console.log(res);
+    })
   }
 
   addCategory(item: any) {

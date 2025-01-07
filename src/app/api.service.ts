@@ -1,8 +1,8 @@
 // api.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, throwError, map, Observable } from 'rxjs';
+import { Product } from './layout/user/interfaces/productInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -74,16 +74,29 @@ export class ApiService {
     );
   }
 
-  // Upload an image
-  uploadImage(file: File): Observable<{ imageUrl: string }> {
-    const formData = new FormData();
-    formData.append('file', file);
+  addBanner(payload: any): Observable<any> {
+     return this.http.post(`${this.baseUrl}/Banner`, payload)
+  }
+
+uploadImage(file: File) {
+  const formData = new FormData();
+  formData.append('file', file);
 
     return this.http.post<{ imageUrl: string }>(
       `${this.baseUrl}/ImageUpload/upload-image`,
       formData
     ).pipe(
       catchError(this.handleError)
+    );
+  }
+
+
+
+  searchProducts(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
+        query
+      )}`
     );
   }
 
