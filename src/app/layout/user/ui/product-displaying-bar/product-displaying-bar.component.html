@@ -1,19 +1,25 @@
 <div class="product-card">
-  <img [src]="productImage" [alt]="productName" class="product-image">
+  <img [src]="productImage" [alt]="productName" class="product-image" />
   <div class="product-details">
     <div class="product-name-col">
-
       <h3>{{ productName }}</h3>
-
     </div>
 
     <div class="actions">
       <div class="col">
-        <p >Color: <strong>{{ color }}</strong></p>
-        <p>Size:<strong> {{ size }}</strong></p>
-        <p class="price">{{ productPrice | currency: 'INR' }}</p>
+        <p>
+          Color: <strong>{{ color }}</strong>
+        </p>
+        <p>
+          Size:<strong> {{ size }}</strong>
+        </p>
+        <p class="price">{{ productPrice | currency : "INR" }}</p>
       </div>
-      <app-addto-cart-deletebtn [productId]="productId" [userId]="userId"></app-addto-cart-deletebtn>
+      <app-addto-cart-deletebtn
+        [productId]="productId"
+        [userId]="userId"
+        (itemDeleted)="onItemDeleted($event)">
+      ></app-addto-cart-deletebtn>
     </div>
   </div>
 </div>
