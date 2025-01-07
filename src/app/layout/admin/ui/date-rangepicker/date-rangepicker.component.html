@@ -1,26 +1,22 @@
-<div class="dropdown">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="custom-dropdown">
+  <button class="btn" (click)="toggleDropdown()">
     <i class="bi bi-calendar"></i>
   </button>
-  <ul class="dropdown-menu p-3">
+  
+  <div class="dropdown-content" [class.show]="isOpen">
     <form [formGroup]="form">
-      <li class="mb-2">
+      <div class="mb-2">
         <label for="startDate" class="form-label">Start Date</label>
-        <input type="date" id="startDate" formControlName="startDate" class="form-control">
-      </li>
-      <li class="mb-2">
+        <input type="date" id="startDate" formControlName="startDate">
+      </div>
+      <div class="mb-2">
         <label for="endDate" class="form-label">End Date</label>
-        <input type="date" id="endDate" formControlName="endDate" class="form-control">
-      </li>
-      <li class="d-flex justify-content-between">
-        <button type="button" (click)="resetFilter()">
-          Reset
-        </button>
-        <button type="button" data-bs-dismiss="dropdown" (click)="applyFilter()">
-          Apply
-        </button>
-      </li>
+        <input type="date" id="endDate" formControlName="endDate">
+      </div>
+      <div class="button-group">
+        <button type="button" (click)="resetFilter()">Reset</button>
+        <button type="button" (click)="applyFilter()">Apply</button>
+      </div>
     </form>
-
-  </ul>
+  </div>
 </div>

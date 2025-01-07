@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule ,Validators} from '@angular/forms';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { Router } from '@angular/router';
-import * as bootstrap from 'bootstrap'
+// import * as bootstrap from 'bootstrap'
 
 @Component({
   selector: 'app-login-form',
@@ -13,7 +13,7 @@ import * as bootstrap from 'bootstrap'
 })
 export class LoginFormComponent {
   constructor(public api:ApiServiceService,private router: Router){}
-  phoneNumber: string = '';
+  phoneNumber: string = '+919746466925';
   employeeId:any=0;
   name: string = '';
   email:string='';
@@ -39,15 +39,16 @@ export class LoginFormComponent {
       (userId) => {
         console.log('User ID:', userId);
         if(userId==null){
-          const modalElement = document.getElementById('exampleModal');
-          if(modalElement){
-            const modal = new bootstrap.Modal(modalElement);
-            modal.show();
-          }
-          else{
-            console.error('modal element not found');
+          this.addNewUser();
+          // const modalElement = document.getElementById('exampleModal');
+          // if(modalElement){
+          //   // const modal = new bootstrap.Modal(modalElement);
+          //   // modal.show();
+          // }
+          // else{
+          //   console.error('modal element not found');
 
-          }
+          // }
         }
         var userID = userId;
         this.employeeId = userID;
