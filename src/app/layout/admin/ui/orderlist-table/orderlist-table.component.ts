@@ -23,6 +23,7 @@ export class OrderlistTableComponent {
   selectedOrder: any = null;
 
   OrderDetailsByID : any
+ 
 
   constructor(public api:ApiServiceService){}
 
@@ -76,6 +77,7 @@ export class OrderlistTableComponent {
 
     this.api.GetOrderDetailById(orderId).subscribe((res:any)=>{
         this.OrderDetailsByID = res
+
         console.log(this.OrderDetailsByID)
         console.log(this.OrderDetailsByID.orderItems)
     })

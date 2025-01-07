@@ -1,10 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError, Observable, switchMap } from 'rxjs';
+import { catchError, map, Observable, switchMap } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
-import { GlobalService } from '../global.service';
 
+interface AddressResponse {
+  id: number;
+  addressLine: string;
+  city: string;
+  district: string;
+  state: string;
+  zipCode: string;
+  // ... other fields
+}
 export interface OrderEmailContext {
   orderId: string;
   customerName: string;
@@ -146,8 +154,20 @@ export class ApiServiceService {
   }
   getOrderDetails() {
     return this.http.get('https://localhost:7267/api/Order/orders/List');
+    // return this.http.get('https://localhost:7267/api/Order/orderItem/List');
   }
 
+  getOrderDetailsById(id:number){
+    return this.http.get(`
+    https://localhost:7267/api/Order/orders/detailsbyid/${id}`);
+  }
+  updateOrderStatusbyid(orderId: number): Observable<any> {
+    const baseUrl = 'https://localhost:7267/api';
+    return this.http.put(
+      `${baseUrl}/Order/updatestatusbyidonly/${orderId}`,
+      null  // No body needed for this request
+    );
+  }
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
     const orderPayload = {
       userId: userId,
@@ -169,6 +189,16 @@ export class ApiServiceService {
       orderPayload
     );
   }
+
+  getAddressById(id: number): Observable<string> {
+    return this.http.get<AddressResponse>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+      .pipe(
+        map(response => {
+          return `${response.addressLine} , ${response.city} , ${response.district} , ${response.state} , ${response.zipCode}`;
+        })
+      );
+  }
+
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
       `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
@@ -272,9 +302,9 @@ console.log('address data',data);
     return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
   }
 
-  getAddressById(id:number){
-    return this.http.get(`https://localhost:7267/api/Users/getAddressById/${id}`)
-  }
+  // getAddressById(id:number){
+  //   return this.http.get(`https://localhost:7267/api/Users/getAddressById/${id}`)
+  // }
 
   editAddressById(addressId: number, item: any) {
     let data = {
@@ -329,12 +359,23 @@ console.log('address data',data);
     return this.http.get('https://localhost:7267/api/Categories');
   }
 
+  getAllBanners(){
+    return this.http.get('https://localhost:7267/api/Banner')
+  }
+
   categoryDeletion(id: any) {
     this.http
       .delete(`https://localhost:7267/api/Categories/${id}`)
       .subscribe((res) => {
         console.log(res);
       });
+  }
+
+  bannerDelete(id:any) {
+    this.http.delete(`https://localhost:7267/api/Banner/${id}`)
+    .subscribe((res) => {
+      console.log(res);
+    })
   }
 
   addCategory(item: any) {
