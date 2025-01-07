@@ -14,22 +14,19 @@
       @for (data of address; track data) {
       <app-profile-address-card
         [address]="data"
+(edit)="onEdit($event)"
+(delete)="onDelete($event)"
       ></app-profile-address-card>
       }
     </div>
 
-<!-- <app-profile-address-card
-(edit)="onEdit(address)"
-(delete)="onDelete(address)">
-</app-profile-address-card> -->
 
-    <!-- Modal -->
+    <!-- Add address Modal -->
     <div
       class="modal fade"
       id="exampleModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
     >
       <div class="modal-dialog">
         <div class="modal-content">
@@ -47,13 +44,24 @@
             ></button>
           </div>
           <div class="modal-body">
-            <app-new-address></app-new-address>
+            <app-new-address [editMode]="false" (addressAdded)="refreshAddressList()"></app-new-address>
           </div>
-          <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div> -->
         </div>
       </div>
     </div>
+
+<!--Edit Address Model-->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Address</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+              <app-new-address [editMode]="true" [addressData]="selectedAddress" (addressUpdated)="refreshAddressList()"></app-new-address>
+          </div>
+        </div>
+      </div>
   </div>
 </div>

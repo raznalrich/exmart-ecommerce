@@ -24,12 +24,46 @@ import { firstValueFrom } from 'rxjs';
 })
 export class OrderListComponent {
   orderlist: any[] = [];
+  filteredItems: any[] = [];
   constructor(public api: ApiServiceService) {}
   ngOnInit() {
     this.api.getOrderList().subscribe((res: any) => {
-      this.orderlist = res;
-      console.log('orderlist', this.orderlist);
+      this.orderlist = res.map((item: any) => ({
+        ...item,
+        orderDate: new Date(item.orderDate).toISOString(),
+      }));
+      this.filteredItems = [...this.orderlist];
+      console.log('filtered list', this.filteredItems);
     });
+  }
+
+  onDateRangeSelected(dateRange: { startDate: string; endDate: string }) {
+    const { startDate, endDate } = dateRange;
+
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      start.setHours(0, 0, 0, 0);
+
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59, 999);
+
+      this.filteredItems = this.orderlist.filter((item) => {
+        try {
+          const orderDate = new Date(item.orderDate);
+          if (!orderDate || isNaN(orderDate.getTime())) {
+            console.warn('Invalid order date:', item.orderDate);
+            return false;
+          }
+          // Fixed date range comparison
+          return orderDate >= start && orderDate <= end;
+        } catch (error) {
+          console.error('Date parsing error:', error);
+          return false;
+        }
+      });
+    } else {
+      this.filteredItems = [...this.orderlist];
+    }
   }
 
   async onFileChange(event: Event) {
@@ -40,37 +74,40 @@ export class OrderListComponent {
 
     try {
       const workbook = new ExcelJS.Workbook();
-      const arrayBuffer = await file.arrayBuffer();
-
-      await workbook.xlsx.load(arrayBuffer);
+      await workbook.xlsx.load(await file.arrayBuffer());
       const worksheet = workbook.getWorksheet(1);
 
       if (!worksheet) {
         console.error('No worksheet found');
         return;
       }
-      const orders: any[] = [];
 
-      // Skip the header row and process data rows
-      worksheet.eachRow((row, rowNumber) => {
-        if (rowNumber === 1) return; // Skip header row
-        const order = {
-          orderItemId: row.getCell(1).value,
-          productStatusId: this.getStatusNumber(row.getCell(4).value as string),
-        };
-        orders.push(order);
-      });
-      // console.log('Imported orders:', orders);
-      for (const order of orders) {
-        try {
-          const response = await firstValueFrom(
-            this.api.updateOrderStatus(order)
-          );
-          console.log(`Order updated: ${order.orderItemId}`, response);
-        } catch (error) {
-          console.error(`Error updating order: ${order.orderItemId}`, error);
-        }
-      }
+      const orders =
+        worksheet
+          .getRows(2, worksheet.rowCount - 1)
+          ?.map(
+            (row) =>
+              row && {
+                orderItemId: row.getCell(1).value,
+                productStatusId: this.getStatusNumber(
+                  row.getCell(4).value as string
+                ),
+              }
+          )
+          .filter((order) => order && order.orderItemId) ?? [];
+
+      await Promise.all(
+        orders.map(async (order) => {
+          try {
+            const response = await firstValueFrom(
+              this.api.updateOrderStatus(order)
+            );
+            console.log(`Order updated: ${order.orderItemId}`, response);
+          } catch (error) {
+            console.error(`Error updating order: ${order.orderItemId}`, error);
+          }
+        })
+      );
     } catch (error) {
       console.error('Error reading Excel file:', error);
     }
@@ -82,16 +119,13 @@ export class OrderListComponent {
       shipped: 2,
       delivered: 3,
     };
-
     return statusMap[status.toLowerCase()] || 1;
   }
 
-  downloadReport() {
-    // Step 1: Create Workbook and Worksheet
+  async downloadReport() {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Orders');
 
-    // Step 2: Add Columns (Headers)
     worksheet.columns = [
       { header: 'Order Item Id', key: 'orderItemId', width: 15 },
       { header: 'Date', key: 'orderDate', width: 20 },
@@ -101,47 +135,37 @@ export class OrderListComponent {
       { header: 'Quantity', key: 'quantity', width: 10 },
     ];
 
-    // Step 3: Map API Data to Columns
-    const data = this.orderlist.map((order) => ({
+    const data = this.filteredItems.map((order) => ({
       orderItemId: order.orderItemId,
       orderDate: new Date(order.orderDate).toLocaleDateString(),
       productName: order.productName,
       status:
-        order.status === 1
-          ? 'Pending'
-          : order.status === 2
-          ? 'Shipped'
-          : 'Delivered',
+        ['Pending', 'Shipped', 'Delivered'][order.status - 1] || 'Pending',
       amount: order.amount.toFixed(2),
       quantity: order.quantity,
     }));
-
+    // console.log("this is filtered data",data);
     data.forEach((row) => worksheet.addRow(row));
 
-    // Step 4: Apply Data Validation to the "Status" Column
-    const startRow = 2; // Rows start at 2 because row 1 contains headers
-    const endRow = startRow + data.length - 1; // End row for data
-    const validationRange = `G${startRow}:G${endRow}`; // "Status" is the 7th column (G)
+    const dataValidation = {
+      type: 'list' as const,
+      allowBlank: false,
+      formulae: ['"Pending,Shipped,Delivered"'],
+      showErrorMessage: true,
+      errorTitle: 'Invalid Input',
+      error:
+        'Please select a value from the dropdown: Pending, Shipped, or Delivered.',
+    };
 
-    worksheet
-      .getColumn('status')
-      .eachCell({ includeEmpty: true }, (cell, rowNumber) => {
-        if (rowNumber >= startRow && rowNumber <= endRow) {
-          cell.dataValidation = {
-            type: 'list',
-            allowBlank: false,
-            formulae: ['"Pending,Shipped,Delivered"'],
-            showErrorMessage: true,
-            errorTitle: 'Invalid Input',
-            error:
-              'Please select a value from the dropdown: Pending, Shipped, or Delivered.',
-          };
-        }
-      });
-
-    // Step 5: Save the Workbook
-    workbook.xlsx.writeBuffer().then((buffer) => {
-      saveAs(new Blob([buffer]), 'Orders_With_Validation.xlsx');
+    const statusColumn = worksheet.getColumn('status');
+    statusColumn.eachCell({ includeEmpty: true }, (cell, rowNumber) => {
+      if (rowNumber > 1) {
+        // Skip header row
+        cell.dataValidation = dataValidation;
+      }
     });
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([buffer]), 'Orders_With_Validation.xlsx');
   }
 }

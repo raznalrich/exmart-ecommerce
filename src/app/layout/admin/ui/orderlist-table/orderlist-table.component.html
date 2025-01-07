@@ -26,6 +26,7 @@
           type="button"
           class="btn btn-secondary"
           data-bs-dismiss="modal"
+          (click)="closeModal()"
         >
           Cancel
         </button>
@@ -56,10 +57,13 @@
     class="btn-close"
     data-bs-dismiss="modal"
     aria-label="Close"
+    (click)="closeModal()"
   ></button>
 
 <div class="modal-body">
-  <app-order-popup [OrderDetailById]="OrderDetailsByID"></app-order-popup>
+  <app-order-popup
+  [selectedOrderItemId]="selectedOrderItemId"
+  [OrderDetailsByID]="OrderDetailsByID"></app-order-popup>
 </div>
 </div>
 </div>
@@ -97,7 +101,7 @@
         <td>{{item.amount | currency : "INR"}}</td>
          <td>{{item.quantity}}</td>
           <td style="text-align: center;">
-            <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId)">
+            <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId, item.orderItemId)">
               <i class="fa-regular fa-eye"></i>
             </button>
             </td>
