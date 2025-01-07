@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { OrderSectionComponent } from '../../ui/order-section/order-section.component';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { CommonModule } from '@angular/common';
+import { GlobalService } from '../../../../global.service';
 
 @Component({
   selector: 'app-user-orders',
@@ -11,7 +12,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-orders.component.scss'
 })
 export class UserOrdersComponent {
-  constructor(public api:ApiServiceService){}
+  constructor(public api:ApiServiceService,public global:GlobalService){
+    this.global.getUserId();
+  }
   @Input() tabs = ['In Transit', 'Pending'];
   activeTab = 'In Transit';
   inTransitOrders: any[] = [];
@@ -38,10 +41,11 @@ export class UserOrdersComponent {
     },
   ];
 
-  userId: number = 1;
+  userId: any;
 
   ngOnInit() {
     this.loadOrders();
+    this.userId = this.global.userId();
   }
   setActiveTab(tab: string) {
     this.activeTab = tab;
@@ -53,7 +57,7 @@ export class UserOrdersComponent {
 
     this.api.getAllOrderList().subscribe({
       next: (res: any) => {
-        this.inTransitOrders = res.filter((order: { userId: number }) => order.userId === this.userId);
+        this.inTransitOrders = res.filter((order:any) => order.userId === this.userId);
         this.orderHistorylist = res.filter((order: { userId: number }) => order.userId === this.userId);
         console.log("filtered orders", this.inTransitOrders);
         this.isLoading = false;
