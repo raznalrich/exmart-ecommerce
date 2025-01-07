@@ -1,40 +1,77 @@
+// api.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
-import { map, Observable } from 'rxjs';
+import { catchError, throwError, map, Observable } from 'rxjs';
 import { Product } from './layout/user/interfaces/productInterface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  addCategory(categoryData: any) {
-    throw new Error('Method not implemented.');
-  }
-  getCategory() {
-    throw new Error('Method not implemented.');
-  }
-  constructor(public http: HttpClient) {}
-
-  getCardImages() {
-    return this.http.get(`Data/carouselImages.json`);
-  }
-
-  getProductDetails() {
-    return this.http.get(`Data/details.json`);
-  }
-
-  getCarouselImages() {
-    return this.http.get(`Data/carouselImages.json`);
-  }
-
-  getProducts() {
-    return this.http.get(`product-sample.json`);
-  }
   private baseUrl = 'https://localhost:7267/api';
 
+  constructor(private http: HttpClient) {}
+
+  // Add Category (Method not implemented)
+  addCategory(categoryData: any): Observable<any> {
+    // Implement this method as needed
+    throw new Error('Method not implemented.');
+  }
+
+  // Fetch all categories
+  getAllCategories(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/Categories`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Fetch all sizes (Corrected Endpoint)
+  getAllSizes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/Config/GetAllSizes`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Fetch all colors (Corrected Endpoint)
+  getAllColors(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/Config/GetAllColors`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Fetch card images from local JSON
+  getCardImages(): Observable<any> {
+    return this.http.get(`Data/carouselImages.json`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Fetch product details from local JSON
+  getProductDetails(): Observable<any> {
+    return this.http.get(`Data/details.json`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Fetch carousel images from local JSON
+  getCarouselImages(): Observable<any> {
+    return this.http.get(`Data/carouselImages.json`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Fetch products from local JSON
+  getProducts(): Observable<any> {
+    return this.http.get(`product-sample.json`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Add a new product
   addProduct(payload: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Product/add-product`, payload);
+    return this.http.post(`${this.baseUrl}/Product/add-product`, payload).pipe(
+      catchError(this.handleError)
+    );
   }
 
   addBanner(payload: any): Observable<any> {
@@ -45,8 +82,13 @@ uploadImage(file: File) {
   const formData = new FormData();
   formData.append('file', file);
 
-  return this.http.post<{ imageUrl: string }>(`${this.baseUrl}/ImageUpload/upload-image`, formData);
-}
+    return this.http.post<{ imageUrl: string }>(
+      `${this.baseUrl}/ImageUpload/upload-image`,
+      formData
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
 
 
 
@@ -58,42 +100,44 @@ uploadImage(file: File) {
     );
   }
 
-
-  getUserAddress() {
-    return this.http.get(`Data/address.json`);
+  // Fetch user address from local JSON
+  getUserAddress(): Observable<any> {
+    return this.http.get(`Data/address.json`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-getUserFeedback(){
-  return this.http.get(`https://localhost:7267/api/FeedBack`)
+  // Fetch user feedback
+  getUserFeedback(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/FeedBack`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-
-
-// getUserFeedback(userId:number){
-//   return this.http.get(`https://localhost:7267/api/Feedback/ByUserId?userId=${userId}`);
-// saveUserFeedback(){
-//   return this.http.post(``)
-// }
-  saveUserFeedback(item: any) {
-    let data = {
-      feedback: item.feedback ,// Mapping 'text' from the input to 'feedbackText' for the API
-      userId: item.userId, // Mapping 'userId' from the input
-      productName: item.productName
-
-
+  // Save user feedback
+  saveUserFeedback(item: any): Observable<any> {
+    const data = {
+      feedback: item.feedback,       // Mapping 'feedback' from input
+      userId: item.userId,           // Mapping 'userId' from input
+      productName: item.productName, // Mapping 'productName' from input
     };
 
     const headers = { 'Content-Type': 'application/json' };
 
-    return this.http
-      .post('https://localhost:7267/api/FeedBack', data, { headers })
-      .pipe(
-        catchError((error) => {
-          console.log('Error details:', error.error);
-          throw error;
-        })
-      );
+    return this.http.post(`${this.baseUrl}/FeedBack`, data, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error saving user feedback:', error);
+        return throwError(error);
+      })
+    );
   }
+
+  // Uncomment and implement as needed
+  // getProductsById(id: any): Observable<any> {
+  //   return this.http.get(`Data/productTrail.json/${id}`).pipe(
+  //     catchError(this.handleError)
+  //   );
+
   getAllFeedback(){
     return this.http.get(`https://localhost:7267/api/FeedBack/all`);
   }
@@ -102,25 +146,21 @@ getUserFeedback(){
   //   return this.http.get(`Data/productTrail.json/${id}`)
   // }
 
-  // getProductsById(id:number){
-    // return this.http.get(`/Data/productsTrail.json`).pipe(
-    //   map((data:any)=>{
-    //     const filterddata = data.filter((item:any)=> item.id == id)
-    //     return filterddata;
-
-    //   })
-    // );
-    // return this.http.get(`https://localhost:7267/api/Product/GetProductById?id=${id}`);
+  // getProductsById(id: number): Observable<any> {
+  //   return this.http.get(`${this.baseUrl}/Product/GetProductById?id=${id}`).pipe(
+  //     catchError(this.handleError)
+  //   );
   // }
 
-//   getImagesByProductId(id:number){
-//   return this.http.get(`https://localhost:7267/api/ProductImage/ByProduct/${id}`);
-// }
+  // getImagesByProductId(id: number): Observable<any> {
+  //   return this.http.get(`${this.baseUrl}/ProductImage/ByProduct/${id}`).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
 
+  // Private method to handle errors
+  private handleError(error: any) {
+    console.error('API Error:', error);
+    return throwError(error);
+  }
 }
-function saveUserFeedback(item: any, any: any) {
-  throw new Error('Function not implemented.');
-}
-
-
-

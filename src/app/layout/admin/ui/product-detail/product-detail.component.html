@@ -2,10 +2,11 @@
   @for(item of OrderDetailsByID.orderItems; track item){
   <div class="col-md-11 border p-3 rounded bg-light" style="width: 910px;">
 
-      <div class="d-flex align-items-center justify-content-between">
+      <div
+      class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
           <img
-            src="https://via.placeholder.com/145"
+            src={{item.productImageUrl}}
             alt="Product Image"
             class="img-fluid me-3"
             style="width: 145px"

@@ -134,9 +134,13 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Product');
   }
   getOrderDetails() {
-    return this.http.get('https://localhost:7267/api/Order/orders/List');
+    return this.http.get('https://localhost:7267/api/Order/orderItem/List');
   }
 
+  getOrderDetailsById(id:number){
+    return this.http.get(`
+    https://localhost:7267/api/Order/orders/detailsbyid/${id}`);
+  }
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
     const orderPayload = {
       userId: userId,
@@ -227,7 +231,6 @@ export class ApiServiceService {
   }
 
   getAddressByUserId(id: number) {
-    // return this.http.get(`https://localhost:7267/api/Users/${id}`)
     return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`);
   }
 

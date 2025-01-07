@@ -34,7 +34,6 @@ export class ReportPageComponent {
 console.log("button clicked");
 
     const { startDate, endDate } = dateRange;
-
     if (startDate && endDate) {
       const start = new Date(startDate);
       start.setHours(0, 0, 0, 0);
