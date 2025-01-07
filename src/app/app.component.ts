@@ -28,6 +28,7 @@ import { UsersidebarComponent } from './layout/user/ui/usersidebar/usersidebar.c
 import { ReportPageComponent } from './layout/admin/pages/report-page/report-page.component';
 import { OrderPopupComponent } from "./layout/admin/ui/order-popup/order-popup.component";
 import { PopUpComponent } from "./layout/user/ui/pop-up/pop-up.component";
+import { AddBannerComponent } from "./layout/admin/ui/add-banner/add-banner.component";
 
 @Component({
   selector: 'app-root',
@@ -62,6 +63,7 @@ import { PopUpComponent } from "./layout/user/ui/pop-up/pop-up.component";
     AddressConfirmPageComponent,
     OrderPopupComponent,
     PopUpComponent,
+    AddBannerComponent
 ],
 
   templateUrl: './app.component.html',

@@ -21,6 +21,10 @@ export class DateRangepickerComponent {
     this.dateRangeSelected.emit({ startDate, endDate });
     console.log('filter applied');
   }
+  console(){
+    console.log("button clicked");
+
+  }
 
   resetFilter() {
     this.form.reset();
