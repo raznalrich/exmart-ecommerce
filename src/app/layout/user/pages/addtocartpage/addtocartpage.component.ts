@@ -15,6 +15,7 @@ export interface OrderEmailContext {
   orderId: number;
   customerName: string;
   items: Array<{
+    orderItemId:number;
     productName: string;
     quantity: number;
     price: number;
@@ -54,6 +55,7 @@ id:any
 data:any
 cartItemList:any
 selectedAddress:any
+address:string='';
 totalPrice: number = 0;
   constructor(public api: ApiService,public apis:ApiServiceService, private route: ActivatedRoute,public global:GlobalService, private router: Router,
     public emailservice:EmailService
@@ -73,7 +75,9 @@ productIds: number[] = []; // Collection of product IDs
 
     if(this.global.selectedAddressId()){
       this.selectedAddress = +this.global.selectedAddressId();
+      this.loadAddress(this.selectedAddress);
     }
+
     const cartItems = this.global.signalCartList();
     this.cartItemList = this.global.signalCartList();
     this.productIds = cartItems.map(item => item.productId);
@@ -83,6 +87,16 @@ productIds: number[] = []; // Collection of product IDs
 
     this.fetchCartItems(cartItems);
     // console.log(this.CartItems);
+  }
+  loadAddress(addressId:number) {
+    this.apis.getAddressById(addressId).subscribe({
+      next: (formattedAddress) => {
+        this.address = formattedAddress;
+      },
+      error: (error) => {
+        console.error('Error fetching address:', error);
+      }
+    });
   }
 
   fetchCartItems(cartItems: any[]) {
@@ -139,39 +153,40 @@ productIds: number[] = []; // Collection of product IDs
         next: (response: any) => {
           console.log('Order placed successfully!', response);
 
-          // Define the type for order items with product details
-          const fetchProductNames$: Observable<{ productId: number; productName: string; quantity: number; price: number }>[] = response.orderItems.map((item: any) =>
-            this.apis.getProductsById(item.productId).pipe(
-              map((product:any) => ({
-                productId: item.productId,
-                productName: product.name,
-                quantity: item.quantity,
-                price: product.price,
-              }))
-            )
-          );
 
-          forkJoin(fetchProductNames$).subscribe(
-            (orderItemsWithNames) => {
-              const orderContext: OrderEmailContext = {
-                orderId: response.orderId, // Get order ID from response
-                customerName: response.user.name, // Get user name
-                items: orderItemsWithNames.map(item => ({
-                  productName: item.productName,
-                  quantity: item.quantity,
-                  price: item.price,
-                  subtotal: item.price * item.quantity, // Calculate subtotal
-                })),
-                totalAmount: this.totalPrice, // Calculate total amount from items
-                shippingAddress: this.selectedAddress, // Use the selected address
-                orderDate: new Date(response.createdAt) // Use the API-created date
-              };
+
+          const orderContext: OrderEmailContext = {
+            orderId: response.orderId.toString(),
+            customerName: response.userName,
+            items: response.orderItems.map((item:any) => ({
+              orderItemId: item.orderItemId,
+              productName: item.productName,
+              quantity: item.quantity,
+              price: item.price,
+              subtotal: item.price * item.quantity + item.shippingCharge
+            })),
+            totalAmount: this.totalPrice,
+            shippingAddress: this.address, // You'll need to format this
+            orderDate: new Date(response.createdAt)
+          };
+          console.log('orderd items ids',orderContext);
 
               // Send order confirmation email
-              this.emailservice.sendOrderConfirmationEmail('raznalrich@gmail.com', orderContext).subscribe({
+              this.emailservice.sendOrderConfirmationEmail('mohammed.ka@experionglobal.com', orderContext).subscribe({
                 next: () => {
                   console.log('Order confirmation email sent successfully');
-                  this.router.navigate(['/thankyou']);
+                  this.emailservice.sendOrderRequestEmail('raznalrich@gmail.com', orderContext).subscribe({
+                    next: () => {
+                      console.log('Order confirmation email sent successfully');
+                      this.router.navigate(['/thankyou']);
+                    },
+                    error: (emailError) => {
+                      console.error('Failed to send order confirmation email:', emailError);
+                      // Navigate to thank you page even if email fails
+                      this.router.navigate(['/thankyou']);
+                    }
+                  });
+                  // this.router.navigate(['/thankyou']);
                 },
                 error: (emailError) => {
                   console.error('Failed to send order confirmation email:', emailError);
@@ -179,11 +194,11 @@ productIds: number[] = []; // Collection of product IDs
                   this.router.navigate(['/thankyou']);
                 }
               });
-            },
-            (error) => {
-              console.error('Failed to fetch product names:', error);
-            }
-          );
+            // },
+            // (error) => {
+            //   console.error('Failed to fetch product names:', error);
+            // }
+          // );
         },
         error: (err) => console.error('Error placing order', err),
       });
