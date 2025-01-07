@@ -1,61 +1,230 @@
-<div class="container" >
-  <form>
-    <div class="row g-3">
-      <div class="col-md-6">
-        <app-text-input
-          label="Email"
-          id="inputEmail4"
-          type="email"
-        ></app-text-input>
-      </div>
-      <div class="col-md-6">
-        <app-text-input label="Mobile Number" id="inputPhone"></app-text-input>
-      </div>
-      <div class="col-12">
-        <app-text-input
-          label="Address"
-          id="inputAddress"
-          placeholder="1234 Main St"
-        ></app-text-input>
-      </div>
-      <div class="col-md-6">
-        <app-text-input label="City" id="inputCity"></app-text-input>
-      </div>
-      <div class="col-md-4">
-        <app-select-input
-          label="State"
-          id="inputState"
-          [options]="states"
-        ></app-select-input>
-      </div>
-      <div class="col-md-2">
-        <app-text-input label="PIN" id="inputZip"></app-text-input>
-      </div>
-      <div class="col-12">
-        <app-radio-group
-          label="Address Type"
-          id="addressType"
-          [options]="[
-            { label: 'Home', value: 'home' },
-            { label: 'Work', value: 'work' }
-          ]"
-        ></app-radio-group>
-      </div>
+
+<!-- //working -->
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="p-4">
+
+  <div *ngIf="errorMessage" class="alert alert-danger mb-3">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="successMessage" class="alert alert-success mb-3">
+    {{ successMessage }}
+  </div>
+
+
+  <!-- <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input
+      id="name"
+      type="text"
+      class="form-control"
+      formControlName="name"
+      [ngClass]="{'is-invalid': formControls['name'].touched && formControls['name'].errors}"
+    >
+    <div class="invalid-feedback" *ngIf="formControls['name'].touched && formControls['name'].errors?.['required']">
+      Name is required
     </div>
+  </div> -->
 
-    <div class="col-12 d-flex justify-content-end mt-3">
-      <app-save-button
 
-        [label]="'Save'"
-        (clickEvent)="onSave($event)"
-      ></app-save-button>
-      <app-cancel-button
-        [label]="'Cancel'"
-        data-bs-dismiss="modal"
-        class="ms-3"
-        (clickEvent)="onCancel($event)"
-      ></app-cancel-button>
+  <div class="mb-3">
+    <label for="addressType" class="form-label">Address Type</label>
+    <select
+      id="addressType"
+      class="form-select"
+      formControlName="addressTypeName"
+      [ngClass]="{'is-invalid': formControls['addressTypeName'].touched && formControls['addressTypeName'].errors}"
+    >
+      <option value="Home">Home</option>
+      <option value="Work">Work</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="addressLine" class="form-label">Building No</label>
+    <input
+      id="addressLine"
+      type="text"
+      class="form-control"
+      formControlName="addressLine"
+      [ngClass]="{'is-invalid': formControls['addressLine'].touched && formControls['addressLine'].errors}"
+    >
+    <div class="invalid-feedback" *ngIf="formControls['addressLine'].touched && formControls['addressLine'].errors?.['required']">
+      Building number is required
     </div>
+  </div>
 
-  </form>
+
+  <!-- <div class="mb-3">
+    <label for="place" class="form-label">Place</label>
+    <input
+      id="place"
+      type="text"
+      class="form-control"
+      formControlName="place"
+      [ngClass]="{'is-invalid': formControls['place'].touched && formControls['place'].errors}"
+    >
+    <div class="invalid-feedback" *ngIf="formControls['place'].touched && formControls['place'].errors?.['required']">
+      Place is required
+    </div>
+  </div> -->
+
+
+  <div class="mb-3">
+    <label for="city" class="form-label">City</label>
+    <input
+      id="city"
+      type="text"
+      class="form-control"
+      formControlName="city"
+      [ngClass]="{'is-invalid': formControls['city'].touched && formControls['city'].errors}"
+    >
+    <div class="invalid-feedback" *ngIf="formControls['city'].touched && formControls['city'].errors?.['required']">
+      City is required
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="district" class="form-label">District</label>
+    <input
+      id="district"
+      type="text"
+      class="form-control"
+      formControlName="district"
+      [ngClass]="{'is-invalid': formControls['district'].touched && formControls['district'].errors}"
+    >
+    <div class="invalid-feedback" *ngIf="formControls['district'].touched && formControls['district'].errors?.['required']">
+      District is required
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="state" class="form-label">State</label>
+    <input
+      id="state"
+      type="text"
+      class="form-control"
+      formControlName="state"
+      [ngClass]="{'is-invalid': formControls['state'].touched && formControls['state'].errors}"
+    >
+    <div class="invalid-feedback" *ngIf="formControls['state'].touched && formControls['state'].errors?.['required']">
+      State is required
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="zipCode" class="form-label">Pincode</label>
+    <input
+      id="zipCode"
+      type="text"
+      class="form-control"
+      formControlName="zipCode"
+      [ngClass]="{'is-invalid': formControls['zipCode'].touched && formControls['zipCode'].errors}"
+    >
+    <div class="invalid-feedback" *ngIf="formControls['zipCode'].touched && formControls['zipCode'].errors?.['required']">
+      Pincode is required
+    </div>
+    <div class="invalid-feedback" *ngIf="formControls['zipCode'].touched && formControls['zipCode'].errors?.['pattern']">
+      Please enter a valid 6-digit pincode
+    </div>
+  </div>
+
+
+  <div class="d-flex justify-content-end gap-2">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!addressForm.valid || isSubmitting"
+    >
+      <span class="spinner-border spinner-border-sm me-2" *ngIf="isSubmitting"></span>
+      {{ editMode ? 'Update' : 'Save' }} Address
+    </button>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+<!-- <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="p-4">
+
+  <div class="mb-3">
+    <label for="addressType" class="form-label">Address Type</label>
+    <select id="addressType" class="form-select" formControlName="addressTypeName">
+      <option value="Home">Home</option>
+      <option value="Work">Work</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="place" class="form-label">Place</label>
+    <input id="place" type="text" class="form-control" formControlName="place"
+      [ngClass]="{'is-invalid': formControls['place'].touched && formControls['place'].errors}">
+    <div class="invalid-feedback">Place is required</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="city" class="form-label">City</label>
+    <input id="city" type="text" class="form-control" formControlName="city"
+      [ngClass]="{'is-invalid': formControls['city'].touched && formControls['city'].errors}">
+    <div class="invalid-feedback">City is required</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="district" class="form-label">District</label>
+    <input id="district" type="text" class="form-control" formControlName="district"
+      [ngClass]="{'is-invalid': formControls['district'].touched && formControls['district'].errors}">
+    <div class="invalid-feedback">District is required</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="state" class="form-label">State</label>
+    <input id="state" type="text" class="form-control" formControlName="state"
+      [ngClass]="{'is-invalid': formControls['state'].touched && formControls['state'].errors}">
+    <div class="invalid-feedback">State is required</div>
+  </div>
+
+
+ <div class="mb-3">
+  <label for="ZipCode" class="form-label">Pincode</label>
+  <input
+    id="ZipCode"
+    type="text"
+    class="form-control"
+    formControlName="ZipCode"
+    [ngClass]="{'is-invalid': formControls['ZipCode'].touched && formControls['ZipCode'].errors}"
+  >
+  <div class="invalid-feedback" *ngIf="formControls['ZipCode'].touched && formControls['ZipCode'].errors?.['required']">
+    Pincode is required
+  </div>
+  <div class="invalid-feedback" *ngIf="formControls['ZipCode'].touched && formControls['ZipCode'].errors?.['pattern']">
+    Please enter a valid 6-digit pincode
+  </div>
 </div>
+
+<div class="d-flex justify-content-end gap-2">
+  <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!addressForm.valid || isSubmitting">
+    <span class="spinner-border spinner-border-sm me-2" *ngIf="isSubmitting"></span>
+    {{ editMode ? 'Update' : 'Save' }}
+  </button>
+</div>
+</form> -->
+
+
+
