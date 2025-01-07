@@ -17,14 +17,8 @@
           <button class="btn-create-new" (click)="fileInput.click()">
             <i class="bi bi-file-arrow-up"></i>
           </button>
-          <span class="tooltip-text">Upload report</span>
         </div>
-
-          <!-- <button class="btn-create-new" (click)="uploadReport()">
-            <i class="bi bi-file-arrow-up"></i>
-          </button> -->
-        </div>
-        <app-date-rangepicker></app-date-rangepicker>
+        <app-date-rangepicker (dateRangeSelected)="onDateRangeSelected($event)"></app-date-rangepicker>
       </div>
       <div class="count-box">
         <app-admin-values-displaying-button [count]="28" [iconSrc]="'icons/clipboard.png'"
@@ -39,3 +33,5 @@
 
 </div>
 <app-orderlist-table [OrderList]="orderlist"></app-orderlist-table>
+
+<app-orderlist-table [OrderList]="filteredItems"></app-orderlist-table>
