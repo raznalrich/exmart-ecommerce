@@ -1,0 +1,26 @@
+<!-- odertracking-table.component.html -->
+<div class="container">
+  <!-- Greeting Section -->
+  <div class="greeting">
+    <h1>Hi, {{trackorder?.name}}</h1>
+    <h2>Your Order #EXP-ORD{{trackorder?.orderId}}</h2>
+  </div>
+
+  <!-- Table for Product and Order Status -->
+  <table>
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Order Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(item of trackorder?.orderItems; track item.orderItem) {
+        <tr>
+          <td>{{item.productName}}</td>
+          <td>pending</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

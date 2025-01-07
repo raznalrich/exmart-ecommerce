@@ -1,0 +1,125 @@
+<button
+  *ngIf="bannerCount < 3"
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#bannermodal"
+>
+  <i class="bi bi-plus"></i>
+</button>
+
+<div
+  class="modal fade"
+  id="bannermodal"
+  #bannerModal
+  tabindex="-1"
+  aria-labelledby="addBannerModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeModal()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addBannerForm" (ngSubmit)="onSubmit()">
+          <!-- Title Field with Search -->
+          <div class="mb-3">
+            <label for="title" class="form-label">Product Name:</label>
+            <input
+              type="search"
+              id="title"
+              class="form-control"
+              formControlName="title"
+              placeholder="Search Product"
+              (input)="onSearch()"
+            />
+            <div
+              *ngIf="
+                addBannerForm.get('title')?.touched &&
+                addBannerForm.get('title')?.invalid
+              "
+              class="text-danger"
+            >
+              Title is required.
+            </div>
+
+            <!-- Search Results Dropdown -->
+            <ul
+              class="list-group mt-2"
+              *ngIf="searchResults.length > 0"
+              style="max-height: 200px; overflow-y: auto"
+            >
+              <li
+                class="list-group-item list-group-item-action"
+                *ngFor="let product of searchResults"
+                (click)="selectProduct(product)"
+              >
+                {{ product.name }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Selected Product Display -->
+          <div class="mb-3" *ngIf="selectedProduct">
+            <label class="form-label">Selected Product:</label>
+            <input
+              type="text"
+              class="form-control"
+              [value]="selectedProduct.name || ''"
+              readonly
+            />
+          </div>
+
+          <!-- Primary Image Upload -->
+          <div class="mb-3">
+            <label for="primaryImage" class="form-label">Primary Image:</label>
+            <input
+              type="file"
+              id="primaryImage"
+              class="form-control"
+              (change)="onFileChange($event)"
+              accept="image/*"
+            />
+            <div
+              *ngIf="
+                addBannerForm.get('primaryImage')?.touched &&
+                addBannerForm.get('primaryImage')?.invalid
+              "
+              class="text-danger"
+            >
+              Primary image is required.
+            </div>
+            <div *ngIf="selectedFile" class="mt-2">
+              <strong>Selected File:</strong> {{ selectedFile.name }}
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!addBannerForm.valid"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="closeModal()"
+              aria-label="Close"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

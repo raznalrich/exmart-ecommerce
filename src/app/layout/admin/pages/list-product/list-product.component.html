@@ -1,0 +1,31 @@
+<!-- If showModal is true, we render <app-edit-product> with the selected product -->
+  <app-edit-product
+  *ngIf="showModal"
+  [product]="selectedProduct"
+  (close)="onCloseModal()"
+>
+</app-edit-product>
+
+<!-- Example table of products -->
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of products">
+      <td>{{ p.id }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.price }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="onEdit(p)">
+          Edit
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -14,6 +14,7 @@ import { CustomerDetailComponent } from '../customer-detail/customer-detail.comp
 export class OrderPopupComponent {
 @Input() OrderDetailById : any
 
+
   closeCard() {
     console.log('Card closed'); // Replace this with actual functionality
     // Example: Add logic to hide the card or navigate away
