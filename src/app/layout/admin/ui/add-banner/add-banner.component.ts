@@ -1,5 +1,4 @@
-// add-banner.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -33,6 +32,10 @@ export class AddBannerComponent implements OnInit {
   selectedFile: File | null = null;
   showDropdown = false;
   @Input() bannerCount: number = 0;
+  @Output() bannerAdded = new EventEmitter<any>();
+
+
+  @ViewChild('bannerModal') bannerModalRef!: ElementRef;
 
   constructor(private apiService: ApiService) {}
 
@@ -46,11 +49,12 @@ export class AddBannerComponent implements OnInit {
 
     // Load all products on init
     this.loadProducts();
+  }
 
-    const modalElement = document.getElementById('bannermodal');
-    if (modalElement) {
-      this.modalInstance = new Modal(modalElement);
-      modalElement.addEventListener('hidden.bs.modal', () => {
+  ngAfterViewInit(): void {
+    if (this.bannerModalRef) {
+      this.modalInstance = new Modal(this.bannerModalRef.nativeElement);
+      this.bannerModalRef.nativeElement.addEventListener('hidden.bs.modal', () => {
         this.resetForm();
       });
     }
@@ -95,6 +99,12 @@ export class AddBannerComponent implements OnInit {
     this.filteredProducts = [...this.allProducts];
   }
 
+  openModal(): void {
+    if (this.modalInstance) {
+      this.modalInstance.show();
+    }
+  }
+
   closeModal(): void {
     if (this.modalInstance) {
       this.modalInstance.hide();
@@ -134,6 +144,7 @@ export class AddBannerComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log('Banner added successfully:', res);
+          this.bannerAdded.emit(res); // Emit the added banner data
           this.closeModal();
         },
         error: (err) => {

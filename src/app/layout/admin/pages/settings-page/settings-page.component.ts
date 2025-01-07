@@ -48,4 +48,14 @@ export class SettingsPageComponent implements OnInit {
     this.banners = this.banners.filter(ban => ban.bannerId !== item.bannerId);
 
   }
+
+  onBannerAdded(newBanner: any) {
+    // Option 1: Append the new banner to the banners array
+    this.banners.push(newBanner);
+    console.log('New banner added:', newBanner);
+
+    // Option 2: Fetch the banners again from the server
+    // Uncomment the line below if you prefer to re-fetch the banners
+    // this.fetchBanners();
+  }
 }

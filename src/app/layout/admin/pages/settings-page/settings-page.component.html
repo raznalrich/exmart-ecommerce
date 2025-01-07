@@ -40,8 +40,12 @@
     </div>
     }
     <div class="add">
-      <app-add-banner [bannerCount]="banners.length"></app-add-banner>
+      <app-add-banner
+        [bannerCount]="banners.length"
+        (bannerAdded)="onBannerAdded($event)"
+      ></app-add-banner>
     </div>
+
   </div>
 
   <div class="edit-policies">
