@@ -2,7 +2,11 @@
   <ul class="nav nav-tabs">
     <li class="nav-item" *ngFor="let tab of tabs">
       <a [class]="'nav-link active' + (activeTab === tab ? 'bg-blue-500 text-black border' : 'hover:bg-gray-200')" aria-current="page" (click)="setActiveTab(tab)" >
-        @if(tab === 'In Transit'){
+        @if(tab=='Pending'){
+          <i [class]="'bi bi-truck'"></i>
+
+        }
+        @else if(tab === 'In Transit'){
           <i [class]="'bi bi-truck'"></i>
         }
         @else {
@@ -22,13 +26,39 @@
   style=" border-radius: 14px; padding: 5px"
 >
 <div [ngSwitch]="activeTab">
+  <div *ngSwitchCase="'Pending'">
+    @if(!isLoading&&!error){
+
+      <app-order-section
+      title="In Transit"
+      icon="bi bi-truck"
+      maxHeight="70vh"
+      [items]="pendingOrders"
+      ></app-order-section>
+
+  }
+  @if(isLoading){
+    <!-- <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div> -->
+    <p class="placeholder-glow">
+      <span class="placeholder col-12"></span>
+    </p>
+  }
+    <!-- <app-order-section
+      title="In Transit"
+      icon="bi bi-truck"
+      maxHeight="200px"
+      [items]="inTransitOrders">
+    </app-order-section> -->
+  </div>
   <div *ngSwitchCase="'In Transit'">
     @if(!isLoading&&!error){
 
       <app-order-section
       title="In Transit"
       icon="bi bi-truck"
-      maxHeight="100vh"
+      maxHeight="70vh"
       [items]="inTransitOrders"
       ></app-order-section>
 
@@ -54,7 +84,7 @@
       <app-order-section
       title="In delivered"
       icon="bi bi-truck"
-      maxHeight="100vh"
+      maxHeight="70vh"
       [items]="orderHistorylist">
     </app-order-section>
   }

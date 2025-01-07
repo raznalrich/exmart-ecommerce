@@ -37,7 +37,7 @@ export class OrderItemComponent {
   constructor(public api:ApiServiceService){}
 ngOnInit(){
 
-  
+
     //Fetch color details
     this.api.GetOrderDetailById(this.id).subscribe({
       next: (orderData) => {
@@ -45,7 +45,7 @@ ngOnInit(){
         console.log("Colordata",orderData);
         this.orderItemslist = this.orderData.orderItems
         console.log('order item',this.orderItemslist);
-        this.fetchProductImages();
+        // this.fetchProductImages();
 
         // this.color = this.color.colorName;
         // console.log('color', this.color);
@@ -56,17 +56,17 @@ ngOnInit(){
     });
 
 }
-fetchProductImages() {
-  this.orderItemslist.forEach(item => {
-    this.api.getProductsById(item.productId).subscribe({
-      next: (imageData) => {
-        this.productDetails = imageData
-        console.log('OrderItemId',item.productId);
+// fetchProductImages() {
+//   this.orderItemslist.forEach(item => {
+//     this.api.getProductsById(item.productId).subscribe({
+//       next: (imageData) => {
+//         this.productDetails = imageData
+//         console.log('OrderItemId',item.productId);
 
-        item.primaryImageUrl = this.productDetails.primaryImageUrl
-      },
-      error: (error) => console.error('Error fetching image:', error)
-    });
-  });
-}
+//         item.primaryImageUrl = this.productDetails.primaryImageUrl
+//       },
+//       error: (error) => console.error('Error fetching image:', error)
+//     });
+//   });
+// }
 }
