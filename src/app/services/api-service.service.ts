@@ -170,8 +170,7 @@ export class ApiServiceService {
       null  // No body needed for this request
     );
   }
-    return this.http.get('https://localhost:7267/api/Order/orderItem/List');
-  }
+ 
   getOrderDetail(): Observable<OrderItem[]>  {
     return this.http.get<OrderItem[]>('https://localhost:7267/api/Order/orderItem/List');
   }
