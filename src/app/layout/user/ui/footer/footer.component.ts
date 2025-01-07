@@ -1,5 +1,3 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Component, Input } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { Router, RouterLink } from '@angular/router';
@@ -12,17 +10,9 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-onSendReplay() {
-throw new Error('Method not implemented.');
-}
 @Input() CategoryList : any;
 
   emailTemplate: string = '';
-  constructor(public api:ApiServiceService,public router: Router){
-
-  }
-
-
   constructor(public api:ApiServiceService,public router: Router){
 this.loadTemplate();
   }
