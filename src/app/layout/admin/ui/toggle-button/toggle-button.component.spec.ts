@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddressListComponent } from './address-list.component';
+import { ToggleButtonComponent } from './toggle-button.component';
 
-describe('AddressListComponent', () => {
-  let component: AddressListComponent;
-  let fixture: ComponentFixture<AddressListComponent>;
+describe('ToggleButtonComponent', () => {
+  let component: ToggleButtonComponent;
+  let fixture: ComponentFixture<ToggleButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddressListComponent]
+      imports: [ToggleButtonComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddressListComponent);
+    fixture = TestBed.createComponent(ToggleButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

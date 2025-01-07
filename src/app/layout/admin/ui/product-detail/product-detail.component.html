@@ -1,27 +1,32 @@
 <div class="row mb-4">
+  @for(item of OrderDetailsByID.orderItems; track item){
   <div class="col-md-11 border p-3 rounded bg-light" style="width: 910px;">
-    <div class="d-flex align-items-center justify-content-between">
-      <div class="d-flex align-items-center">
-        <img
-          src="https://via.placeholder.com/145"
-          alt="Product Image"
-          class="img-fluid me-3"
-          style="width: 145px"
-        />
-        <div>
+
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <img
+            src="https://via.placeholder.com/145"
+            alt="Product Image"
+            class="img-fluid me-3"
+            style="width: 145px"
+          />
+          <div>
+            <p>
+              <strong>{{item.productName}}</strong><br/>
+              <small>Color: {{item.colorName}}</small><br />
+              <small>Size: {{item.sizeName}}</small>
+            </p>
+          </div>
+        </div>
+        <div class="text-end">
           <p>
-            <strong>Experion Sweater for Men</strong><br />
-            <small>Color: Dark Blue</small><br />
-            <small>Size: XL</small>
+            <strong>Quantity:</strong> {{item.quantity}}<br />
+            <strong>Shipping Charge:</strong> {{item.shippingCharge | currency : "INR"}}<br />
+            <strong>Price:</strong> {{item.price | currency : "INR" }}
           </p>
         </div>
       </div>
-      <div class="text-end">
-        <p>
-          <strong>Quantity:</strong> 2<br />
-          <strong>Price:</strong> $10
-        </p>
-      </div>
-    </div>
+
   </div>
+}
 </div>
