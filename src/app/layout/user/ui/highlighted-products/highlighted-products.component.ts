@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './highlighted-products.component.scss'
 })
 export class HighlightedProductsComponent {
-
   mainImage = 'staticimages/pro_tshirt.png'; // Replace with your dynamic URL
   subItems = [
     {
@@ -18,7 +17,5 @@ export class HighlightedProductsComponent {
     {
       imageUrl: 'https://m.media-amazon.com/images/I/61eYApdaTDL._SL1100_.jpg', // Replace with dynamic URLs
       altText: 'Black Hoodie',
-    },
-  ];
-
+    },];
 }
