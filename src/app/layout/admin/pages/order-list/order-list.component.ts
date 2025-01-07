@@ -6,8 +6,8 @@ import { AdminValuesDisplayingButtonComponent } from '../../ui/admin-values-disp
 import { DateRangepickerComponent } from '../../ui/date-rangepicker/date-rangepicker.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import * as ExcelJS from 'exceljs';
-import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-order-list',
@@ -26,11 +26,66 @@ export class OrderListComponent {
   orderlist: any[] = [];
   constructor(public api: ApiServiceService) {}
   ngOnInit() {
-    this.api.getOrderDetails().subscribe((res: any) => {
+    this.api.getOrderList().subscribe((res: any) => {
       this.orderlist = res;
       console.log('orderlist', this.orderlist);
     });
   }
+
+  async onFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file = target?.files?.[0];
+
+    if (!file) return;
+
+    try {
+      const workbook = new ExcelJS.Workbook();
+      const arrayBuffer = await file.arrayBuffer();
+
+      await workbook.xlsx.load(arrayBuffer);
+      const worksheet = workbook.getWorksheet(1);
+
+      if (!worksheet) {
+        console.error('No worksheet found');
+        return;
+      }
+      const orders: any[] = [];
+
+      // Skip the header row and process data rows
+      worksheet.eachRow((row, rowNumber) => {
+        if (rowNumber === 1) return; // Skip header row
+        const order = {
+          orderItemId: row.getCell(1).value,
+          productStatusId: this.getStatusNumber(row.getCell(4).value as string),
+        };
+        orders.push(order);
+      });
+      // console.log('Imported orders:', orders);
+      for (const order of orders) {
+        try {
+          const response = await firstValueFrom(
+            this.api.updateOrderStatus(order)
+          );
+          console.log(`Order updated: ${order.orderItemId}`, response);
+        } catch (error) {
+          console.error(`Error updating order: ${order.orderItemId}`, error);
+        }
+      }
+    } catch (error) {
+      console.error('Error reading Excel file:', error);
+    }
+  }
+
+  private getStatusNumber(status: string): number {
+    const statusMap: { [key: string]: number } = {
+      pending: 1,
+      shipped: 2,
+      delivered: 3,
+    };
+
+    return statusMap[status.toLowerCase()] || 1;
+  }
+
   downloadReport() {
     // Step 1: Create Workbook and Worksheet
     const workbook = new ExcelJS.Workbook();
@@ -38,29 +93,27 @@ export class OrderListComponent {
 
     // Step 2: Add Columns (Headers)
     worksheet.columns = [
-      { header: 'Customer ID', key: 'customerId', width: 15 },
-      { header: 'Customer Name', key: 'customerName', width: 25 },
-      { header: 'Order Date', key: 'orderDate', width: 15 },
-      { header: 'Order ID', key: 'orderId', width: 10 },
-      { header: 'Total Items', key: 'totalItems', width: 12 },
-      { header: 'Total Amount', key: 'totalAmount', width: 15 },
-      { header: 'Status', key: 'status', width: 15 }, // Dropdown column
+      { header: 'Order Item Id', key: 'orderItemId', width: 15 },
+      { header: 'Date', key: 'orderDate', width: 20 },
+      { header: 'Product', key: 'productName', width: 25 },
+      { header: 'Status', key: 'status', width: 15 },
+      { header: 'Amount', key: 'amount', width: 15 },
+      { header: 'Quantity', key: 'quantity', width: 10 },
     ];
 
-    // Step 3: Add Rows (API Data)
+    // Step 3: Map API Data to Columns
     const data = this.orderlist.map((order) => ({
-      customerId: order.customerId,
-      customerName: order.customerName,
+      orderItemId: order.orderItemId,
       orderDate: new Date(order.orderDate).toLocaleDateString(),
-      orderId: order.orderId,
-      totalItems: order.totalItems,
-      totalAmount: order.totalAmount.toFixed(2),
+      productName: order.productName,
       status:
         order.status === 1
           ? 'Pending'
           : order.status === 2
           ? 'Shipped'
           : 'Delivered',
+      amount: order.amount.toFixed(2),
+      quantity: order.quantity,
     }));
 
     data.forEach((row) => worksheet.addRow(row));
@@ -90,8 +143,5 @@ export class OrderListComponent {
     workbook.xlsx.writeBuffer().then((buffer) => {
       saveAs(new Blob([buffer]), 'Orders_With_Validation.xlsx');
     });
-  }
-  uploadReport() {
-    throw new Error('Method not implemented.');
   }
 }
