@@ -1,10 +1,10 @@
 <div class="page">
     <div class="top">
         <app-searchbar></app-searchbar>
-        <app-add-button [button]="button"></app-add-button>
-    </div>
+        <app-add-button [button]="button" (buttonClick)="onAddButtonClick()"></app-add-button>
+      </div>
     <div class="bottom">
-        <app-table [header]="header" [items]="items"></app-table>
-        <app-add-products></app-add-products>
+      <app-table [header]="header" [items]="items" (editProduct)="onEditProduct($event)"></app-table>
+      <app-add-products></app-add-products>
     </div>
 </div>
