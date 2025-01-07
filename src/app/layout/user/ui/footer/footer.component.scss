@@ -19,11 +19,23 @@
       li{
         color: white;
         padding-top: 5px;
-      
+
         i{
           padding-right: 10px;
         }
       }
     }
   }
+}
+.policyTabs{
+  display: flex;
+  color: white;
+  font-weight: 700;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.tndc{
+  display: flex;
 }
