@@ -1,8 +1,17 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError, Observable, switchMap } from 'rxjs';
+import { catchError, map, Observable, switchMap } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
+interface AddressResponse {
+  id: number;
+  addressLine: string;
+  city: string;
+  district: string;
+  state: string;
+  zipCode: string;
+  // ... other fields
+}
 import { OrderItem } from '../layout/admin/interface/order.interface';
 
 export interface OrderEmailContext {
@@ -35,7 +44,17 @@ interface PolicyUpdate {
   providedIn: 'root',
 })
 export class ApiServiceService {
-  map(arg0: (order: any) => { CustomerID: any; CustomerName: any; OrderDate: string; OrderID: any; TotalItems: any; TotalAmount: any; Status: any; }) {
+  map(
+    arg0: (order: any) => {
+      CustomerID: any;
+      CustomerName: any;
+      OrderDate: string;
+      OrderID: any;
+      TotalItems: any;
+      TotalAmount: any;
+      Status: any;
+    }
+  ) {
     throw new Error('Method not implemented.');
   }
   constructor(private http: HttpClient) {}
@@ -125,6 +144,21 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Product');
   }
   getOrderDetails() {
+    return this.http.get('https://localhost:7267/api/Order/orders/List');
+    // return this.http.get('https://localhost:7267/api/Order/orderItem/List');
+  }
+
+  getOrderDetailsById(id:number){
+    return this.http.get(`
+    https://localhost:7267/api/Order/orders/detailsbyid/${id}`);
+  }
+  updateOrderStatusbyid(orderId: number): Observable<any> {
+    const baseUrl = 'https://localhost:7267/api';
+    return this.http.put(
+      `${baseUrl}/Order/updatestatusbyidonly/${orderId}`,
+      null  // No body needed for this request
+    );
+  }
     return this.http.get('https://localhost:7267/api/Order/orderItem/List');
   }
   getOrderDetail(): Observable<OrderItem[]>  {
@@ -152,6 +186,15 @@ export class ApiServiceService {
       orderPayload
     );
   }
+
+  getAddressById(id: number): Observable<string> {
+    return this.http.get<AddressResponse>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+      .pipe(
+        map(response => {
+          return `${response.addressLine} , ${response.city} , ${response.district} , ${response.state} , ${response.zipCode}`;
+        })
+      );
+  }
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
       `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
@@ -169,13 +212,9 @@ export class ApiServiceService {
       .set('receptor', email)
       .set('subject', subject)
       .set('body', body)
-      .set('isBodyHtml', 'true');  // Adding HTML flag as parameter
+      .set('isBodyHtml', 'true'); // Adding HTML flag as parameter
 
-    return this.http.post(
-      'https://localhost:7267/api/email',
-      null,
-      { params }
-    );
+    return this.http.post('https://localhost:7267/api/email', null, { params });
   }
   getAllCategories() {
     return this.http.get('https://localhost:7267/api/Categories');
@@ -185,22 +224,26 @@ export class ApiServiceService {
       `https://localhost:7267/api/Config/GetColorById?id=${id}`
     );
   }
-  checkUserIdIsExisted(id:number){
-    return this.http.get(`https://localhost:7267/api/Users/CheckUserExisted/${id}`);
+  checkUserIdIsExisted(id: number) {
+    return this.http.get(
+      `https://localhost:7267/api/Users/CheckUserExisted/${id}`
+    );
   }
-  IsAdmin(id:number){
+  IsAdmin(id: number) {
     return this.http.get(`https://localhost:7267/api/Admin/Check/${id}`);
   }
-  returnIdFromEmail(email:string){
-    return this.http.get(`https://localhost:7267/api/Users/ReturnIdfromemail/${email}`);
+  returnIdFromEmail(email: string) {
+    return this.http.get(
+      `https://localhost:7267/api/Users/ReturnIdfromemail/${email}`
+    );
   }
-  addNewUser(email:string,name:string,phone:string){
+  addNewUser(email: string, name: string, phone: string) {
     let data = {
       email: email, // Changed from 'name' to 'categoryName'
       name: name, // Changed from 'icon' to 'iconPath'
-      phone:phone,
+      phone: phone,
       orders: [], // Provide empty array
-  feedbacks: [] // Provide empty array
+      feedbacks: [], // Provide empty array
     };
 
     const headers = { 'Content-Type': 'application/json' };
@@ -220,14 +263,13 @@ export class ApiServiceService {
     );
   }
 
-  getAddressByUserId(id:number){
-    // return this.http.get(`https://localhost:7267/api/Users/${id}`)
-    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
+  getAddressByUserId(id: number) {
+    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`);
   }
 
   getOrderList() {
     return this.http.get(`https://localhost:7267/api/Order/orderItem/List`);
-    // return this.http.get(`Data/OrderList.json`);
+    // return this.http.get('https://localhost:7267/api/Order/orders/List');
   }
 
   getAllOrderList() {
@@ -247,12 +289,23 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Categories');
   }
 
+  getAllBanners(){
+    return this.http.get('https://localhost:7267/api/Banner')
+  }
+
   categoryDeletion(id: any) {
     this.http
       .delete(`https://localhost:7267/api/Categories/${id}`)
       .subscribe((res) => {
         console.log(res);
       });
+  }
+
+  bannerDelete(id:any) {
+    this.http.delete(`https://localhost:7267/api/Banner/${id}`)
+    .subscribe((res) => {
+      console.log(res);
+    })
   }
 
   addCategory(item: any) {

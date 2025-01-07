@@ -1,47 +1,43 @@
 <div class="table table-hover mt-5">
-<div>
+  <div>
     <div class="card-body scrollable-card">
+      <app-product-feedback-toggle (filterChange)="onFilterChange($event)"></app-product-feedback-toggle>
       <table class="table table-borderless align-middle">
         <thead class="text-muted border-bottom">
-          <!-- <app-user-orders [tabs]="['Product','Website']"></app-user-orders> -->
           <tr>
             <th scope="col">Employee</th>
-            <th scope="col">Product Name</th>
+            @if(shouldShowProductColumn()){
+              <th scope="col">Product Name</th>
+            }
             <th scope="col">Feedback</th>
             <th scope="col" class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
-          @for(item of feedback; track item){
-          <tr class="border-bottom hover-row">
-            <td class="d-flex align-items-center">
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/149/149071.png"
-                alt="Profile Picture"
-                class="rounded-circle me-3 shadow-sm"
-              />
-              <span class="fw-bold">{{ item.userName }}</span>
-            </td>
-            <td>
-              <p class="mb-0 text-muted">{{ item.productName }}</p>
-            </td>
-            <td>
-              <p class="mb-0 text-muted">{{ item.feedBack }}</p>
-            </td>
-            <button class="replay-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-
-            <td class="text-center">
-              <i
-                class="bi bi-send-fill action-icon"
-                title="Send Feedback"
-              ></i>
-            </td>
-          </button>
-          <div class="replay-modal">
-
-            <app-feedback-replay></app-feedback-replay>
-          </div>
-          </tr>
+          @for(item of filteredFeedback; track item){
+            <tr class="border-bottom hover-row">
+              <td class="d-flex align-items-center">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/149/149071.png"
+                  alt="Profile Picture"
+                  class="rounded-circle me-3 shadow-sm"
+                />
+                <span class="fw-bold">{{ item.userName }}</span>
+              </td>
+              @if(shouldShowProductColumn()){
+                <td>
+                  <p class="mb-0 text-muted">{{ item.productName }}</p>
+                </td>
+              }
+              <td>
+                <p class="mb-0 text-muted">{{ item.feedBack }}</p>
+              </td>
+              <td class="text-center">
+                <button class="replay-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <i class="bi bi-send-fill action-icon" title="Send Feedback"></i>
+                </button>
+              </td>
+            </tr>
           }
         </tbody>
       </table>
