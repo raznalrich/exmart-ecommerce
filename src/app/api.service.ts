@@ -1,8 +1,8 @@
 // api.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, throwError, map, Observable } from 'rxjs';
+import { Product } from './layout/user/interfaces/productInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -74,10 +74,13 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
-  // Upload an image
-  uploadImage(file: File): Observable<{ imageUrl: string }> {
-    const formData = new FormData();
-    formData.append('file', file);
+  addBanner(payload: any): Observable<any> {
+     return this.http.post(`${this.baseUrl}/Banner`, payload)
+  }
+
+uploadImage(file: File) {
+  const formData = new FormData();
+  formData.append('file', file);
 
     return this.http
       .post<{ imageUrl: string }>(
@@ -91,6 +94,16 @@ export class ApiService {
     return this.http.put(
       `https://localhost:7267/api/Product/Update/${productId}`,
       productData
+    );
+  }
+
+
+
+  searchProducts(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
+        query
+      )}`
     );
   }
 
@@ -131,6 +144,13 @@ export class ApiService {
   //   return this.http.get(`Data/productTrail.json/${id}`).pipe(
   //     catchError(this.handleError)
   //   );
+
+  getAllFeedback(){
+    return this.http.get(`https://localhost:7267/api/FeedBack/all`);
+  }
+
+  // getProductsById(id:any){
+  //   return this.http.get(`Data/productTrail.json/${id}`)
   // }
 
   // getProductsById(id: number): Observable<any> {
