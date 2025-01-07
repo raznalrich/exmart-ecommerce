@@ -27,9 +27,9 @@ export class ProfileAddressCardComponent {
     pincode: '',
     city: '',
     district: '',
-    stste: '',
-    country: '',
-    phoneNo: '',
+    state: '',
+    // country: '',
+    // phoneNo: '',
   };
   @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();

@@ -3,6 +3,7 @@ import { Injectable, signal } from '@angular/core';
 import { catchError, Observable, switchMap } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
+import { GlobalService } from '../global.service';
 
 export interface OrderEmailContext {
   orderId: string;
@@ -236,8 +237,35 @@ export class ApiServiceService {
     );
   }
 
-  addAddress(address: AddAddressDTO){
-    return this.http.post(`https://localhost:7267/api/Users/addAddress`,address);
+  // addAddress(address: AddAddressDTO){
+  //   return this.http.post(`https://localhost:7267/api/Users/addAddress`,address);
+  // }
+
+  addAddress(userId:number, item: any) {
+    let data = {
+      userId: userId,
+      // isPrimary: true,
+      addressTypeId: 1, // Address type (e.g., Home, Work)
+      addressLine: item.addressLine, // Building number
+      zipCode: item.zipCode, // Pincode
+      city: item.city, // City
+      district: item.district, // District
+      state: item.state, // State
+      createdBy:userId
+    };
+console.log('address data',data);
+
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http
+      .post('https://localhost:7267/api/Users/addAddress', data, { headers })
+      .pipe(
+        catchError((error) => {
+          console.log('Error details:', error.error);
+          throw (error);
+        })
+      );
   }
 
   getAddressByUserId(id:number){
@@ -248,8 +276,31 @@ export class ApiServiceService {
     return this.http.get(`https://localhost:7267/api/Users/getAddressById/${id}`)
   }
 
-  editAddressById(id:number,addAddressDTO:any){
-    return this.http.patch(`https://localhost:7267/api/Users/editAddress/${id}`,addAddressDTO)
+  editAddressById(addressId: number, item: any) {
+    let data = {
+      id: addressId,
+      userId: item.userId,
+      addressTypeId: 1,
+      addressLine: item.addressLine,
+      zipCode: item.zipCode,
+      city: item.city,
+      district: item.district,
+      state: item.state,
+      updatedBy: item.userId
+    };
+
+    console.log('updating address data', data);
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http
+      .put(`https://localhost:7267/api/Users/editAddress/${addressId}`, data, { headers, responseType: 'text' })
+      .pipe(
+        catchError((error) => {
+          console.log('Error details:', error.error);
+          throw error;
+        })
+      );
   }
 
   deleteAddressById(id:number){
