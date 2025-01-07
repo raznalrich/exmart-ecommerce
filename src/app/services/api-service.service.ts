@@ -12,6 +12,8 @@ interface AddressResponse {
   zipCode: string;
   // ... other fields
 }
+import { OrderItem } from '../layout/admin/interface/order.interface';
+
 export interface OrderEmailContext {
   orderId: string;
   customerName: string;
@@ -157,6 +159,12 @@ export class ApiServiceService {
       null  // No body needed for this request
     );
   }
+    return this.http.get('https://localhost:7267/api/Order/orderItem/List');
+  }
+  getOrderDetail(): Observable<OrderItem[]>  {
+    return this.http.get<OrderItem[]>('https://localhost:7267/api/Order/orderItem/List');
+  }
+
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
     const orderPayload = {
       userId: userId,
