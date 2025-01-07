@@ -61,7 +61,7 @@ import { PopUpComponent } from "./layout/user/ui/pop-up/pop-up.component";
     AddtocartpageComponent,
     AddressConfirmPageComponent,
     OrderPopupComponent,
-    PopUpComponent
+    PopUpComponent,
 ],
 
   templateUrl: './app.component.html',
