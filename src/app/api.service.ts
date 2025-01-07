@@ -61,10 +61,8 @@ export class ApiService {
   }
 
   // Fetch products from local JSON
-  getProducts(): Observable<any> {
-    return this.http
-      .get(`product-sample.json`)
-      .pipe(catchError(this.handleError));
+  getProducts() {
+    return this.http.get('https://localhost:7267/api/Product');
   }
 
   // Add a new product
