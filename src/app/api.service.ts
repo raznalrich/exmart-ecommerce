@@ -124,6 +124,13 @@ export class ApiService {
   //   return this.http.get(`Data/productTrail.json/${id}`).pipe(
   //     catchError(this.handleError)
   //   );
+
+  getAllFeedback(){
+    return this.http.get(`https://localhost:7267/api/FeedBack/all`);
+  }
+
+  // getProductsById(id:any){
+  //   return this.http.get(`Data/productTrail.json/${id}`)
   // }
 
   // getProductsById(id: number): Observable<any> {
