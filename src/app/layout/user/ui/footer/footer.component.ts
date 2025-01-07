@@ -10,6 +10,9 @@ import { ApiServiceService } from '../../../../services/api-service.service';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
+onSendReplay() {
+throw new Error('Method not implemented.');
+}
   emailTemplate: string = '';
   constructor(public api:ApiServiceService,public router: Router){
 

@@ -7,6 +7,7 @@ import { DateRangepickerComponent } from '../../ui/date-rangepicker/date-rangepi
 import { ReactiveFormsModule } from '@angular/forms';
 import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-order-list',
@@ -30,6 +31,61 @@ export class OrderListComponent {
       console.log('orderlist', this.orderlist);
     });
   }
+
+  async onFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file = target?.files?.[0];
+
+    if (!file) return;
+
+    try {
+      const workbook = new ExcelJS.Workbook();
+      const arrayBuffer = await file.arrayBuffer();
+
+      await workbook.xlsx.load(arrayBuffer);
+      const worksheet = workbook.getWorksheet(1);
+
+      if (!worksheet) {
+        console.error('No worksheet found');
+        return;
+      }
+      const orders: any[] = [];
+
+      // Skip the header row and process data rows
+      worksheet.eachRow((row, rowNumber) => {
+        if (rowNumber === 1) return; // Skip header row
+        const order = {
+          orderItemId: row.getCell(1).value,
+          productStatusId: this.getStatusNumber(row.getCell(4).value as string),
+        };
+        orders.push(order);
+      });
+      // console.log('Imported orders:', orders);
+      for (const order of orders) {
+        try {
+          const response = await firstValueFrom(
+            this.api.updateOrderStatus(order)
+          );
+          console.log(`Order updated: ${order.orderItemId}`, response);
+        } catch (error) {
+          console.error(`Error updating order: ${order.orderItemId}`, error);
+        }
+      }
+    } catch (error) {
+      console.error('Error reading Excel file:', error);
+    }
+  }
+
+  private getStatusNumber(status: string): number {
+    const statusMap: { [key: string]: number } = {
+      pending: 1,
+      shipped: 2,
+      delivered: 3,
+    };
+
+    return statusMap[status.toLowerCase()] || 1;
+  }
+
   downloadReport() {
     // Step 1: Create Workbook and Worksheet
     const workbook = new ExcelJS.Workbook();
@@ -87,8 +143,5 @@ export class OrderListComponent {
     workbook.xlsx.writeBuffer().then((buffer) => {
       saveAs(new Blob([buffer]), 'Orders_With_Validation.xlsx');
     });
-  }
-  uploadReport() {
-    throw new Error('Method not implemented.');
   }
 }

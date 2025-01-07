@@ -1,110 +1,199 @@
-@if (isModalVisible) {
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="container">
-            <form [formGroup]="addProduct" (ngSubmit)="onSubmit()">
-              <div class="mb-3">
-                <label>Image:</label>
-                <input type="file" class="form-control" (change)="onFileChange($event)" />
-              </div>
-
-              <div class="mb-3">
-                <label>Name:</label>
-                <input type="text" class="form-control" formControlName="name" placeholder="Enter product name" />
-                @if (addProduct.get('name')?.touched && addProduct.get('name')?.invalid) {
-                  @if (addProduct.get('name')?.hasError('required')) {
-                    <small>
-                      <div class="alert alert-danger" style="margin: 5px">Name is required</div>
-                    </small>
-                  }
-                }
-              </div>
-
-              <div class="mb-3">
-                <label>Category:</label>
-                <select class="form-select" formControlName="categoryId">
-                  @for (category of categories; track category.id) {
-                    <option [ngValue]="category.id">{{ category.label }}</option>
-                  }
-                </select>
-              </div>
-
-              <div class="mb-3">
-                <label>Description:</label>
-                <textarea class="form-control" formControlName="description" placeholder="Enter product description"></textarea>
-              </div>
-
-              <div class="mb-3">
-                <label>Brand:</label>
-                <input type="text" class="form-control" formControlName="brand" placeholder="Enter brand" />
-              </div>
-
-              <div class="mb-3">
-                <label>Vendor ID:</label>
-                <input type="number" class="form-control" formControlName="vendorId" placeholder="Enter vendor ID" />
-              </div>
-
-              <div class="mb-3">
-                <label>Weight (kg):</label>
-                <input type="text" class="form-control" formControlName="weight" placeholder="Enter product weight" />
-              </div>
-
-              <div class="mb-3">
-                <label>Price (in ₹):</label>
-                <input type="text" class="form-control" formControlName="price" placeholder="Enter price" />
-              </div>
-
-              @if (addProduct.get('categoryId')?.value === 1) {
-                <div class="mb-3">
-                  <label class="d-block">Sizes:</label>
-                  @for (size of sizes; track size.id) {
-                    <div class="form-check d-inline-block me-3">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        [value]="size.id"
-                        [checked]="isSelected('size', size.id)"
-                        (change)="onCheckboxChange($event, 'size')"
-                      >
-                      <label class="form-check-label">{{ size.label }}</label>
-                    </div>
-                  }
-                </div>
-              }
-
-
-              <div class="mb-3">
-                <label class="d-block">Colors:</label>
-                @for (color of colors; track color.id) {
-                  <div class="form-check d-inline-block me-3">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      [value]="color.id"
-                      [checked]="isSelected('color', color.id)"
-                      (change)="onCheckboxChange($event, 'color')"
-                    >
-                    <label class="form-check-label">{{ color.label }}</label>
-                  </div>
-                }
-              </div>
-
-              <div class="mb-3">
-                <label>Additional Images:</label>
-                <input type="file" class="form-control" (change)="onAdditionalFilesChange($event)" multiple />
-                <small class="form-text text-muted">You can upload multiple images.</small>
-              </div>
-
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-            </form>
+<!-- add-products.component.html -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          {{ isEditMode ? 'Edit Product' : 'Add New Product' }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addProduct" (ngSubmit)="onSubmit()">
+          <!-- Image Upload -->
+          <div class="mb-3">
+            <label>Image:</label>
+            <input
+              type="file"
+              class="form-control"
+              (change)="onFileChange($event)"
+              [required]="!isEditMode"
+            />
           </div>
-        </div>
+
+          <!-- Name Field -->
+          <div class="mb-3">
+            <label>Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              placeholder="Enter product name"
+            />
+            <div
+              *ngIf="
+                addProduct.get('name')?.touched &&
+                addProduct.get('name')?.invalid
+              "
+              class="alert alert-danger"
+              style="margin: 5px"
+            >
+              Name is required
+            </div>
+          </div>
+
+          <!-- Category Selection -->
+          <div class="mb-3">
+            <label>Category:</label>
+            <select class="form-select" formControlName="categoryId">
+              <option value="">Select a category</option>
+              <option
+                *ngFor="let category of categories"
+                [ngValue]="category.id"
+              >
+                {{ category.categoryName }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Description Field -->
+          <div class="mb-3">
+            <label>Description:</label>
+            <textarea
+              class="form-control"
+              formControlName="description"
+              placeholder="Enter product description"
+            ></textarea>
+          </div>
+
+          <!-- Brand Field -->
+          <div class="mb-3">
+            <label>Brand:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="brand"
+              placeholder="Enter brand"
+            />
+          </div>
+
+          <!-- Vendor ID Field -->
+          <div class="mb-3">
+            <label>Vendor ID:</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="vendorId"
+              placeholder="Enter vendor ID"
+            />
+          </div>
+
+          <!-- Weight Field -->
+          <div class="mb-3">
+            <label>Weight (kg):</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="weight"
+              placeholder="Enter product weight"
+            />
+          </div>
+
+          <!-- Price Field -->
+          <div class="mb-3">
+            <label>Price (in ₹):</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="price"
+              placeholder="Enter price"
+            />
+          </div>
+
+          <!-- Sizes Selection (Conditional) -->
+          <div class="mb-3" *ngIf="showSizes">
+            <label class="d-block">Sizes:</label>
+            <div
+              *ngFor="let size of sizes"
+              class="form-check d-inline-block me-3"
+            >
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [value]="size.sizeId"
+                [checked]="isSelected('size', size.sizeId)"
+                (change)="onCheckboxChange($event, 'size')"
+                id="size{{ size.sizeId }}"
+              />
+              <label class="form-check-label" for="size{{ size.sizeId }}">
+                {{ size.size }}
+              </label>
+            </div>
+          </div>
+
+          <!-- Colors Selection -->
+          <div class="mb-3">
+            <label class="d-block">Colors:</label>
+            <div
+              *ngFor="let color of colors"
+              class="form-check d-inline-block me-3"
+            >
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [value]="color.colorId"
+                [checked]="isSelected('color', color.colorId)"
+                (change)="onCheckboxChange($event, 'color')"
+                id="color{{ color.colorId }}"
+              />
+              <label class="form-check-label" for="color{{ color.colorId }}">
+                {{ color.colorName }}
+              </label>
+            </div>
+          </div>
+
+          <!-- Additional Images Upload -->
+          <div class="mb-3">
+            <label>Additional Images:</label>
+            <input
+              type="file"
+              class="form-control"
+              (change)="onAdditionalFilesChange($event)"
+              multiple
+            />
+            <small class="form-text text-muted">
+              You can upload multiple images.
+            </small>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+              {{ isEditMode ? 'Update' : 'Submit' }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-}
+</div>
