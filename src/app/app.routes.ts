@@ -27,7 +27,7 @@ import { SeeAllProductsPageComponent } from './layout/user/pages/see-all-product
 import { EditPoliciesComponent } from './layout/admin/ui/edit-policies/edit-policies.component';
 import { PolicyPageComponent } from './layout/user/pages/policy-page/policy-page.component';
 import { PolicyContentComponent } from './layout/user/ui/policy-content/policy-content.component';
-
+import { TrackExmartComponent } from './layout/user/pages/track-exmart/track-exmart.component';
 
 export const routes: Routes = [
   {
@@ -78,6 +78,7 @@ export const routes: Routes = [
       {
         path:"thankyou", component:ThankyoupageComponent
       },
+
       {
         path:'',redirectTo:'home',pathMatch:'full'
       }
@@ -129,6 +130,9 @@ export const routes: Routes = [
   },
   {
     path:'login',component:LoginComponent
+  },
+   {
+    path:"trackexmart/:id",component:TrackExmartComponent
   }
 
 ];
