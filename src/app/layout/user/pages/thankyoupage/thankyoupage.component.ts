@@ -45,6 +45,7 @@ interface Item {
   styleUrl: './thankyoupage.component.scss'
 })
 export class ThankyoupageComponent {
+  orderPlaced:string='Order Placed'
   productDetails:any
 id:any
 data:any
