@@ -15,7 +15,7 @@ export class UserOrdersComponent {
   constructor(public api:ApiServiceService,public global:GlobalService){
     this.global.getUserId();
   }
-  @Input() tabs = ['In Transit', 'Pending'];
+  @Input() tabs = ['In Transit', 'Delivered'];
   activeTab = 'In Transit';
   inTransitOrders: any[] = [];
   orderHistorylist: any[] = [];
@@ -55,10 +55,10 @@ export class UserOrdersComponent {
     this.isLoading = true;
     this.error = null;
 
-    this.api.getAllOrderList().subscribe({
+    this.api.getOrderItemList().subscribe({
       next: (res: any) => {
-        this.inTransitOrders = res.filter((order:any) => order.userId === this.userId);
-        this.orderHistorylist = res.filter((order: { userId: number }) => order.userId === this.userId);
+        this.inTransitOrders = res.filter((order:any) => order.userId === this.userId && order.status === 1);
+        this.orderHistorylist = res.filter((order: any) => order.userId === this.userId && order.status === 2);
         console.log("filtered orders", this.inTransitOrders);
         this.isLoading = false;
       },

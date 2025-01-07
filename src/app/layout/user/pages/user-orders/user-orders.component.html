@@ -48,7 +48,7 @@
       [items]="inTransitOrders">
     </app-order-section> -->
   </div>
-  <div *ngSwitchCase="'Pending'">
+  <div *ngSwitchCase="'Delivered'">
     @if(!isLoading&&!error){
 
       <app-order-section

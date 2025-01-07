@@ -24,10 +24,12 @@ interface OrderItem {
 export class OrderItemComponent {
   @Input() id:number=0;
   @Input() title: string = '';
-  @Input() type: string = '';
-  @Input() size: string = '';
+  @Input() amount: string = '';
+  @Input() quantity: string = '';
   @Input() imageUrl: string = '';
-  @Input() status: string = '';
+  @Input() status: any;
+  statusName:any;
+  @Input() OrderedDate: any;
   @Input() statusIcon: string = '';
   productDetails:any;
   orderData:any;
@@ -35,6 +37,7 @@ export class OrderItemComponent {
   constructor(public api:ApiServiceService){}
 ngOnInit(){
 
+  
     //Fetch color details
     this.api.GetOrderDetailById(this.id).subscribe({
       next: (orderData) => {
