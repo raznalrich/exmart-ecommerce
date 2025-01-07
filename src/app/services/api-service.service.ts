@@ -142,7 +142,8 @@ export class ApiServiceService {
     return this.http.get('https://localhost:7267/api/Product');
   }
   getOrderDetails() {
-    return this.http.get('https://localhost:7267/api/Order/orderItem/List');
+    return this.http.get('https://localhost:7267/api/Order/orders/List');
+    // return this.http.get('https://localhost:7267/api/Order/orderItem/List');
   }
 
   getOrderDetailsById(id:number){

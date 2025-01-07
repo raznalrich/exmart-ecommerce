@@ -1,62 +1,90 @@
-.dropdown .btn {
-  color: black;
-  font-weight: bold;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+
+  .btn {
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+    &:hover,
+    &:focus {
+      transform: translateY(-3px);
+    }
+  }
 }
 
-button[type="button"] {
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 0 4px;
- }
- 
- button:first-child {
-  background-color: white;
-  color: #8061c3;
-  border: 1px solid #8061c3;
- }
- 
- button:last-child {
-  background-color: #8061c3;
-  color: white;
-  border: none;
- }
- 
- button:hover {
-  opacity: 0.9;
- }
-.dropdown .btn:hover,
-.dropdown .btn:focus{
-  transform: translateY(-3px);
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f8f9fa;
+  min-width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  right: 0;
+  
+  &.show {
+    display: block;
+  }
+
+  input[type="date"] {
+    width: 100%;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+    &:hover,
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+  }
 }
 
-/* Styling the dropdown menu */
-.dropdown-menu {
-  background-color: #f8f9fa; /* Light background */
-  border: 1px solid #ddd; /* Subtle border */
-  border-radius: 8px; /* Rounded corners */
-  padding: 10px; /* Spacing inside */
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Dropdown shadow */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 1rem;
+
+  button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+
+    &:first-child {
+      background-color: white;
+      color: #8061c3;
+      border: 1px solid #8061c3;
+    }
+
+    &:last-child {
+      background-color: #8061c3;
+      color: white;
+      border: none;
+    }
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
 }
 
-/* Styling the date inputs inside the dropdown */
-.dropdown-menu input[type="date"] {
-  width: 100%; /* Full width */
-  padding: 5px 10px; /* Padding for input */
-  margin: 5px 0; /* Spacing between inputs */
-  border: 1px solid #ccc; /* Border color */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1); /* Inner shadow */
+.form-label {
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
-/* Date input hover and focus effects */
-.dropdown-menu input[type="date"]:hover,
-.dropdown-menu input[type="date"]:focus {
-  border-color: #007bff; /* Highlight border on hover/focus */
-  outline: none; /* Remove default outline */
+.mb-2 {
+  margin-bottom: 1rem;
 }
