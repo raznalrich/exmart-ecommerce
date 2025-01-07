@@ -58,6 +58,8 @@ fetchProductImages() {
     this.api.getProductsById(item.productId).subscribe({
       next: (imageData) => {
         this.productDetails = imageData
+        console.log('OrderItemId',item.productId);
+
         item.primaryImageUrl = this.productDetails.primaryImageUrl
       },
       error: (error) => console.error('Error fetching image:', error)
