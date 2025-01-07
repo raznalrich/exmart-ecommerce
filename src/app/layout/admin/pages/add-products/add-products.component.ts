@@ -1,5 +1,5 @@
 // add-products.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,6 +11,7 @@ import { ApiService } from '../../../../api.service';
 import { CommonModule } from '@angular/common';
 import { forkJoin, of } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-add-products',
@@ -19,8 +20,10 @@ import { switchMap, map, catchError } from 'rxjs/operators';
   templateUrl: './add-products.component.html',
   styleUrls: ['./add-products.component.scss'],
 })
-export class AddProductsComponent implements OnInit {
-  isModalVisible = true;
+export class AddProductsComponent implements OnInit, OnChanges {
+  @Input() productToEdit: any;
+
+  isModalVisible = false;
   addProduct!: FormGroup;
 
   categories: any[] = [];
@@ -30,16 +33,29 @@ export class AddProductsComponent implements OnInit {
   selectedFile: File | null = null;
   additionalFiles: File[] = [];
 
-  isLoading = true;
-  loadError: string | null = null;
+  showSizes = false;
 
-  showSizes: boolean = false;
-
+  public isEditMode = false;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    // Initialize the form group
+    // 1) Initialize the form group
+    this.initializeForm();
+
+    // 2) Fetch categories, colors, and sizes from the API
+    this.fetchInitialData();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // If parent passes a product to edit:
+    if (changes['productToEdit'] && this.productToEdit) {
+      this.populateForm(this.productToEdit);
+      this.isEditMode = true;
+    }
+  }
+
+  initializeForm() {
     this.addProduct = new FormGroup({
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.maxLength(500)),
@@ -67,26 +83,29 @@ export class AddProductsComponent implements OnInit {
       productImages: new FormControl([], Validators.required),
     });
 
-    // Fetch categories, colors, and sizes from the API
+    // Dynamically update "showSizes" if category changes
+    this.addProduct.get('categoryId')?.valueChanges.subscribe((categoryId) => {
+      this.handleCategoryChange(categoryId);
+    });
+  }
+
+  fetchInitialData() {
     forkJoin({
       categories: this.apiService.getAllCategories().pipe(
         catchError((error) => {
           console.error('Error fetching categories:', error);
-          this.loadError = 'Failed to load categories.';
           return of([]);
         })
       ),
       colors: this.apiService.getAllColors().pipe(
         catchError((error) => {
           console.error('Error fetching colors:', error);
-          this.loadError = 'Failed to load colors.';
           return of([]);
         })
       ),
       sizes: this.apiService.getAllSizes().pipe(
         catchError((error) => {
           console.error('Error fetching sizes:', error);
-          this.loadError = 'Failed to load sizes.';
           return of([]);
         })
       ),
@@ -98,32 +117,59 @@ export class AddProductsComponent implements OnInit {
         console.log('Loaded categories:', this.categories);
         console.log('Loaded colors:', this.colors);
         console.log('Loaded sizes:', this.sizes);
-        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error loading data:', err);
-        this.loadError = 'An error occurred while loading data.';
-        this.isLoading = false;
       },
     });
+  }
 
-    // Subscribe to category changes to handle dynamic validators
-    this.addProduct.get('categoryId')?.valueChanges.subscribe((categoryId) => {
-      console.log('Category changed to:', categoryId);
-      this.showSizes = Number(categoryId) === 1;
+  setAddMode() {
+    this.isEditMode = false;
+    this.productToEdit = null;
+    this.addProduct.reset();
+    this.additionalFiles = [];
+    this.selectedFile = null;
+    this.showSizes = false;
+  }
 
-      const sizeControl = this.addProduct.get('size');
-      if (this.showSizes) {
-        sizeControl?.setValidators(Validators.required);
-      } else {
-        sizeControl?.clearValidators();
-        sizeControl?.setValue([]);
-      }
-      sizeControl?.updateValueAndValidity();
+  setEditMode(product: any) {
+    this.isEditMode = true;
+    this.productToEdit = product;
+    this.populateForm(product);
+  }
 
-      console.log('Show sizes:', this.showSizes);
-      console.log('Size field valid status:', sizeControl?.valid);
+  handleCategoryChange(categoryId: number) {
+    // Use categoryId == 20 (example) to show sizes
+    this.showSizes = Number(categoryId) === 20;
+
+    const sizeControl = this.addProduct.get('size');
+    if (this.showSizes) {
+      sizeControl?.setValidators(Validators.required);
+    } else {
+      sizeControl?.clearValidators();
+      sizeControl?.setValue([]);
+    }
+    sizeControl?.updateValueAndValidity();
+  }
+
+  populateForm(product: any) {
+    this.addProduct.patchValue({
+      name: product.name,
+      description: product.description,
+      brand: product.brand,
+      vendorId: product.vendorId,
+      categoryId: product.categoryId,
+      size: product.size, // adapt if your data differs
+      color: product.color, // adapt if your data differs
+      primaryImageUrl: product.primaryImageUrl,
+      weight: product.weight,
+      price: product.price,
+      createdBy: product.createdBy,
+      productImages: product.productImages || [],
     });
+    // Keep consistent with handleCategoryChange:
+    this.showSizes = Number(product.categoryId) === 20;
   }
 
   // Helper method to check if a checkbox is selected
@@ -157,8 +203,9 @@ export class AddProductsComponent implements OnInit {
       return;
     }
     this.selectedFile = input.files[0];
-    this.addProduct.patchValue({ primaryImageUrl: input.files[0] });
-    console.log('File selected:', input.files[0].name);
+    // Patch the form with the File object so we know it's selected
+    this.addProduct.patchValue({ primaryImageUrl: this.selectedFile });
+    console.log('File selected:', this.selectedFile.name);
   }
 
   // Handle additional image file selections
@@ -187,6 +234,115 @@ export class AddProductsComponent implements OnInit {
       return;
     }
 
+    if (this.isEditMode && this.productToEdit) {
+      // Handle Edit Product
+      this.updateExistingProduct();
+    } else {
+      // Handle Add Product
+      this.createNewProduct();
+    }
+  }
+
+  private updateExistingProduct() {
+    const formValue = this.addProduct.value;
+    const productId = this.productToEdit.id;
+
+    // If user selected a new file, upload first => then update
+    if (this.selectedFile) {
+      // 1) Upload the primary image
+      this.apiService
+        .uploadImage(this.selectedFile)
+        .pipe(
+          switchMap((primaryRes: any) => {
+            const primaryImageUrl = primaryRes.imageUrl;
+            // If additional files were selected, upload them
+            if (this.additionalFiles.length > 0) {
+              const uploads = this.additionalFiles.map((file) =>
+                this.apiService.uploadImage(file)
+              );
+              return forkJoin(uploads).pipe(
+                map((additionalResponses: any[]) => {
+                  const additionalImageUrls = additionalResponses.map(
+                    (res) => res.imageUrl
+                  );
+                  return { primaryImageUrl, additionalImageUrls };
+                }),
+                catchError((error) => {
+                  console.error('Error uploading additional images:', error);
+                  return of({ primaryImageUrl, additionalImageUrls: [] });
+                })
+              );
+            } else {
+              // No additional images
+              return of({ primaryImageUrl, additionalImageUrls: [] });
+            }
+          }),
+          switchMap(({ primaryImageUrl, additionalImageUrls }) => {
+            const payload = {
+              id: productId,
+              name: formValue.name,
+              description: formValue.description,
+              brand: formValue.brand,
+              vendorId: +formValue.vendorId,
+              categoryId: +formValue.categoryId,
+              SizeId: formValue.size,
+              ColorId: formValue.color,
+              primaryImageUrl: primaryImageUrl, // string from the upload
+              weight: +formValue.weight,
+              price: +formValue.price,
+              createdBy: +formValue.createdBy,
+              productImages: additionalImageUrls.map((url: string) => ({
+                imageUrl: url,
+              })),
+            };
+
+            console.log('Edit payload with uploaded file:', payload);
+            return this.apiService.updateProduct(payload.id, payload);
+          })
+        )
+        .subscribe({
+          next: (res) => {
+            console.log('Product updated (with file) successfully:', res);
+            this.closeModal();
+          },
+          error: (err) => {
+            console.error('Error updating product:', err);
+          },
+        });
+    } else {
+      // No new file selected => send existing URL
+      const payload = {
+        id: productId,
+        name: formValue.name,
+        description: formValue.description,
+        brand: formValue.brand,
+        vendorId: +formValue.vendorId,
+        categoryId: +formValue.categoryId,
+        SizeId: formValue.size,
+        ColorId: formValue.color,
+        primaryImageUrl: this.productToEdit.primaryImageUrl, // keep old string
+        weight: +formValue.weight,
+        price: +formValue.price,
+        createdBy: +formValue.createdBy,
+        // If needed, keep old product images or override with formValue.productImages
+        productImages: this.productToEdit.productImages || [],
+      };
+
+      console.log('Edit payload (no new file):', payload);
+      this.apiService.updateProduct(payload.id, payload).subscribe({
+        next: (res) => {
+          console.log('Product updated successfully:', res);
+          this.closeModal();
+        },
+        error: (err) => {
+          console.error('Error updating product:', err);
+        },
+      });
+    }
+  }
+
+  private createNewProduct() {
+    // Handle Add Product
     if (!this.selectedFile) {
       console.error('No primary image selected for upload.');
       return;
@@ -200,8 +356,8 @@ export class AddProductsComponent implements OnInit {
 
           if (this.additionalFiles.length > 0) {
             // Prepare upload observables for additional images
-            const additionalUploadObservables = this.additionalFiles.map(
-              (file) => this.apiService.uploadImage(file)
+            const additionalUploadObservables = this.additionalFiles.map((file) =>
+              this.apiService.uploadImage(file)
             );
 
             // Upload all additional images in parallel
@@ -241,25 +397,27 @@ export class AddProductsComponent implements OnInit {
             })),
           };
 
-          console.log('Payload:', payload);
-
-          // Send the payload to add the product
+          console.log('Payload (create new):', payload);
           return this.apiService.addProduct(payload);
         })
       )
       .subscribe({
         next: (res) => {
           console.log('Product added successfully:', res);
-          this.isModalVisible = false;
-          // Optionally, reset the form and additional files
-          this.addProduct.reset();
-          this.additionalFiles = [];
-          // Reset selectedFile and primaryImageUrl
-          this.selectedFile = null;
+          this.closeModal();
         },
         error: (err) => {
           console.error('Error adding product:', err);
         },
       });
+  }
+
+  closeModal() {
+    const modalElement = document.getElementById('staticBackdrop');
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      modal?.hide();
+    }
+    this.setAddMode();
   }
 }

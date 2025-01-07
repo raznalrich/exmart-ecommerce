@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { ButtonComponent } from '../button/button.component';
-import { GlobalService } from '../../../../global.service';
 
 @Component({
   selector: 'app-table',
@@ -11,9 +10,12 @@ import { GlobalService } from '../../../../global.service';
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
-  constructor(public api: ApiServiceService, public service: GlobalService) {}
+  constructor(public api: ApiServiceService) {}
   @Input() items: any;
   @Input() header: any;
+
+  // Add Output property
+  @Output() editProduct = new EventEmitter()
 
   toggleStatus(item: any) {
     this.api.toggelProductStatus(item.id).subscribe({
@@ -23,6 +25,10 @@ export class TableComponent {
       },
       error: (err) => console.error(err),
     });
+  }
+
+  onEdit(item: any) {
+    this.editProduct.emit(item);
   }
 
   loadProducts(): void {
