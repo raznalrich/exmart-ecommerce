@@ -31,7 +31,7 @@ export class ReportPageComponent {
   }
 
   onDateRangeSelected(dateRange: { startDate: string; endDate: string }) {
-console.log("button clicked");
+    console.log('button clicked');
 
     const { startDate, endDate } = dateRange;
     if (startDate && endDate) {
