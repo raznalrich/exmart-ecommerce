@@ -28,6 +28,7 @@ import { EditPoliciesComponent } from './layout/admin/ui/edit-policies/edit-poli
 import { PolicyPageComponent } from './layout/user/pages/policy-page/policy-page.component';
 import { PolicyContentComponent } from './layout/user/ui/policy-content/policy-content.component';
 import { TrackExmartComponent } from './layout/user/pages/track-exmart/track-exmart.component';
+import { ShippedConfirmationEmailComponent } from './layout/admin/ui/shipped-confirmation-email/shipped-confirmation-email.component';
 
 export const routes: Routes = [
   {
@@ -133,6 +134,9 @@ export const routes: Routes = [
   },
    {
     path:"trackexmart/:id",component:TrackExmartComponent
+  },
+  {
+    path:"updateStatusBy/:id",component:ShippedConfirmationEmailComponent
   }
 
 ];

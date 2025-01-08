@@ -93,13 +93,16 @@
         }
 
        }
-      @if(selectedAddress==1||selectedAddress==2){
+      <!-- @if(addressType==1){
         <p class="total"><span>Shipping : </span> <span>{{ '0'| currency:'INR'}}</span></p>
-       }
-       @else if (selectedAddress==3) {
-        <p class="total"><span>Shipping : </span> <span>{{ '50'| currency:'INR'}}</span></p>
+       } -->
+       <!-- @else if (selectedAddress==3) { -->
+        @if(selectedAddress){
 
-       }
+          <p class="total"><span>Shipping : </span> <span>{{ shippingCharge | currency:'INR'}}</span></p>
+        }
+
+       <!-- } -->
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
       <p class="total"><span>Total:</span> <span>{{ totalPrice| currency:'INR'}}</span></p>
     </div>
