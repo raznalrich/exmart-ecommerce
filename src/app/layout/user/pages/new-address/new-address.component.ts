@@ -94,6 +94,7 @@ console.log('updating data');
         console.log('Address added successfully:', response);
         this.successMessage = 'Address added successfully!';
         this.addressAdded.emit();
+this.closeModal();
         this.resetForm();
       },
       (error) => {
@@ -136,9 +137,7 @@ console.log('Update data being sent:', addressData);
 }
 
 private closeModal(): void {
-  setTimeout(() => {
     this.modalClose.emit();
-  }, 1000); // Delay of 1 second to show success message before closing
 }
 
 onCancel() {
