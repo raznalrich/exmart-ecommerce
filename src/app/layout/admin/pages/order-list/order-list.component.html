@@ -3,7 +3,7 @@
     <div class="top">
       <div style="display: flex;">
 
-        <app-searchbar></app-searchbar>
+        <app-searchbar [searchPlaceholder]="searchPlaceholder" (searchChange)="onSearch($event)"></app-searchbar>
         <div class="right">
           <div class="tooltip-container">
           <button class="btn-create-new" (click)="downloadReport()">
