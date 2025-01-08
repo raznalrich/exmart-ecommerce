@@ -14,8 +14,8 @@
       @for (data of address; track data) {
       <app-profile-address-card
         [address]="data"
-(edit)="onEdit($event)"
-(delete)="onDelete($event)"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
       ></app-profile-address-card>
       }
     </div>
@@ -29,6 +29,7 @@
       aria-labelledby="exampleModalLabel"
     >
       <div class="modal-dialog">
+      <!-- <div class="modal show d-block"> -->
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -48,10 +49,10 @@
           </div>
         </div>
       </div>
-    </div>
+</div>
 
 <!--Edit Address Model-->
-    <div class="modal fade" id="editModal" tabindex="-1" >
+    <div class="modal fade" id="editModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -59,7 +60,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-              <app-new-address [editMode]="true" [addressData]="selectedAddress" (addressUpdated)="refreshAddressList()"></app-new-address>
+              <app-new-address [addressId]="addressId" [editMode]="true" [addressData]="selectedAddress" (addressUpdated)="refreshAddressList()"></app-new-address>
           </div>
         </div>
       </div>
