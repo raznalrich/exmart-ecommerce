@@ -3,6 +3,7 @@ import { Injectable, signal } from '@angular/core';
 import { catchError, map, Observable, switchMap } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
+
 interface AddressResponse {
   id: number;
   addressLine: string;
@@ -23,6 +24,7 @@ export interface OrderEmailContext {
     price: number;
     subtotal: number;
   }>;
+
   totalAmount: number;
   shippingAddress: string;
   orderDate: Date;
@@ -34,10 +36,21 @@ export interface CartItem {
   colorId: number;
   userId: number;
 }
+
 interface PolicyUpdate {
   id: number;
   tndCheading: string;
   tndCcontent: string;
+}
+
+export interface AddAddressDTO {
+  userId: number;
+  addressTypeId: number;
+  isPrimary: boolean;
+  addressLine: string;
+  city: string;
+  district: string;
+  state: string;
 }
 
 @Injectable({
@@ -47,8 +60,6 @@ export class ApiServiceService {
   map(
     arg0: (order: any) => {
       CustomerID: any;
-      CustomerName: any;
-      OrderDate: string;
       OrderID: any;
       TotalItems: any;
       TotalAmount: any;
@@ -159,7 +170,6 @@ export class ApiServiceService {
       null  // No body needed for this request
     );
   }
-    // return this.http.get('https://localhost:7267/api/Order/orderItem/List');
 
   getOrderDetail(): Observable<OrderItem[]>  {
     return this.http.get<OrderItem[]>('https://localhost:7267/api/Order/orderItem/List');
@@ -195,6 +205,7 @@ export class ApiServiceService {
         })
       );
   }
+
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
       `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
@@ -263,8 +274,74 @@ export class ApiServiceService {
     );
   }
 
-  getAddressByUserId(id: number) {
-    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`);
+  // addAddress(address: AddAddressDTO){
+  //   return this.http.post(`https://localhost:7267/api/Users/addAddress`,address);
+  // }
+
+  addAddress(userId:number, item: any) {
+    let data = {
+      userId: userId,
+      // isPrimary: true,
+      addressTypeId: 1, // Address type (e.g., Home, Work)
+      addressLine: item.addressLine, // Building number
+      zipCode: item.zipCode, // Pincode
+      city: item.city, // City
+      district: item.district, // District
+      state: item.state, // State
+      createdBy:userId
+    };
+console.log('address data',data);
+
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http
+      .post('https://localhost:7267/api/Users/addAddress', data, { headers })
+      .pipe(
+        catchError((error) => {
+          console.log('Error details:', error.error);
+          throw (error);
+        })
+      );
+  }
+
+  getAddressByUserId(id:number){
+    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
+  }
+
+  // getAddressById(id:number){
+  //   return this.http.get(`https://localhost:7267/api/Users/getAddressById/${id}`)
+  // }
+
+  editAddressById(addressId: number, item: any) {
+    let data = {
+      id: addressId,
+      userId: item.userId,
+      addressTypeId: 1,
+      addressLine: item.addressLine,
+      zipCode: item.zipCode,
+      city: item.city,
+      district: item.district,
+      state: item.state,
+      updatedBy: item.userId
+    };
+
+    console.log('updating address data', data);
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http
+      .put(`https://localhost:7267/api/Users/editAddress/${addressId}`, data, { headers, responseType: 'text' })
+      .pipe(
+        catchError((error) => {
+          console.log('Error details:', error.error);
+          throw error;
+        })
+      );
+  }
+
+  deleteAddressById(id:number){
+    return this.http.delete(`https://localhost:7267/api/Users/DeleteAddress/${id}`)
   }
 
   getOrderList() {

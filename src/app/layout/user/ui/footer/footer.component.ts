@@ -24,6 +24,23 @@ this.loadTemplate();
       // console.log(this.CategoryList);
     });
 }
+
+private readonly hrEmail = 'sona.george@experionglobal.com';
+
+openTeamsChat(): void {
+  // Create Teams deep link URL
+  const teamsUrl = `msteams:/l/chat/0/0?users=${encodeURIComponent(this.hrEmail)}`;
+
+  // Try to open Teams app
+  window.location.href = teamsUrl;
+
+  // Fallback - if Teams app doesn't open after 1 second, open Teams web
+  setTimeout(() => {
+    const webTeamsUrl = `https://teams.microsoft.com/_#/conversations/new?users=${encodeURIComponent(this.hrEmail)}`;
+    window.location.href = webTeamsUrl;
+  }, 1000);
+}
+
   private generateEmailContent(): string {
     return `
       <!DOCTYPE html>
