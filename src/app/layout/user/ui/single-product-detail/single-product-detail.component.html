@@ -40,7 +40,7 @@
       {{ message }}
     </div>
     }
-    <div class="quantity">
+    <!-- <div class="quantity">
       <label for="quantity"></label>
       <input
         type="number"
@@ -51,7 +51,23 @@
         [(ngModel)]="quantity"
         (ngModelChange)="onQuantityChange()"
       />
-    </div>
+    </div> -->
+
+<br>
+    <!-- <app-quantity
+    [minQuantity]="1"
+    [maxQuantity]="99"
+    [showMessage]="true"
+    [(ngModel)]="quantity"
+    (quantityChange)="onQuantityChange()">
+  </app-quantity> -->
+<app-quantity
+    [minQuantity]="1"
+    [maxQuantity]="99"
+    [showMessage]="true"
+    [(quantity)]="quantity"
+   >
+  </app-quantity>
     <div class="rating">
       <!-- <app-star-rating [rating]="data.rating"></app-star-rating> -->
     </div>

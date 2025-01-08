@@ -8,12 +8,14 @@ import { GlobalService } from '../../../../global.service';
 import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
 import { AddProductsComponent } from '../add-products/add-products.component';
 import * as bootstrap from 'bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-productlist',
   standalone: true,
 
   imports: [
+    CommonModule,
     AddButtonComponent,
     TableComponent,
     SearchbarComponent,
@@ -24,14 +26,15 @@ import * as bootstrap from 'bootstrap';
 })
 export class ProductlistComponent {
   @ViewChild(AddProductsComponent) addProductsComponent!: AddProductsComponent;
-
+  filteredItems: any = [];
+  searchPlaceholder: string = 'Search Product';
+  isAddProductVisible: boolean = false;
   // onClickButton() {
   //   console.log('Added product');
   // }
   constructor(public api: ApiServiceService) {}
-
   items: any;
-  header: any = ['Id', 'Image', 'Category', 'Product', 'Price', 'Actions'];
+  header: any = ['Id', 'Image', 'Product', 'Category', 'Price', 'Actions'];
 
   button: any = {
     id: 1,
@@ -41,37 +44,63 @@ export class ProductlistComponent {
 
   ngOnInit() {
     this.loadProducts();
+    this.api.getProducts().subscribe((res: any) => {
+      this.items = res;
+    });
   }
 
   loadProducts() {
     this.api.getProducts().subscribe((res: any) => {
-      this.items = res;
-      console.log(this.items);
+      this.filteredItems = res;
     });
+  }
+
+  onSearch(searchTerm: any) {
+    const term = searchTerm.toLowerCase().trim();
+    if (!term) {
+      this.filteredItems = [...this.items];
+      return;
+    }
+    this.filteredItems = this.items.filter((item: any) => {
+      return item.name && item.name.toLowerCase().includes(term);
+    });
+    // console.log(this.filteredItems);
+    if (this.filteredItems.length === 0) {
+      console.log('No matching results found for:', term);
+    }
   }
 
   onEditProduct(product: any) {
     // Pass the product to AddProductsComponent for editing
+    this.isAddProductVisible =true;
+    console.log('product',product);
+
     this.addProductsComponent.setEditMode(product);
 
     // Open the modal using Bootstrap's JS API
-    const modalElement = document.getElementById('staticBackdrop');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-    }
+    // const modalElement = document.getElementById('staticBackdrop');
+    // if (modalElement) {
+    //   const modal = new bootstrap.Modal(modalElement);
+    //   modal.show();
+    // }
   }
-
+  onCloseAddProduct() {
+    this.isAddProductVisible = false;
+  }
   onAddButtonClick() {
     // Set Add Mode
-    this.addProductsComponent.setAddMode();
-
+    // this.addProductsComponent.setAddMode();
+    this.isAddProductVisible = true;
     // Open the modal
-    const modalElement = document.getElementById('staticBackdrop');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-    }
+    // const modalElement = document.getElementById('staticBackdrop');
+    // if (modalElement) {
+    //   const modal = new bootstrap.Modal(modalElement);
+    //   modal.show();
+    // }
+  }
+  add(){
+    this.isAddProductVisible = true;
+
   }
 
   icons: any = [
@@ -86,6 +115,4 @@ export class ProductlistComponent {
       bgColor: '#EC7063',
     },
   ];
-
-
 }

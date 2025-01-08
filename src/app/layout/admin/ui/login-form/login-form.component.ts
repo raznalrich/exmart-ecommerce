@@ -88,6 +88,7 @@ export class LoginFormComponent {
         this.authentication(this.employeeId);
       },
       (error) => {
+        this.addNewUser();
         console.error('Error fetching user ID:', error);
       }
     );

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ItemsInOrderComponent } from "../../ui/items-in-order/items-in-order.component";
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { OrderTrackingBarComponent } from "../../ui/order-tracking-bar/order-tracking-bar.component";
@@ -47,6 +47,7 @@ interface Item {
 export class ThankyoupageComponent {
   orderPlaced:string='Order Placed'
   productDetails:any
+ @Input() orderContext:any;
 id:any
 data:any
 cartItemList:any
