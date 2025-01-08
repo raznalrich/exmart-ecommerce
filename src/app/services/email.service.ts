@@ -102,12 +102,12 @@ export class EmailService {
     return this.api.sendMail(email, subject, body).pipe(
       map((response) => {
         console.log('Email sent successfully', response);
-        alert('Email sent successfully');
+        // alert('Email sent successfully');
         return true; // Return success
       }),
       catchError((error) => {
         console.error('Error sending email:', error);
-        alert('Failed to send email');
+        // alert('Failed to send email');
         return of(false); // Return failure
       })
     );
@@ -119,12 +119,12 @@ export class EmailService {
     return this.api.sendMail(email, subject, body).pipe(
       map((response) => {
         console.log('Email sent successfully', response);
-        alert('Email sent successfully');
+        // alert('Email sent successfully');
         return true; // Return success
       }),
       catchError((error) => {
         console.error('Error sending email:', error);
-        alert('Failed to send email');
+        // alert('Failed to send email');
         return of(false); // Return failure
       })
     );

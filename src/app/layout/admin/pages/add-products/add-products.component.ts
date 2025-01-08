@@ -27,21 +27,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
   @Output() save = new EventEmitter<void>();
   isModalOpen = false;
 
-  buttonFunction() {
-    this.close.emit();
-  }
-
-
-
-
-  // closeModal(): void {
-  //   this.close.emit();
-  // }
-
-
-  saveChanges(): void {
-    this.save.emit();
-  }
   @Input() productToEdit: any;
 
   isModalVisible = false;
@@ -68,6 +53,16 @@ export class AddProductsComponent implements OnInit, OnChanges {
     this.fetchInitialData();
   }
 
+  buttonFunction() {
+    this.close.emit();
+  }
+
+
+
+
+  saveChanges(): void {
+    this.save.emit();
+  }
   ngOnChanges(changes: SimpleChanges): void {
     // If parent passes a product to edit:
     if (changes['productToEdit'] && this.productToEdit) {
@@ -156,7 +151,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   setEditMode(product: any) {
-    this.isModalOpen = true;
+
     this.isEditMode = true;
     this.productToEdit = product;
     this.populateForm(product);
