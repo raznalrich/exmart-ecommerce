@@ -99,6 +99,29 @@ border: #64A2F5 1px solid;
 //   color: white; /* Change text color for selected size */
 //   border-color: #0056b3; /* Change border color for selected size */
 // }
+.fade-in-out {
+  animation: fadeInOut 5s ease-in-out; /* 5s for the duration, including fade in and out */
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0; /* Completely hidden */
+    transform: translateY(-10px); /* Slide up slightly */
+  }
+  10% {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Slide to its position */
+  }
+  90% {
+    opacity: 1; /* Stay visible */
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0; /* Fade out */
+    transform: translateY(-10px); /* Slide up slightly again */
+  }
+}
+
 
 .rating{
 margin-top: 20px;
@@ -119,6 +142,12 @@ margin-top: 20px;
 .product-feedback
 {
   margin-top: 20px;
-  margin-left: 20rem;
+  margin-left: 2.5rem;
+  width: 100%;
 
+}
+.alert{
+  position: fixed;
+  top: 50px;
+  right: 10px;
 }
