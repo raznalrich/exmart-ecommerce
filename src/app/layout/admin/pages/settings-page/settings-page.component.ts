@@ -5,6 +5,9 @@ import { EditPoliciesComponent } from '../../ui/edit-policies/edit-policies.comp
 import { RouterLink } from '@angular/router';
 import { AddBannerComponent } from '../../ui/add-banner/add-banner.component';
 import { EditCategoryComponent } from '../../ui/edit-category/edit-category.component';
+import { EditBannerComponent } from "../../ui/edit-banner/edit-banner.component";
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-settings-page',
@@ -14,7 +17,8 @@ import { EditCategoryComponent } from '../../ui/edit-category/edit-category.comp
     EditPoliciesComponent,
     RouterLink,
     AddBannerComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    EditBannerComponent
 ],
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss']
@@ -25,28 +29,41 @@ export class SettingsPageComponent implements OnInit {
   banners: any[] = [];
 
   @ViewChild(EditCategoryComponent) editCategoryComponent!: EditCategoryComponent;
+  @ViewChild(EditBannerComponent) editBannerComponent!: EditBannerComponent;
 
 
-  constructor(private api: ApiServiceService) {}
+
+  constructor(private api: ApiServiceService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.fetchCategories();
     this.fetchBanners();
   }
 
-  fetchCategories() {
-    this.api.getCategory().subscribe((res: any) => {
-      this.category = res;
-      console.log('Fetched Categories:', this.category);
+  fetchCategories(): void {
+    this.api.getCategory().subscribe({
+      next: (res: any) => {
+        this.category = res;
+        console.log('Fetched Categories:', this.category);
+        this.cdr.detectChanges(); // Ensure changes reflect dynamically
+      },
+      error: (err) => console.error('Error fetching categories:', err),
     });
   }
 
-  fetchBanners() {
-    this.api.getAllBanners().subscribe((res: any) => {
-      this.banners = res;
-      console.log('Fetched Banners:', this.banners);
+
+
+  fetchBanners(): void {
+    this.api.getAllBanners().subscribe({
+      next: (res: any) => {
+        this.banners = res;
+        console.log('Fetched Banners:', this.banners);
+        this.cdr.detectChanges(); // Ensure changes reflect dynamically
+      },
+      error: (err) => console.error('Error fetching banners:', err),
     });
   }
+
 
   // Delete Category
   deleteCategory(item: any) {
@@ -89,15 +106,36 @@ export class SettingsPageComponent implements OnInit {
 
   // Handle category edited event
   onCategoryEdited(updatedCategory: any): void {
-    // Find the index of the updated category
     const index = this.category.findIndex(cat => cat.id === updatedCategory.id);
     if (index !== -1) {
-      // Update the category in the array
       this.category[index] = updatedCategory;
       console.log('Category updated:', updatedCategory);
-      alert('Category updated successfully.');
+    } else {
+      console.warn('Category not found in the local array, re-fetching categories.');
+      this.fetchCategories();
     }
+    this.cdr.detectChanges(); // Ensure UI reflects changes
   }
+
+  onEditBanner(bannerItem: any): void {
+    // Pass the selected banner to the child component
+    this.editBannerComponent.banner = bannerItem;
+    // Open the modal
+    this.editBannerComponent.openModal();
+  }
+
+  onBannerEdited(updatedBanner: any): void {
+    const index = this.banners.findIndex(b => b.bannerId === updatedBanner.bannerId);
+    if (index !== -1) {
+      this.banners[index] = updatedBanner;
+      console.log('Banner updated in local array:', updatedBanner);
+    } else {
+      console.warn('Banner not found in the local array, re-fetching banners.');
+      this.fetchBanners();
+    }
+    this.cdr.detectChanges(); // Ensure UI reflects changes
+  }
+
 
   trackById(index: number, item: any): number {
     return item.id;

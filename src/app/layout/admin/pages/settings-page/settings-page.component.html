@@ -39,7 +39,12 @@
         <p>{{ item.productName }}</p>
       </div>
       <div class="category-actions">
-        <button><i class="bi bi-pencil-square"></i></button>
+        <button
+          class="btn btn-sm btn-outline-primary me-2"
+          (click)="onEditBanner(item)"
+        >
+          <i class="bi bi-pencil-square"></i>
+        </button>
         <button (click)="deleteBanner(item)">
           <i class="bi bi-trash3"></i>
         </button>
@@ -54,10 +59,14 @@
     </div>
   </div>
 
-
   <div class="edit-policies">
     <app-edit-policiesapp-edit-policies></app-edit-policiesapp-edit-policies>
   </div>
 </div>
 
-<app-edit-category (categoryEdited)="onCategoryEdited($event)"></app-edit-category>
+<app-edit-category
+  (categoryEdited)="onCategoryEdited($event)"
+></app-edit-category>
+
+<app-edit-banner (bannerEdited)="onBannerEdited($event)"></app-edit-banner>
+

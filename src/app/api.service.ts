@@ -18,6 +18,14 @@ export class ApiService {
     throw new Error('Method not implemented.');
   }
 
+  // api.service.ts (or a separate banner service)
+updateBanner(id: number, updatedBanner: any) {
+  // If your endpoint is like PUT /banners/{id}
+  // Adjust to match your real endpoint & HTTP method
+  return this.http.put(`${this.baseUrl}/Banner/${id}`, updatedBanner);
+}
+
+
   // Fetch all categories
   getAllCategories(): Observable<any[]> {
     return this.http
@@ -61,7 +69,7 @@ export class ApiService {
   }
 
   // Fetch products from local JSON
-  getProducts() {
+  getProducts(): Observable<any> {
     return this.http.get('https://localhost:7267/api/Product');
   }
 
