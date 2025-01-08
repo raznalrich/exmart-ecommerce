@@ -465,7 +465,7 @@ export class ApiServiceService {
           tndCheading: existingPolicy.tndCheading, // Preserve the existing heading
           tndCcontent: policyContent,
         };
-        return this.http.put(
+          return this.http.put(
           `https://localhost:7267/api/Policy/${id}`,
           updatePayload
         );
