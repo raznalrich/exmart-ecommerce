@@ -1,6 +1,49 @@
-<div class="feedback-form">
+<!-- <div class="feedback-form">
   <form [formGroup]="productFeedbackForm" (ngSubmit)="submitProductFeedback()" >
     <input type="text" id="feedback" name="feedback" placeholder="Enter your feedback" formControlName="feedback">
     <button type="submit">Submit</button>
   </form>
-</div>
+</div> -->
+
+
+
+<div class="feedback-container">
+  <form [formGroup]="productFeedbackForm" (ngSubmit)="submitProductFeedback()">
+    <div class="input-wrapper">
+      <input
+        type="text"
+        formControlName="feedback"
+        placeholder="Enter your feedback..."
+        class="feedback-input"
+      >
+      <button
+        type="submit"
+        class="send-button"
+        [@buttonState]="isSubmitting ? 'submitting' : 'idle'"
+        [disabled]="isSubmitting"
+      >
+        <span class="button-content" [class.hidden]="isSubmitting">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </span>
+        <span class="loader" [class.show]="isSubmitting"></span>
+      </button>
+    </div>
+  </form>
+
+  <!-- <div *ngIf="showThankYou" [@messageState] class="thank-you-message">
+    <div class="success-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      </svg>
+    </div>
+    <h3>Thank You!</h3>
+    <p>We appreciate your feedback.</p>
+    <button class="new-feedback-btn" (click)="resetForm()">Send Another Feedback</button>
+  </div>
+</div> -->
