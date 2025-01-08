@@ -145,6 +145,9 @@ export class ApiServiceService {
   getCartList() {
     return this.http.get('https://localhost:7267/api/addtocart/GetCart');
   }
+  getOrderItemList() {
+    return this.http.get('https://localhost:7267/api/Order/orderItem/List');
+  }
 
   toggelProductStatus(id: number) {
     const url = `https://localhost:7267/api/Product/toggle-status/${id}`;
@@ -206,6 +209,15 @@ export class ApiServiceService {
       );
   }
 
+  getAddressTypeById(id: number): Observable<string> {
+    return this.http.get<any>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+      .pipe(
+        map(response => {
+          return `${response.addressTypeId}`;
+        })
+      );
+  }
+
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
       `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
@@ -246,6 +258,11 @@ export class ApiServiceService {
   returnIdFromEmail(email: string) {
     return this.http.get(
       `https://localhost:7267/api/Users/ReturnIdfromemail/${email}`
+    );
+  }
+  returnEmailFromId(id: number) {
+    return this.http.get(
+      `https://localhost:7267/api/Users/ReturnIdfromemail/${id}`
     );
   }
   addNewUser(email: string, name: string, phone: string) {
