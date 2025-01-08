@@ -110,7 +110,6 @@ console.log('update address');
 console.log('id',id);
 console.log('addressdata',addressData);
 
-
   if (id) {
     const updateData = {
       ...addressData,
