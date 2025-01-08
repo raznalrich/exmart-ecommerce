@@ -73,6 +73,8 @@ export class ApiServiceService {
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
 
+
+
   addToCart(
     id: number,
     userId: number,
@@ -479,5 +481,9 @@ console.log('address data',data);
     // return this.http.put(`https://localhost:7267/api/Policy/${id}`, payload);
 
     // return this.http.put(`https://localhost:7267/api/Policy/${id}`,policyContent);
+  }
+
+  LoginandToken(loginRequest:any){
+    return this.http.post(`https://localhost:7267/login`,loginRequest)
   }
 }
