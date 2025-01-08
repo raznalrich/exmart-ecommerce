@@ -1,0 +1,149 @@
+<!-- edit-category.component.html -->
+
+<!-- Modal Structure -->
+<div
+  class="modal fade"
+  id="editCategoryModal"
+  tabindex="-1"
+  aria-labelledby="editCategoryModalLabel"
+  aria-hidden="true"
+  #editCategoryModal
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeModal()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+          <!-- Category Name Input -->
+          <div class="mb-3">
+            <label for="edit-category-name" class="form-label">Category Name</label>
+            <input
+              type="text"
+              id="edit-category-name"
+              class="form-control"
+              formControlName="name"
+              placeholder="Enter category name"
+              required
+            />
+          </div>
+
+          <!-- Category Icon Selection -->
+          <div class="mb-3">
+            <label class="form-label">Category Icon</label>
+            <div class="d-flex flex-wrap gap-2">
+              <!-- Icon 1 -->
+              <div class="form-check">
+                <input
+                  type="radio"
+                  name="icon"
+                  id="edit-icon1"
+                  class="form-check-input"
+                  (change)="onIconSelect('https://cdn-icons-png.flaticon.com/512/3724/3724720.png')"
+                />
+                <label for="edit-icon1" class="form-check-label">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3724/3724720.png"
+                    alt="Icon 1"
+                    width="50"
+                    height="50"
+                  />
+                </label>
+              </div>
+              <!-- Icon 2 -->
+              <div class="form-check">
+                <input
+                  type="radio"
+                  name="icon"
+                  id="edit-icon3"
+                  class="form-check-input"
+                  (change)="onIconSelect('https://cdn-icons-png.flaticon.com/512/8694/8694414.png')"
+                />
+                <label for="edit-icon3" class="form-check-label">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/8694/8694414.png"
+                    alt="Icon 3"
+                    width="50"
+                    height="50"
+                  />
+                </label>
+              </div>
+              <!-- Icon 3 -->
+              <div class="form-check">
+                <input
+                  type="radio"
+                  name="icon"
+                  id="edit-icon4"
+                  class="form-check-input"
+                  (change)="onIconSelect('https://cdn2.iconfinder.com/data/icons/modern-future-technology-2/128/devices-laptop-tablet-phone2-512.png')"
+                />
+                <label for="edit-icon4" class="form-check-label">
+                  <img
+                    src="https://cdn2.iconfinder.com/data/icons/modern-future-technology-2/128/devices-laptop-tablet-phone2-512.png"
+                    alt="Icon 4"
+                    width="50"
+                    height="50"
+                  />
+                </label>
+              </div>
+              <!-- Icon 4 -->
+              <div class="form-check">
+                <input
+                  type="radio"
+                  name="icon"
+                  id="edit-icon5"
+                  class="form-check-input"
+                  (change)="onIconSelect('https://img.pikbest.com/element_our/20230314/bg/50b936af08408.png!sw800')"
+                />
+                <label for="edit-icon5" class="form-check-label">
+                  <img
+                    src="https://img.pikbest.com/element_our/20230314/bg/50b936af08408.png!sw800"
+                    alt="Icon 5"
+                    width="50"
+                    height="50"
+                  />
+                </label>
+              </div>
+              <!-- Icon 5 -->
+              <div class="form-check">
+                <input
+                  type="radio"
+                  name="icon"
+                  id="edit-icon6"
+                  class="form-check-input"
+                  (change)="onIconSelect('https://www.iconpacks.net/icons/1/free-smartphone-icon-695-thumb.png')"
+                />
+                <label for="edit-icon6" class="form-check-label">
+                  <img
+                    src="https://www.iconpacks.net/icons/1/free-smartphone-icon-695-thumb.png"
+                    alt="Icon 6"
+                    width="50"
+                    height="50"
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveCategory()">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

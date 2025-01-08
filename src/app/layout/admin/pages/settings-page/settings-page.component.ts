@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { AddNewCategoryComponent } from '../../ui/add-new-category/add-new-category.component';
 import { EditPoliciesComponent } from '../../ui/edit-policies/edit-policies.component';
 import { RouterLink } from '@angular/router';
 import { AddBannerComponent } from '../../ui/add-banner/add-banner.component';
+import { EditCategoryComponent } from '../../ui/edit-category/edit-category.component';
 
 @Component({
   selector: 'app-settings-page',
@@ -12,8 +13,9 @@ import { AddBannerComponent } from '../../ui/add-banner/add-banner.component';
     AddNewCategoryComponent,
     EditPoliciesComponent,
     RouterLink,
-    AddBannerComponent
-  ],
+    AddBannerComponent,
+    EditCategoryComponent
+],
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss']
 })
@@ -21,6 +23,9 @@ export class SettingsPageComponent implements OnInit {
   // Arrays to store fetched data
   category: any[] = [];
   banners: any[] = [];
+
+  @ViewChild(EditCategoryComponent) editCategoryComponent!: EditCategoryComponent;
+
 
   constructor(private api: ApiServiceService) {}
 
@@ -73,6 +78,25 @@ export class SettingsPageComponent implements OnInit {
 
     // Option 2: Re-fetch categories from the server
     // this.fetchCategories();
+  }
+
+  onEditCategory(category: any): void {
+    // Assign the category to the EditCategoryComponent
+    this.editCategoryComponent.category = category;
+    // Open the edit modal
+    this.editCategoryComponent.openModal();
+  }
+
+  // Handle category edited event
+  onCategoryEdited(updatedCategory: any): void {
+    // Find the index of the updated category
+    const index = this.category.findIndex(cat => cat.id === updatedCategory.id);
+    if (index !== -1) {
+      // Update the category in the array
+      this.category[index] = updatedCategory;
+      console.log('Category updated:', updatedCategory);
+      alert('Category updated successfully.');
+    }
   }
 
   trackById(index: number, item: any): number {

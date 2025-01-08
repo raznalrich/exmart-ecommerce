@@ -159,7 +159,7 @@ export class ApiServiceService {
     // return this.http.get('https://localhost:7267/api/Order/orderItem/List');
   }
 
-  getOrderDetailsById(id:number){
+  getOrderDetailsById(id: number) {
     return this.http.get(`
     https://localhost:7267/api/Order/orders/detailsbyid/${id}`);
   }
@@ -167,12 +167,14 @@ export class ApiServiceService {
     const baseUrl = 'https://localhost:7267/api';
     return this.http.put(
       `${baseUrl}/Order/updatestatusbyidonly/${orderId}`,
-      null  // No body needed for this request
+      null // No body needed for this request
     );
   }
- 
-  getOrderDetail(): Observable<OrderItem[]>  {
-    return this.http.get<OrderItem[]>('https://localhost:7267/api/Order/orderItem/List');
+
+  getOrderDetail(): Observable<OrderItem[]> {
+    return this.http.get<OrderItem[]>(
+      'https://localhost:7267/api/Order/orderItem/List'
+    );
   }
 
   placeOrder(userId: number, addressId: number, cartItems: CartItem[]) {
@@ -181,12 +183,12 @@ export class ApiServiceService {
       addressId: addressId,
       orderItems: cartItems.map((item) => ({
         productId: item.productId,
-        productName:'',
+        productName: '',
         quantity: item.quantity,
         sizeId: item.sizeId,
-        sizeName:'',
+        sizeName: '',
         colorId: item.colorId,
-        colorName:''
+        colorName: '',
       })),
     };
     console.log(orderPayload);
@@ -198,9 +200,12 @@ export class ApiServiceService {
   }
 
   getAddressById(id: number): Observable<string> {
-    return this.http.get<AddressResponse>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+    return this.http
+      .get<AddressResponse>(
+        `https://localhost:7267/api/Users/getAddressById/${id}`
+      )
       .pipe(
-        map(response => {
+        map((response) => {
           return `${response.addressLine} , ${response.city} , ${response.district} , ${response.state} , ${response.zipCode}`;
         })
       );
@@ -274,11 +279,18 @@ export class ApiServiceService {
     );
   }
 
+  updateCategory(id: number, category: any): Observable<any> {
+    return this.http.put<any>(
+      `https://localhost:7267/api/Categories/${id}`,
+      category
+    );
+  }
+
   // addAddress(address: AddAddressDTO){
   //   return this.http.post(`https://localhost:7267/api/Users/addAddress`,address);
   // }
 
-  addAddress(userId:number, item: any) {
+  addAddress(userId: number, item: any) {
     let data = {
       userId: userId,
       // isPrimary: true,
@@ -288,10 +300,9 @@ export class ApiServiceService {
       city: item.city, // City
       district: item.district, // District
       state: item.state, // State
-      createdBy:userId
+      createdBy: userId,
     };
-console.log('address data',data);
-
+    console.log('address data', data);
 
     const headers = { 'Content-Type': 'application/json' };
 
@@ -300,13 +311,13 @@ console.log('address data',data);
       .pipe(
         catchError((error) => {
           console.log('Error details:', error.error);
-          throw (error);
+          throw error;
         })
       );
   }
 
-  getAddressByUserId(id:number){
-    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`)
+  getAddressByUserId(id: number) {
+    return this.http.get(`https://localhost:7267/api/Users/getAddress/${id}`);
   }
 
   // getAddressById(id:number){
@@ -323,7 +334,7 @@ console.log('address data',data);
       city: item.city,
       district: item.district,
       state: item.state,
-      updatedBy: item.userId
+      updatedBy: item.userId,
     };
 
     console.log('updating address data', data);
@@ -331,7 +342,10 @@ console.log('address data',data);
     const headers = { 'Content-Type': 'application/json' };
 
     return this.http
-      .put(`https://localhost:7267/api/Users/editAddress/${addressId}`, data, { headers, responseType: 'text' })
+      .put(`https://localhost:7267/api/Users/editAddress/${addressId}`, data, {
+        headers,
+        responseType: 'text',
+      })
       .pipe(
         catchError((error) => {
           console.log('Error details:', error.error);
@@ -340,8 +354,10 @@ console.log('address data',data);
       );
   }
 
-  deleteAddressById(id:number){
-    return this.http.delete(`https://localhost:7267/api/Users/DeleteAddress/${id}`)
+  deleteAddressById(id: number) {
+    return this.http.delete(
+      `https://localhost:7267/api/Users/DeleteAddress/${id}`
+    );
   }
 
   getOrderList() {
@@ -366,8 +382,8 @@ console.log('address data',data);
     return this.http.get('https://localhost:7267/api/Categories');
   }
 
-  getAllBanners(){
-    return this.http.get('https://localhost:7267/api/Banner')
+  getAllBanners() {
+    return this.http.get('https://localhost:7267/api/Banner');
   }
 
   categoryDeletion(id: any) {
@@ -378,11 +394,12 @@ console.log('address data',data);
       });
   }
 
-  bannerDelete(id:any) {
-    this.http.delete(`https://localhost:7267/api/Banner/${id}`)
-    .subscribe((res) => {
-      console.log(res);
-    })
+  bannerDelete(id: any) {
+    this.http
+      .delete(`https://localhost:7267/api/Banner/${id}`)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
   addCategory(item: any) {
@@ -434,26 +451,26 @@ console.log('address data',data);
     );
   }
 
-  GetPolicy(){
-    return this.http.get(`https://localhost:7267/api/Policy`)
+  GetPolicy() {
+    return this.http.get(`https://localhost:7267/api/Policy`);
   }
-  GetPolicyById(id:number){
+  GetPolicyById(id: number) {
     return this.http.get(`https://localhost:7267/api/Policy/${id}`);
   }
-  UpdatePolicy(id:number,policyContent:string){
-
+  UpdatePolicy(id: number, policyContent: string) {
     return this.GetPolicyById(id).pipe(
       switchMap((existingPolicy: any) => {
         const updatePayload: PolicyUpdate = {
           id: id,
           tndCheading: existingPolicy.tndCheading, // Preserve the existing heading
-          tndCcontent: policyContent
+          tndCcontent: policyContent,
         };
-        return this.http.put(`https://localhost:7267/api/Policy/${id}`, updatePayload);
+        return this.http.put(
+          `https://localhost:7267/api/Policy/${id}`,
+          updatePayload
+        );
       })
     );
-
-
 
     // const payload = {
     //   tndCcontent: policyContent
