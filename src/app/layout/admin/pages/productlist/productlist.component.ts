@@ -26,14 +26,15 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductlistComponent {
   @ViewChild(AddProductsComponent) addProductsComponent!: AddProductsComponent;
+  filteredItems: any = [];
+  searchPlaceholder: string = 'Search Product';
   isAddProductVisible: boolean = false;
   // onClickButton() {
   //   console.log('Added product');
   // }
   constructor(public api: ApiServiceService) {}
-
   items: any;
-  header: any = ['Id', 'Image', 'Category', 'Product', 'Price', 'Actions'];
+  header: any = ['Id', 'Image', 'Product', 'Category', 'Price', 'Actions'];
 
   button: any = {
     id: 1,
@@ -43,13 +44,30 @@ export class ProductlistComponent {
 
   ngOnInit() {
     this.loadProducts();
+    this.api.getProducts().subscribe((res: any) => {
+      this.items = res;
+    });
   }
 
   loadProducts() {
     this.api.getProducts().subscribe((res: any) => {
-      this.items = res;
-      console.log(this.items);
+      this.filteredItems = res;
     });
+  }
+
+  onSearch(searchTerm: any) {
+    const term = searchTerm.toLowerCase().trim();
+    if (!term) {
+      this.filteredItems = [...this.items];
+      return;
+    }
+    this.filteredItems = this.items.filter((item: any) => {
+      return item.name && item.name.toLowerCase().includes(term);
+    });
+    // console.log(this.filteredItems);
+    if (this.filteredItems.length === 0) {
+      console.log('No matching results found for:', term);
+    }
   }
 
   onEditProduct(product: any) {
@@ -97,6 +115,4 @@ export class ProductlistComponent {
       bgColor: '#EC7063',
     },
   ];
-
-
 }

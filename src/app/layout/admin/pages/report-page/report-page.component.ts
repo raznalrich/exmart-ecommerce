@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './report-page.component.scss',
 })
 export class ReportPageComponent {
+  searchPlaceholder: string = 'Search Name';
   constructor(public api: ApiServiceService) {}
   items: any = [];
   filteredItems: any = [];
@@ -30,9 +31,26 @@ export class ReportPageComponent {
     });
   }
 
+  onSearch(searchTerm: string) {
+    const term = searchTerm.toLowerCase().trim();
+    if (!term) {
+      this.filteredItems = [...this.items];
+      return;
+    }
+    // console.log(this.filteredItems);
+    this.filteredItems = this.items.filter((item: any) => {
+      return (
+        item.customerName && item.customerName.toLowerCase().includes(term)
+      );
+    });
+
+    if (this.filteredItems.length === 0) {
+      console.warn('No matching results found for:', term);
+    }
+  }
+
   onDateRangeSelected(dateRange: { startDate: string; endDate: string }) {
     console.log('button clicked');
-
     const { startDate, endDate } = dateRange;
     if (startDate && endDate) {
       const start = new Date(startDate);
@@ -60,7 +78,6 @@ export class ReportPageComponent {
   }
 
   downloadReport() {
-    // console.log('Download Report');
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
       this.filteredItems
     );
