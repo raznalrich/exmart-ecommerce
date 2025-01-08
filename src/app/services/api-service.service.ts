@@ -296,7 +296,7 @@ console.log('address data',data);
     const headers = { 'Content-Type': 'application/json' };
 
     return this.http
-      .post('https://localhost:7267/api/Users/addAddress', data, { headers })
+      .post('https://localhost:7267/api/Users/addAddress', data, { headers, responseType:'text' })
       .pipe(
         catchError((error) => {
           console.log('Error details:', error.error);
@@ -313,9 +313,9 @@ console.log('address data',data);
   //   return this.http.get(`https://localhost:7267/api/Users/getAddressById/${id}`)
   // }
 
-  editAddressById(addressId: number, item: any) {
+  editAddressById(id: number, item: any) {
     let data = {
-      id: addressId,
+      // id: id,
       userId: item.userId,
       addressTypeId: 1,
       addressLine: item.addressLine,
@@ -324,6 +324,7 @@ console.log('address data',data);
       district: item.district,
       state: item.state,
       updatedBy: item.userId
+
     };
 
     console.log('updating address data', data);
@@ -331,7 +332,7 @@ console.log('address data',data);
     const headers = { 'Content-Type': 'application/json' };
 
     return this.http
-      .put(`https://localhost:7267/api/Users/editAddress/${addressId}`, data, { headers, responseType: 'text' })
+      .put(`https://localhost:7267/api/Users/editAddress/${id}`, data, { headers, responseType: 'text' })
       .pipe(
         catchError((error) => {
           console.log('Error details:', error.error);
