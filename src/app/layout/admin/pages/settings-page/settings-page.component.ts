@@ -25,11 +25,18 @@ export class SettingsPageComponent implements OnInit {
   constructor(private api: ApiServiceService) {}
 
   ngOnInit(): void {
+    this.fetchCategories();
+    this.fetchBanners();
+  }
+
+  fetchCategories() {
     this.api.getCategory().subscribe((res: any) => {
       this.category = res;
       console.log('Fetched Categories:', this.category);
     });
+  }
 
+  fetchBanners() {
     this.api.getAllBanners().subscribe((res: any) => {
       this.banners = res;
       console.log('Fetched Banners:', this.banners);
@@ -57,5 +64,18 @@ export class SettingsPageComponent implements OnInit {
     // Option 2: Fetch the banners again from the server
     // Uncomment the line below if you prefer to re-fetch the banners
     // this.fetchBanners();
+  }
+
+  onCategoryAdded(newCategory: any) {
+    // Option 1: Append the new category to the existing array
+    this.category.push(newCategory);
+    console.log('New category added:', newCategory);
+
+    // Option 2: Re-fetch categories from the server
+    // this.fetchCategories();
+  }
+
+  trackById(index: number, item: any): number {
+    return item.id;
   }
 }
