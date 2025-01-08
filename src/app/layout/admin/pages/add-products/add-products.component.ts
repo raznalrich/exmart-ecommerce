@@ -1,5 +1,5 @@
 // add-products.component.ts
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -21,6 +21,12 @@ import * as bootstrap from 'bootstrap';
   styleUrls: ['./add-products.component.scss'],
 })
 export class AddProductsComponent implements OnInit, OnChanges {
+  @Input() isOpen = false;
+  @Input() title = 'Modal Title';
+  @Output() close = new EventEmitter<void>();
+  @Output() save = new EventEmitter<void>();
+  isModalOpen = false;
+
   @Input() productToEdit: any;
 
   isModalVisible = false;
@@ -47,6 +53,16 @@ export class AddProductsComponent implements OnInit, OnChanges {
     this.fetchInitialData();
   }
 
+  buttonFunction() {
+    this.close.emit();
+  }
+
+
+
+
+  saveChanges(): void {
+    this.save.emit();
+  }
   ngOnChanges(changes: SimpleChanges): void {
     // If parent passes a product to edit:
     if (changes['productToEdit'] && this.productToEdit) {
@@ -125,6 +141,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   setAddMode() {
+    this.isModalOpen = true;
     this.isEditMode = false;
     this.productToEdit = null;
     this.addProduct.reset();
@@ -134,6 +151,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   setEditMode(product: any) {
+
     this.isEditMode = true;
     this.productToEdit = product;
     this.populateForm(product);
@@ -413,11 +431,12 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   closeModal() {
-    const modalElement = document.getElementById('staticBackdrop');
-    if (modalElement) {
-      const modal = bootstrap.Modal.getInstance(modalElement);
-      modal?.hide();
-    }
+    // const modalElement = document.getElementById('staticBackdrop');
+    // if (modalElement) {
+    //   const modal = bootstrap.Modal.getInstance(modalElement);
+    //   modal?.hide();
+    // }
+    this.isModalOpen = false;
     this.setAddMode();
   }
 }

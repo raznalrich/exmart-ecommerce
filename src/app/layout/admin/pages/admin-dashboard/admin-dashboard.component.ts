@@ -1,95 +1,141 @@
-import { Component } from '@angular/core';
+import { Component, NgModule, SimpleChanges } from '@angular/core';
 import { SidebarComponent } from "../../ui/sidebar/sidebar.component";
 import { AdminValuesDisplayingButtonComponent } from "../../ui/admin-values-displaying-button/admin-values-displaying-button.component";
 import { AdminWeeklyChartDispComponent } from "../../ui/admin-weekly-chart-disp/admin-weekly-chart-disp.component";
 import { AdminRecentOrdersInDashBoardComponent } from "../../ui/admin-recent-orders-in-dash-board/admin-recent-orders-in-dash-board.component";
 import { ApiServiceService } from '../../../../services/api-service.service';
-import { Product } from '../../../user/interfaces/productInterface';
-import { Order } from '../../interface/order.interface';
+import { OrderItem } from '../../interface/order.interface';
+import { formatDate } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule, NgModel } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
 
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
   imports: [SidebarComponent,AdminValuesDisplayingButtonComponent,
-    AdminWeeklyChartDispComponent, AdminRecentOrdersInDashBoardComponent],
+    AdminWeeklyChartDispComponent, AdminRecentOrdersInDashBoardComponent,RouterLink,FormsModule],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
 
 export class AdminDashboardComponent {
-  allOrders: Order[] = [];
-  products: Product[] = [];
-  pendingOrdersCount = 0;
-  pendingOrdersAmount = 0;
-  latestOrders: Order[] = [];
-  monthlyOrders: number[] = new Array(12).fill(0);
-  // items: any;
+
+  allOrders: OrderItem[] = [];
+  pendingOrders: number = 0;
+  shippedOrders : number = 0;
+  deliveredOrders : number = 0;
+  currentYearOrders: number = 0;
+  latestProducts: Array<{ productName: string; orderDate: string; imageUrl:string; }> = [];
+  monthlyOrderCounts: number[] = new Array(12).fill(0);
+  availableYears: number[] = [];
+  selectedYear: number = new Date().getFullYear();
+
+  constructor(public api:ApiServiceService,public router: Router){
+    const currentYear = new Date().getFullYear();
+    this.availableYears = Array.from(
+      { length: 3 },
+      (_, i) => currentYear - i
+    ).sort((a, b) => b - a);
+  }
 
 
-  // allOrders: any;
-  // products: any;
-  constructor(public api:ApiServiceService){}
+  ngOnInit(){
 
-
-ngOnInit(){
-
-  this.api.getProducts().subscribe((res: any) => {
-    this.products = res;
-    // this.displayedProducts = [...this.allProList];
-    // console.log(this.allProList)
-    console.log('DisplayedPro API:', this.products);
-  });
-
-  this.api.getAllOrderList().subscribe((res: any) => {
-    this.allOrders = res;
-    console.log('All Orders API:', this.allOrders);
-  });
-
+    this.api.getOrderDetail().subscribe((res: OrderItem[]) => {
+      this.allOrders = res;
+      console.log(this.allOrders);
 
       this.calculatePendingOrders();
-      this.calculatePendingAmount();
-      this.getLatestOrders();
-      this.calculateMonthlyOrders();
+      this.calculateShippedOrders();
+      this.calculateDevileredOrders()
+      this.calculateCurrentYearOrders();
+      this.getLatestProducts();
+      this.calculateMonthlyOrders(this.selectedYear);
+    });
+  };
+   calculatePendingOrders() {
+    this.pendingOrders = this.allOrders.filter(order => order.status === 1).length;
+    console.log('pend',this.pendingOrders);
+  }
+  calculateShippedOrders() {
+    this.shippedOrders = this.allOrders.filter(order => order.status === 2).length;
+    console.log('ship',this.shippedOrders);
+  }
+  calculateDevileredOrders() {
+    this.deliveredOrders = this.allOrders.filter(order => order.status === 3).length;
+    console.log('deliver',this.deliveredOrders);
+  }
+
+  calculateCurrentYearOrders() {
+    const currentYear = new Date().getFullYear();
+    this.currentYearOrders = this.allOrders.filter(order =>
+      new Date(order.orderDate).getFullYear() === currentYear
+    ).length;
+    console.log(this.currentYearOrders);
+
+  }
+
+  getLatestProducts() {
+    this.latestProducts = this.allOrders
+      .sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime())
+      .slice(0, 5)
+      .map(order => ({
+        productName: order.productName,
+        imageUrl: order.primaryImageUrl,
+        orderDate: formatDate(order.orderDate, 'dd/MM/yyyy', 'en-US')
+      }));
+      console.log("latest pross: ",this.latestProducts);
+  }
+
+onYearChange(event: Event) {
+  const selectedYear = Number((event.target as HTMLSelectElement).value);
+  this.calculateMonthlyOrders(selectedYear);
 }
+  calculateMonthlyOrders(year: number) {
+    this.monthlyOrderCounts = new Array(12).fill(0);
 
-calculatePendingOrders() {
-  this.pendingOrdersCount = this.allOrders.filter(
-    order => order.product_StatusId == 1
-  ).length;
+    this.allOrders.forEach(order => {
+      const orderDate = new Date(order.orderDate);
 
-  console.log('pendingOrders:', this.pendingOrdersCount);
-}
-
-calculatePendingAmount() {
-  const pendingOrders = this.allOrders.filter(
-    order => order.product_StatusId === 1
-  );
-
-  this.pendingOrdersAmount = pendingOrders.reduce((total, order) => {
-    const orderProduct = this.products.find(p => p.id === order.orderId);
-    return total + (orderProduct?.price || 0);
-  }, 0);
-
-  console.log('ordersAmount:', this.pendingOrdersAmount);
-}
-
-getLatestOrders() {
-  this.latestOrders = [...this.allOrders]
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    .slice(0, 5);
-  console.log('latestOrders:',this.latestOrders);
-
-}
-
-calculateMonthlyOrders() {
-  this.allOrders.forEach(order => {
-    const month = new Date(order.createdAt).getMonth();
-    this.monthlyOrders[month]++;
+      // Count orders for selected year
+      if (orderDate.getFullYear() === year) {
+          this.monthlyOrderCounts[orderDate.getMonth()]++;
+      }
   });
-  console.log('monthlyorders:',this.monthlyOrders);
+  console.log(`Orders for year ${year}:`, this.monthlyOrderCounts);
 
-}
+    // this.allOrders
+    //   .filter(order => {
+    //     const orderDate = new Date(order.orderDate);
+    //     return orderDate.getFullYear() === Number(this.selectedYear);
+
+    //  })
+    //   .forEach(order => {
+    //     const month = new Date(order.orderDate).getMonth();
+    //     this.monthlyOrderCounts[month]++;
+    //   });
+        console.log('selected Year: ',this.selectedYear);
+  }
+
+  ngOnChanges(changes:SimpleChanges){
+    console.log('Changes testing:', this.monthlyOrderCounts);
+
+  }
+
+  getMonthName(monthIndex: number): string {
+    const months = [
+      'January', 'February', 'March', 'April',
+      'May', 'June', 'July', 'August',
+      'September', 'October', 'November', 'December'
+    ];
+    return months[monthIndex];
+  }
 
 
+  MoveToOrdersPage(){
+    this.router.navigate(['/admin/orderlist',]);
+  }
 }

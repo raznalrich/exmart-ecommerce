@@ -1,3 +1,4 @@
+import { address } from './../../interfaces/AddressInterface';
 import { Component } from '@angular/core';
 import { CheckoutbuttonComponent } from "../../ui/checkoutbutton/checkoutbutton.component";
 import { AddtoCartDeletebtnComponent } from "../../ui/addto-cart-deletebtn/addto-cart-deletebtn.component";
@@ -15,6 +16,7 @@ export interface OrderEmailContext {
   orderId: number;
   customerName: string;
   items: Array<{
+    orderItemId:number;
     productName: string;
     quantity: number;
     price: number;
@@ -54,6 +56,10 @@ id:any
 data:any
 cartItemList:any
 selectedAddress:any
+address:string='';
+shippingCharge:number=0;
+orderContext:any;
+addressType:string='';
 totalPrice: number = 0;
   constructor(public api: ApiService,public apis:ApiServiceService, private route: ActivatedRoute,public global:GlobalService, private router: Router,
     public emailservice:EmailService
@@ -70,19 +76,50 @@ productIds: number[] = []; // Collection of product IDs
 
     // });
     this.userId = this.global.userId();
+    if(this.global.selectedAddressId() == ''){
+      // this.router.navigate(['/addressconfirm']);
+    }
 
     if(this.global.selectedAddressId()){
       this.selectedAddress = +this.global.selectedAddressId();
+      this.loadAddressType(this.selectedAddress);
+      this.loadAddress(this.selectedAddress);
     }
+
     const cartItems = this.global.signalCartList();
     this.cartItemList = this.global.signalCartList();
     this.productIds = cartItems.map(item => item.productId);
 
     console.log('Cart list:', cartItems);
     console.log('Product IDs:', this.productIds);
+    if(this.global.selectedAddressId()==''){
 
-    this.fetchCartItems(cartItems);
+      this.fetchCartItems(cartItems);
+    }
     // console.log(this.CartItems);
+  }
+  loadAddress(addressId:number) {
+    this.apis.getAddressById(addressId).subscribe({
+      next: (formattedAddress) => {
+        this.address = formattedAddress;
+      },
+      error: (error) => {
+        console.error('Error fetching address:', error);
+      }
+    });
+  }
+  loadAddressType(addressId:number){
+    this.apis.getAddressTypeById(addressId).subscribe({
+      next:(typeID)=>{
+this.addressType=typeID;
+console.log('type',this.addressType);
+this.fetchCartItems( this.global.signalCartList());
+
+      },
+      error: (error) => {
+        console.error('Error fetching address:', error);
+      }
+    })
   }
 
   fetchCartItems(cartItems: any[]) {
@@ -117,13 +154,21 @@ productIds: number[] = []; // Collection of product IDs
       // Find the corresponding cart item to get the quantity
       const cartItem = this.cartItemList.find((item: any) => item.productId === product.id);
       const quantity = cartItem ? cartItem.quantity : 0;
-      return total + (product.price * quantity);
+      if(+this.addressType == 1 ){
+        console.log('shipping charge');
+
+        this.shippingCharge = this.shippingCharge + 49
+        return total + ((product.price * quantity)+49)
+      }
+      else{
+        console.log("calculating total amount");
+
+        return total + (product.price * quantity);
+      }
     }, 0);
 
     // Add delivery charge if address is 3
-    if (this.selectedAddress == 3) {
-      this.totalPrice = this.totalPrice + 50;
-    }
+
     console.log(this.totalPrice);
   }
   setOrderFromCart() {
@@ -139,39 +184,41 @@ productIds: number[] = []; // Collection of product IDs
         next: (response: any) => {
           console.log('Order placed successfully!', response);
 
-          // Define the type for order items with product details
-          const fetchProductNames$: Observable<{ productId: number; productName: string; quantity: number; price: number }>[] = response.orderItems.map((item: any) =>
-            this.apis.getProductsById(item.productId).pipe(
-              map((product:any) => ({
-                productId: item.productId,
-                productName: product.name,
-                quantity: item.quantity,
-                price: product.price,
-              }))
-            )
-          );
 
-          forkJoin(fetchProductNames$).subscribe(
-            (orderItemsWithNames) => {
-              const orderContext: OrderEmailContext = {
-                orderId: response.orderId, // Get order ID from response
-                customerName: response.user.name, // Get user name
-                items: orderItemsWithNames.map(item => ({
-                  productName: item.productName,
-                  quantity: item.quantity,
-                  price: item.price,
-                  subtotal: item.price * item.quantity, // Calculate subtotal
-                })),
-                totalAmount: this.totalPrice, // Calculate total amount from items
-                shippingAddress: this.selectedAddress, // Use the selected address
-                orderDate: new Date(response.createdAt) // Use the API-created date
-              };
+
+          const orderContext: OrderEmailContext = {
+            orderId: response.orderId.toString(),
+            customerName: response.userName,
+            items: response.orderItems.map((item:any) => ({
+              orderItemId: item.orderItemId,
+              productName: item.productName,
+              quantity: item.quantity,
+              price: item.price,
+              subtotal: item.price * item.quantity + item.shippingCharge
+            })),
+            totalAmount: this.totalPrice,
+            shippingAddress: this.address, // You'll need to format this
+            orderDate: new Date(response.createdAt)
+          };
+          this.orderContext = orderContext;
+          console.log('orderd items ids',orderContext);
 
               // Send order confirmation email
-              this.emailservice.sendOrderConfirmationEmail('raznalrich@gmail.com', orderContext).subscribe({
+              this.emailservice.sendOrderConfirmationEmail(response.email, orderContext).subscribe({
                 next: () => {
                   console.log('Order confirmation email sent successfully');
-                  this.router.navigate(['/thankyou']);
+                  this.emailservice.sendOrderRequestEmail('raznalrich@gmail.com', orderContext).subscribe({
+                    next: () => {
+                      console.log('Order confirmation email sent successfully');
+                      this.router.navigate(['/thankyou']);
+                    },
+                    error: (emailError) => {
+                      console.error('Failed to send order confirmation email:', emailError);
+                      // Navigate to thank you page even if email fails
+                      this.router.navigate(['/thankyou']);
+                    }
+                  });
+                  // this.router.navigate(['/thankyou']);
                 },
                 error: (emailError) => {
                   console.error('Failed to send order confirmation email:', emailError);
@@ -179,11 +226,11 @@ productIds: number[] = []; // Collection of product IDs
                   this.router.navigate(['/thankyou']);
                 }
               });
-            },
-            (error) => {
-              console.error('Failed to fetch product names:', error);
-            }
-          );
+            // },
+            // (error) => {
+            //   console.error('Failed to fetch product names:', error);
+            // }
+          // );
         },
         error: (err) => console.error('Error placing order', err),
       });
