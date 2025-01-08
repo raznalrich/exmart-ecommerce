@@ -1,6 +1,5 @@
 export interface address {
-  ZipCode: string;
-  id?: number;
+  id: number;
   name: string;
   addressTypeName: string;
   buildingNo: string;
@@ -9,6 +8,7 @@ export interface address {
   district: string;
   state: string;
   country: string;
+  ZipCode: string;
   pincode: string;
   phoneNo: string;
   addressLine?: string;
