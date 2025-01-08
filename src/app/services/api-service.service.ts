@@ -363,6 +363,9 @@ console.log('address data',data);
   deleteAddressById(id:number){
     return this.http.delete(`https://localhost:7267/api/Users/DeleteAddress/${id}`)
   }
+  deleteCartById(id:number){
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteAllUserCart/${id}`)
+  }
 
   getOrderList() {
     return this.http.get(`https://localhost:7267/api/Order/orderItem/List`);

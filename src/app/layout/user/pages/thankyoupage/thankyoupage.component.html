@@ -4,9 +4,11 @@
 <!-- <app-orderconfirmationanimation></app-orderconfirmationanimation> -->
 
 <app-order-confirmation-tick-animation [text]="orderPlaced"></app-order-confirmation-tick-animation>
+
 <!-- <app-order-tracking-bar></app-order-tracking-bar> -->
+
 <div class="MainContainer animated-section" [class.show-content]="isContentVisible"
-                                            [class.animated-section]="ContentVisible">
+[class.animated-section]="ContentVisible">
 
 
 <div class="itemsInOrder">
@@ -25,29 +27,41 @@
     <div class="rightSide">
       <h2>Order Details</h2>
       <div class="summary-details">
-        @for(numberOfItems of CartItems; track numberOfItems){
+        <!-- <p><span>No of Items:</span> <span>{{global.cartCount()}}</span></p> -->
+        <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
+         @for(numberOfItems of CartItems; track numberOfItems){
+          @for(numOfCartItems of cartItemList;track numOfCartItems){
+            @if(numberOfItems.id == numOfCartItems.productId){
 
-          <p><span>{{numberOfItems.name}}</span> <span>{{numberOfItems.price | currency:'INR'}}</span></p>
+              <p><span>{{numberOfItems.name}} x <strong>{{numOfCartItems.quantity}}</strong></span> <span>{{numberOfItems.price * numOfCartItems.quantity | currency:'INR'}}</span></p>
+            }
+          }
+
          }
-        @if(selectedAddress==1||selectedAddress==2){
+        <!-- @if(addressType==1){
           <p class="total"><span>Shipping : </span> <span>{{ '0'| currency:'INR'}}</span></p>
-         }
-         @else if (selectedAddress==3) {
-          <p class="total"><span>Shipping : </span> <span>{{ '50'| currency:'INR'}}</span></p>
+         } -->
+         <!-- @else if (selectedAddress==3) { -->
+          @if(selectedAddress){
 
-         }
+            <p class="total"><span>Shipping : </span> <span>{{ shippingCharge | currency:'INR'}}</span></p>
+          }
+
+         <!-- } -->
+        <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
         <p class="total"><span>Total:</span> <span>{{ totalPrice| currency:'INR'}}</span></p>
       </div>
       <div class="button">
         <app-long-button
         label="Home"
-        routerLink="/"
+ 
+        (buttonClick)="onDelete()"
         ></app-long-button>
       </div>
   </div>
   </div>
 
-
+  <app-thank-you-purchase [orderId]="12"></app-thank-you-purchase>
   <app-web-feedback-section></app-web-feedback-section>
 
 
