@@ -68,7 +68,7 @@ totalPrice: number = 0;
   }
 
   CartItems: ProductDetails[] = []; // Array to store fetched product details
-productIds: number[] = []; // Collection of product IDs
+  productIds: number[] = []; // Collection of product IDs
   ngOnInit(){
     // this.api.getProductsById(this.id).subscribe((res: any) => {
     //   this.productDetails = res;

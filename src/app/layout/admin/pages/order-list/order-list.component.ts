@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 import { firstValueFrom } from 'rxjs';
+import { OrderValueDisplayingButtonComponent } from '../../ui/order-value-displaying-button/order-value-displaying-button.component';
 
 @Component({
   selector: 'app-order-list',
@@ -16,7 +17,7 @@ import { firstValueFrom } from 'rxjs';
     OrderlistTableComponent,
     ReactiveFormsModule,
     SearchbarComponent,
-    AdminValuesDisplayingButtonComponent,
+    OrderValueDisplayingButtonComponent,
     DateRangepickerComponent,
   ],
   templateUrl: './order-list.component.html',
@@ -26,6 +27,9 @@ export class OrderListComponent {
   orderlist: any[] = [];
   filteredItems: any[] = [];
   searchPlaceholder: string = 'Search Order Item/Product';
+  totalOrders : any
+  deliveredOrders : any
+
   constructor(public api: ApiServiceService) {}
 
   ngOnInit() {
@@ -35,7 +39,11 @@ export class OrderListComponent {
         orderDate: new Date(item.orderDate).toISOString(),
       }));
       this.filteredItems = [...this.orderlist];
+      this.totalOrders = this.filteredItems.length
+      console.log(this.totalOrders)
       console.log('filtered list', this.filteredItems);
+
+      this.calculateDevileredOrders()
     });
   }
 
@@ -61,6 +69,11 @@ export class OrderListComponent {
     if (this.filteredItems.length === 0) {
       console.warn('No matching results found for:', term);
     }
+  }
+
+  calculateDevileredOrders() {
+    this.deliveredOrders = this.filteredItems.filter(order => order.status === 3).length;
+    console.log('deliver',this.deliveredOrders);
   }
 
   onDateRangeSelected(dateRange: { startDate: string; endDate: string }) {
