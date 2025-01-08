@@ -1,3 +1,4 @@
+import { GlobalService } from './../../../../global.service';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AddAddressButtonComponent } from '../../ui/add-address-button/add-address-button.component';
@@ -20,16 +21,19 @@ address:address[]=[]
 selectedAddress?:address;
 isLoading=false
 addressId:number=0;
-    constructor(public api:ApiServiceService, private fb:FormBuilder){
-    }
+userId:number=0;
+    constructor(public api:ApiServiceService, private fb:FormBuilder, public global:GlobalService){
+    this.global.getUserId()
+  }
 
 ngOnInit() {
+this.userId=this.global.userId();
 this.refreshAddressList()
 }
 
 refreshAddressList() {
   this.isLoading = true;
-  this.api.getAddressByUserId(1).subscribe((res: any) => {
+  this.api.getAddressByUserId(this.userId).subscribe((res: any) => {
         this.address = res.filter((item: any) =>
           ['home', 'other'].includes(item.addressTypeName.toLowerCase())
         );
