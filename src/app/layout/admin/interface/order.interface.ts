@@ -1,8 +1,11 @@
-export interface Order {
+export interface OrderItem {
+  productId: number;
+  orderItemId: number;
+  orderDate: string;
+  productName: string;
+  primaryImageUrl: string;
+  status: number;
+  amount: number;
+  quantity: number;
   orderId: number;
-  userId: number;
-  product_StatusId: number;
-  createdAt: string;
-  userAddressId: number;
-  orderItems:number;
 }

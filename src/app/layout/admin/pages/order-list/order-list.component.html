@@ -5,24 +5,26 @@
 
         <app-searchbar></app-searchbar>
         <div class="right">
+          <div class="tooltip-container">
           <button class="btn-create-new" (click)="downloadReport()">
             <i class="bi bi-file-arrow-down"></i>
           </button>
+          <span class="tooltip-text">Download report</span>
+        </div>
 
+        <div class="tooltip-container">
           <input type="file" #fileInput (change)="onFileChange($event)" accept=".xlsx, .xls" style="display: none;" />
           <button class="btn-create-new" (click)="fileInput.click()">
             <i class="bi bi-file-arrow-up"></i>
           </button>
-
-          <!-- <button class="btn-create-new" (click)="uploadReport()">
-            <i class="bi bi-file-arrow-up"></i>
-          </button> -->
         </div>
-        <app-date-rangepicker></app-date-rangepicker>
+        <app-date-rangepicker (dateRangeSelected)="onDateRangeSelected($event)"></app-date-rangepicker>
       </div>
       <div class="count-box">
-        <app-admin-values-displaying-button [count]="28" [iconSrc]="'icons/clipboard.png'"
-          [label]="'Total Orders'"></app-admin-values-displaying-button>
+        <app-admin-values-displaying-button
+        [count]="28"
+        [iconSrc]="'icons/clipboard.png'"
+        [label]="'Total Orders'"></app-admin-values-displaying-button>
 
         <app-admin-values-displaying-button [count]="15" [iconSrc]="'icons/delivered (1).png'"
           [label]="'Delivered'"></app-admin-values-displaying-button>
@@ -32,4 +34,7 @@
   </div>
 
 </div>
-<app-orderlist-table [OrderList]="orderlist"></app-orderlist-table>
+</div>
+<!-- <app-orderlist-table [OrderList]="orderlist"></app-orderlist-table> -->
+
+<app-orderlist-table [OrderList]="filteredItems"></app-orderlist-table>

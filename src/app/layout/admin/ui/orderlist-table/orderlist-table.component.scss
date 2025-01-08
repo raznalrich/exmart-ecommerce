@@ -8,8 +8,34 @@ body {
   max-height: 400px; /* Set the height for the scrollable area */
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Disable horizontal scrolling if not needed */
+  transition: filter 0.3s ease;
 }::-webkit-scrollbar {
   display: none;
+}
+/* Class to apply blur when modal is open */
+.blur-background {
+  filter: blur(4px);
+  pointer-events: none;
+  user-select: none;
+}
+/* Ensure modal stays clear */
+.modal {
+  filter: none !important;
+}
+
+.modal-dialog {
+  filter: none !important;
+}
+/* dim the background slightly for better contrast */
+.blur-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
 }
 .styled-table {
   width: 100%;

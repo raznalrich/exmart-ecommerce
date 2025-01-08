@@ -11,31 +11,47 @@
 .greetings{
   font-size: 30px;
 }
-
+hr {
+  border-top: 2px solid #8061C3;
+  margin: 10px;
+}
 .adminHead{
   display: flex;
   gap: 500px;
   align-items: center;
 }
-.app-admin-values-displaying-button{
+app-admin-values-displaying-button{
 }
-
+.monthly-orders {
+}
+.year-selector{
+  display: flex;
+  justify-content: end;
+  gap: 5px;
+  align-items: center;
+}
 .leftTopIcons{
   padding-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 80px;
+  gap: 20px;
   padding-bottom: 5px;
 }
 
 .contents{
   display: flex;
-  gap: 30px;
+justify-content: space-around;
 }
 
+.rightCont{
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
 .rigthTop{
-padding-top: 30px;
+padding-top: 0px;
 display: flex;
 gap: 25px;
 
@@ -57,9 +73,8 @@ align-items: center;
 
 }
 .newOrd{
-  font-weight: 800;
-  font-size: 20px;
-  text-transform: capitalize;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 .morebut{
   background-color: #8061c3;
