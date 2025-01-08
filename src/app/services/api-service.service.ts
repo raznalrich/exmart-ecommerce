@@ -209,6 +209,15 @@ export class ApiServiceService {
       );
   }
 
+  getAddressTypeById(id: number): Observable<string> {
+    return this.http.get<any>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+      .pipe(
+        map(response => {
+          return `${response.addressTypeId}`;
+        })
+      );
+  }
+
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
       `https://localhost:7267/api/Product/search?name=${encodeURIComponent(

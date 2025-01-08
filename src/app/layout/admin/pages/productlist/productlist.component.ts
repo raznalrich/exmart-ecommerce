@@ -54,7 +54,10 @@ export class ProductlistComponent {
 
   onEditProduct(product: any) {
     // Pass the product to AddProductsComponent for editing
-    // this.addProductsComponent.setEditMode(product);
+    this.isAddProductVisible =true;
+    console.log('product',product);
+
+    this.addProductsComponent.setEditMode(product);
 
     // Open the modal using Bootstrap's JS API
     // const modalElement = document.getElementById('staticBackdrop');
