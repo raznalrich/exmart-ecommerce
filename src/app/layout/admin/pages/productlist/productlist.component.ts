@@ -8,12 +8,14 @@ import { GlobalService } from '../../../../global.service';
 import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
 import { AddProductsComponent } from '../add-products/add-products.component';
 import * as bootstrap from 'bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-productlist',
   standalone: true,
 
   imports: [
+    CommonModule,
     AddButtonComponent,
     TableComponent,
     SearchbarComponent,
@@ -24,7 +26,7 @@ import * as bootstrap from 'bootstrap';
 })
 export class ProductlistComponent {
   @ViewChild(AddProductsComponent) addProductsComponent!: AddProductsComponent;
-
+  isAddProductVisible: boolean = false;
   // onClickButton() {
   //   console.log('Added product');
   // }
@@ -52,26 +54,32 @@ export class ProductlistComponent {
 
   onEditProduct(product: any) {
     // Pass the product to AddProductsComponent for editing
-    this.addProductsComponent.setEditMode(product);
+    // this.addProductsComponent.setEditMode(product);
 
     // Open the modal using Bootstrap's JS API
-    const modalElement = document.getElementById('staticBackdrop');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-    }
+    // const modalElement = document.getElementById('staticBackdrop');
+    // if (modalElement) {
+    //   const modal = new bootstrap.Modal(modalElement);
+    //   modal.show();
+    // }
   }
-
+  onCloseAddProduct() {
+    this.isAddProductVisible = false;
+  }
   onAddButtonClick() {
     // Set Add Mode
-    this.addProductsComponent.setAddMode();
-
+    // this.addProductsComponent.setAddMode();
+    this.isAddProductVisible = true;
     // Open the modal
-    const modalElement = document.getElementById('staticBackdrop');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-    }
+    // const modalElement = document.getElementById('staticBackdrop');
+    // if (modalElement) {
+    //   const modal = new bootstrap.Modal(modalElement);
+    //   modal.show();
+    // }
+  }
+  add(){
+    this.isAddProductVisible = true;
+
   }
 
   icons: any = [
