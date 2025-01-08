@@ -1,4 +1,5 @@
 export interface OrderItem {
+  productId: number;
   orderItemId: number;
   orderDate: string;
   productName: string;
