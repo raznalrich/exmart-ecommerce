@@ -20,6 +20,8 @@ export class SelectAddressComponent {
 address:address[]=[]
 selectedAddress?:address;
 isLoading=false
+isAddProductVisible: boolean = false;
+
 addressId:number=0;
 userId:number=0;
     constructor(public api:ApiServiceService, private fb:FormBuilder, public global:GlobalService){
@@ -29,6 +31,9 @@ userId:number=0;
 ngOnInit() {
 this.userId=this.global.userId();
 this.refreshAddressList()
+}
+onCloseAddProduct(){
+this.isAddProductVisible=false;
 }
 
 refreshAddressList() {
@@ -42,6 +47,7 @@ refreshAddressList() {
 
 onAddAddress() {
   this.selectedAddress = undefined;
+  this.isAddProductVisible= true;
 }
 
 onEdit(id: number) {
