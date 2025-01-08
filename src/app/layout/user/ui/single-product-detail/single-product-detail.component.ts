@@ -13,11 +13,12 @@ import { FormsModule } from '@angular/forms';
 import { LongButtonComponent } from "../long-button/long-button.component";
 import { WebFeedbackSectionComponent } from "../web-feedback-section/web-feedback-section.component";
 import { ProductFeedbackComponent } from "../product-feedback/product-feedback.component";
+import { QuantityComponent } from '../quantity/quantity.component';
 
 @Component({
   selector: 'app-single-product-detail',
   standalone: true,
-  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent, FormsModule, WebFeedbackSectionComponent, ProductFeedbackComponent],
+  imports: [CommonModule, ColorButtonComponent, SizeButtonComponent, FormsModule, WebFeedbackSectionComponent, ProductFeedbackComponent, QuantityComponent],
   templateUrl: './single-product-detail.component.html',
   styleUrl: './single-product-detail.component.scss',
 })
@@ -52,7 +53,7 @@ message:string='';
 
   onQuantityChange() {
     console.log('Updated Quantity:', this.quantity );
-    // this.addtocart()
+    this.addtocart()
   }
 
   ngOnInit() {
