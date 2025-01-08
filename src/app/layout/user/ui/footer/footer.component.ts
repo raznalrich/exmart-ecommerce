@@ -11,18 +11,9 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-
+private readonly hrEmail = 'sona.george@experionglobal.com';
 @Input() CategoryList : any;
-
-  emailTemplate: string = '';
-  constructor(public api:ApiServiceService,public router: Router){
-
-  }
-
-
-
-
-
+  constructor(public api:ApiServiceService,public router: Router){}
   ngOnInit(){
     this.api.getAllCategories().subscribe((res: any) => {
       this.CategoryList = res;
@@ -30,9 +21,15 @@ export class FooterComponent {
     });
 }
 
+openTeamsChat(): void {
+  const teamsUrl = `msteams:/l/chat/0/0?users=${encodeURIComponent(this.hrEmail)}`;
 
-
-
+  window.location.href = teamsUrl;
+  setTimeout(() => {
+    const webTeamsUrl = `https://teams.microsoft.com/_#/conversations/new?users=${encodeURIComponent(this.hrEmail)}`;
+    window.location.href = webTeamsUrl;
+  }, 1000);
+}
   navigateToPolicy(type: string) {
     this.router.navigate(['/policies', type]);
   }
