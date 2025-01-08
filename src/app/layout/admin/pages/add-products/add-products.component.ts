@@ -30,28 +30,24 @@ export class AddProductsComponent implements OnInit, OnChanges {
   sizes: any[] = [];
   colors: any[] = [];
 
-  selectedFile: File | null = null;
-  additionalFiles: File[] = [];
+  selectedFile: File | null = null;       // primary image file
+  additionalFiles: File[] = [];           // additional images to upload
 
   showSizes = false;
-
-  public isEditMode = false;
+  isEditMode = false;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    // 1) Initialize the form group
     this.initializeForm();
-
-    // 2) Fetch categories, colors, and sizes from the API
     this.fetchInitialData();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // If parent passes a product to edit:
+    // if parent sets a product to edit
     if (changes['productToEdit'] && this.productToEdit) {
-      this.populateForm(this.productToEdit);
       this.isEditMode = true;
+      this.populateForm(this.productToEdit);
     }
   }
 
@@ -60,32 +56,20 @@ export class AddProductsComponent implements OnInit, OnChanges {
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.maxLength(500)),
       brand: new FormControl('', Validators.required),
-      vendorId: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^\d+$/),
-      ]),
+      vendorId: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
       categoryId: new FormControl('', Validators.required),
-      size: new FormControl([]), // Initially no validators
+      size: new FormControl([]), // optional or mandatory, your choice
       color: new FormControl([], Validators.required),
       primaryImageUrl: new FormControl(null, Validators.required),
-      weight: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^\d+(\.\d{1,2})?$/),
-      ]),
-      price: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^\d+(\.\d{1,2})?$/),
-      ]),
-      createdBy: new FormControl(2, [
-        Validators.required,
-        Validators.pattern(/^\d+$/),
-      ]),
+      weight: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
+      price: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
+      createdBy: new FormControl(2, [Validators.required, Validators.pattern(/^\d+$/)]),
       productImages: new FormControl([], Validators.required),
     });
 
-    // Dynamically update "showSizes" if category changes
-    this.addProduct.get('categoryId')?.valueChanges.subscribe((categoryId) => {
-      this.handleCategoryChange(categoryId);
+    // Dynamically handle "showSizes" if category=20
+    this.addProduct.get('categoryId')?.valueChanges.subscribe((catId) => {
+      this.handleCategoryChange(catId);
     });
   }
 
@@ -140,17 +124,8 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   handleCategoryChange(categoryId: number) {
-    // Use categoryId == 20 (example) to show sizes
-    this.showSizes = Number(categoryId) === 20;
-
-    const sizeControl = this.addProduct.get('size');
-    if (this.showSizes) {
-      sizeControl?.setValidators(Validators.required);
-    } else {
-      sizeControl?.clearValidators();
-      sizeControl?.setValue([]);
-    }
-    sizeControl?.updateValueAndValidity();
+    // e.g. show sizes if cat=20
+    this.showSizes = (Number(categoryId) === 20);
   }
 
   populateForm(product: any) {
@@ -160,25 +135,23 @@ export class AddProductsComponent implements OnInit, OnChanges {
       brand: product.brand,
       vendorId: product.vendorId,
       categoryId: product.categoryId,
-      size: product.size, // adapt if your data differs
-      color: product.color, // adapt if your data differs
+      size: product.size || [],
+      color: product.color || [],
       primaryImageUrl: product.primaryImageUrl,
       weight: product.weight,
       price: product.price,
       createdBy: product.createdBy,
       productImages: product.productImages || [],
     });
-    // Keep consistent with handleCategoryChange:
-    this.showSizes = Number(product.categoryId) === 20;
+    this.showSizes = (Number(product.categoryId) === 20);
   }
 
-  // Helper method to check if a checkbox is selected
+  // Check if a checkbox (size/color) is selected
   isSelected(controlName: string, value: number): boolean {
     const control = this.addProduct.get(controlName);
     return control?.value?.includes(value) || false;
   }
 
-  // Handle checkbox changes for sizes and colors
   onCheckboxChange(event: Event, controlName: string) {
     const checkbox = event.target as HTMLInputElement;
     const control = this.addProduct.get(controlName);
@@ -187,13 +160,11 @@ export class AddProductsComponent implements OnInit, OnChanges {
     if (checkbox.checked) {
       control?.setValue([...currentValue, Number(checkbox.value)]);
     } else {
-      control?.setValue(
-        currentValue.filter((val: number) => val !== Number(checkbox.value))
-      );
+      control?.setValue(currentValue.filter((val: number) => val !== Number(checkbox.value)));
     }
   }
 
-  // Handle primary image file selection
+  // Primary image
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files || !input.files[0]) {
@@ -203,151 +174,48 @@ export class AddProductsComponent implements OnInit, OnChanges {
       return;
     }
     this.selectedFile = input.files[0];
-    // Patch the form with the File object so we know it's selected
     this.addProduct.patchValue({ primaryImageUrl: this.selectedFile });
-    console.log('File selected:', this.selectedFile.name);
+    console.log('Primary file selected:', this.selectedFile.name);
   }
 
-  // Handle additional image file selections
+  // Additional images
   onAdditionalFilesChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files) return;
     this.additionalFiles = Array.from(input.files);
-    const filePlaceholders = this.additionalFiles.map(() => ({ imageUrl: '' }));
-    this.addProduct.patchValue({ productImages: filePlaceholders });
+
+    // Replace whatever was in `productImages` with placeholders for these new images
+    const placeholders = this.additionalFiles.map(() => ({ imageUrl: '' }));
+    this.addProduct.patchValue({ productImages: placeholders });
+
     console.log(
       'Additional files selected:',
       this.additionalFiles.map((f) => f.name)
     );
   }
 
-  // Handle form submission
+  // Submit => create or update
   onSubmit() {
     if (!this.addProduct.valid) {
       console.error('Form is invalid:', this.addProduct.errors);
-      Object.keys(this.addProduct.controls).forEach((key) => {
-        const controlErrors = this.addProduct.get(key)?.errors;
-        if (controlErrors) {
-          console.error(`Control ${key} is invalid:`, controlErrors);
-        }
-      });
       return;
     }
 
     if (this.isEditMode && this.productToEdit) {
-      // Handle Edit Product
       this.updateExistingProduct();
     } else {
-      // Handle Add Product
       this.createNewProduct();
     }
   }
 
-  private updateExistingProduct() {
-    const formValue = this.addProduct.value;
-    const productId = this.productToEdit.id;
-
-    // If user selected a new file, upload first => then update
-    if (this.selectedFile) {
-      // 1) Upload the primary image
-      this.apiService
-        .uploadImage(this.selectedFile)
-        .pipe(
-          switchMap((primaryRes: any) => {
-            const primaryImageUrl = primaryRes.imageUrl;
-            // If additional files were selected, upload them
-            if (this.additionalFiles.length > 0) {
-              const uploads = this.additionalFiles.map((file) =>
-                this.apiService.uploadImage(file)
-              );
-              return forkJoin(uploads).pipe(
-                map((additionalResponses: any[]) => {
-                  const additionalImageUrls = additionalResponses.map(
-                    (res) => res.imageUrl
-                  );
-                  return { primaryImageUrl, additionalImageUrls };
-                }),
-                catchError((error) => {
-                  console.error('Error uploading additional images:', error);
-                  return of({ primaryImageUrl, additionalImageUrls: [] });
-                })
-              );
-            } else {
-              // No additional images
-              return of({ primaryImageUrl, additionalImageUrls: [] });
-            }
-          }),
-          switchMap(({ primaryImageUrl, additionalImageUrls }) => {
-            const payload = {
-              id: productId,
-              name: formValue.name,
-              description: formValue.description,
-              brand: formValue.brand,
-              vendorId: +formValue.vendorId,
-              categoryId: +formValue.categoryId,
-              SizeId: formValue.size,
-              ColorId: formValue.color,
-              primaryImageUrl: primaryImageUrl, // string from the upload
-              weight: +formValue.weight,
-              price: +formValue.price,
-              createdBy: +formValue.createdBy,
-              productImages: additionalImageUrls.map((url: string) => ({
-                imageUrl: url,
-              })),
-            };
-
-            console.log('Edit payload with uploaded file:', payload);
-            return this.apiService.updateProduct(payload.id, payload);
-          })
-        )
-        .subscribe({
-          next: (res) => {
-            console.log('Product updated (with file) successfully:', res);
-            this.closeModal();
-          },
-          error: (err) => {
-            console.error('Error updating product:', err);
-          },
-        });
-    } else {
-      // No new file selected => send existing URL
-      const payload = {
-        id: productId,
-        name: formValue.name,
-        description: formValue.description,
-        brand: formValue.brand,
-        vendorId: +formValue.vendorId,
-        categoryId: +formValue.categoryId,
-        SizeId: formValue.size,
-        ColorId: formValue.color,
-        primaryImageUrl: this.productToEdit.primaryImageUrl, // keep old string
-        weight: +formValue.weight,
-        price: +formValue.price,
-        createdBy: +formValue.createdBy,
-        // If needed, keep old product images or override with formValue.productImages
-        productImages: this.productToEdit.productImages || [],
-      };
-
-      console.log('Edit payload (no new file):', payload);
-      this.apiService.updateProduct(payload.id, payload).subscribe({
-        next: (res) => {
-          console.log('Product updated successfully:', res);
-          this.closeModal();
-        },
-        error: (err) => {
-          console.error('Error updating product:', err);
-        },
-      });
-    }
-  }
-
+  // -------- CREATE NEW PRODUCT --------
   private createNewProduct() {
-    // Handle Add Product
     if (!this.selectedFile) {
       console.error('No primary image selected for upload.');
       return;
     }
 
+    // 1) Upload primary
     this.apiService
       .uploadImage(this.selectedFile)
       .pipe(
@@ -355,49 +223,41 @@ export class AddProductsComponent implements OnInit, OnChanges {
           const primaryImageUrl = primaryResponse.imageUrl;
 
           if (this.additionalFiles.length > 0) {
-            // Prepare upload observables for additional images
-            const additionalUploadObservables = this.additionalFiles.map((file) =>
-              this.apiService.uploadImage(file)
-            );
-
-            // Upload all additional images in parallel
-            return forkJoin(additionalUploadObservables).pipe(
-              map((additionalResponses: any[]) => {
-                const additionalImageUrls = additionalResponses.map(
-                  (res) => res.imageUrl
-                );
+            // 2) Upload additional images
+            const uploads = this.additionalFiles.map((f) => this.apiService.uploadImage(f));
+            return forkJoin(uploads).pipe(
+              map((responses: any[]) => {
+                const additionalImageUrls = responses.map((r) => r.imageUrl);
                 return { primaryImageUrl, additionalImageUrls };
               }),
-              catchError((error) => {
-                console.error('Error uploading additional images:', error);
+              catchError((err) => {
+                console.error('Error uploading additional images:', err);
                 return of({ primaryImageUrl, additionalImageUrls: [] });
               })
             );
           } else {
-            // If no additional images, proceed with primaryImageUrl only
             return of({ primaryImageUrl, additionalImageUrls: [] });
           }
         }),
         switchMap(({ primaryImageUrl, additionalImageUrls }) => {
-          const formValue = this.addProduct.value;
+          const fv = this.addProduct.value;
           const payload = {
-            name: formValue.name,
-            description: formValue.description,
-            brand: formValue.brand,
-            vendorId: +formValue.vendorId,
-            categoryId: +formValue.categoryId,
-            SizeId: formValue.size,
-            ColorId: formValue.color,
+            name: fv.name,
+            description: fv.description,
+            brand: fv.brand,
+            vendorId: +fv.vendorId,
+            categoryId: +fv.categoryId,
+            SizeId: fv.size,
+            ColorId: fv.color,
             primaryImageUrl: primaryImageUrl,
-            weight: +formValue.weight,
-            price: +formValue.price,
-            createdBy: +formValue.createdBy,
+            weight: +fv.weight,
+            price: +fv.price,
+            createdBy: +fv.createdBy,
             productImages: additionalImageUrls.map((url: string) => ({
               imageUrl: url,
             })),
           };
-
-          console.log('Payload (create new):', payload);
+          console.log('Create payload:', payload);
           return this.apiService.addProduct(payload);
         })
       )
@@ -410,6 +270,150 @@ export class AddProductsComponent implements OnInit, OnChanges {
           console.error('Error adding product:', err);
         },
       });
+  }
+
+  // -------- UPDATE EXISTING PRODUCT --------
+  private updateExistingProduct() {
+    const fv = this.addProduct.value;
+    const productId = this.productToEdit.id;
+
+    // If new primary image is selected => upload it
+    if (this.selectedFile) {
+      this.apiService
+        .uploadImage(this.selectedFile)
+        .pipe(
+          switchMap((primaryRes: any) => {
+            const primaryImageUrl = primaryRes.imageUrl;
+
+            if (this.additionalFiles.length > 0) {
+              // upload new additional images
+              const uploads = this.additionalFiles.map((f) => this.apiService.uploadImage(f));
+              return forkJoin(uploads).pipe(
+                map((resps: any[]) => {
+                  const additionalImageUrls = resps.map((r) => r.imageUrl);
+                  return { primaryImageUrl, additionalImageUrls };
+                }),
+                catchError((err) => {
+                  console.error('Error uploading additional images:', err);
+                  return of({ primaryImageUrl, additionalImageUrls: [] });
+                })
+              );
+            } else {
+              return of({ primaryImageUrl, additionalImageUrls: [] });
+            }
+          }),
+          switchMap(({ primaryImageUrl, additionalImageUrls }) => {
+            // Because user wants to replace old images with the new set,
+            // if additionalFiles>0 => productImages is just that new set
+            // if 0 => keep old
+            const newImageArray =
+              this.additionalFiles.length > 0
+                ? additionalImageUrls.map((url: string) => ({ imageUrl: url }))
+                : this.productToEdit.productImages || [];
+
+            const payload = {
+              id: productId,
+              name: fv.name,
+              description: fv.description,
+              brand: fv.brand,
+              vendorId: +fv.vendorId,
+              categoryId: +fv.categoryId,
+              SizeId: fv.size,
+              ColorId: fv.color,
+              primaryImageUrl, // new main image
+              weight: +fv.weight,
+              price: +fv.price,
+              createdBy: +fv.createdBy,
+              productImages: newImageArray,
+            };
+
+            console.log('Edit payload (new main file + replaced images):', payload);
+            return this.apiService.updateProduct(payload.id, payload);
+          })
+        )
+        .subscribe({
+          next: (res) => {
+            console.log('Product updated successfully:', res);
+            this.closeModal();
+          },
+          error: (err) => {
+            console.error('Error updating product:', err);
+          },
+        });
+    } else {
+      // No new primary image
+      if (this.additionalFiles.length > 0) {
+        // If user selected new additional images => upload & replace old
+        forkJoin(this.additionalFiles.map((f) => this.apiService.uploadImage(f)))
+          .pipe(
+            switchMap((responses: any[]) => {
+              const additionalImageUrls = responses.map((r) => r.imageUrl);
+              const newImageArray = additionalImageUrls.map((url: string) => ({
+                imageUrl: url,
+              }));
+
+              const payload = {
+                id: productId,
+                name: fv.name,
+                description: fv.description,
+                brand: fv.brand,
+                vendorId: +fv.vendorId,
+                categoryId: +fv.categoryId,
+                SizeId: fv.size,
+                ColorId: fv.color,
+                // keep old main image
+                primaryImageUrl: this.productToEdit.primaryImageUrl,
+                weight: +fv.weight,
+                price: +fv.price,
+                createdBy: +fv.createdBy,
+                productImages: newImageArray,
+              };
+
+              console.log('Edit payload (no new main file, replaced images):', payload);
+              return this.apiService.updateProduct(payload.id, payload);
+            })
+          )
+          .subscribe({
+            next: (res) => {
+              console.log('Product updated successfully:', res);
+              this.closeModal();
+            },
+            error: (err) => {
+              console.error('Error updating product:', err);
+            },
+          });
+      } else {
+        // No new primary image, no new additional images => only update text
+        const payload = {
+          id: productId,
+          name: fv.name,
+          description: fv.description,
+          brand: fv.brand,
+          vendorId: +fv.vendorId,
+          categoryId: +fv.categoryId,
+          SizeId: fv.size,
+          ColorId: fv.color,
+          // keep old main image
+          primaryImageUrl: this.productToEdit.primaryImageUrl,
+          weight: +fv.weight,
+          price: +fv.price,
+          createdBy: +fv.createdBy,
+          // keep old images
+          productImages: this.productToEdit.productImages || [],
+        };
+
+        console.log('Edit payload (no new files, no images replaced):', payload);
+        this.apiService.updateProduct(payload.id, payload).subscribe({
+          next: (res) => {
+            console.log('Product updated successfully:', res);
+            this.closeModal();
+          },
+          error: (err) => {
+            console.error('Error updating product:', err);
+          },
+        });
+      }
+    }
   }
 
   closeModal() {
