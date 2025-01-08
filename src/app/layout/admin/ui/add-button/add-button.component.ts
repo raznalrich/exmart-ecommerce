@@ -11,11 +11,17 @@ import { AddProductsComponent } from '../../pages/add-products/add-products.comp
   styleUrl: './add-button.component.scss',
 })
 export class AddButtonComponent {
-  buttonFunction = output();
+  // buttonFunction = output();
+  @Output() buttonClick = new EventEmitter<void>();
 
-  addProduct() {
-    this.buttonFunction.emit();
+  // Update method name to match template
+  buttonFunction() {
+    this.buttonClick.emit();
   }
+
+  // addProduct() {
+  //   this.buttonFunction.emit();
+  // }
   constructor(public productService: GlobalService) {}
   @Input() button: any = {
     id: 0,
