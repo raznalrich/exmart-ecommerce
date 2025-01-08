@@ -42,8 +42,8 @@ export class LoginFormComponent {
           this.addNewUser();
           // const modalElement = document.getElementById('exampleModal');
           // if(modalElement){
-          //   const modal = new bootstrap.Modal(modalElement);
-          //   modal.show();
+          //   // const modal = new bootstrap.Modal(modalElement);
+          //   // modal.show();
           // }
           // else{
           //   console.error('modal element not found');
@@ -55,6 +55,7 @@ export class LoginFormComponent {
         this.authentication(this.employeeId);
       },
       (error) => {
+        this.addNewUser();
         console.error('Error fetching user ID:', error);
       }
     );

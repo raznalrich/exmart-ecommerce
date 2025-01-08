@@ -14,7 +14,7 @@ export class SidebarComponent {
     {
       id: 1,
       routerLink: 'admindashboard',
-      item: 'Dashboard',
+      item: 'Analytics',
       image: 'bi bi-bar-chart',
     },
     {
