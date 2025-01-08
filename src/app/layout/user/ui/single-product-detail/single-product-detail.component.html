@@ -86,3 +86,8 @@
   <app-product-feedback productName={{data.name}} ></app-product-feedback>
 </div>
 <!-- } -->
+@if(isLoading){
+  <div class="alert alert-success fade-in-out" role="alert">
+    Product added to the cart
+  </div>
+}
