@@ -5,10 +5,14 @@
 
         <app-searchbar></app-searchbar>
         <div class="right">
+          <div class="tooltip-container">
           <button class="btn-create-new" (click)="downloadReport()">
             <i class="bi bi-file-arrow-down"></i>
           </button>
+          <span class="tooltip-text">Download report</span>
+        </div>
 
+        <div class="tooltip-container">
           <input type="file" #fileInput (change)="onFileChange($event)" accept=".xlsx, .xls" style="display: none;" />
           <button class="btn-create-new" (click)="fileInput.click()">
             <i class="bi bi-file-arrow-up"></i>
