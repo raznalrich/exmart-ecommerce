@@ -26,10 +26,12 @@ import { OrderValueDisplayingButtonComponent } from '../../ui/order-value-displa
 export class OrderListComponent {
   orderlist: any[] = [];
   filteredItems: any[] = [];
+  searchPlaceholder: string = 'Search Order Item/Product';
   totalOrders : any
   deliveredOrders : any
 
   constructor(public api: ApiServiceService) {}
+
   ngOnInit() {
     this.api.getOrderList().subscribe((res: any) => {
       this.orderlist = res.map((item: any) => ({
@@ -43,6 +45,30 @@ export class OrderListComponent {
 
       this.calculateDevileredOrders()
     });
+  }
+
+  onSearch(searchTerm: string) {
+    const term = searchTerm.trim();
+    if (!term) {
+      this.filteredItems = [...this.orderlist];
+      return;
+    }
+    // console.log('Search Term:', term);
+    const regex = new RegExp(`^${term}$`, 'i');
+    this.filteredItems = this.orderlist.filter((item: any) => {
+      const orderId =
+        item.orderItemId !== undefined ? item.orderItemId.toString() : '';
+      const productName = item.productName
+        ? item.productName.toLowerCase()
+        : '';
+      const status = item.status !== undefined ? item.status.toString() : '';
+
+      return regex.test(orderId) || productName.includes(term.toLowerCase()) || regex.test(status);
+    });
+
+    if (this.filteredItems.length === 0) {
+      console.warn('No matching results found for:', term);
+    }
   }
 
   calculateDevileredOrders() {
@@ -79,6 +105,17 @@ export class OrderListComponent {
     }
   }
 
+  loadOrders() {
+    this.api.getOrderList().subscribe((res: any) => {
+      this.orderlist = res.map((item: any) => ({
+        ...item,
+        orderDate: new Date(item.orderDate).toISOString(),
+      }));
+      this.filteredItems = [...this.orderlist];
+      console.log('filtered list', this.filteredItems);
+    });
+  }
+
   async onFileChange(event: Event) {
     const target = event.target as HTMLInputElement;
     const file = target?.files?.[0];
@@ -109,6 +146,9 @@ export class OrderListComponent {
           )
           .filter((order) => order && order.orderItemId) ?? [];
 
+      // Track successful updates
+      let hasUpdates = false;
+
       await Promise.all(
         orders.map(async (order) => {
           try {
@@ -116,11 +156,16 @@ export class OrderListComponent {
               this.api.updateOrderStatus(order)
             );
             console.log(`Order updated: ${order.orderItemId}`, response);
+
+            hasUpdates = true;
           } catch (error) {
             console.error(`Error updating order: ${order.orderItemId}`, error);
           }
         })
       );
+      if (hasUpdates) {
+        this.loadOrders();
+      }
     } catch (error) {
       console.error('Error reading Excel file:', error);
     }

@@ -6,18 +6,20 @@
     </div>
     <div class="col">
       <p><strong> PRODUCTS</strong></p>
-      <ul>
-        <li>Appliances</li>
-        <li>Stationary</li>
-        <li>Garments</li>
-      </ul>
+      @for (category of CategoryList; track category) {
+        <ul>
+          <li class="cursoring" routerLink="home/category/{{category.id}}">{{category.categoryName}}</li>
+        </ul>
+      }
     </div>
     <div class="col">
       <p><strong> YOUR ACCOUNT</strong></p>
       <ul>
 
-        <li>Manage address</li>
-        <li>Order History</li>
+        <li class="cursoring" routerLink="userprofile/addresspage">Manage address</li>
+        <li> </li>
+        <li></li>
+        <li class="cursoring" routerLink="userprofile/userorder">Order History</li>
       </ul>
     </div>
     <div class="col">
@@ -33,7 +35,7 @@
           <i class="bi bi-geo-alt-fill"></i>
         </div>
           HR, Experion Global, Gayathiri Building, Technopark phase-1, Trivandrum - 695581</li>
-        <li><button  class="btn btn-light">Chat with HR<i class="bi bi-send-fill" style="padding-left: 10px;"></i></button></li>
+        <li><button (click)="openTeamsChat()"  class="btn btn-light">Chat with HR<i class="bi bi-send-fill" style="padding-left: 10px;"></i></button></li>
       </ul>
     </div>
   </div>
@@ -51,10 +53,6 @@
         Payment policy
       </div>
     </div>
-
-    <!-- <section class="policyTabs">
-   <div>Terms and conditions</div> | <div class="ShipPo">Shipping policy</div>  | <div class="payPo">Payment policy</div>
-    </section> -->
 
     <hr>
     <p>© 2024 HR department Experion global</p>

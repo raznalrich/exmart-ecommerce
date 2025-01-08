@@ -1,3 +1,4 @@
+// add-banner.component.ts
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -26,16 +27,16 @@ interface Product {
 export class AddBannerComponent implements OnInit {
   private modalInstance: Modal | null = null;
   addBannerForm!: FormGroup;
-  searchResults: Product[] = [];
+  allProducts: Product[] = [];
+  filteredProducts: Product[] = [];
   selectedProduct: Product | null = null;
   selectedFile: File | null = null;
-  @Input() bannerCount: number = 0; // Add this line to receive banner count from parent
-
+  showDropdown = false;
+  @Input() bannerCount: number = 0;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    // Initialize the form
     this.addBannerForm = new FormGroup({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.maxLength(500)),
@@ -43,23 +44,55 @@ export class AddBannerComponent implements OnInit {
       primaryImage: new FormControl(null, Validators.required),
     });
 
-    // Initialize the modal
+    // Load all products on init
+    this.loadProducts();
+
     const modalElement = document.getElementById('bannermodal');
     if (modalElement) {
       this.modalInstance = new Modal(modalElement);
-
-      // Add event listener for when modal is hidden
       modalElement.addEventListener('hidden.bs.modal', () => {
         this.resetForm();
       });
     }
   }
 
+  loadProducts() {
+    this.apiService.getProducts().subscribe({
+      next: (products: any) => {
+        this.allProducts = products;
+        this.filteredProducts = [...products];
+      },
+      error: (err) => {
+        console.error('Error loading products:', err);
+      },
+    });
+  }
+
+  filterProducts(event: Event) {
+    const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
+    this.filteredProducts = this.allProducts.filter(product =>
+      product.name.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
+
+  selectProduct(product: Product) {
+    this.selectedProduct = product;
+    this.addBannerForm.patchValue({
+      title: product.name,
+      productId: product.id
+    });
+    this.showDropdown = false;
+  }
+
   resetForm(): void {
     this.addBannerForm.reset();
-    this.searchResults = [];
     this.selectedProduct = null;
     this.selectedFile = null;
+    this.filteredProducts = [...this.allProducts];
   }
 
   closeModal(): void {
@@ -80,33 +113,6 @@ export class AddBannerComponent implements OnInit {
     this.addBannerForm.patchValue({ primaryImage: input.files[0] });
   }
 
-  onSearch() {
-    const query = this.addBannerForm.get('title')?.value.trim();
-    if (!query) {
-      this.searchResults = [];
-      return;
-    }
-
-    this.apiService.searchProducts(query).subscribe({
-      next: (products: Product[]) => {
-        this.searchResults = products;
-      },
-      error: (err) => {
-        console.error('Error searching products:', err);
-        this.searchResults = [];
-      },
-    });
-  }
-
-  selectProduct(product: Product) {
-    this.selectedProduct = product;
-    this.addBannerForm.patchValue({
-      title: product.name,
-      productId: product.id
-    });
-    this.searchResults = [];
-  }
-
   onSubmit() {
     if (!this.addBannerForm.valid || !this.selectedFile) {
       this.markAllAsTouched();
@@ -119,7 +125,7 @@ export class AddBannerComponent implements OnInit {
         switchMap((uploadResponse: any) => {
           const payload = {
             productId: this.addBannerForm.value.productId,
-            productName: this.selectedProduct?.name, // Add this line
+            productName: this.selectedProduct?.name,
             ImageUrl: uploadResponse.imageUrl,
           };
           return this.apiService.addBanner(payload);

@@ -3,7 +3,7 @@
     <div class="top">
       <div style="display: flex;">
 
-        <app-searchbar></app-searchbar>
+        <app-searchbar [searchPlaceholder]="searchPlaceholder" (searchChange)="onSearch($event)"></app-searchbar>
         <div class="right">
           <div class="tooltip-container">
           <button class="btn-create-new" (click)="downloadReport()">
@@ -25,6 +25,7 @@
         <app-order-value-displaying-button [count]="totalOrders" [iconSrc]="'icons/clipboard.png'"
           [label]="'Total Orders'"></app-order-value-displaying-button>
 
+
         <app-order-value-displaying-button [count]="deliveredOrders" [iconSrc]="'icons/delivered (1).png'"
           [label]="'Delivered'"></app-order-value-displaying-button>
       </div>
@@ -34,6 +35,8 @@
 
 </div>
 </div>
+<!-- <app-orderlist-table [OrderList]="orderlist"></app-orderlist-table> -->
+
 <!-- <app-orderlist-table [OrderList]="orderlist"></app-orderlist-table> -->
 
 <app-orderlist-table [OrderList]="filteredItems"></app-orderlist-table>

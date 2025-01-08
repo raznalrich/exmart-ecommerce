@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Input, SimpleChanges } from '@angular/core';
 import{Chart, ChartConfiguration, registerables} from 'chart.js';
 
 Chart.register(...registerables);
@@ -9,46 +9,69 @@ Chart.register(...registerables);
   templateUrl: './admin-weekly-chart-disp.component.html',
   styleUrl: './admin-weekly-chart-disp.component.scss'
 })
-export class AdminWeeklyChartDispComponent implements AfterViewInit {
+export class AdminWeeklyChartDispComponent {
+
+  @Input() data: any[] = [];
+  changedData:any=[]
+  barChart: any;
+
+
 
   constructor() {
     Chart.register(...registerables);
   }
 
-  ngAfterViewInit(): void {
-    const barChartConfig: ChartConfiguration = {
-      type: 'bar',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep' , 'Oct', 'Nov', 'Dec'],
-        datasets: [
-          {
-            label: 'Daily Data',
-            data: [10, 12, 14, 20, 10, 18, 16, 12, 16, 18, 20, 30],
-            backgroundColor: [
-              '#F09951','#EA5853','#64A2F5','#43BF73'
-            ],
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 40,
-          },
-        },
-      },
-    };
 
-    // Create Chart
-    const ctx = document.getElementById('barChart') as HTMLCanvasElement;
-    new Chart(ctx, barChartConfig);
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.barChart) {
+      this.barChart.destroy(); // Destroy the existing chart instance before creating a new one
+    }
+
+    setTimeout(() => {
+      console.log("View On It: ", this.data);
+
+      const barChartConfig: ChartConfiguration = {
+        type: 'bar',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [
+            {
+              label: 'Orders',
+              data: this.data,
+              backgroundColor: ['#F09951', '#EA5853', '#64A2F5', '#43BF73'],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 40,
+            },
+          },
+        },
+      };
+
+      const ctx = document.getElementById('barChart') as HTMLCanvasElement;
+      if (ctx) {
+        this.barChart = new Chart(ctx.getContext('2d')!, barChartConfig);
+      } else {
+        console.error('Failed to get canvas element');
+      }
+    }, 100);
   }
+
+
+
 }
+
+
