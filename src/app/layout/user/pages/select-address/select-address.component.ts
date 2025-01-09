@@ -21,6 +21,7 @@ address:address[]=[]
 selectedAddress?:address;
 isLoading=false
 isAddProductVisible: boolean = false;
+iseditProductVisible: boolean = false;
 
 addressId:number=0;
 userId:number=0;
@@ -35,6 +36,9 @@ this.refreshAddressList()
 onCloseAddProduct(){
 this.isAddProductVisible=false;
 }
+onCloseeditProduct(){
+  this.iseditProductVisible=false;
+  }
 
 refreshAddressList() {
   this.isLoading = true;
@@ -56,7 +60,7 @@ this.addressId=id;
   this.api.getAddressById(id).subscribe({
     next: (address: any) => {
       this.selectedAddress = address; // Set the selected address
-
+      this.iseditProductVisible=true;
       // const editModal = new bootstrap.Modal(document.getElementById('editModal'));
       // editModal.show();
     },

@@ -29,6 +29,8 @@ export class ProductlistComponent {
   filteredItems: any = [];
   searchPlaceholder: string = 'Search Product';
   isAddProductVisible: boolean = false;
+  isEditmode:boolean=false;
+  editProductDetails:any
   // onClickButton() {
   //   console.log('Added product');
   // }
@@ -72,10 +74,12 @@ export class ProductlistComponent {
 
   onEditProduct(product: any) {
     // Pass the product to AddProductsComponent for editing
+    this.isEditmode=true;
+    this.editProductDetails = product;
     this.isAddProductVisible =true;
-    console.log('product',product);
+    console.log('product',this.editProductDetails);
 
-    this.addProductsComponent.setEditMode(product);
+    // this.addProductsComponent.setEditMode(product);
 
     // Open the modal using Bootstrap's JS API
     // const modalElement = document.getElementById('staticBackdrop');
