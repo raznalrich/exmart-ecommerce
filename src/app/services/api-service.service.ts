@@ -515,4 +515,5 @@ console.log('address data',data);
   LoginandToken(loginRequest:any){
     return this.http.post(`https://localhost:7267/login`,loginRequest)
   }
+  
 }
