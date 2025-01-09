@@ -20,6 +20,9 @@ export class SelectAddressComponent {
 address:address[]=[]
 selectedAddress?:address;
 isLoading=false
+isAddProductVisible: boolean = false;
+iseditProductVisible: boolean = false;
+
 addressId:number=0;
 userId:number=0;
     constructor(public api:ApiServiceService, private fb:FormBuilder, public global:GlobalService){
@@ -30,6 +33,12 @@ ngOnInit() {
 this.userId=this.global.userId();
 this.refreshAddressList()
 }
+onCloseAddProduct(){
+this.isAddProductVisible=false;
+}
+onCloseeditProduct(){
+  this.iseditProductVisible=false;
+  }
 
 refreshAddressList() {
   this.isLoading = true;
@@ -42,6 +51,7 @@ refreshAddressList() {
 
 onAddAddress() {
   this.selectedAddress = undefined;
+  this.isAddProductVisible= true;
 }
 
 onEdit(id: number) {
@@ -50,7 +60,7 @@ this.addressId=id;
   this.api.getAddressById(id).subscribe({
     next: (address: any) => {
       this.selectedAddress = address; // Set the selected address
-
+      this.iseditProductVisible=true;
       // const editModal = new bootstrap.Modal(document.getElementById('editModal'));
       // editModal.show();
     },
