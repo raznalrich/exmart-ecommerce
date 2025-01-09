@@ -31,6 +31,17 @@ export class SingleProductDetailComponent {
   quantity: number=1;
   message:string='';
 
+
+
+
+  showSuccess: boolean = false;
+  isInCart: boolean = false;
+  private alertTimeout: any;
+  isLoading: boolean = false;
+
+
+
+
   private paramSubscription!: Subscription;
   constructor(
     private route: ActivatedRoute,
@@ -74,22 +85,139 @@ export class SingleProductDetailComponent {
     }
 }
 
-  addtocart() {
-   // Replace with dynamic userId if needed
-    console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
+  // addtocart() {
+  //  // Replace with dynamic userId if needed
+  //   console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
 
-    this.apis
-      .addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
-      .subscribe(
-        (response) => {
-          console.log('Item added to cart successfully:', response);
-          this.cartService.getCartCount();
-          alert('Product added to cart!'); // Alert message
-        },
-        (error) => {
-          console.error('Error adding item to cart:', error);
-        }
-      );
+  //   this.apis
+  //     .addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
+  //     .subscribe(
+  //       (response) => {
+  //         console.log('Item added to cart successfully:', response);
+  //         this.cartService.getCartCount();
+  //         alert('Product added to cart!'); // Alert message
+  //       },
+  //       (error) => {
+  //         console.error('Error adding item to cart:', error);
+  //       }
+  //     );
+  // }
+
+
+
+  // addtocart() {
+  //   if (this.colorId && this.sizeId) {
+  //     this.apis.addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
+  //       .subscribe({
+  //         next: (response) => {
+  //           console.log('Item added to cart successfully:', response);
+  //           this.cartService.getCartCount();
+  //           this.showSuccessAlert();
+  //           this.isInCart = true;
+  //         },
+  //         error: (error) => {
+  //           console.error('Error adding item to cart:', error);
+  //         }
+  //       });
+  //   }
+  // }
+
+  // showSuccessAlert() {
+  //   this.showSuccess = true;
+
+  //   // Clear any existing timeout
+  //   if (this.alertTimeout) {
+  //     clearTimeout(this.alertTimeout);
+  //   }
+
+  //   // Auto hide alert after 3 seconds
+  //   this.alertTimeout = setTimeout(() => {
+  //     this.closeAlert();
+  //   }, 3000);
+  // }
+
+  closeAlert() {
+    this.showSuccess = false;
   }
 
+  ngOnDestroy() {
+    if (this.alertTimeout) {
+      clearTimeout(this.alertTimeout);
+    }
+  }
+
+
+
+
+
+
+
+  // toggleCart() {
+  //   if (this.isLoading) return;
+
+  //   this.isLoading = true;
+
+  //   if (this.isInCart) {
+  //     this.removeFromCart();
+  //   } else {
+  //     this.addtocart();
+  //   }
+  // }
+
+  addtocart() {
+    if (this.colorId && this.sizeId) {
+      this.apis.addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
+        .subscribe({
+          next: (response) => {
+        this.isLoading=false;
+            console.log('Item added to cart successfully:', response);
+            this.cartService.getCartCount();
+            this.isInCart = true;
+
+  this.showSuccessAlert('Product added to cart successfully!');
+
+      this.isLoading=false;
+          },
+          error: (error) => {
+            console.error('Error adding item to cart:', error);
+          },
+          complete: () => {
+            this.isLoading = false;
+          }
+        });
+    }
+  }
+
+  showSuccessAlert(message: string) {
+    this.message = message;
+    this.showSuccess = true;
+
+    if (this.alertTimeout) {
+      clearTimeout(this.alertTimeout);
+    }
+
+    this.alertTimeout = setTimeout(() => {
+      this.closeAlert();
+    }, 4000);
+  }
+
+
+
+  // removeFromCart() {
+  //   this.apis.deleteFromCart(this.id,this.userId)
+  //     .subscribe({
+  //       next: (response) => {
+  //         console.log('Item removed from cart successfully:', response);
+  //         this.cartService.getCartCount();
+  //         this.isInCart = false;
+  //         this.showSuccessAlert('Product removed from cart successfully!');
+  //       },
+  //       error: (error) => {
+  //         console.error('Error removing item from cart:', error);
+  //       },
+  //       complete: () => {
+  //         this.isLoading = false;
+  //       }
+  //     });
+  // }
 }

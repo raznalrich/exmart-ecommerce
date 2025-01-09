@@ -122,3 +122,67 @@ margin-top: 20px;
   margin-left: 35px;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.alert {
+  margin: 1rem 0;
+  position: relative;
+  margin-left: 30px;
+}
+
+// .add-to-bag-btn {
+//   width: 100%;
+//   padding: 12px 24px;
+//   border: none;
+//   border-radius: 6px;
+//   background-color: #4a90e2;
+//   color: white;
+//   font-size: 1rem;
+//   cursor: pointer;
+//   transition: all 0.3s ease;
+// }
+
+.add-to-bag-btn:hover:not(:disabled) {
+  background-color: #357abd;
+}
+
+.add-to-bag-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.alert-success {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+  border-radius: 4px;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  line-height: 1;
+  color: #155724;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.btn-close:hover {
+  opacity: 0.75;
+}
