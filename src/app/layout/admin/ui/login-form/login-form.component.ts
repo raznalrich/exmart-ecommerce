@@ -31,6 +31,7 @@ export class LoginFormComponent {
   })
 
   submit(){
+    this.isLoading=true;
     const email = this.LoginForm.get('email')?.value;
     this.email = email!;
 
