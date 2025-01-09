@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { GlobalService } from '../../../../global.service';
 import { OrderEmailContext } from '../../interfaces/OrderEmailContext';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-thank-you-purchase',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './thank-you-purchase.component.html',
   styleUrl: './thank-you-purchase.component.scss'
 })

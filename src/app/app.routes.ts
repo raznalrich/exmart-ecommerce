@@ -30,6 +30,7 @@ import { PolicyContentComponent } from './layout/user/ui/policy-content/policy-c
 import { TrackExmartComponent } from './layout/user/pages/track-exmart/track-exmart.component';
 import { ShippedConfirmationEmailComponent } from './layout/admin/ui/shipped-confirmation-email/shipped-confirmation-email.component';
 import { AuthGuard } from './authGuard/auth.guard';
+import { OrderConfirmedEmailComponent } from './layout/user/pages/order-confirmed-email/order-confirmed-email.component';
 
 export const routes: Routes = [
   {
@@ -139,6 +140,9 @@ export const routes: Routes = [
   },
   {
     path:"updateStatusBy/:id",component:ShippedConfirmationEmailComponent
+  },
+  {
+    path:"orderconfirmed/:id",component:OrderConfirmedEmailComponent
   }
 
 ];
