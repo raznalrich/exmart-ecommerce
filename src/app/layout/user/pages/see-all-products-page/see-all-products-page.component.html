@@ -1,7 +1,15 @@
 <div class="cAllContainer">
   <div class="heading">All products in exMart</div>
   <div class="content">
-    <!-- <div class="leftOptions"> -->
+    <div class="productGrid">
+      @for (product of displayedProducts ||[]; track product?.id) {
+        <app-productcard [cards]="product"></app-productcard>
+      }
+    </div>
+  </div>
+</div>
+
+  <!-- <div class="leftOptions"> -->
       <!-- <div class="filters">Filters</div>
       @for (category of CategoryList; track category.id) {
         <div class="category-item">
@@ -15,13 +23,3 @@
         </div>
       }
     </div> -->
-    <div class="productGrid">
-      @for (product of displayedProducts; track product.id) {
-        <!-- <p>{{product.name}}</p> -->
-        <app-productcard [cards]="product"></app-productcard>
-      }
-    </div>
-  </div>
-</div>
-
-
