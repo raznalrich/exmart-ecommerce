@@ -9,6 +9,11 @@
     @for (item of items; track item) {
       <app-order-item
       [id]="item.orderId"
+      [amount]="item.amount"
+      [imageUrl]="item.primaryImageUrl"
+      [title]="item.productName"
+      [status]="item.status"
+
 
       ></app-order-item>
     }

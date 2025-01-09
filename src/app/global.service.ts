@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { ApiServiceService } from './services/api-service.service';
 import { Router } from '@angular/router';
+import { OrderEmailContext } from './layout/user/interfaces/OrderEmailContext';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ export class GlobalService {
   userId = signal(0);
   cartCount = signal(0);
   signalCartList = signal<any[]>([])
+  orderContext = signal<OrderEmailContext[]>([])
   signalOrderList = signal<any[]>([])
   selectedAddressId = signal<string>('');
   cartList:any[]=[];

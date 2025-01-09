@@ -1,4 +1,4 @@
-@for(item of orderItemslist;track item){
+
 
 
 <div
@@ -7,25 +7,37 @@
 >
   <div class="d-flex align-items-center">
     <img
-      [src]="item.primaryImageUrl"
+      [src]="imageUrl"
       [alt]="title"
       style="width: 50px; height: 50px; border-radius: 8px; margin-right: 10px;"
     />
     <div>
-      <h6 style="margin: 0; font-weight: bold;">{{ item.productName }}</h6>
+      <h6 style="margin: 0; font-weight: bold;">{{ title }}</h6>
       <p style="margin: 0; font-size: 0.85rem;">
-        Color: {{ item.colorName }}<br />
-        Size: {{ item.sizeName }}<br />
-        Price: {{ item.price }}
+        <!-- Color: {{ item.colorName }}<br /> -->
+        <!-- Size: {{ item.sizeName }}<br /> -->
+        Price: {{ amount }}
       </p>
     </div>
   </div>
   <div>
     <p style="margin: 0; font-size: 0.9rem; font-weight: bold;">
-      pending <i [class]="statusIcon"></i>
-      <button type="button" class="btn btn-outline-danger">Cancel</button>
+      @if(status==1){
+
+        pending <i [class]="statusIcon"></i>
+      }
+      @else if(status==2){
+        Shipped
+      }
+      @else {
+        Delivered
+      }
+      @if(status==1 ){
+
+        <button type="button" class="btn btn-outline-danger">Cancel</button>
+      }
     </p>
 
   </div>
 </div>
-}
+

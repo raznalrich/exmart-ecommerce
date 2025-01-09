@@ -1,29 +1,57 @@
 <div class="adminDashboardContainer">
  <div class="adminHead">
-  <div class="greetings">Welcome <strong>Admin</strong></div>
+  <div class="greetings">Greetings <strong>Admin</strong></div>
  </div>
  <div class="contents">
     <div class="leftCont">
       <div class="leftTopIcons">
 
-        <p>Pending Orders: {{pendingOrdersCount}}</p>
-      <p>Total Pending Amount: {{pendingOrdersAmount }}</p>
-          <!-- <app-admin-values-displaying-button
-        [count]={{pendingOrdersCount}}
-        [iconSrc]="'icons/graph.png'"
+        <app-admin-values-displaying-button
+        [count]="currentYearOrders"
+        [iconSrc]="'icons/1_prev_ui.png'"
+        [label]="'Orders in this year'">
+        ></app-admin-values-displaying-button>
+
+          <app-admin-values-displaying-button
+        [count]="pendingOrders"
+        [iconSrc]="'icons/4_prev_ui.png'"
         [label]="'Pending Orders'">
-        ></app-admin-values-displaying-button> -->
+        ></app-admin-values-displaying-button>
 
         <app-admin-values-displaying-button
-        [count]="2000"
-        [iconSrc]="'icons/rupee-indian.png'"
-        [label]="'This month'">
+        [count]="shippedOrders"
+        [iconSrc]="'icons/3_prev_ui.png'"
+        [label]="'Shipped Orders'">
+        ></app-admin-values-displaying-button>
+
+        <app-admin-values-displaying-button
+        [count]="deliveredOrders"
+        [iconSrc]="'icons/2_prev_ui.png'"
+        [label]="'Delivered Orders'">
         ></app-admin-values-displaying-button>
 
       </div>
       <div class="leftBottom">
-        <app-admin-weekly-chart-disp></app-admin-weekly-chart-disp>
-        <!-- <img src="staticimages/grpaphtrail.png" alt=""> -->
+        
+        <div class="year-selector">
+          <label for="yearSelect" class="mr-2">Select Year:</label>
+          <select
+                id="yearSelect"
+                [(ngModel)]="selectedYear"
+                (change)="onYearChange($event)"
+                class="p-2 border rounded">
+                @for (year of availableYears; track year) {
+                  <option [value]="year">{{year}}</option>
+                }
+          </select>
+        </div>
+
+        <app-admin-weekly-chart-disp
+
+        [data]="monthlyOrderCounts"
+
+        ></app-admin-weekly-chart-disp>
+
       </div>
 
 
@@ -36,11 +64,18 @@
           <div class="newOrd">new orders</div>
         </div>
         <div class="rightTopRight">
-          <button class="morebut">more</button>
+          <button class="morebut" (click)="MoveToOrdersPage()">more</button>
         </div>
       </div>
-
-      <app-admin-recent-orders-in-dash-board></app-admin-recent-orders-in-dash-board>
+      <div class="newOrd">
+        @for (orders of latestProducts; track orders ){
+          <app-admin-recent-orders-in-dash-board
+          [proImage] = "orders.imageUrl"
+          [proName] = "orders.productName"
+          [proDate] ="orders.orderDate"
+          ></app-admin-recent-orders-in-dash-board>
+        }
+      </div>
     </div>
  </div>
 </div>
