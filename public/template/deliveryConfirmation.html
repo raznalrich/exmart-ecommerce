@@ -8,7 +8,7 @@
   <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
     <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
       <div style="background-color: #f8f9fa; padding: 20px; text-align: center; border-radius: 5px;">
-        <h1 style="color: #333; margin: 0;">Order Confirmation</h1>
+        <h1 style="color: #333; margin: 0;">Your product is shipped Confirmation</h1>
         <p style="font-size: 18px; margin-top: 10px;">Order #{{orderId}}</p>
       </div>
 
@@ -47,13 +47,9 @@
         </table>
       </div>
 
-      <div style="margin-top: 30px;">
-        <h2 style="color: #444; font-size: 18px;">Shipping Address</h2>
-        <p style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">{{shippingAddress}}</p>
-      </div>
 
       <div style="margin-top: 30px;">
-        <a href="http://localhost:4200/trackexmart/{{orderParsingId}}"
+        <a href="http://localhost:4200/orderconfirmed/{{orderParsingId}}"
            style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;">
           Confirm Product Delivered
         </a>

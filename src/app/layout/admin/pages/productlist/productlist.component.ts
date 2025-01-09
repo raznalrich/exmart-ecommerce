@@ -29,10 +29,11 @@ export class ProductlistComponent {
   filteredItems: any = [];
   searchPlaceholder: string = 'Search Product';
   isAddProductVisible: boolean = false;
-  // onClickButton() {
-  //   console.log('Added product');
-  // }
+  isEditmode: boolean = false;
+  editProductDetails: any;
+
   constructor(public api: ApiServiceService) {}
+
   items: any;
   header: any = ['Id', 'Image', 'Product', 'Category', 'Price', 'Actions'];
 
@@ -71,36 +72,26 @@ export class ProductlistComponent {
   }
 
   onEditProduct(product: any) {
-    // Pass the product to AddProductsComponent for editing
-    this.isAddProductVisible =true;
-    console.log('product',product);
-
-    this.addProductsComponent.setEditMode(product);
-
-    // Open the modal using Bootstrap's JS API
-    // const modalElement = document.getElementById('staticBackdrop');
-    // if (modalElement) {
-    //   const modal = new bootstrap.Modal(modalElement);
-    //   modal.show();
-    // }
+    this.isEditmode = true;
+    this.editProductDetails = product;
+    this.isAddProductVisible = true;
+    console.log('Editing product:', this.editProductDetails);
   }
+
   onCloseAddProduct() {
     this.isAddProductVisible = false;
+    this.isEditmode = false;          // Reset edit mode when modal is closed
+    this.editProductDetails = null;   // Clear product details when modal is closed
   }
+
   onAddButtonClick() {
-    // Set Add Mode
-    // this.addProductsComponent.setAddMode();
-    this.isAddProductVisible = true;
-    // Open the modal
-    // const modalElement = document.getElementById('staticBackdrop');
-    // if (modalElement) {
-    //   const modal = new bootstrap.Modal(modalElement);
-    //   modal.show();
-    // }
+    this.isEditmode = false;          // Ensure add mode
+    this.editProductDetails = null;   // Clear any existing data
+    this.isAddProductVisible = true;  // Show the modal
   }
+
   add(){
     this.isAddProductVisible = true;
-
   }
 
   icons: any = [

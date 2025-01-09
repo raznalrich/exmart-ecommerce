@@ -109,6 +109,7 @@ export class ApiServiceService {
         })
       );
   }
+
   deleteFromCart(productId: number, userId: number): Observable<any> {
     return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart`, {
       params: {
@@ -117,6 +118,21 @@ export class ApiServiceService {
       },
     });
   }
+
+  updateCategory(id: number, category: any): Observable<any> {
+    return this.http.put<any>(
+      `https://localhost:7267/api/Categories/${id}`,
+      category
+    );
+  }
+
+  updateBanner(id: number, updatedBanner: any) {
+    // If your endpoint is like PUT /banners/{id}
+    // Adjust to match your real endpoint & HTTP method
+    return this.http.put(`https://localhost:7267/api/Banner/${id}`, updatedBanner);
+  }
+
+
   removecartcount(id: number) {
     this.cartcount.update((value) => value - 1);
     this.cartid.update((value) => value.filter((item) => item !== id));
@@ -210,6 +226,10 @@ export class ApiServiceService {
         })
       );
   }
+  getuserAddressById(id: number){
+    return this.http.get<AddressResponse>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+
+  }
 
   getAddressTypeById(id: number): Observable<string> {
     return this.http.get<any>(`https://localhost:7267/api/Users/getAddressById/${id}`)
@@ -262,9 +282,15 @@ export class ApiServiceService {
       `https://localhost:7267/api/Users/ReturnIdfromemail/${email}`
     );
   }
-  returnEmailFromId(id: number) {
+  // returnEmailFromId(id: number): Observable<string> {
+  //   return this.http.get<string>(
+  //     `https://localhost:7267/api/Users/ReturnEmailFromId/${id}`
+  //   );
+  // }
+  returnEmailFromId(id: number): Observable<string> {
     return this.http.get(
-      `https://localhost:7267/api/Users/ReturnIdfromemail/${id}`
+      `https://localhost:7267/api/Users/ReturnEmailFromId/${id}`,
+      { responseType: 'text' }  // Specify that we expect a text response
     );
   }
   addNewUser(email: string, name: string, phone: string) {
@@ -489,4 +515,5 @@ console.log('address data',data);
   LoginandToken(loginRequest:any){
     return this.http.post(`https://localhost:7267/login`,loginRequest)
   }
+  
 }
