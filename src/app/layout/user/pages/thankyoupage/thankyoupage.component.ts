@@ -61,6 +61,9 @@ id:any
 data:any
 cartItemList:any
 selectedAddress:any
+addressType:string='';
+address:string='';
+
 totalPrice: number = 0;
   orders: Order[] = [];
   isContentVisible = false;
@@ -76,7 +79,9 @@ productIds: number[] = [];
   ngOnInit(){
     this.userId = this.global.userId();
     if(this.global.selectedAddressId()){
-      this.selectedAddress = this.global.selectedAddressId();
+      this.selectedAddress = +this.global.selectedAddressId();
+      this.loadAddressType(this.selectedAddress);
+      this.loadAddress(this.selectedAddress);
     }
     const cartItems = this.global.signalCartList();
     this.cartItemList = this.global.signalCartList();
@@ -106,6 +111,7 @@ productIds: number[] = [];
       });
     }
     onDelete() {
+      this.global.selectedAddressId.set('');
 
       this.apis.deleteCartById(this.userId).subscribe({
         next: () => {
@@ -120,47 +126,79 @@ productIds: number[] = [];
       });
 
   }
-
-  fetchCartItems(cartItems: any[]) {
-      const requests = this.productIds.map((id) => this.apis.getProductsById(id));
-
-      forkJoin(requests).subscribe(
-        (responses: any[]) => {
-          // Map responses with cart item details including color and size
-          this.CartItems = responses.map((res, index) => {
-            const cartItem = cartItems.find(item => item.productId === this.productIds[index]);
-            return {
-              id: this.productIds[index],
-              ...res,
-              colorId: cartItem?.colorId,
-              sizeId: cartItem?.sizeId
-            };
-          });
-
-          this.calculateTotalPrice();
-          console.log('Updated Cart Items:', this.CartItems);
-        },
-        (error) => {
-          console.error('Error fetching product details:', error);
-        }
-      );
-    }
-
-    // ... rest of the code remains the same ...
-
-    calculateTotalPrice() {
-      this.totalPrice = this.CartItems.reduce((total, product) => total + (product.price || 0), 0);
-      // if(this.selectedAddress==1||this.selectedAddress==2){
-
-      //   this.totalPrice = this.totalPrice+0;
-      // }
-      if(this.selectedAddress==3){
-        this.totalPrice = this.totalPrice+50;
-
+  loadAddress(addressId:number) {
+    this.apis.getAddressById(addressId).subscribe({
+      next: (formattedAddress) => {
+        this.address = formattedAddress;
+      },
+      error: (error) => {
+        console.error('Error fetching address:', error);
       }
-      console.log(this.totalPrice);
+    });
+  }
+  loadAddressType(addressId:number){
+    this.apis.getAddressTypeById(addressId).subscribe({
+      next:(typeID)=>{
+this.addressType=typeID;
+console.log('type',this.addressType);
+this.fetchCartItems( this.global.signalCartList());
 
-    }
+      },
+      error: (error) => {
+        console.error('Error fetching address:', error);
+      }
+    })
+  }
+  fetchCartItems(cartItems: any[]) {
+    const requests = this.productIds.map((id) => this.apis.getProductsById(id));
 
+    forkJoin(requests).subscribe(
+      (responses: any[]) => {
+        // Map responses with cart item details including color and size
+        this.CartItems = responses.map((res, index) => {
+          const cartItem = cartItems.find(item => item.productId === this.productIds[index]);
+          return {
+            id: this.productIds[index],
+            ...res,
+            colorId: cartItem?.colorId,
+            sizeId: cartItem?.sizeId
+          };
+        });
 
+        this.calculateTotalPrice();
+        console.log('Updated Cart Items:', this.CartItems);
+      },
+      (error) => {
+        console.error('Error fetching product details:', error);
+      }
+    );
+  }
+
+  // ... rest of the code remains the same ...
+
+  calculateTotalPrice() {
+    this.totalPrice = this.CartItems.reduce((total, product) => {
+      // Find the corresponding cart item to get the quantity
+      const cartItem = this.cartItemList.find((item: any) => item.productId === product.id);
+      const quantity = cartItem ? cartItem.quantity : 0;
+      if(+this.addressType == 1 ){
+        console.log('shipping charge');
+
+        this.shippingCharge = this.shippingCharge + 49
+        return total + ((product.price * quantity)+49)
+      }
+      else{
+        console.log("calculating total amount");
+
+        return total + (product.price * quantity);
+      }
+    }, 0);
+
+    // Add delivery charge if address is 3
+
+    console.log(this.totalPrice);
+  }
+  setOrderFromCart() {
+    this.global.signalOrderList.set([...this.cartItemList]);
+  }
 }
