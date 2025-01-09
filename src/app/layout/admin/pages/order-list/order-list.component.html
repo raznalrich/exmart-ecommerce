@@ -3,7 +3,7 @@
     <div class="top">
       <div style="display: flex;">
 
-        <app-searchbar></app-searchbar>
+        <app-searchbar [searchPlaceholder]="searchPlaceholder" (searchChange)="onSearch($event)"></app-searchbar>
         <div class="right">
           <div class="tooltip-container">
           <button class="btn-create-new" (click)="downloadReport()">
@@ -17,23 +17,26 @@
           <button class="btn-create-new" (click)="fileInput.click()">
             <i class="bi bi-file-arrow-up"></i>
           </button>
+          <span class="tooltip-text">Upload report</span>
         </div>
         <app-date-rangepicker (dateRangeSelected)="onDateRangeSelected($event)"></app-date-rangepicker>
       </div>
       <div class="count-box">
-        <app-admin-values-displaying-button
-        [count]="28"
-        [iconSrc]="'icons/clipboard.png'"
-        [label]="'Total Orders'"></app-admin-values-displaying-button>
+        <app-order-value-displaying-button [count]="totalOrders" [iconSrc]="'icons/clipboard.png'"
+          [label]="'Total Orders'"></app-order-value-displaying-button>
 
-        <app-admin-values-displaying-button [count]="15" [iconSrc]="'icons/delivered (1).png'"
-          [label]="'Delivered'"></app-admin-values-displaying-button>
+
+        <app-order-value-displaying-button [count]="deliveredOrders" [iconSrc]="'icons/delivered (1).png'"
+          [label]="'Delivered'"></app-order-value-displaying-button>
       </div>
 
     </div>
   </div>
 
 </div>
-<app-orderlist-table [OrderList]="orderlist"></app-orderlist-table>
+</div>
+<!-- <app-orderlist-table [OrderList]="orderlist"></app-orderlist-table> -->
+
+<!-- <app-orderlist-table [OrderList]="orderlist"></app-orderlist-table> -->
 
 <app-orderlist-table [OrderList]="filteredItems"></app-orderlist-table>

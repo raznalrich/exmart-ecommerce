@@ -14,54 +14,69 @@
       @for (data of address; track data) {
       <app-profile-address-card
         [address]="data"
-(edit)="onEdit($event)"
-(delete)="onDelete($event)"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
       ></app-profile-address-card>
       }
     </div>
 
+    <div class="backdrop" *ngIf="isAddProductVisible" (click)="onCloseAddProduct()"></div>
+    <div class="modal1" *ngIf="isAddProductVisible">
+      <div class="modal2 show d-block"  >
 
-    <!-- Add address Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              <i class="bi bi-house-add" style="padding-right: 15px">
-                Add New Address
-              </i>
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <app-new-address [editMode]="false" (addressAdded)="refreshAddressList()"></app-new-address>
-          </div>
-        </div>
-      </div>
+<!-- Add address Modal -->
+<div
+class="modal show d-block"
+id="exampleModal"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+>
+<!-- <div class="modal-dialog"> -->
+<!-- <div class="modal show d-block"> -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">
+        <i class="bi bi-house-add" style="padding-right: 15px">
+          Add New Address
+        </i>
+      </h1>
+      <button
+        type="button"
+        class="btn-close"
+        (click)="onCloseAddProduct()"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
     </div>
+    <div class="modal-body">
+      <app-new-address (modalClose)="onCloseAddProduct()" [editMode]="false" (addressAdded)="refreshAddressList()"></app-new-address>
+    </div>
+  </div>
+<!-- </div> -->
+</div>
+        </div>
+
+      </div>
+      </div>
+
 
 <!--Edit Address Model-->
-    <div class="modal fade" id="editModal" tabindex="-1" >
-      <div class="modal-dialog">
+<div class="backdrop" *ngIf="iseditProductVisible" (click)="onCloseeditProduct()"></div>
+    <div class="modal1" *ngIf="iseditProductVisible">
+      <div class="modal2 show d-block"  >
+    <div class="modal show d-block" id="editModal" tabindex="-1">
+      <!-- <div class="modal-dialog"> -->
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Edit Address</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button type="button" (click)="onCloseeditProduct()" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-              <app-new-address [editMode]="true" [addressData]="selectedAddress" (addressUpdated)="refreshAddressList()"></app-new-address>
+              <app-new-address (modalClose)="onCloseeditProduct()" [addressId]="addressId" [editMode]="true" [addressData]="selectedAddress" (addressUpdated)="refreshAddressList()"></app-new-address>
           </div>
         </div>
       </div>
   </div>
 </div>
+</div>
+<!-- </div> -->

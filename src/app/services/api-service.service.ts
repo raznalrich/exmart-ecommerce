@@ -73,6 +73,8 @@ export class ApiServiceService {
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
 
+
+
   addToCart(
     id: number,
     userId: number,
@@ -107,6 +109,7 @@ export class ApiServiceService {
         })
       );
   }
+
   deleteFromCart(productId: number, userId: number): Observable<any> {
     return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart`, {
       params: {
@@ -115,6 +118,21 @@ export class ApiServiceService {
       },
     });
   }
+
+  updateCategory(id: number, category: any): Observable<any> {
+    return this.http.put<any>(
+      `https://localhost:7267/api/Categories/${id}`,
+      category
+    );
+  }
+
+  updateBanner(id: number, updatedBanner: any) {
+    // If your endpoint is like PUT /banners/{id}
+    // Adjust to match your real endpoint & HTTP method
+    return this.http.put(`https://localhost:7267/api/Banner/${id}`, updatedBanner);
+  }
+
+
   removecartcount(id: number) {
     this.cartcount.update((value) => value - 1);
     this.cartid.update((value) => value.filter((item) => item !== id));
@@ -208,6 +226,19 @@ export class ApiServiceService {
         })
       );
   }
+  getuserAddressById(id: number){
+    return this.http.get<AddressResponse>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+
+  }
+
+  getAddressTypeById(id: number): Observable<string> {
+    return this.http.get<any>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+      .pipe(
+        map(response => {
+          return `${response.addressTypeId}`;
+        })
+      );
+  }
 
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
@@ -251,9 +282,15 @@ export class ApiServiceService {
       `https://localhost:7267/api/Users/ReturnIdfromemail/${email}`
     );
   }
-  returnEmailFromId(id: number) {
+  // returnEmailFromId(id: number): Observable<string> {
+  //   return this.http.get<string>(
+  //     `https://localhost:7267/api/Users/ReturnEmailFromId/${id}`
+  //   );
+  // }
+  returnEmailFromId(id: number): Observable<string> {
     return this.http.get(
-      `https://localhost:7267/api/Users/ReturnIdfromemail/${id}`
+      `https://localhost:7267/api/Users/ReturnEmailFromId/${id}`,
+      { responseType: 'text' }  // Specify that we expect a text response
     );
   }
   addNewUser(email: string, name: string, phone: string) {
@@ -304,7 +341,7 @@ console.log('address data',data);
     const headers = { 'Content-Type': 'application/json' };
 
     return this.http
-      .post('https://localhost:7267/api/Users/addAddress', data, { headers })
+      .post('https://localhost:7267/api/Users/addAddress', data, { headers, responseType:'text' })
       .pipe(
         catchError((error) => {
           console.log('Error details:', error.error);
@@ -321,9 +358,9 @@ console.log('address data',data);
   //   return this.http.get(`https://localhost:7267/api/Users/getAddressById/${id}`)
   // }
 
-  editAddressById(addressId: number, item: any) {
+  editAddressById(id: number, item: any) {
     let data = {
-      id: addressId,
+      // id: id,
       userId: item.userId,
       addressTypeId: 1,
       addressLine: item.addressLine,
@@ -332,6 +369,7 @@ console.log('address data',data);
       district: item.district,
       state: item.state,
       updatedBy: item.userId
+
     };
 
     console.log('updating address data', data);
@@ -339,7 +377,7 @@ console.log('address data',data);
     const headers = { 'Content-Type': 'application/json' };
 
     return this.http
-      .put(`https://localhost:7267/api/Users/editAddress/${addressId}`, data, { headers, responseType: 'text' })
+      .put(`https://localhost:7267/api/Users/editAddress/${id}`, data, { headers, responseType: 'text' })
       .pipe(
         catchError((error) => {
           console.log('Error details:', error.error);
@@ -350,6 +388,9 @@ console.log('address data',data);
 
   deleteAddressById(id:number){
     return this.http.delete(`https://localhost:7267/api/Users/DeleteAddress/${id}`)
+  }
+  deleteCartById(id:number){
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteAllUserCart/${id}`)
   }
 
   getOrderList() {
@@ -469,5 +510,9 @@ console.log('address data',data);
     // return this.http.put(`https://localhost:7267/api/Policy/${id}`, payload);
 
     // return this.http.put(`https://localhost:7267/api/Policy/${id}`,policyContent);
+  }
+
+  LoginandToken(loginRequest:any){
+    return this.http.post(`https://localhost:7267/login`,loginRequest)
   }
 }

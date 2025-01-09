@@ -3,35 +3,27 @@
 
 <div class="page">
     <div class="top">
-        <app-searchbar></app-searchbar>
-        <app-add-button [button]="button" (buttonClick)="add()"></app-add-button>
-         <!-- <button (click)="add()" >addd</button> -->
+
+        <app-searchbar [searchPlaceholder]="searchPlaceholder" (searchChange)="onSearch($event)"></app-searchbar>
+        <app-add-button [button]="button" (buttonClick)="onAddButtonClick()"></app-add-button>
       </div>
     <div class="bottom">
-
-      <app-table [header]="header" [items]="items" (editProduct)="onEditProduct($event)"></app-table>
+      <app-table [header]="header" [items]="filteredItems" (editProduct)="onEditProduct($event)"></app-table>
 
     </div>
     <div class="backdrop" *ngIf="isAddProductVisible" (click)="onCloseAddProduct()"></div>
   <div class="modal1" *ngIf="isAddProductVisible">
 
     <div class="modal2 show d-block"  >
-      <app-add-products (close)="onCloseAddProduct()"></app-add-products>
-      <!-- <div class="modal show d-block">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>Modal body text goes here.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" >Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div> -->
+      @if(isEditmode){
+
+        <app-add-products [editProductDetails]="editProductDetails" [isEditMode]="true" (close)="onCloseAddProduct()"></app-add-products>
+      }
+      @else {
+        <app-add-products [isEditMode]="false"  (close)="onCloseAddProduct()"></app-add-products>
+
+      }
+
     </div>
 
   </div>

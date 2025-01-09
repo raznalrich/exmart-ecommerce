@@ -9,6 +9,9 @@
     border: border
   }"
 >
+@if(isLoading){
+  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+}
 <!-- (mouseenter)="hovered = true"
   (mouseleave)="hovered = false"
   [ngStyle]="hovered ? {

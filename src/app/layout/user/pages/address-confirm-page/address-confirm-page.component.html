@@ -12,7 +12,8 @@
     <app-address-card [address]="data" ></app-address-card>
   }
     <div class="newAddressButton">
-      <app-add-address-button></app-add-address-button>
+      <app-add-address-button   [buttonLabel]="'Add New Address'"
+      (add)="onAddAddress()"></app-add-address-button>
     </div>
 
   </div>
