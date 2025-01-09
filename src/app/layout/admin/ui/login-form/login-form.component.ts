@@ -54,44 +54,44 @@ export class LoginFormComponent {
           const decoded: any = jwtDecode(this.token);
           console.log('Decoded UserId:', decoded.UserId);
           console.log('Decoded UserName:', decoded.name);
-          
+
           // Store token in localStorage or a service
           localStorage.setItem('token', this.token);
-          
+          this.authentication(decoded.UserId);
           // Navigate to dashboard or home page
-          this.router.navigate(['/dashboard']);
+
         } catch (error) {
           console.error('Error decoding token:', error);
         }
-        
+
     })
 
 
 
-    this.api.returnIdFromEmail(email).subscribe(
-      (userId) => {
-        console.log('User ID:', userId);
-        if(userId==null){
-          this.addNewUser();
-          // const modalElement = document.getElementById('exampleModal');
-          // if(modalElement){
-          //   // const modal = new bootstrap.Modal(modalElement);
-          //   // modal.show();
-          // }
-          // else{
-          //   console.error('modal element not found');
+    // this.api.returnIdFromEmail(email).subscribe(
+    //   (userId) => {
+    //     console.log('User ID:', userId);
+    //     if(userId==null){
+    //       this.addNewUser();
+    //       // const modalElement = document.getElementById('exampleModal');
+    //       // if(modalElement){
+    //       //   // const modal = new bootstrap.Modal(modalElement);
+    //       //   // modal.show();
+    //       // }
+    //       // else{
+    //       //   console.error('modal element not found');
 
-          // }
-        }
-        var userID = userId;
-        this.employeeId = userID;
-        this.authentication(this.employeeId);
-      },
-      (error) => {
-        this.addNewUser();
-        console.error('Error fetching user ID:', error);
-      }
-    );
+    //       // }
+    //     }
+    //     var userID = userId;
+    //     this.employeeId = userID;
+    //     this.authentication(this.employeeId);
+    //   },
+    //   (error) => {
+    //     this.addNewUser();
+    //     console.error('Error fetching user ID:', error);
+    //   }
+    // );
 
   }
   getIdfromemail(email:string){
@@ -108,7 +108,7 @@ export class LoginFormComponent {
   this.api.IsAdmin(userId).subscribe(
     (isAdmin)=>{
       if(isAdmin){
-        alert("it is admin")
+
         this.router.navigate(['/admin/admindashboard']);
       }
       else{
