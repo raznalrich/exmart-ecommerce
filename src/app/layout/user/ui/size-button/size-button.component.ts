@@ -27,6 +27,9 @@ export class SizeButtonComponent {
 
   ngOnInit() {
  //Fetch size details
+ if(this.SizeId==8){
+  this.onSizeSelect();
+ }
  this.api.getSizeById(this.SizeId).subscribe({
   next: (sizeData) => {
     this.sizeName = sizeData;
