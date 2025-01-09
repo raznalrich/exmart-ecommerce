@@ -73,6 +73,8 @@ export class ApiServiceService {
   cartid = signal<any[]>([]);
   totalcartprice = signal(0);
 
+
+
   addToCart(
     id: number,
     userId: number,
@@ -208,6 +210,10 @@ export class ApiServiceService {
           return `${response.addressLine} , ${response.city} , ${response.district} , ${response.state} , ${response.zipCode}`;
         })
       );
+  }
+  getuserAddressById(id: number){
+    return this.http.get<AddressResponse>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+
   }
 
   getAddressTypeById(id: number): Observable<string> {
@@ -362,6 +368,9 @@ console.log('address data',data);
   deleteAddressById(id:number){
     return this.http.delete(`https://localhost:7267/api/Users/DeleteAddress/${id}`)
   }
+  deleteCartById(id:number){
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteAllUserCart/${id}`)
+  }
 
   getOrderList() {
     return this.http.get(`https://localhost:7267/api/Order/orderItem/List`);
@@ -480,5 +489,9 @@ console.log('address data',data);
     // return this.http.put(`https://localhost:7267/api/Policy/${id}`, payload);
 
     // return this.http.put(`https://localhost:7267/api/Policy/${id}`,policyContent);
+  }
+
+  LoginandToken(loginRequest:any){
+    return this.http.post(`https://localhost:7267/login`,loginRequest)
   }
 }

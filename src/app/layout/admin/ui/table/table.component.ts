@@ -21,7 +21,6 @@ export class TableComponent {
     this.api.toggelProductStatus(item.id).subscribe({
       next: (isActive: boolean) => {
         item.isActive = !item.isActive;
-        // item.isActive = isActive;
       },
       error: (err) => console.error(err),
     });

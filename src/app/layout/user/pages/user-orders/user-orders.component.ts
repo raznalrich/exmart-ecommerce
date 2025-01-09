@@ -3,6 +3,7 @@ import { OrderSectionComponent } from '../../ui/order-section/order-section.comp
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { CommonModule } from '@angular/common';
 import { GlobalService } from '../../../../global.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-orders',
@@ -12,7 +13,7 @@ import { GlobalService } from '../../../../global.service';
   styleUrl: './user-orders.component.scss'
 })
 export class UserOrdersComponent {
-  constructor(public api:ApiServiceService,public global:GlobalService){
+  constructor(public api:ApiServiceService,public global:GlobalService,private router: Router){
     this.global.getUserId();
   }
   @Input() tabs = ['Pending','In Transit', 'Delivered'];
@@ -43,7 +44,15 @@ export class UserOrdersComponent {
   ];
 
   userId: any;
+  logout(): void {
+    // Remove specific data (e.g., userId) from local storage
+    localStorage.removeItem('userId');
 
+    // Optionally clear all local storage
+    localStorage.clear();
+
+    this.router.navigate(['/login']);
+  }
   ngOnInit() {
     this.loadOrders();
     this.userId = this.global.userId();

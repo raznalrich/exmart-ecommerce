@@ -2,6 +2,14 @@ button{
   border: none;
 
 }
+.modal2 {
+  pointer-events: auto;
+  height: 470px;
+  width: 600px;
+}
+.show {
+  display: block;
+}
 
 // add-products.component.scss
 .modal-overlay {

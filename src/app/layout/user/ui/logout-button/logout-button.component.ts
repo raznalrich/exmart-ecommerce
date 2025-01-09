@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logout-button',
@@ -13,4 +14,15 @@ export class LogoutButtonComponent {
     route:'',
     icon: '',
   };
+  constructor(private router:Router){}
+
+  logout(): void {
+    // Remove specific data (e.g., userId) from local storage
+    localStorage.removeItem('userId');
+
+    // Optionally clear all local storage
+    localStorage.clear();
+
+    this.router.navigate(['/login']);
+  }
 }
