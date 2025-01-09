@@ -9,7 +9,12 @@
           <p>{{ item.categoryName }}</p>
         </div>
         <div class="category-actions">
-          <button><i class="bi bi-pencil-square"></i></button>
+          <button
+            class="btn btn-sm btn-outline-primary me-2"
+            (click)="onEditCategory(item)"
+          >
+            <i class="bi bi-pencil-square"></i>
+          </button>
           <button (click)="deleteCategory(item)">
             <i class="bi bi-trash3"></i>
           </button>
@@ -17,7 +22,9 @@
       </div>
       }
       <div class="add">
-        <app-add-new-category></app-add-new-category>
+        <app-add-new-category
+          (categoryAdded)="onCategoryAdded($event)"
+        ></app-add-new-category>
       </div>
     </div>
   </section>
@@ -32,7 +39,12 @@
         <p>{{ item.productName }}</p>
       </div>
       <div class="category-actions">
-        <button><i class="bi bi-pencil-square"></i></button>
+        <button
+          class="btn btn-sm btn-outline-primary me-2"
+          (click)="onEditBanner(item)"
+        >
+          <i class="bi bi-pencil-square"></i>
+        </button>
         <button (click)="deleteBanner(item)">
           <i class="bi bi-trash3"></i>
         </button>
@@ -40,7 +52,10 @@
     </div>
     }
     <div class="add">
-      <app-add-banner [bannerCount]="banners.length"></app-add-banner>
+      <app-add-banner
+        [bannerCount]="banners.length"
+        (bannerAdded)="onBannerAdded($event)"
+      ></app-add-banner>
     </div>
   </div>
 
@@ -48,3 +63,9 @@
     <app-edit-policiesapp-edit-policies></app-edit-policiesapp-edit-policies>
   </div>
 </div>
+
+<app-edit-category
+  (categoryEdited)="onCategoryEdited($event)"
+></app-edit-category>
+
+<app-edit-banner (bannerEdited)="onBannerEdited($event)"></app-edit-banner>
