@@ -29,6 +29,7 @@ export class SingleProductDetailComponent {
   colorId: any;
   sizeId: any;
   quantity: number=1;
+  isLoading:boolean=false;
 message:string='';
   private paramSubscription!: Subscription;
   constructor(
@@ -95,7 +96,11 @@ message:string='';
         (response) => {
           console.log('Item added to cart successfully:', response);
           this.cartService.getCartCount();
-          alert('Product added to cart!'); // Alert message
+          this.isLoading=true;
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 5000);
+          // alert('Product added to cart!'); // Alert message
         },
         (error) => {
           console.error('Error adding item to cart:', error);

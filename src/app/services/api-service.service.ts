@@ -210,6 +210,10 @@ export class ApiServiceService {
         })
       );
   }
+  getuserAddressById(id: number){
+    return this.http.get<AddressResponse>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+
+  }
 
   getAddressTypeById(id: number): Observable<string> {
     return this.http.get<any>(`https://localhost:7267/api/Users/getAddressById/${id}`)
@@ -362,6 +366,9 @@ console.log('address data',data);
 
   deleteAddressById(id:number){
     return this.http.delete(`https://localhost:7267/api/Users/DeleteAddress/${id}`)
+  }
+  deleteCartById(id:number){
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteAllUserCart/${id}`)
   }
 
   getOrderList() {

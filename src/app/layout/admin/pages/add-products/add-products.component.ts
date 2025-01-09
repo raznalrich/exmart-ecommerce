@@ -26,6 +26,8 @@ export class AddProductsComponent implements OnInit, OnChanges {
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<void>();
   isModalOpen = false;
+  @Input() isEditMode = false;
+  @Input() editProductDetails:any;
 
   @Input() productToEdit: any;
 
@@ -41,7 +43,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
 
   showSizes = false;
 
-  public isEditMode = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -51,6 +52,9 @@ export class AddProductsComponent implements OnInit, OnChanges {
 
     // 2) Fetch categories, colors, and sizes from the API
     this.fetchInitialData();
+    if(this.isEditMode){
+      this.setEditMode();
+    }
   }
 
   buttonFunction() {
@@ -150,11 +154,13 @@ export class AddProductsComponent implements OnInit, OnChanges {
     this.showSizes = false;
   }
 
-  setEditMode(product: any) {
+  setEditMode() {
 
-    this.isEditMode = true;
-    this.productToEdit = product;
-    this.populateForm(product);
+    // this.isEditMode = true;
+    this.productToEdit = this.editProductDetails;
+    console.log('product details',this.editProductDetails);
+
+    this.populateForm(this.editProductDetails);
   }
 
   handleCategoryChange(categoryId: number) {
