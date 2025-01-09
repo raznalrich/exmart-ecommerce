@@ -1,4 +1,19 @@
-<!-- @for (item of data; track item.id;){ -->
+ <!-- Success Alert -->
+<div
+  *ngIf="showSuccess"
+  [@alertAnimation]
+  class="alert alert-warning alert-dismissible fade show"
+  role="alert"
+>
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    (click)="closeAlert()"
+    aria-label="Close"
+  ></button>
+</div>
+
 <div class="product-details">
   <h3 style="font-size: 20px">
     <strong>{{ data.name }}</strong>
@@ -9,85 +24,67 @@
     <p>
       <strong>MRP ₹{{ data.price }}</strong>
     </p>
+
     <div class="color-options">
       @for(ColorId of data.colorId; track ColorId){
-      <!-- {{data.colorId}} -->
-      <app-color-button
-        [ColorId]="ColorId"
-        (colorSelected)="handleColorSelect($event)"
-        [ngClass]="{ active: colorId == ColorId }"
-        [(ngModel)]="colorId"
-        (change)="checkSelection()"
-      ></app-color-button>
+        <app-color-button
+          [ColorId]="ColorId"
+          (colorSelected)="handleColorSelect($event)"
+          [ngClass]="{ active: colorId == ColorId }"
+          [(ngModel)]="colorId"
+          (change)="checkSelection()"
+        ></app-color-button>
       }
     </div>
+
     <br />
+
     <div class="size-options">
       @for(SizeId of data.sizeId; track SizeId){
-      <!-- {{data.sizeId}} -->
-      <app-size-button
-        [SizeId]="SizeId"
-        (sizeSelected)="handleSizeSelect($event)"
-        [ngClass]="{ active: sizeId == SizeId }"
-        [(ngModel)]="sizeId"
-        (change)="checkSelection()"
-      ></app-size-button>
+        <app-size-button
+          [SizeId]="SizeId"
+          (sizeSelected)="handleSizeSelect($event)"
+          [ngClass]="{ active: sizeId == SizeId }"
+          [(ngModel)]="sizeId"
+          (change)="checkSelection()"
+        ></app-size-button>
       }
     </div>
 
-    @if(message){
-    <div class="alert alert-warning">
-      {{ message }}
-    </div>
-    }
-    <!-- <div class="quantity">
-      <label for="quantity"></label>
-      <input
-        type="number"
-        id="quantity"
-        placeholder="1"
-        min="1"
-        [value]="1"
-        [(ngModel)]="quantity"
-        (ngModelChange)="onQuantityChange()"
-      />
-    </div> -->
+    <br>
 
-<br>
-    <!-- <app-quantity
-    [minQuantity]="1"
-    [maxQuantity]="99"
-    [showMessage]="true"
-    [(ngModel)]="quantity"
-    (quantityChange)="onQuantityChange()">
-  </app-quantity> -->
-<app-quantity
-    [minQuantity]="1"
-    [maxQuantity]="99"
-    [showMessage]="true"
-    [(quantity)]="quantity"
-   >
-  </app-quantity>
+    <app-quantity
+      [minQuantity]="1"
+      [maxQuantity]="99"
+      [showMessage]="true"
+      [(quantity)]="quantity"
+    ></app-quantity>
+
     <div class="rating">
       <!-- <app-star-rating [rating]="data.rating"></app-star-rating> -->
     </div>
+
     <div class="actions">
       <button
-        class="add-to-bag-btn"
-        (click)="addtocart()"
-        [disabled]="!colorId || !sizeId"
-      >
-        Add to Bag
-      </button>
+      class="add-to-bag-btn"
+      (click)="addtocart()"
+      [disabled]="!colorId || !sizeId"
+    >
+      Add to Bag
+    </button>
+      <!-- <button
+      class="add-to-bag-btn"
+      (click)="toggleCart()"
+      [disabled]="(!colorId || !sizeId) || isLoading"
+    >
+      <span *ngIf="isLoading">Loading...</span>
+      <span *ngIf="!isLoading">
+        {{ isInCart ? 'Remove from Cart' : 'Add to Bag' }}
+      </span>
+    </button> -->
     </div>
   </div>
 </div>
 <div class="product-feedback">
-  <app-product-feedback productName={{data.name}} ></app-product-feedback>
+  <app-product-feedback [productName]="data.name"></app-product-feedback>
 </div>
-<!-- } -->
-@if(isLoading){
-  <div class="alert alert-success fade-in-out" role="alert">
-    Product added to the cart
-  </div>
-}
