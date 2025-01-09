@@ -25,7 +25,7 @@ export class ProductDisplayingSectionComponent {
 
       this.data = this.api.getProducts().subscribe((res:any)=>{
         this.data = res.
-        filter((item: any) => item.categoryId == this.id);
+        filter((item: any) => item.categoryId == this.id && item.isActive==true);
         console.log(this.data);
 
       })
