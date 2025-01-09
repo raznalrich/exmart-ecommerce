@@ -32,15 +32,26 @@ export class EmailService {
   emailTemplate: string = '';
   hrEmailTemplate: string = '';
   DeliveryEmailTemplate: string = '';
+  productDeliverdEmailTemplate: string = '';
   constructor(public api:ApiServiceService) {
     this.loadTemplate();
     this.hrLoadTemplate();
     this.deliveryLoadTemplate();
+    this.deliveryConfirmedTemplate();
   }
   private async hrLoadTemplate(){
     try {
 
       this.hrEmailTemplate = await fetch('/template/hrConfirmationMail.html')
+        .then(response => response.text());
+    } catch (error) {
+      console.error('Failed to load email template:', error);
+    }
+  }
+  private async deliveryConfirmedTemplate(){
+    try {
+
+      this.productDeliverdEmailTemplate = await fetch('/template/productDelivered.html')
         .then(response => response.text());
     } catch (error) {
       console.error('Failed to load email template:', error);
@@ -93,42 +104,10 @@ export class EmailService {
       </tr>
     `).join('');
   }
-  private replacePlaceholders(template: string, context: OrderEmailContext): string {
-    const itemRows = this.generateItemRows(context.items);
 
-    return template
-      .replace('{{orderId}}', String(context.orderId))
-      .replace('{{orderParsingId}}', String(context.orderId))
-      .replace('{{customerName}}', context.customerName)
-      .replace('{{itemRows}}', itemRows)
-      .replace('{{totalAmount}}', context.totalAmount.toFixed(2))
-      .replace('{{shippingAddress}}', context.shippingAddress)
-      .replace('{{orderDate}}', new Date(context.orderDate).toLocaleDateString());
-  }
-  private replaceHRPlaceholders(template: string, context: OrderEmailContext): string {
-    const itemRows = this.generateHRItemRows(context.items);
 
-    return template
-      .replace('{{orderId}}', String(context.orderId))
-      .replace('{{customerName}}', context.customerName)
-      .replace('{{itemRows}}', itemRows)
-      .replace('{{totalAmount}}', context.totalAmount.toFixed(2))
-      .replace('{{shippingAddress}}', context.shippingAddress)
-      .replace('{{orderDate}}', new Date(context.orderDate).toLocaleDateString());
-  }
-  private replaceDeliveryOrderPlaceholders(template: string, context: DeliveryConfirmation): string {
-    // const itemRows = this.generateHRItemRows(context.items);
 
-    return template
-      .replace('{{orderId}}', String(context.orderitemId))
-      .replace('{{customerName}}', context.customerName)
-      .replace('{{productName}}', context.productName)
-      .replace('{{quantity}}', String(context.quantity))
-      .replace('{{subtotal}}', context.subtotal.toFixed(2))
-      .replace('{{totalAmount}}', context.subtotal.toFixed(2))
-      .replace('{{shippingAddress}}', context.shippingAddress)
-      .replace('{{orderDate}}', new Date(context.orderDate).toLocaleDateString());
-  }
+
   sendOrderConfirmationEmail(email: string, orderContext: OrderEmailContext): Observable<boolean> {
     const subject = `Order Confirmation - #EXP${orderContext.orderId}`;
     const body = this.replacePlaceholders(this.emailTemplate, orderContext);
@@ -145,6 +124,18 @@ export class EmailService {
         return of(false); // Return failure
       })
     );
+  }
+  private replacePlaceholders(template: string, context: OrderEmailContext): string {
+    const itemRows = this.generateItemRows(context.items);
+
+    return template
+      .replace('{{orderId}}', String(context.orderId))
+      .replace('{{orderParsingId}}', String(context.orderId))
+      .replace('{{customerName}}', context.customerName)
+      .replace('{{itemRows}}', itemRows)
+      .replace('{{totalAmount}}', context.totalAmount.toFixed(2))
+      .replace('{{shippingAddress}}', context.shippingAddress)
+      .replace('{{orderDate}}', new Date(context.orderDate).toLocaleDateString());
   }
   sendOrderDeliveryConfirmationEmail(email: string, orderContext: DeliveryConfirmation): Observable<boolean> {
     const subject = `Your Order is Shipped !  - #EXP${orderContext.orderitemId}`;
@@ -163,6 +154,50 @@ export class EmailService {
       })
     );
   }
+  private replaceDeliveryOrderPlaceholders(template: string, context: DeliveryConfirmation): string {
+    // const itemRows = this.generateHRItemRows(context.items);
+
+    return template
+      .replace('{{orderId}}', String(context.orderitemId))
+      .replace('{{orderParsingId}}', String(context.orderitemId))
+      .replace('{{customerName}}', context.customerName)
+      .replace('{{productName}}', context.productName)
+      .replace('{{quantity}}', String(context.quantity))
+      .replace('{{subtotal}}', context.subtotal.toFixed(2))
+      .replace('{{totalAmount}}', context.subtotal.toFixed(2))
+      .replace('{{shippingAddress}}', context.shippingAddress)
+      .replace('{{orderDate}}', new Date(context.orderDate).toLocaleDateString());
+  }
+  OrderDeliveryConfirmed(email: string, orderContext: DeliveryConfirmation): Observable<boolean> {
+    const subject = `Hurray! Order delivered - #EXP${orderContext.orderitemId}`;
+    const body = this.replaceOrderDeliveryconfirmedPlaceholders(this.productDeliverdEmailTemplate, orderContext);
+
+    return this.api.sendMail('raznalrich@gmail.com', subject, body).pipe(
+      map((response) => {
+        console.log('Email sent successfully', response);
+        // alert('Email sent successfully');
+        return true; // Return success
+      }),
+      catchError((error) => {
+        console.error('Error sending email:', error);
+        // alert('Failed to send email');
+        return of(false); // Return failure
+      })
+    );
+  }
+  private replaceOrderDeliveryconfirmedPlaceholders(template: string, context: DeliveryConfirmation): string {
+    // const itemRows = this.generateHRItemRows(context.items);
+
+    return template
+      .replace('{{orderId}}', String(context.orderitemId))
+      .replace('{{customerName}}', context.customerName)
+      .replace('{{productName}}', context.productName)
+      .replace('{{quantity}}', String(context.quantity))
+      .replace('{{subtotal}}', context.subtotal.toFixed(2))
+      .replace('{{totalAmount}}', context.subtotal.toFixed(2))
+      .replace('{{shippingAddress}}', context.shippingAddress)
+      .replace('{{orderDate}}', new Date(context.orderDate).toLocaleDateString());
+  }
   sendOrderRequestEmail(email: string, orderContext: OrderEmailContext): Observable<boolean> {
     const subject = `New Order request  - #EXP${orderContext.orderId}`;
     const body = this.replaceHRPlaceholders(this.hrEmailTemplate, orderContext);
@@ -179,6 +214,17 @@ export class EmailService {
         return of(false); // Return failure
       })
     );
+  }
+  private replaceHRPlaceholders(template: string, context: OrderEmailContext): string {
+    const itemRows = this.generateHRItemRows(context.items);
+
+    return template
+      .replace('{{orderId}}', String(context.orderId))
+      .replace('{{customerName}}', context.customerName)
+      .replace('{{itemRows}}', itemRows)
+      .replace('{{totalAmount}}', context.totalAmount.toFixed(2))
+      .replace('{{shippingAddress}}', context.shippingAddress)
+      .replace('{{orderDate}}', new Date(context.orderDate).toLocaleDateString());
   }
 
 }

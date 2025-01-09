@@ -24,6 +24,11 @@ export class ApiService {
       .get<any[]>(`${this.baseUrl}/Categories`)
       .pipe(catchError(this.handleError));
   }
+  updateBanner(id: number, updatedBanner: any) {
+    // If your endpoint is like PUT /banners/{id}
+    // Adjust to match your real endpoint & HTTP method
+    return this.http.put(`${this.baseUrl}/Banner/${id}`, updatedBanner);
+  }
 
   // Fetch all sizes (Corrected Endpoint)
   getAllSizes(): Observable<any[]> {
@@ -61,7 +66,7 @@ export class ApiService {
   // }
 
   // Fetch products from local JSON
-  getProducts() {
+  getProducts(): Observable<any> {
     return this.http.get('https://localhost:7267/api/Product');
   }
 
