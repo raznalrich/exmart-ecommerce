@@ -40,13 +40,13 @@ export class ApiService {
   }
 
   // Fetch card images from local JSON
-  getCardImages(): Observable<any> {
-    return this.http
-      .get(`Data/carouselImages.json`)
-      .pipe(catchError(this.handleError));
-  }
+  // getCardImages(): Observable<any> {
+  //   return this.http
+  //     .get(`Data/carouselImages.json`)
+  //     .pipe(catchError(this.handleError));
+  // }
 
-  // Fetch product details from local JSON
+  //Fetch product details from local JSON
   getProductDetails(): Observable<any> {
     return this.http
       .get(`Data/details.json`)
@@ -54,11 +54,11 @@ export class ApiService {
   }
 
   // Fetch carousel images from local JSON
-  getCarouselImages(): Observable<any> {
-    return this.http
-      .get(`Data/carouselImages.json`)
-      .pipe(catchError(this.handleError));
-  }
+  // getCarouselImages(): Observable<any> {
+  //   return this.http
+  //     .get(`Data/carouselImages.json`)
+  //     .pipe(catchError(this.handleError));
+  // }
 
   // Fetch products from local JSON
   getProducts() {
@@ -106,11 +106,11 @@ uploadImage(file: File) {
   }
 
   // Fetch user address from local JSON
-  getUserAddress(): Observable<any> {
-    return this.http
-      .get(`Data/address.json`)
-      .pipe(catchError(this.handleError));
-  }
+  // getUserAddress(): Observable<any> {
+  //   return this.http
+  //     .get(`Data/address.json`)
+  //     .pipe(catchError(this.handleError));
+  // }
 
   // Fetch user feedback
   getUserFeedback(): Observable<any> {
