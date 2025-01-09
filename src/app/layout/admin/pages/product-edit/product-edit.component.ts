@@ -32,7 +32,7 @@ export class ProductEditComponent implements OnInit {
     public globalService: GlobalService,
     private fb: FormBuilder
   ) {
-    console.log('[ProductEditComponent] constructor. GlobalService:', this.globalService.selectedProduct);
+    // console.log('[ProductEditComponent] constructor. GlobalService:', this.globalService.selectedProduct);
   }
 
   ngOnInit(): void {

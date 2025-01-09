@@ -18,7 +18,7 @@ describe('AdminRecentOrdersInDashBoardComponent', () => {
   });
 
   it('should create the component', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeTruthy();   
   });
 
   it('should display the correct number of products', () => {

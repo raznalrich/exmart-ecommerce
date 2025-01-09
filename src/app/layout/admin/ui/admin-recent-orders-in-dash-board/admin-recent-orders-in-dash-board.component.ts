@@ -12,4 +12,5 @@ export class AdminRecentOrdersInDashBoardComponent {
   @Input() proName : string = '';
   @Input() proDate : string = '';
   @Input() proImage : string = '';
+  products: any;
 }

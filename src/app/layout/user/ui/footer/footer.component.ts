@@ -1,7 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { Component, Input } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { Router, RouterLink } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-footer',
@@ -12,12 +14,12 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class FooterComponent {
 private readonly hrEmail = 'sona.george@experionglobal.com';
-@Input() CategoryList : any;
+CategoryList : any = [];
   constructor(public api:ApiServiceService,public router: Router){}
   ngOnInit(){
     this.api.getAllCategories().subscribe((res: any) => {
       this.CategoryList = res;
-      // console.log(this.CategoryList);
+      console.log(this.CategoryList);
     });
 }
 

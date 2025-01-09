@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { ProductcardComponent } from "../../ui/productcard/productcard.component";
 import { ApiServiceService } from '../../../../services/api-service.service';
@@ -36,11 +37,6 @@ ngOnInit(){
     // console.log('DisplayedPro API:', this.displayedProducts);
   });
 
-    // this.api.getAllCategories().subscribe((res: any) => {
-    //   this.CategoryList = res;
-    //   console.log('Categories API:', this.CategoryList);
-    // });
-    // this.filterProducts();
   }
   toggleCategory(categoryName: string) {
     if (this.selectedCategories.has(categoryName)) {
