@@ -1,0 +1,80 @@
+<!-- edit-banner.component.html -->
+<div
+  class="modal fade"
+  id="editBannerModal"
+  tabindex="-1"
+  aria-labelledby="editBannerModalLabel"
+  aria-hidden="true"
+  #editBannerModal
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="editBannerModalLabel">Edit Banner</h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form [formGroup]="editBannerForm" (ngSubmit)="saveBanner()">
+          <!-- Banner ID (hidden or read-only) -->
+          <input type="hidden" formControlName="bannerId" />
+
+          <!-- Product Dropdown -->
+          <div class="mb-3">
+            <label class="form-label" for="productId">Select Product</label>
+            <select
+              id="productId"
+              class="form-select"
+              formControlName="productId"
+              required
+            >
+              <option *ngFor="let product of allProducts" [value]="product.id">
+                {{ product.name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Existing Image Preview -->
+          <div class="mb-3" *ngIf="editBannerForm.value.imageUrl">
+            <label class="form-label">Current Image:</label>
+            <div>
+              <img
+                [src]="editBannerForm.value.imageUrl"
+                alt="Current Banner Image"
+                style="max-width: 200px; height: auto"
+              />
+            </div>
+          </div>
+
+          <!-- New File Upload -->
+          <div class="mb-3">
+            <label class="form-label" for="newFile">Change Banner Image</label>
+            <input
+              type="file"
+              id="newFile"
+              class="form-control"
+              (change)="onFileChange($event)"
+              accept="image/*"
+            />
+          </div>
+
+          <!-- Save Button -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="editBannerForm.invalid">
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="closeModal()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
