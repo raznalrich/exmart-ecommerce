@@ -26,22 +26,9 @@ export class AddProductsComponent implements OnInit, OnChanges {
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<void>();
   isModalOpen = false;
+  @Input() isEditMode = false;
+  @Input() editProductDetails:any;
 
-  buttonFunction() {
-    this.close.emit();
-  }
-
-
-
-
-  // closeModal(): void {
-  //   this.close.emit();
-  // }
-
-
-  saveChanges(): void {
-    this.save.emit();
-  }
   @Input() productToEdit: any;
 
   isModalVisible = false;
@@ -56,7 +43,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
 
   showSizes = false;
 
-  public isEditMode = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -66,8 +52,21 @@ export class AddProductsComponent implements OnInit, OnChanges {
 
     // 2) Fetch categories, colors, and sizes from the API
     this.fetchInitialData();
+    if(this.isEditMode){
+      this.setEditMode();
+    }
   }
 
+  buttonFunction() {
+    this.close.emit();
+  }
+
+
+
+
+  saveChanges(): void {
+    this.save.emit();
+  }
   ngOnChanges(changes: SimpleChanges): void {
     // If parent passes a product to edit:
     if (changes['productToEdit'] && this.productToEdit) {
@@ -155,11 +154,13 @@ export class AddProductsComponent implements OnInit, OnChanges {
     this.showSizes = false;
   }
 
-  setEditMode(product: any) {
-    this.isModalOpen = true;
-    this.isEditMode = true;
-    this.productToEdit = product;
-    this.populateForm(product);
+  setEditMode() {
+
+    // this.isEditMode = true;
+    this.productToEdit = this.editProductDetails;
+    console.log('product details',this.editProductDetails);
+
+    this.populateForm(this.editProductDetails);
   }
 
   handleCategoryChange(categoryId: number) {

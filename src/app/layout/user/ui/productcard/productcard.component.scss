@@ -2,6 +2,9 @@
   height: 100%;
   object-fit: contain;
 }
+.card-title{
+  font-size: 14px;
+}
 img{
   height: 150px;
   // width: 150px;
@@ -19,12 +22,13 @@ p{
   align-items: center;
 }
 .card-body{
-  
+
 }
 
 .bottom{
   display: flex;
   gap: 10px;
+  justify-content: space-between;
   align-items: center;
 }
 // .color-circle{

@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule ,Validators} from '@angular/forms';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 // import * as bootstrap from 'bootstrap'
-
+interface LoginRequestDTO {
+  email: string;
+}
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -17,6 +20,9 @@ export class LoginFormComponent {
   employeeId:any=0;
   name: string = '';
   email:string='';
+  loginResponse : any
+  token : any
+
   LoginForm = new FormGroup({
     email:new FormControl('',Validators.email),
     password:new FormControl(''),
@@ -34,6 +40,33 @@ export class LoginFormComponent {
       console.error('Email is required');
       return;
     }
+
+    const loginRequest: LoginRequestDTO = {
+      email: this.email
+    };
+
+    this.api.LoginandToken(loginRequest).subscribe((res:any)=> {
+        this.loginResponse = res;
+        console.log(this.loginResponse)
+        this.token = res.token
+
+        try {
+          const decoded: any = jwtDecode(this.token);
+          console.log('Decoded UserId:', decoded.UserId);
+          console.log('Decoded UserName:', decoded.name);
+          
+          // Store token in localStorage or a service
+          localStorage.setItem('token', this.token);
+          
+          // Navigate to dashboard or home page
+          this.router.navigate(['/dashboard']);
+        } catch (error) {
+          console.error('Error decoding token:', error);
+        }
+        
+    })
+
+
 
     this.api.returnIdFromEmail(email).subscribe(
       (userId) => {
