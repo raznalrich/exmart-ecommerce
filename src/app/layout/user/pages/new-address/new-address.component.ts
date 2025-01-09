@@ -15,7 +15,14 @@ import { CancelButtonComponent } from '../../ui/cancel-button/cancel-button.comp
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { address } from '../../interfaces/AddressInterface';
 import { GlobalService } from '../../../../global.service';
-
+interface AddressData {
+  addressTypeName: string;
+  addressLine: string;
+  city: string;
+  district: string;
+  state: string;
+  zipCode: string;
+}
 @Component({
   selector: 'app-new-address',
   standalone: true,
@@ -25,7 +32,7 @@ import { GlobalService } from '../../../../global.service';
 })
 
 export class NewAddressComponent implements OnInit{
-  @Input() editMode:boolean = true;
+  @Input() editMode:boolean = false;
   @Input() addressData?: address;
   @Output() addressAdded = new EventEmitter<void>();
   @Output() addressUpdated = new EventEmitter<void>();
@@ -59,14 +66,26 @@ this.userId=this.global.userId();
 //   this.addressForm.patchValue(this.addressData);
 //   this.fetchAddressById(this.addressId);
 if (this.editMode && this.addressId !== undefined) {
-  // this.fetchAddressById(this.addressId);
+  this.fetchAddressById(this.addressId);
 }
 }
 
 private fetchAddressById(id: number) {
-  this.api.getAddressById(id).subscribe({
+  this.api.getuserAddressById(id).subscribe({
     next: (addressData:any) => {
       this.addressForm.patchValue(addressData);
+      console.log('edit',addressData);
+      if (this.addressForm) {
+        this.addressForm.patchValue({
+          addressTypeName: addressData.addressTypeName || 'Home',
+          addressLine: addressData.addressLine || '',
+          city: addressData.city || '',
+          district: addressData.district || '',
+          state: addressData.state || '',
+          zipCode: addressData.zipCode || ''
+        });
+      }
+
     },
     error: (error) => {
       console.error('Error fetching address:', error);

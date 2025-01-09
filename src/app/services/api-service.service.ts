@@ -225,6 +225,10 @@ export class ApiServiceService {
         })
       );
   }
+  getuserAddressById(id: number){
+    return this.http.get<AddressResponse>(`https://localhost:7267/api/Users/getAddressById/${id}`)
+
+  }
 
   getAddressTypeById(id: number): Observable<string> {
     return this.http.get<any>(`https://localhost:7267/api/Users/getAddressById/${id}`)
