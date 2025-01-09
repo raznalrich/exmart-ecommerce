@@ -19,7 +19,7 @@ export class LogoutButtonComponent {
   logout(): void {
     // Remove specific data (e.g., userId) from local storage
     localStorage.removeItem('userId');
-
+    localStorage.removeItem('token');
     // Optionally clear all local storage
     localStorage.clear();
 
