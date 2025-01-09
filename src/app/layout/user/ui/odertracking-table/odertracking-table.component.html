@@ -18,7 +18,18 @@
       @for(item of trackorder?.orderItems; track item.orderItem) {
         <tr>
           <td>{{item.productName}}</td>
-          <td>pending</td>
+
+            @if(item.product_StatusId==1){
+              <td>Pending</td>
+            }
+            @else if(item.product_StatusId==2){
+              <td>Shipped</td>
+            }
+            @else{
+              <td>Delivered</td>
+            }
+
+
         </tr>
       }
     </tbody>

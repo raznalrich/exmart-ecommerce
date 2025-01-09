@@ -29,8 +29,19 @@ export class SingleProductDetailComponent {
   colorId: any;
   sizeId: any;
   quantity: number=1;
-  isLoading:boolean=false;
-message:string='';
+  message:string='';
+
+
+
+
+  showSuccess: boolean = false;
+  isInCart: boolean = false;
+  private alertTimeout: any;
+  isLoading: boolean = false;
+
+
+
+
   private paramSubscription!: Subscription;
   constructor(
     private route: ActivatedRoute,
@@ -52,10 +63,10 @@ message:string='';
     this.sizeId = res.id;
   }
 
-  onQuantityChange() {
-    console.log('Updated Quantity:', this.quantity );
-    this.addtocart()
-  }
+  // onQuantityChange() {
+  //   console.log('Updated Quantity:', this.quantity );
+  //   this.addtocart()
+  // }
 
   ngOnInit() {
     // console.log("details",this.data)
@@ -74,37 +85,139 @@ message:string='';
     }
 }
 
-  addtocart() {
-   // Replace with dynamic userId if needed
-    console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
+  // addtocart() {
+  //  // Replace with dynamic userId if needed
+  //   console.log('Adding to cart with ID:', this.id, 'User ID:', this.userId); // Debug log
 
-    // // Check if color and size are selected
-    // if (!this.colorId && !this.sizeId) {
-    //     alert('Please select both color and size before adding to the cart.'); // Alert message
-    //     return; // Exit the method if selections are not made
-    // } else if (!this.colorId) {
-    //     alert('Please select a color before adding to the cart.'); // Alert message for missing color
-    //     return; // Exit the method if color is not selected
-    // } else if (!this.sizeId) {
-    //     alert('Please select a size before adding to the cart.'); // Alert message for missing size
-    //     return; // Exit the method if size is not selected
-    // }
+  //   this.apis
+  //     .addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
+  //     .subscribe(
+  //       (response) => {
+  //         console.log('Item added to cart successfully:', response);
+  //         this.cartService.getCartCount();
+  //         alert('Product added to cart!'); // Alert message
+  //       },
+  //       (error) => {
+  //         console.error('Error adding item to cart:', error);
+  //       }
+  //     );
+  // }
 
-    this.apis
-      .addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
-      .subscribe(
-        (response) => {
-          console.log('Item added to cart successfully:', response);
-          this.cartService.getCartCount();
-          this.isLoading=true;
-          setTimeout(() => {
-            this.isLoading = false;
-          }, 5000);
-          // alert('Product added to cart!'); // Alert message
-        },
-        (error) => {
-          console.error('Error adding item to cart:', error);
-        }
-      );
+
+
+  // addtocart() {
+  //   if (this.colorId && this.sizeId) {
+  //     this.apis.addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
+  //       .subscribe({
+  //         next: (response) => {
+  //           console.log('Item added to cart successfully:', response);
+  //           this.cartService.getCartCount();
+  //           this.showSuccessAlert();
+  //           this.isInCart = true;
+  //         },
+  //         error: (error) => {
+  //           console.error('Error adding item to cart:', error);
+  //         }
+  //       });
+  //   }
+  // }
+
+  // showSuccessAlert() {
+  //   this.showSuccess = true;
+
+  //   // Clear any existing timeout
+  //   if (this.alertTimeout) {
+  //     clearTimeout(this.alertTimeout);
+  //   }
+
+  //   // Auto hide alert after 3 seconds
+  //   this.alertTimeout = setTimeout(() => {
+  //     this.closeAlert();
+  //   }, 3000);
+  // }
+
+  closeAlert() {
+    this.showSuccess = false;
   }
+
+  ngOnDestroy() {
+    if (this.alertTimeout) {
+      clearTimeout(this.alertTimeout);
+    }
+  }
+
+
+
+
+
+
+
+  // toggleCart() {
+  //   if (this.isLoading) return;
+
+  //   this.isLoading = true;
+
+  //   if (this.isInCart) {
+  //     this.removeFromCart();
+  //   } else {
+  //     this.addtocart();
+  //   }
+  // }
+
+  addtocart() {
+    if (this.colorId && this.sizeId) {
+      this.apis.addToCart(this.id, this.userId, this.colorId, this.sizeId, this.quantity)
+        .subscribe({
+          next: (response) => {
+        this.isLoading=false;
+            console.log('Item added to cart successfully:', response);
+            this.cartService.getCartCount();
+            this.isInCart = true;
+
+  this.showSuccessAlert('Product added to cart successfully!');
+
+      this.isLoading=false;
+          },
+          error: (error) => {
+            console.error('Error adding item to cart:', error);
+          },
+          complete: () => {
+            this.isLoading = false;
+          }
+        });
+    }
+  }
+
+  showSuccessAlert(message: string) {
+    this.message = message;
+    this.showSuccess = true;
+
+    if (this.alertTimeout) {
+      clearTimeout(this.alertTimeout);
+    }
+
+    this.alertTimeout = setTimeout(() => {
+      this.closeAlert();
+    }, 4000);
+  }
+
+
+
+  // removeFromCart() {
+  //   this.apis.deleteFromCart(this.id,this.userId)
+  //     .subscribe({
+  //       next: (response) => {
+  //         console.log('Item removed from cart successfully:', response);
+  //         this.cartService.getCartCount();
+  //         this.isInCart = false;
+  //         this.showSuccessAlert('Product removed from cart successfully!');
+  //       },
+  //       error: (error) => {
+  //         console.error('Error removing item from cart:', error);
+  //       },
+  //       complete: () => {
+  //         this.isLoading = false;
+  //       }
+  //     });
+  // }
 }

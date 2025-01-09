@@ -26,6 +26,8 @@ export class AddProductsComponent implements OnInit, OnChanges {
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<void>();
   isModalOpen = false;
+  @Input() isEditMode = false;
+  @Input() editProductDetails: any;
 
   @Input() productToEdit: any;
 
@@ -41,30 +43,27 @@ export class AddProductsComponent implements OnInit, OnChanges {
 
   showSizes = false;
 
-  public isEditMode = false;
-
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    // 1) Initialize the form group
     this.initializeForm();
-
-    // 2) Fetch categories, colors, and sizes from the API
     this.fetchInitialData();
+    if (this.isEditMode && this.editProductDetails) {
+      this.setEditMode();
+    } else {
+      this.setAddMode(); // Ensure we're in add mode if not editing
+    }
   }
 
   buttonFunction() {
-    this.close.emit();
+    this.closeModal();
   }
-
-
-
 
   saveChanges(): void {
     this.save.emit();
   }
+
   ngOnChanges(changes: SimpleChanges): void {
-    // If parent passes a product to edit:
     if (changes['productToEdit'] && this.productToEdit) {
       this.populateForm(this.productToEdit);
       this.isEditMode = true;
@@ -81,7 +80,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
         Validators.pattern(/^\d+$/),
       ]),
       categoryId: new FormControl('', Validators.required),
-      size: new FormControl([]), // Initially no validators
+      size: new FormControl([]),
       color: new FormControl([], Validators.required),
       primaryImageUrl: new FormControl(null, Validators.required),
       weight: new FormControl('', [
@@ -99,7 +98,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
       productImages: new FormControl([], Validators.required),
     });
 
-    // Dynamically update "showSizes" if category changes
     this.addProduct.get('categoryId')?.valueChanges.subscribe((categoryId) => {
       this.handleCategoryChange(categoryId);
     });
@@ -144,21 +142,31 @@ export class AddProductsComponent implements OnInit, OnChanges {
     this.isModalOpen = true;
     this.isEditMode = false;
     this.productToEdit = null;
-    this.addProduct.reset();
+    this.editProductDetails = null; // Clear edit product details
+    this.addProduct.reset({
+      createdBy: 2, // Reset with default value
+      size: [],
+      color: [],
+      productImages: []
+    });
     this.additionalFiles = [];
     this.selectedFile = null;
     this.showSizes = false;
+
+    // Ensure validators are cleared
+    const sizeControl = this.addProduct.get('size');
+    sizeControl?.clearValidators();
+    sizeControl?.setValue([]);
+    sizeControl?.updateValueAndValidity();
   }
 
-  setEditMode(product: any) {
-
-    this.isEditMode = true;
-    this.productToEdit = product;
-    this.populateForm(product);
+  setEditMode() {
+    this.productToEdit = this.editProductDetails;
+    console.log('product details', this.editProductDetails);
+    this.populateForm(this.editProductDetails);
   }
 
   handleCategoryChange(categoryId: number) {
-    // Use categoryId == 20 (example) to show sizes
     this.showSizes = Number(categoryId) === 20;
 
     const sizeControl = this.addProduct.get('size');
@@ -178,25 +186,32 @@ export class AddProductsComponent implements OnInit, OnChanges {
       brand: product.brand,
       vendorId: product.vendorId,
       categoryId: product.categoryId,
-      size: product.size, // adapt if your data differs
-      color: product.color, // adapt if your data differs
+      size: product.size,
+      color: product.color,
       primaryImageUrl: product.primaryImageUrl,
       weight: product.weight,
       price: product.price,
       createdBy: product.createdBy,
       productImages: product.productImages || [],
     });
-    // Keep consistent with handleCategoryChange:
-    this.showSizes = Number(product.categoryId) === 20;
+
+    // Call handleCategoryChange to set validators based on categoryId
+    this.handleCategoryChange(product.categoryId);
   }
 
-  // Helper method to check if a checkbox is selected
+  get primaryImageUrl(): string | null {
+    const controlValue = this.addProduct.get('primaryImageUrl')?.value;
+    if (typeof controlValue === 'string') {
+      return controlValue;
+    }
+    return null;
+  }
+
   isSelected(controlName: string, value: number): boolean {
     const control = this.addProduct.get(controlName);
     return control?.value?.includes(value) || false;
   }
 
-  // Handle checkbox changes for sizes and colors
   onCheckboxChange(event: Event, controlName: string) {
     const checkbox = event.target as HTMLInputElement;
     const control = this.addProduct.get(controlName);
@@ -211,7 +226,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
     }
   }
 
-  // Handle primary image file selection
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files || !input.files[0]) {
@@ -221,12 +235,10 @@ export class AddProductsComponent implements OnInit, OnChanges {
       return;
     }
     this.selectedFile = input.files[0];
-    // Patch the form with the File object so we know it's selected
     this.addProduct.patchValue({ primaryImageUrl: this.selectedFile });
     console.log('File selected:', this.selectedFile.name);
   }
 
-  // Handle additional image file selections
   onAdditionalFilesChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files) return;
@@ -239,7 +251,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
     );
   }
 
-  // Handle form submission
   onSubmit() {
     if (!this.addProduct.valid) {
       console.error('Form is invalid:', this.addProduct.errors);
@@ -253,10 +264,8 @@ export class AddProductsComponent implements OnInit, OnChanges {
     }
 
     if (this.isEditMode && this.productToEdit) {
-      // Handle Edit Product
       this.updateExistingProduct();
     } else {
-      // Handle Add Product
       this.createNewProduct();
     }
   }
@@ -265,15 +274,12 @@ export class AddProductsComponent implements OnInit, OnChanges {
     const formValue = this.addProduct.value;
     const productId = this.productToEdit.id;
 
-    // If user selected a new file, upload first => then update
     if (this.selectedFile) {
-      // 1) Upload the primary image
       this.apiService
         .uploadImage(this.selectedFile)
         .pipe(
           switchMap((primaryRes: any) => {
             const primaryImageUrl = primaryRes.imageUrl;
-            // If additional files were selected, upload them
             if (this.additionalFiles.length > 0) {
               const uploads = this.additionalFiles.map((file) =>
                 this.apiService.uploadImage(file)
@@ -291,7 +297,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
                 })
               );
             } else {
-              // No additional images
               return of({ primaryImageUrl, additionalImageUrls: [] });
             }
           }),
@@ -305,7 +310,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
               categoryId: +formValue.categoryId,
               SizeId: formValue.size,
               ColorId: formValue.color,
-              primaryImageUrl: primaryImageUrl, // string from the upload
+              primaryImageUrl: primaryImageUrl,
               weight: +formValue.weight,
               price: +formValue.price,
               createdBy: +formValue.createdBy,
@@ -328,7 +333,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
           },
         });
     } else {
-      // No new file selected => send existing URL
       const payload = {
         id: productId,
         name: formValue.name,
@@ -338,11 +342,10 @@ export class AddProductsComponent implements OnInit, OnChanges {
         categoryId: +formValue.categoryId,
         SizeId: formValue.size,
         ColorId: formValue.color,
-        primaryImageUrl: this.productToEdit.primaryImageUrl, // keep old string
+        primaryImageUrl: this.productToEdit.primaryImageUrl,
         weight: +formValue.weight,
         price: +formValue.price,
         createdBy: +formValue.createdBy,
-        // If needed, keep old product images or override with formValue.productImages
         productImages: this.productToEdit.productImages || [],
       };
 
@@ -360,7 +363,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   private createNewProduct() {
-    // Handle Add Product
     if (!this.selectedFile) {
       console.error('No primary image selected for upload.');
       return;
@@ -373,12 +375,10 @@ export class AddProductsComponent implements OnInit, OnChanges {
           const primaryImageUrl = primaryResponse.imageUrl;
 
           if (this.additionalFiles.length > 0) {
-            // Prepare upload observables for additional images
             const additionalUploadObservables = this.additionalFiles.map((file) =>
               this.apiService.uploadImage(file)
             );
 
-            // Upload all additional images in parallel
             return forkJoin(additionalUploadObservables).pipe(
               map((additionalResponses: any[]) => {
                 const additionalImageUrls = additionalResponses.map(
@@ -392,7 +392,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
               })
             );
           } else {
-            // If no additional images, proceed with primaryImageUrl only
             return of({ primaryImageUrl, additionalImageUrls: [] });
           }
         }),
@@ -431,12 +430,8 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   closeModal() {
-    // const modalElement = document.getElementById('staticBackdrop');
-    // if (modalElement) {
-    //   const modal = bootstrap.Modal.getInstance(modalElement);
-    //   modal?.hide();
-    // }
     this.isModalOpen = false;
-    this.setAddMode();
+    this.close.emit();
+    this.setAddMode(); // Reset to add mode upon closing
   }
 }

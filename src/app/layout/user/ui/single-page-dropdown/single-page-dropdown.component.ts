@@ -13,24 +13,25 @@ export class SinglePageDropdownComponent {
 
   // @Input() buttonName: string = '';
   // @Input()details:any;
-  arr:any;
-details:any={
-title:'',
-content:''
+@Input()data:any;
+//   arr:any;
+// details:any={
+// title:'',
+// content:''
     }
-  constructor(public api: ApiService) {}
-  ngOnInit() {
-    this.api.getProductDetails().subscribe((res: any) => {
-      this.details = res;
-      this.arr = this.details.dropdowns;
-     console.log(this.arr);
+  // constructor(public api: ApiService) {}
+  // ngOnInit() {
+  //   this.api.getProductDetails().subscribe((res: any) => {
+  //     this.details = res;
+  //     this.arr = this.details.dropdowns;
+  //    console.log(this.arr);
 
     // console.log(this.details)
 
-    });
+    // });
 
 
 
-}
+// }
 
-}
+// }
