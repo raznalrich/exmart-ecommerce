@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { LongButtonComponent } from "../../ui/long-button/long-button.component";
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { address } from '../../interfaces/AddressInterface';
+import { GlobalService } from '../../../../global.service';
 
 @Component({
   selector: 'app-address-confirm-page',
@@ -16,7 +17,9 @@ import { address } from '../../interfaces/AddressInterface';
   styleUrl: './address-confirm-page.component.scss'
 })
 export class AddressConfirmPageComponent {
-    constructor(public api:ApiServiceService){}
+    constructor(public api:ApiServiceService, public global:GlobalService){
+      this.global.getUserId()
+    }
 
   @Input()address:any={
     name:'',
@@ -31,8 +34,10 @@ export class AddressConfirmPageComponent {
     phoneNo:''
     }
 selectedAddress?:address;
+userId:number=0;
     ngOnInit() {
-      this.address= this.api.getAddressByUserId(1).subscribe((res: any) => {
+      this.userId=this.global.userId()
+      this.address= this.api.getAddressByUserId(this.userId).subscribe((res: any) => {
          this.address = res;
 
          console.log(this.address);
