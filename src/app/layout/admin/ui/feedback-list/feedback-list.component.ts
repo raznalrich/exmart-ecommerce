@@ -5,6 +5,7 @@ import { ProductFeedbackToggleComponent } from "../product-feedback-toggle/produ
 import { CommonModule } from '@angular/common';
 
 
+
 @Component({
   selector: 'app-feedback-list',
   standalone: true,
@@ -17,6 +18,7 @@ export class FeedbackListComponent {
   feedback: any[] = [];
   filteredFeedback: any[] = [];
   currentFilter: string = 'all';
+
 
   constructor(public api: ApiService) {}
 
@@ -31,6 +33,13 @@ export class FeedbackListComponent {
     });
   }
 
+  // openModal() {
+  //   const modalElement = document.getElementById('staticBackdrop');
+  //   if (modalElement) {
+  //     const modal = new bootstrap.Modal(modalElement);
+  //     modal.show();
+  //   }
+  // }
   onFilterChange(filter: string) {
     this.currentFilter = filter;
 
@@ -51,7 +60,7 @@ export class FeedbackListComponent {
     return this.currentFilter !== 'website';
   }
 
+
+
 }
-
-
 

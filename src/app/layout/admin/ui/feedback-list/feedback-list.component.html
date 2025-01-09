@@ -1,16 +1,18 @@
 <div class="table table-hover mt-5">
+  <div class="toggle-button">
+    <app-product-feedback-toggle (filterChange)="onFilterChange($event)"></app-product-feedback-toggle>
+  </div>
   <div>
     <div class="card-body scrollable-card">
-      <app-product-feedback-toggle (filterChange)="onFilterChange($event)"></app-product-feedback-toggle>
       <table class="table table-borderless align-middle">
         <thead class="text-muted border-bottom">
           <tr>
             <th scope="col">Employee</th>
             @if(shouldShowProductColumn()){
-              <th scope="col">Product Name</th>
             }
+            <th scope="col">Product Name</th>
             <th scope="col">Feedback</th>
-            <th scope="col" class="text-center">Action</th>
+            <!-- <th scope="col" class="text-center">Action</th> -->
           </tr>
         </thead>
         <tbody>
@@ -32,11 +34,11 @@
               <td>
                 <p class="mb-0 text-muted">{{ item.feedBack }}</p>
               </td>
-              <td class="text-center">
-                <button class="replay-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <!-- <td class="text-center">
+                <button class="replay-btn"  >
                   <i class="bi bi-send-fill action-icon" title="Send Feedback"></i>
                 </button>
-              </td>
+              </td> -->
             </tr>
           }
         </tbody>
