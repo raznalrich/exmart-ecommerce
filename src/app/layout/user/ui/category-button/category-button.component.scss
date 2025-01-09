@@ -9,7 +9,9 @@
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
+img {
+  filter: invert(100%) brightness(100%) grayscale(100%);
+}
 .reusable-button:hover {
   transform: scale(1.05); /* Slight zoom on hover */
 

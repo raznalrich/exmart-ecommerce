@@ -11,3 +11,11 @@ export interface Category {
   id: number;
   categoryName: string;
 }
+
+export interface TopProduct {
+  imageUrl: string;
+  productName: string;
+  amount: number;
+  productId: number;
+  totalSold: number;
+}
