@@ -16,6 +16,6 @@
         }
     </div>
     <div class="logout">
-        <app-logout-button [button]="button"></app-logout-button>
+        <app-logout-button (close)="logout()" [button]="button"></app-logout-button>
     </div>
 </div>
