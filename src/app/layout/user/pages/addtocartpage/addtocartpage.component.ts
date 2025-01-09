@@ -200,7 +200,6 @@ this.fetchCartItems( this.global.signalCartList());
             shippingAddress: this.address, // You'll need to format this
             orderDate: new Date(response.createdAt)
           };
-          this.global.selectedAddressId.set('');  
           this.orderContext = orderContext;
           this.global.orderContext.update(current => [...current, orderContext]);
 
