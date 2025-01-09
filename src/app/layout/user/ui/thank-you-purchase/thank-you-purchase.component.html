@@ -9,7 +9,7 @@
       <div class="detail-label">Order Number:</div>
       <div class="detail-value">#ORD-{{orderContext[0].orderId}}</div>
       <div class="detail-label">Order Date:</div>
-      <div class="detail-value">{{orderContext[0].orderDate}}</div>
+      <div class="detail-value">{{orderContext[0].orderDate | date:'mediumDate'}}</div>
     </div>
 
 
