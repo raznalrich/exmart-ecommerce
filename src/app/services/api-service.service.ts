@@ -109,6 +109,7 @@ export class ApiServiceService {
         })
       );
   }
+
   deleteFromCart(productId: number, userId: number): Observable<any> {
     return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart`, {
       params: {

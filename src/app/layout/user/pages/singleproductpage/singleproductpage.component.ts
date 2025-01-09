@@ -6,16 +6,17 @@ import { ApiService } from '../../../../api.service';
 import { SinglePageDropdownComponent } from '../../ui/single-page-dropdown/single-page-dropdown.component';
 import { ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from '../../../../services/api-service.service';
+import { ProductFeedbackComponent } from "../../ui/product-feedback/product-feedback.component";
 
 @Component({
   selector: 'app-singleproductpage',
   standalone: true,
   imports: [
-
     SingleCarouselComponent,
     SingleProductDetailComponent,
     SinglePageDropdownComponent,
-  ],
+    ProductFeedbackComponent
+],
   templateUrl: './singleproductpage.component.html',
   styleUrl: './singleproductpage.component.scss',
 })
@@ -26,7 +27,7 @@ export class SingleproductpageComponent {
   data: any;
   constructor(public api: ApiServiceService, private route: ActivatedRoute) {}
   ngOnInit() {
-    
+
     // this.api.getCarouselImages().subscribe((res: any) => {
     //   this.carouselImages = res;
     //   console.log(this.carouselImages);
