@@ -1,9 +1,21 @@
+body {
+  overflow: hidden;
+}
+
 .card {
   border-radius: 10px;
-  width:150vh;
+  width: 150vh;
 }
-.table{
-  max-height: 100vh;
+
+.scrollable-card {
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: filter 0.3s ease;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .card-header {
@@ -24,11 +36,11 @@
 img {
   width: 30px;
   height: 30px;
-  object-fit: cover
+  object-fit: cover;
 }
 
 .action-icon {
-  color:  #8061c3;
+  color: #8061c3;
   transition: transform 0.3s ease, color 0.3s ease;
   font-size: 1.5rem;
   cursor: pointer;
@@ -52,16 +64,24 @@ img {
 }
 
 .text-end {
-margin-right: 20px;
+  margin-right: 20px;
 }
 
 th {
-color: #8061c3
+  color: #8061c3;
 }
+
 .replay-btn {
-all: unset;
+  all: unset;
 }
-.replay-modal{
+
+.replay-modal {
   display: flex;
   justify-content: center;
 }
+
+.toggle-button {
+  position: -webkit-sticky;
+  cursor: pointer;
+}
+

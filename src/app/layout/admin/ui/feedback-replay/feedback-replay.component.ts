@@ -14,6 +14,7 @@ import { ApiServiceService } from '../../../../services/api-service.service';
 export class FeedbackReplayComponent {
   constructor(public api:ApiServiceService){}
   replayText: string = '';
+  
   onSendReplay() {
     this.api.sendMail('raznalrich@gmail.com', 'Thank You For your feedback | Exmart', this.replayText)
     .subscribe({
