@@ -29,13 +29,14 @@ import { PolicyPageComponent } from './layout/user/pages/policy-page/policy-page
 import { PolicyContentComponent } from './layout/user/ui/policy-content/policy-content.component';
 import { TrackExmartComponent } from './layout/user/pages/track-exmart/track-exmart.component';
 import { ShippedConfirmationEmailComponent } from './layout/admin/ui/shipped-confirmation-email/shipped-confirmation-email.component';
+import { AuthGuard } from './authGuard/auth.guard';
 import { OrderConfirmedEmailComponent } from './layout/user/pages/order-confirmed-email/order-confirmed-email.component';
 
 export const routes: Routes = [
   {
     path:'',component: HomepageComponent,children:[
       {
-        path:'home', component: HomeStaticComponent,children:[
+        path:'home', component: HomeStaticComponent, canActivate: [AuthGuard], children:[
 
           {
             path:'category/:id',component:ProductDisplayingSectionComponent
@@ -49,6 +50,7 @@ export const routes: Routes = [
       {
         path: 'policies',
         component: PolicyPageComponent,
+        canActivate: [AuthGuard],
         children: [
           { path: '', redirectTo: 'terms', pathMatch: 'full' },
           { path: ':type', component: PolicyContentComponent }
@@ -62,7 +64,7 @@ export const routes: Routes = [
         path:'viewproduct/:id',component:SingleproductpageComponent
       },
       {
-        path: 'seeAllProducts',component: SeeAllProductsPageComponent,children:[
+        path: 'seeAllProducts',component: SeeAllProductsPageComponent, canActivate: [AuthGuard], children:[
           {
             path: 'seeAllProducts/category/:id', component: SeeAllProductsPageComponent
           }
@@ -87,7 +89,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path:'userprofile', component:UserprofileComponent,children:[
+    path:'userprofile', component:UserprofileComponent, canActivate: [AuthGuard], children:[
       {
         path:'addaddress',component:NewAddressComponent
       },
@@ -103,7 +105,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path:'admin',component: DashboardComponent,children:[
+    path:'admin',component: DashboardComponent, canActivate: [AuthGuard],children:[
       {
         path:'admindashboard',component:AdminDashboardComponent
       },
