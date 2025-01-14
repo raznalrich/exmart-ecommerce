@@ -16,13 +16,17 @@
       <form [formGroup]="addProduct" (ngSubmit)="onSubmit()">
         <!-- Image Upload -->
         <div class="mb-3">
-          <label>Primary Image:</label>
+          <label class="form-label">Primary Image: <span class="text-danger">*</span></label>
           <input
             type="file"
             class="form-control"
             (change)="onFileChange($event)"
             [required]="!isEditMode"
+            [ngClass]="{'is-invalid': addProduct.get('primaryImageUrl')?.touched && addProduct.get('primaryImageUrl')?.invalid}"
           />
+          <div class="invalid-feedback" *ngIf="addProduct.get('primaryImageUrl')?.touched && addProduct.get('primaryImageUrl')?.invalid">
+            Primary image is required
+          </div>
           <div *ngIf="isEditMode && primaryImageUrl" class="mt-2">
             <img
               [src]="primaryImageUrl"
@@ -35,29 +39,27 @@
 
         <!-- Name Field -->
         <div class="mb-3">
-          <label>Name:</label>
+          <label class="form-label">Name: <span class="text-danger">*</span></label>
           <input
             type="text"
             class="form-control"
             formControlName="name"
             placeholder="Enter product name"
+            [ngClass]="{'is-invalid': addProduct.get('name')?.touched && addProduct.get('name')?.invalid}"
           />
-          <div
-            *ngIf="
-              addProduct.get('name')?.touched &&
-              addProduct.get('name')?.invalid
-            "
-            class="alert alert-danger"
-            style="margin: 5px"
-          >
-            Name is required
+          <div class="invalid-feedback" *ngIf="addProduct.get('name')?.touched && addProduct.get('name')?.invalid">
+            <span *ngIf="addProduct.get('name')?.errors?.['required']">Product name is required</span>
           </div>
         </div>
 
         <!-- Category Selection -->
         <div class="mb-3">
-          <label>Category:</label>
-          <select class="form-select" formControlName="categoryId">
+          <label class="form-label">Category: <span class="text-danger">*</span></label>
+          <select
+            class="form-select"
+            formControlName="categoryId"
+            [ngClass]="{'is-invalid': addProduct.get('categoryId')?.touched && addProduct.get('categoryId')?.invalid}"
+          >
             <option value="">Select a category</option>
             <option
               *ngFor="let category of categories"
@@ -66,65 +68,91 @@
               {{ category.categoryName }}
             </option>
           </select>
+          <div class="invalid-feedback" *ngIf="addProduct.get('categoryId')?.touched && addProduct.get('categoryId')?.invalid">
+            Please select a category
+          </div>
         </div>
 
         <!-- Description Field -->
         <div class="mb-3">
-          <label>Description:</label>
+          <label class="form-label">Description:</label>
           <textarea
             class="form-control"
             formControlName="description"
             placeholder="Enter product description"
+            [ngClass]="{'is-invalid': addProduct.get('description')?.touched && addProduct.get('description')?.invalid}"
           ></textarea>
+          <div class="invalid-feedback" *ngIf="addProduct.get('description')?.touched && addProduct.get('description')?.errors?.['maxlength']">
+            Description cannot exceed 500 characters
+          </div>
         </div>
 
         <!-- Brand Field -->
         <div class="mb-3">
-          <label>Brand:</label>
+          <label class="form-label">Brand: <span class="text-danger">*</span></label>
           <input
             type="text"
             class="form-control"
             formControlName="brand"
             placeholder="Enter brand"
+            [ngClass]="{'is-invalid': addProduct.get('brand')?.touched && addProduct.get('brand')?.invalid}"
           />
+          <div class="invalid-feedback" *ngIf="addProduct.get('brand')?.touched && addProduct.get('brand')?.invalid">
+            Brand is required
+          </div>
         </div>
 
         <!-- Vendor ID Field -->
         <div class="mb-3">
-          <label>Vendor ID:</label>
+          <label class="form-label">Vendor ID: <span class="text-danger">*</span></label>
           <input
             type="number"
             class="form-control"
             formControlName="vendorId"
             placeholder="Enter vendor ID"
+            [ngClass]="{'is-invalid': addProduct.get('vendorId')?.touched && addProduct.get('vendorId')?.invalid}"
           />
+          <div class="invalid-feedback" *ngIf="addProduct.get('vendorId')?.touched && addProduct.get('vendorId')?.invalid">
+            <span *ngIf="addProduct.get('vendorId')?.errors?.['required']">Vendor ID is required</span>
+            <span *ngIf="addProduct.get('vendorId')?.errors?.['pattern']">Please enter a valid number</span>
+          </div>
         </div>
 
         <!-- Weight Field -->
         <div class="mb-3">
-          <label>Weight (kg):</label>
+          <label class="form-label">Weight (kg): <span class="text-danger">*</span></label>
           <input
             type="text"
             class="form-control"
             formControlName="weight"
             placeholder="Enter product weight"
+            [ngClass]="{'is-invalid': addProduct.get('weight')?.touched && addProduct.get('weight')?.invalid}"
           />
+          <div class="invalid-feedback" *ngIf="addProduct.get('weight')?.touched && addProduct.get('weight')?.invalid">
+            <span *ngIf="addProduct.get('weight')?.errors?.['required']">Weight is required</span>
+            <span *ngIf="addProduct.get('weight')?.errors?.['pattern']">Please enter a valid number (up to 2 decimal places)</span>
+          </div>
         </div>
 
         <!-- Price Field -->
         <div class="mb-3">
-          <label>Price (in ₹):</label>
+          <label class="form-label">Price (in ₹): <span class="text-danger">*</span></label>
           <input
             type="text"
             class="form-control"
             formControlName="price"
             placeholder="Enter price"
+            [ngClass]="{'is-invalid': addProduct.get('price')?.touched && addProduct.get('price')?.invalid}"
           />
+          <div class="invalid-feedback" *ngIf="addProduct.get('price')?.touched && addProduct.get('price')?.invalid">
+            <span *ngIf="addProduct.get('price')?.errors?.['required']">Price is required</span>
+            <span *ngIf="addProduct.get('price')?.errors?.['pattern']">Please enter a valid price (up to 2 decimal places)</span>
+          </div>
         </div>
 
         <!-- Sizes Selection (Conditional) -->
         <div class="mb-3" *ngIf="showSizes">
-          <label class="d-block">Sizes:</label>
+          <label class="form-label d-block">Sizes: <span class="text-danger" *ngIf="showSizes">*</span></label>
           <div
             *ngFor="let size of sizes"
             class="form-check d-inline-block me-3"
@@ -142,20 +170,16 @@
             </label>
           </div>
           <div
-            *ngIf="
-              addProduct.get('size')?.touched &&
-              addProduct.get('size')?.invalid
-            "
-            class="alert alert-danger"
-            style="margin: 5px"
+            class="text-danger small mt-1"
+            *ngIf="addProduct.get('size')?.touched && addProduct.get('size')?.invalid && showSizes"
           >
-            Size is required
+            Please select at least one size
           </div>
         </div>
 
         <!-- Colors Selection -->
         <div class="mb-3">
-          <label class="d-block">Colors:</label>
+          <label class="form-label d-block">Colors: <span class="text-danger">*</span></label>
           <div
             *ngFor="let color of colors"
             class="form-check d-inline-block me-3"
@@ -172,11 +196,17 @@
               {{ color.colorName }}
             </label>
           </div>
+          <div
+            class="text-danger small mt-1"
+            *ngIf="addProduct.get('color')?.touched && addProduct.get('color')?.invalid"
+          >
+            Please select at least one color
+          </div>
         </div>
 
         <!-- Additional Images Upload -->
         <div class="mb-3">
-          <label>Additional Images:</label>
+          <label class="form-label">Additional Images:</label>
           <input
             type="file"
             class="form-control"
@@ -190,7 +220,11 @@
 
         <!-- Modal Footer -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!addProduct.valid"
+          >
             {{ isEditMode ? 'Update' : 'Submit' }}
           </button>
           <button
