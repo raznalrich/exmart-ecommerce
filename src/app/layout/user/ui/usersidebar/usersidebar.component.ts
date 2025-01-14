@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LogoutButtonComponent } from '../logout-button/logout-button.component';
 
 @Component({
@@ -10,6 +10,9 @@ import { LogoutButtonComponent } from '../logout-button/logout-button.component'
   styleUrl: './usersidebar.component.scss',
 })
 export class UsersidebarComponent {
+  constructor(private router:Router) {
+
+  }
   menuItems: any = [
     {
       id: 1,
@@ -35,4 +38,14 @@ export class UsersidebarComponent {
     route: 'HomeStaticComponent',
     icon: 'bi bi-arrow-left-circle',
   };
+
+  logout(): void {
+    // Remove specific data (e.g., userId) from local storage
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
+    // Optionally clear all local storage
+    localStorage.clear();
+
+    this.router.navigate(['/login']);
+  }
 }

@@ -22,6 +22,7 @@ export class LoginFormComponent {
   email:string='';
   loginResponse : any
   token : any
+  isLoading:boolean=false;
 
   LoginForm = new FormGroup({
     email:new FormControl('',Validators.email),
@@ -30,6 +31,7 @@ export class LoginFormComponent {
   })
 
   submit(){
+    this.isLoading=true;
     const email = this.LoginForm.get('email')?.value;
     this.email = email!;
 

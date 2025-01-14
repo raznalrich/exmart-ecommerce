@@ -1,21 +1,57 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ApiServiceService } from '../../../../services/api-service.service';
-import { ButtonComponent } from '../button/button.component';
+
+interface Category {
+  id: number;
+  categoryName: string;  // Updated to match actual data structure
+  iconPath: string;
+}
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
   constructor(public api: ApiServiceService) {}
+
   @Input() items: any;
   @Input() header: any;
+  @Output() editProduct = new EventEmitter();
 
-  // Add Output property
-  @Output() editProduct = new EventEmitter()
+  categories: Category[] = [];
+  categoryMap: Map<number, string> = new Map();
+
+  ngOnInit() {
+    this.loadCategories();
+  }
+
+  loadCategories(): void {
+    this.api.getAllCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+
+        // Create a map using categoryName instead of name
+        categories.forEach((category: Category) => {
+          this.categoryMap.set(Number(category.id), category.categoryName);
+        });
+
+        this.loadProducts();
+      },
+      error: (err) => {
+        console.error('Error fetching categories:', err);
+      },
+    });
+  }
+
+  getCategoryName(categoryId: number | string): string {
+    const numericCategoryId = Number(categoryId);
+    const categoryName = this.categoryMap.get(numericCategoryId);
+    return categoryName || 'Unknown Category';
+  }
 
   toggleStatus(item: any) {
     this.api.toggelProductStatus(item.id).subscribe({

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,20 +9,25 @@ import { Router } from '@angular/router';
   styleUrl: './logout-button.component.scss',
 })
 export class LogoutButtonComponent {
+    @Output() close = new EventEmitter<void>();
   @Input() button: any = {
     label: '',
     route:'',
     icon: '',
   };
+  clickbutton = Output();
   constructor(private router:Router){}
-
-  logout(): void {
-    // Remove specific data (e.g., userId) from local storage
-    localStorage.removeItem('userId');
-    localStorage.removeItem('token');
-    // Optionally clear all local storage
-    localStorage.clear();
-
-    this.router.navigate(['/login']);
+  back(){
+    this.close.emit();
   }
+
+  // logout(): void {
+  //   // Remove specific data (e.g., userId) from local storage
+  //   localStorage.removeItem('userId');
+  //   localStorage.removeItem('token');
+  //   // Optionally clear all local storage
+  //   localStorage.clear();
+
+  //   this.router.navigate(['/login']);
+  // }
 }
