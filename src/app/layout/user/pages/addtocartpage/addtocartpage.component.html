@@ -21,14 +21,14 @@
   <div class="card-items">
 
     <section class="bag-section">
-        @for(items of CartItems; track items ){
+        @for(items of cartItemList; track items ){
           <!-- <img [src]="items[0].imageUrl" [alt]="items.productName" /> -->
 
           <app-product-displaying-bar
-            [productImage]="items.primaryImageUrl || 'images/box not packed.png'"
-            [productName]="items.name"
-            [productColor]="items.colorId"
-            [productSize]="items.sizeId"
+            [productImage]="items.productImageUrl || 'images/box not packed.png'"
+            [productName]="items.productName"
+            [productColor]="items.colorName"
+            [productSize]="items.sizeName"
             [productPrice]="items.price"
             [productId]="items.id"
             >
@@ -84,15 +84,15 @@
     <div class="summary-details">
       <!-- <p><span>No of Items:</span> <span>{{global.cartCount()}}</span></p> -->
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
-       @for(numberOfItems of CartItems; track numberOfItems){
+       <!-- @for(numberOfItems of CartItems; track numberOfItems){ -->
         @for(numOfCartItems of cartItemList;track numOfCartItems){
-          @if(numberOfItems.id == numOfCartItems.productId){
 
-            <p><span>{{numberOfItems.name}} x <strong>{{numOfCartItems.quantity}}</strong></span> <span>{{numberOfItems.price * numOfCartItems.quantity | currency:'INR'}}</span></p>
-          }
+
+            <p><span>{{numOfCartItems.productName}} x <strong>{{numOfCartItems.quantity}}</strong></span> <span>{{numOfCartItems.price * numOfCartItems.quantity | currency:'INR'}}</span></p>
+
         }
 
-       }
+       <!-- } -->
       <!-- @if(addressType==1){
         <p class="total"><span>Shipping : </span> <span>{{ '0'| currency:'INR'}}</span></p>
        } -->
