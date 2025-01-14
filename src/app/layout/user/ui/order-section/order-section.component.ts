@@ -19,10 +19,6 @@ export class OrderSectionComponent {
   data:any;
   ngOnInit(){
     console.log('hello',this.items);
-    // this.api.GetOrderDetailById(this.items).subscribe((res: any) => {
-    //   this.data = res;
-    //   console.log("componet orders", this.data);
-
-    // });
+    
   }
 }

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../../../api.service';
-import { FeedbackReplayComponent } from "../feedback-replay/feedback-replay.component";
 import { ProductFeedbackToggleComponent } from "../product-feedback-toggle/product-feedback-toggle.component";
 import { CommonModule } from '@angular/common';
+
 
 
 @Component({
   selector: 'app-feedback-list',
   standalone: true,
-  imports: [FeedbackReplayComponent, ProductFeedbackToggleComponent,CommonModule],
+  imports: [ProductFeedbackToggleComponent, CommonModule],
   templateUrl: './feedback-list.component.html',
   styleUrl: './feedback-list.component.scss'
 })
@@ -17,6 +17,7 @@ export class FeedbackListComponent {
   feedback: any[] = [];
   filteredFeedback: any[] = [];
   currentFilter: string = 'all';
+
 
   constructor(public api: ApiService) {}
 
@@ -30,6 +31,7 @@ export class FeedbackListComponent {
       this.filteredFeedback = [...res];
     });
   }
+
 
   onFilterChange(filter: string) {
     this.currentFilter = filter;
@@ -51,7 +53,7 @@ export class FeedbackListComponent {
     return this.currentFilter !== 'website';
   }
 
+
+
 }
-
-
 

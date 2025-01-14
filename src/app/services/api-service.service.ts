@@ -261,7 +261,7 @@ export class ApiServiceService {
 
     return this.http.post('https://localhost:7267/api/email', null, { params });
   }
-  getAllCategories() {
+  getAllCategories(): Observable<any> {
     return this.http.get('https://localhost:7267/api/Categories');
   }
   getColorById(id: number) {
@@ -515,5 +515,5 @@ console.log('address data',data);
   LoginandToken(loginRequest:any){
     return this.http.post(`https://localhost:7267/login`,loginRequest)
   }
-  
+
 }
