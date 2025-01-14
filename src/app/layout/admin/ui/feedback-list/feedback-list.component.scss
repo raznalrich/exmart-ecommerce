@@ -85,3 +85,11 @@ th {
   cursor: pointer;
 }
 
+.sticky-col {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
