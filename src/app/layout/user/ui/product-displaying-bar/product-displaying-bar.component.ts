@@ -16,8 +16,8 @@ export class ProductDisplayingBarComponent {
   @Input() productImage: string = '';
   @Input() productId:number =0;
   @Input() productName: string = '';
-  @Input() productColor: number = 0;
-  @Input() productSize: number = 0;
+  @Input() productColor: string = '';
+  @Input() productSize: string = '';
   @Input() productPrice: number = 0;
   userId:any;
   color:any;
@@ -27,28 +27,9 @@ this.global.getUserId();
  }
  ngOnInit(){
   this.userId = this.global.userId();
-  this.api.getColorById(this.productColor).subscribe({
-    next: (colorData) => {
-      this.color = colorData;
-      this.color = this.color.colorName
-      console.log('color',this.color);
 
-    },
-    error: (error) => {
-      console.error('Error fetching color:', error);
-    }
-  });
 
-  // Fetch size details
-  this.api.getSizeById(this.productSize).subscribe({
-    next: (sizeData) => {
-      this.size = sizeData;
-      this.size = this.size.size
-    },
-    error: (error) => {
-      console.error('Error fetching size:', error);
-    }
-  });
+ 
 
  }
  removeFromCart(productId: number, userId: number) {
