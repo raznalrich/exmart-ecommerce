@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AddtoCartDeletebtnComponent } from "../addto-cart-deletebtn/addto-cart-deletebtn.component";
 import { CurrencyPipe } from '@angular/common';
 import { ApiServiceService } from '../../../../services/api-service.service';
@@ -19,6 +19,8 @@ export class ProductDisplayingBarComponent {
   @Input() productColor: string = '';
   @Input() productSize: string = '';
   @Input() productPrice: number = 0;
+    @Output() clear = new EventEmitter<void>();
+
   userId:any;
   color:any;
   size:any;
@@ -29,8 +31,12 @@ this.global.getUserId();
   this.userId = this.global.userId();
 
 
- 
 
+
+ }
+ deleteCart(){
+  this.clear.emit();
+  
  }
  removeFromCart(productId: number, userId: number) {
   this.api.deleteFromCart(productId, userId).subscribe({
