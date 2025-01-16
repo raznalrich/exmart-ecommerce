@@ -88,6 +88,7 @@ totalPrice: number = 0;
 
     const cartItems = this.global.signalCartList();
     this.cartItemList = this.global.signalCartList();
+    
     console.log('cart item list ',this.cartItemList);
 
     this.productIds = cartItems.map(item => item.productId);
