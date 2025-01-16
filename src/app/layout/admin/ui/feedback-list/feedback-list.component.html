@@ -1,3 +1,4 @@
+<!-- product-feedback.component.html -->
 <div class="table table-hover mt-5">
   <div class="toggle-button">
     <app-product-feedback-toggle (filterChange)="onFilterChange($event)"></app-product-feedback-toggle>
@@ -8,14 +9,14 @@
         <thead class="text-muted border-bottom">
           <tr>
             <th scope="col" class="sticky-col">Employee</th>
-            @if(shouldShowProductColumn()){
+            @if (shouldShowProductColumn()) {
+              <th scope="col" class="sticky-col">Product Name</th>
             }
-            <th scope="col" class="sticky-col">Product Name</th>
             <th scope="col" class="sticky-col">Feedback</th>
           </tr>
         </thead>
         <tbody>
-          @for(item of filteredFeedback; track item){
+          @for (item of filteredFeedback; track item) {
             <tr class="border-bottom hover-row">
               <td class="d-flex align-items-center">
                 <img
@@ -25,7 +26,7 @@
                 />
                 <span class="fw-bold">{{ item.userName }}</span>
               </td>
-              @if(shouldShowProductColumn()){
+              @if (shouldShowProductColumn()) {
                 <td>
                   <p class="mb-0 text-muted">{{ item.productName }}</p>
                 </td>
