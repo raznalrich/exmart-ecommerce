@@ -69,6 +69,8 @@ export class UserOrdersComponent {
       next: (res: any) => {
 
         this.inTransitOrders = res.filter((order:any) => order.userId === this.userId && order.status === 2 );
+        console.log('in transit',this.inTransitOrders);
+
         this.pendingOrders = res.filter((order:any) => order.userId === this.userId &&  order.status ===1);
         this.orderHistorylist = res.filter((order: any) => order.userId === this.userId && order.status === 3);
         console.log("filtered orders", this.inTransitOrders);
