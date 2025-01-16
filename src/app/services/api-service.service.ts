@@ -163,6 +163,9 @@ export class ApiServiceService {
   getCartList() {
     return this.http.get('https://exmart-backend.onrender.com/api/addtocart/GetCart');
   }
+  getBannerList() {
+    return this.http.get('https://exmart-backend.onrender.com/api/Banner/Detailed');
+  }
   getOrderItemList() {
     return this.http.get('https://exmart-backend.onrender.com/api/Order/orderItem/List');
   }
