@@ -88,6 +88,9 @@ totalPrice: number = 0;
 
     const cartItems = this.global.signalCartList();
     this.cartItemList = this.global.signalCartList();
+    
+    console.log('cart item list ',this.cartItemList);
+
     this.productIds = cartItems.map(item => item.productId);
 
     console.log('Cart list:', cartItems);
@@ -127,6 +130,8 @@ this.fetchCartItems( this.global.signalCartList());
 
     forkJoin(requests).subscribe(
       (responses: any[]) => {
+        console.log('add to cart',responses);
+
         // Map responses with cart item details including color and size
         this.CartItems = responses.map((res, index) => {
           const cartItem = cartItems.find(item => item.productId === this.productIds[index]);
@@ -139,10 +144,10 @@ this.fetchCartItems( this.global.signalCartList());
         });
 
         this.calculateTotalPrice();
-        console.log('Updated Cart Items:', this.CartItems);
+        // console.log('Updated Cart Items:', this.CartItems);
       },
       (error) => {
-        console.error('Error fetching product details:', error);
+        // console.error('Error fetching product details:', error);
       }
     );
   }

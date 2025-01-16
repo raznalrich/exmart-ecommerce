@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AddtoCartDeletebtnComponent } from "../addto-cart-deletebtn/addto-cart-deletebtn.component";
 import { CurrencyPipe } from '@angular/common';
 import { ApiServiceService } from '../../../../services/api-service.service';
@@ -16,9 +16,11 @@ export class ProductDisplayingBarComponent {
   @Input() productImage: string = '';
   @Input() productId:number =0;
   @Input() productName: string = '';
-  @Input() productColor: number = 0;
-  @Input() productSize: number = 0;
+  @Input() productColor: string = '';
+  @Input() productSize: string = '';
   @Input() productPrice: number = 0;
+    @Output() clear = new EventEmitter<void>();
+
   userId:any;
   color:any;
   size:any;
@@ -27,29 +29,14 @@ this.global.getUserId();
  }
  ngOnInit(){
   this.userId = this.global.userId();
-  this.api.getColorById(this.productColor).subscribe({
-    next: (colorData) => {
-      this.color = colorData;
-      this.color = this.color.colorName
-      console.log('color',this.color);
 
-    },
-    error: (error) => {
-      console.error('Error fetching color:', error);
-    }
-  });
 
-  // Fetch size details
-  this.api.getSizeById(this.productSize).subscribe({
-    next: (sizeData) => {
-      this.size = sizeData;
-      this.size = this.size.size
-    },
-    error: (error) => {
-      console.error('Error fetching size:', error);
-    }
-  });
 
+
+ }
+ deleteCart(){
+  this.clear.emit();
+  
  }
  removeFromCart(productId: number, userId: number) {
   this.api.deleteFromCart(productId, userId).subscribe({

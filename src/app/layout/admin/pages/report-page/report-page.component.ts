@@ -105,7 +105,7 @@ export class ReportPageComponent {
 
   header: any = [
     'Sl No.',
-    'Employee Id',
+    // 'Employee Id',
     'Employee Name',
     'Order Id',
     'Purchase Date',

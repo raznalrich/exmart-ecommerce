@@ -22,7 +22,6 @@ export class WebFeedbackSectionComponent {
     userId: new FormControl('1'),
     productName: new FormControl('website')
 
-
   });
 
   submitFeedback() {
@@ -42,8 +41,4 @@ export class WebFeedbackSectionComponent {
       console.warn('Feedback form is invalid');
     }
   }
-
-
-
-
 }

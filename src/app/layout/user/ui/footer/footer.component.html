@@ -5,8 +5,8 @@
       <p style="font-size: 12px;padding-top: 20px;text-align: justify;">exMart is the online merchandise selling platform for experion global which holds all the experion branded items for sale</p>
     </div>
     <div class="col">
-      <p><strong> PRODUCTS</strong></p>
-      @for (category of CategoryList; track category) {
+      <p><strong> CATEGORIES</strong></p>
+      @for (category of CategoryList || []; track category) {
         <ul>
           <li class="cursoring" routerLink="home/category/{{category.id}}">{{category.categoryName}}</li>
         </ul>
@@ -41,14 +41,14 @@
   </div>
   <div class="row text-center">
     <div class="policyTabs">
-      <div (click)="navigateToPolicy('terms')" [class.active]="router.url.includes('terms')">
+      <div (click)="navigateToPolicy('terms')" [class.active]="router?.url?.includes('terms')">
         Terms and conditions
       </div> |
-      <div (click)="navigateToPolicy('shipping')" [class.active]="router.url.includes('shipping')"
+      <div (click)="navigateToPolicy('shipping')" [class.active]="router?.url?.includes('shipping')"
         class="ShipPo">
         Shipping policy
       </div> |
-      <div (click)="navigateToPolicy('payment')" [class.active]="router.url.includes('payment')"
+      <div (click)="navigateToPolicy('payment')" [class.active]="router?.url?.includes('payment')"
         class="payPo">
         Payment policy
       </div>
