@@ -3,14 +3,14 @@
   <div class="list">
     <div *ngFor="let item of sliderItems" class="item">
       <div class="image-container">
-        <img [src]="item.image" alt="Image">
+        <img [src]="item.imageUrl" alt="Image">
         <div class="overlay"></div>
       </div>
       <div class="content">
 
-        <div class="author">{{ item.author }}</div>
-        <div class="title">{{ item.title }}</div>
-        <div class="topic">{{ item.topic }}</div>
+        <div class="author">{{ item.categoryName }}</div>
+        <div class="title">{{ item.productName }}</div>
+        <div class="topic">{{ item.productPrice }}</div>
         <!-- <div class="des">{{ item.description }}</div> -->
         <div class="buttons">
           <button (click)="seeMore(item)">BUY NOW</button>
@@ -22,10 +22,10 @@
 
   <!-- list thumbnail -->
   <div class="thumbnail">
-    <div *ngFor="let thumbnail of thumbnails" class="item">
-        <img [src]="thumbnail.image" alt="Thumbnail">
+    <div *ngFor="let thumbnail of sliderItems" class="item">
+        <img [src]="thumbnail.productImage" alt="Thumbnail">
         <div class="content">
-          <div class="title">{{ thumbnail.title }}</div>
+          <div class="title">{{ thumbnail.productName |slice:0:14 }}</div>
           <!-- <div class="description">{{ thumbnail.description }}</div> -->
         </div>
 
