@@ -19,22 +19,22 @@ export class OrderPreviewPageComponent {
       id:1,
       itemName: 'T Shirt',
       itemImage: '',
-      color: 1,
-      size: 1,
+      color: 'Black',
+      size: 'white',
       rate: 299.00
     },
     {
       id:2,
       itemName: 'T Shirt',
-      color: 1,
-      size: 1,
+      color: 'red',
+      size: 'xl',
       rate: 399.00
     },
     {
       id:3,
       itemName: 'T Shirt',
-      color: 1,
-      size: 1,
+      color: 'red',
+      size: 'sx',
       rate: 99.00
     }
   ]
