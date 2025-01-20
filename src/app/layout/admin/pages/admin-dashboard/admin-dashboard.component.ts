@@ -28,7 +28,7 @@ export class AdminDashboardComponent {
   shippedOrders : number = 0;
   deliveredOrders : number = 0;
   currentYearOrders: number = 0;
-  latestProducts: Array<{ productName: string; orderDate: string; imageUrl:string; }> = [];
+  latestProducts: Array<{ productName: string; orderDate: string; imageUrl:string; quantity :number}> = [];
   monthlyOrderCounts: number[] = new Array(12).fill(0);
   availableYears: number[] = [];
   selectedYear: number = new Date().getFullYear();
@@ -85,7 +85,8 @@ export class AdminDashboardComponent {
       .map(order => ({
         productName: order.productName,
         imageUrl: order.primaryImageUrl,
-        orderDate: formatDate(order.orderDate, 'dd/MM/yyyy', 'en-US')
+        orderDate: formatDate(order.orderDate, 'dd/MM/yyyy', 'en-US'),
+        quantity : order.quantity
       }));
       console.log("latest pross: ",this.latestProducts);
   }

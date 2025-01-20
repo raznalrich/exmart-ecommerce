@@ -8,7 +8,10 @@
       <p><strong> CATEGORIES</strong></p>
       @for (category of CategoryList || []; track category) {
         <ul>
-          <li class="cursoring" routerLink="home/category/{{category.id}}">{{category.categoryName}}</li>
+          <li class="cursoring" (click)="navigateToCategory(category.id, category.categoryName)">
+            {{category.categoryName}}
+          </li>
+          <!-- <li class="cursoring" routerLink="home/category/{{category.id}}">{{category.categoryName}}</li> -->
         </ul>
       }
     </div>
