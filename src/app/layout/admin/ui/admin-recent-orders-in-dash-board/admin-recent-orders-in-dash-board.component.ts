@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 
 @Component({
   selector: 'app-admin-recent-orders-in-dash-board',
@@ -12,5 +12,6 @@ export class AdminRecentOrdersInDashBoardComponent {
   @Input() proName : string = '';
   @Input() proDate : string = '';
   @Input() proImage : string = '';
+  @Input() qty : number = 0 ;
   products: any;
 }
