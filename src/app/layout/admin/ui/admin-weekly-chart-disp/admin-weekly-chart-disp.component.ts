@@ -26,7 +26,7 @@ export class AdminWeeklyChartDispComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.barChart) {
-      this.barChart.destroy(); // Destroy the existing chart instance before creating a new one
+      this.barChart.destroy(); 
     }
 
     setTimeout(() => {
