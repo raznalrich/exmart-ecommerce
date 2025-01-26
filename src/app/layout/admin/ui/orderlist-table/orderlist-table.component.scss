@@ -92,3 +92,17 @@ body {
   font-size: 14px;
 }
 
+.modal-dialog {
+  max-height: 100vh; /* Prevents modal from being taller than viewport */
+  margin: 0 auto;
+}
+
+.modal-content {
+  height: auto;
+  max-height: 100vh;
+}
+
+.modal-body {
+  position: relative;
+  height: auto;
+}
