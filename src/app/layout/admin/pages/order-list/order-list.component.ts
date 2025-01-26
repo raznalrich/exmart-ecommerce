@@ -169,7 +169,7 @@ export class OrderListComponent {
         })
       );
       if (hasUpdates) {
-        this.showSuccessAlert('Product added to cart successfully!');
+        this.showSuccessAlert('Order status updated successfulyy');
         this.loadOrders();
       }
     } catch (error) {
@@ -243,7 +243,7 @@ export class OrderListComponent {
 
     this.alertTimeout = setTimeout(() => {
       this.closeAlert();
-    }, 4000);
+    }, 2000);
   }
 
   closeAlert() {
