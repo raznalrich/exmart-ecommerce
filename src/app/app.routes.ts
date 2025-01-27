@@ -56,10 +56,6 @@ export const routes: Routes = [
           { path: ':type', component: PolicyContentComponent }
         ]
       },
-
-      // {
-      //   path: 'policy/:id',component:PolicyPageComponent
-      // },
       {
         path:'viewproduct/:id',component:SingleproductpageComponent
       },
@@ -82,7 +78,6 @@ export const routes: Routes = [
       {
         path:"thankyou", component:ThankyoupageComponent
       },
-
       {
         path:'',redirectTo:'home',pathMatch:'full'
       }
