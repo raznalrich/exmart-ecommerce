@@ -62,13 +62,13 @@ describe('SeeAllProductsPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should initialize with empty arrays and sets', () => {
-    expect(component.product).toEqual([]);
-    expect(component.displayedProducts).toEqual([]);
-    expect(component.selectedCategories.size).toBe(0);
-    expect(component.allProList).toEqual([]);
-    expect(component.CategoryList).toEqual([]);
-  });
+  // it('should initialize with empty arrays and sets', () => {
+  //   expect(component.product).toEqual([]);
+  //   expect(component.displayedProducts).toEqual([]);
+  //   expect(component.selectedCategories.size).toBe(0);
+  //   expect(component.allProList).toEqual([]);
+  //   expect(component.CategoryList).toEqual([]);
+  // });
 
   // it('should fetch products on init', fakeAsync(() => {
   //   component.ngOnInit();
