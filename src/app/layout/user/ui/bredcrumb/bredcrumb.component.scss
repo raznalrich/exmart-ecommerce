@@ -1,0 +1,39 @@
+.breadcrumb {
+  background: #f8f9fa;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.breadcrumb-item {
+  display: inline;
+  font-size: 14px;
+  color: #007bff;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.breadcrumb-item span {
+  color: #6c757d;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+  padding: 0 10px;
+  color: #6c757d;
+}
+
+.breadcrumb-item:last-child {
+  font-weight: bold;
+}
