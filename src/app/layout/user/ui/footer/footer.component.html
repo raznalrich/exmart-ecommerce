@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col" style="padding-left: 30px;">
       <img src="images/exmart_logo.svg" alt="" srcset="">
-      <p style="font-size: 12px;padding-top: 20px;text-align: justify;">exMart is the online merchandise selling platform for experion global which holds all the experion branded items for sale</p>
+      @if (HrDetailList) {
+        <p style="font-size: 12px;padding-top: 20px;text-align: justify;">{{HrDetailList.proTagLine}}</p>
+      }
     </div>
     <div class="col">
       <p><strong> CATEGORIES</strong></p>
@@ -28,16 +30,17 @@
     <div class="col">
       <p><strong> CONTACT</strong></p>
       <ul>
-        <li style="display: flex;"><div>
-          <i class="bi bi-telephone-fill"></i>
-        </div>+91 99999 99999</li>
-        <li style="display: flex;"><div>
-          <i class="bi bi-envelope-fill"></i>
-        </div>experion.hr.experionglobal.com</li>
-        <li style="display: flex;"><div>
-          <i class="bi bi-geo-alt-fill"></i>
-        </div>
-          HR, Experion Global, Gayathiri Building, Technopark phase-1, Trivandrum - 695581</li>
+        @if (HrDetailList) {
+          <li style="display: flex;"><div>
+            <i class="bi bi-telephone-fill"></i>
+          </div>+ {{ HrDetailList.hrPhoneNumber }}</li>
+          <li style="display: flex;"><div>
+            <i class="bi bi-envelope-fill"></i>
+          </div>{{ HrDetailList.hrEmail }}</li>
+          <li style="display: flex;"><div>
+            <i class="bi bi-geo-alt-fill"></i>
+          </div>{{ HrDetailList.hrAddress }}</li>
+        }
         <li><button (click)="openTeamsChat()"  class="btn btn-light">Chat with HR<i class="bi bi-send-fill" style="padding-left: 10px;"></i></button></li>
       </ul>
     </div>
@@ -58,6 +61,6 @@
     </div>
 
     <hr>
-    <p>© 2024 HR department Experion global</p>
+    <p>© 2025 HR department Experion Technologies Global  </p>
   </div>
 </div>
