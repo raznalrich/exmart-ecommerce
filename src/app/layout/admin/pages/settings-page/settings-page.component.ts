@@ -7,6 +7,8 @@ import { AddBannerComponent } from '../../ui/add-banner/add-banner.component';
 import { EditCategoryComponent } from '../../ui/edit-category/edit-category.component';
 import { EditBannerComponent } from "../../ui/edit-banner/edit-banner.component";
 import { ChangeDetectorRef } from '@angular/core';
+import { ConfigurationTabComponent } from "../../ui/configuration-tab/configuration-tab.component";
+import { ConfigurationButtonComponent } from "../../ui/configuration-button/configuration-button.component";
 
 
 @Component({
@@ -18,7 +20,9 @@ import { ChangeDetectorRef } from '@angular/core';
     RouterLink,
     AddBannerComponent,
     EditBannerComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    ConfigurationTabComponent,
+    ConfigurationButtonComponent
 ],
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss']
