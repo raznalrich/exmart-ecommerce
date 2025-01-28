@@ -243,6 +243,10 @@ export class ApiServiceService {
       );
   }
 
+  getAddress() {
+    return this.http.get('https://localhost:7267/api/users' );
+  }
+
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
       `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
