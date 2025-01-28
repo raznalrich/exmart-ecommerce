@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
+import { Router } from '@angular/router';
 export interface bannerList{
   bannerId:number,
   imageUrl:string,
@@ -8,7 +9,7 @@ export interface bannerList{
   productImage:string,
   categoryName:string,
   productName:string,
-  productPrice:string
+  productPrice:number
 };
 @Component({
   selector: 'app-animated-product-carousel',
@@ -18,7 +19,7 @@ export interface bannerList{
   styleUrl: './animated-product-carousel.component.scss'
 })
 export class AnimatedProductCarouselComponent {
-  constructor(public api:ApiServiceService){}
+  constructor(public api:ApiServiceService,private router: Router){}
   carouselElement(carouselElement: any) {
     throw new Error('Method not implemented.');
   }
@@ -91,6 +92,8 @@ export class AnimatedProductCarouselComponent {
   getBannerList(){
 this.api.getBannerList().subscribe((bannerList:any)=>{
   this.sliderItems=bannerList;
+  console.log('price ', bannerList);
+
 })
   }
 
@@ -101,7 +104,9 @@ this.api.getBannerList().subscribe((bannerList:any)=>{
   }
 
   seeMore(item: any) {
-    alert(`See more about: ${item.title}`);
+    // alert(`See more about: ${item.title}`);
+    this.router.navigate([`/viewproduct/${item}`]);
+
   }
 
   subscribe(item: any) {
