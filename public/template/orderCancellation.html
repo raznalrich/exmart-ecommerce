@@ -1,0 +1,58 @@
+<!-- order-email.template.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+      <div style="background-color: #f8f9fa; padding: 20px; text-align: center; border-radius: 5px;">
+        <h1 style="color: #333; margin: 0;">Order Cancellation Request</h1>
+        <p style="font-size: 18px; margin-top: 10px;">Order #{{orderId}}</p>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <p>Customer name: {{customerName}},</p>
+      </div>
+
+      <div style="margin-top: 30px;">
+        <h2 style="color: #444; font-size: 18px;">Order Details</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background-color: #f8f9fa;">
+              <th style="padding: 12px; text-align: left;">Product</th>
+              <th style="padding: 12px; text-align: center;">Quantity</th>
+              <th style="padding: 12px; text-align: right;">Price</th>
+              <th style="padding: 12px; text-align: right;">Subtotal</th>
+              <th style="padding: 12px; text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{itemRows}}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" style="padding: 12px; text-align: right; font-weight: bold;">Total:</td>
+              <td style="padding: 12px; text-align: right; font-weight: bold;">₹{{totalAmount}}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div style="margin-top: 30px;">
+        <h2 style="color: #444; font-size: 18px;">Shipping Address</h2>
+        <p style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">{{shippingAddress}}</p>
+      </div>
+
+
+
+      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+        <p style="font-size: 14px; color: #666;">
+          Order Date: {{orderDate}}<br>
+
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
