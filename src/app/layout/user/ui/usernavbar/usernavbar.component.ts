@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-usernavbar',
   standalone: true,
-  imports: [UserSearchbarComponent,RouterLink],
+  imports: [UserSearchbarComponent, RouterLink],
   templateUrl: './usernavbar.component.html',
   styleUrl: './usernavbar.component.scss',
 })
@@ -15,6 +15,8 @@ import { RouterLink } from '@angular/router';
 export class UsernavbarComponent {
   @Input() cartCount :any=10;
 
+
   constructor(public cartAdd: GlobalService){}
 
+  
 }

@@ -14,27 +14,28 @@ import { RouterLink } from '@angular/router';
 })
 export class OrderPreviewPageComponent {
 
-  CartItems = [
+  CartItems =
+  [
     {
       id:1,
       itemName: 'T Shirt',
       itemImage: '',
-      color: 'Black',
-      size: 'white',
+      color: '',
+      size: '',
       rate: 299.00
     },
     {
       id:2,
       itemName: 'T Shirt',
-      color: 'red',
-      size: 'xl',
+      color: "",
+      size: "",
       rate: 399.00
     },
     {
       id:3,
       itemName: 'T Shirt',
-      color: 'red',
-      size: 'sx',
+      color: "",
+      size: "",
       rate: 99.00
     }
   ]

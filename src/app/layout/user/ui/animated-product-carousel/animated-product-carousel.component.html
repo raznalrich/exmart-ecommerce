@@ -10,11 +10,11 @@
 
         <div class="author">{{ item.categoryName }}</div>
         <div class="title">{{ item.productName }}</div>
-        <div class="topic">{{ item.productPrice }}</div>
+        <div class="topic">₹{{ item.productPrice }}</div>
         <!-- <div class="des">{{ item.description }}</div> -->
         <div class="buttons">
-          <button (click)="seeMore(item)">BUY NOW</button>
-          <button (click)="subscribe(item)">VIEW MORE</button>
+          <button (click)="seeMore(item.productId)">VIEW MORE</button>
+          <!-- <button (click)="subscribe(item)">VIEW MORE</button> -->
         </div>
       </div>
     </div>
