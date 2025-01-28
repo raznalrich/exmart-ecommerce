@@ -3,6 +3,7 @@ import { ApiServiceService } from '../../../../services/api-service.service';
 import { Router, RouterLink } from '@angular/router';
 import { AnimationStateService } from '../../../../services/animation-state.service';
 import { ScrollServiceService } from '../../../../services/scroll-service.service';
+import { subscribeOn } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -12,8 +13,10 @@ import { ScrollServiceService } from '../../../../services/scroll-service.servic
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-private readonly hrEmail = 'sona.george@experionglobal.com';
+
 CategoryList : any = [];
+HrDetailList: any;
+hrEmail: string = '';
 
 constructor(public api:ApiServiceService,public router: Router,private scrollService: ScrollServiceService,private animationStateService : AnimationStateService){}
 
@@ -22,6 +25,15 @@ constructor(public api:ApiServiceService,public router: Router,private scrollSer
       this.CategoryList = res;
       console.log(this.CategoryList);
     });
+
+    this.api.GetHrDetails().subscribe((res:any)=> {
+      this.HrDetailList = res;
+      this.hrEmail = this.HrDetailList.hrChatEmail
+      // || 'hr@experionglobal.com'
+      console.log("Hr details Consoling API",this.HrDetailList);
+      console.log("direct Api",this.HrDetailList.hrChatEmail);
+      console.log("chatEmail",this.hrEmail)
+    })
 }
 
 openTeamsChat(): void {
@@ -33,7 +45,8 @@ openTeamsChat(): void {
   }, 1000);
 }
   navigateToPolicy(type: string) {
-    this.router.navigate(['/policies', type]);
+    this.router.navigate(['/policies', type])
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   navigateToCategory(categoryId: string, categoryName: string) {
