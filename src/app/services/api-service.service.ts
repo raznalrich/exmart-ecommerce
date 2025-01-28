@@ -494,15 +494,24 @@ console.log('address data',data);
   GetHrDetails(){
     return this.http.get<HrDetailsI>(`https://exmart-backend.onrender.com/api/HrDetails`);
   }
-  
-  UpdateHrDetails(HrdetailContent:HrDetailsI): Observable<any>{
-    const payload = {
-      id: 1,
-      ...HrdetailContent
-    };
-    const headers = { 'Content-Type': 'application/json' };
-    return this.http.put(`https://exmart-backend.onrender.com/api/HrDetails/1`,payload,{ headers });
+
+  UpdateHrDetails(hrDetailContent: HrDetailsI) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put(
+      'https://exmart-backend.onrender.com/api/HrDetails',
+      hrDetailContent,
+      { headers }
+    );
   }
+
+  // UpdateHrDetails(HrdetailContent:HrDetailsI): Observable<any>{
+  //   const payload = {
+  //     id: 1,
+  //     ...HrdetailContent
+  //   };
+  //   const headers = { 'Content-Type': 'application/json' };
+  //   return this.http.put(`https://exmart-backend.onrender.com/api/HrDetails/1`,payload,{ headers });
+  // }
 
   GetPolicy(){
     return this.http.get(`https://localhost:7267/api/Policy`)
