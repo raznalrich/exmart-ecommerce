@@ -7,6 +7,7 @@ import { AddBannerComponent } from '../../ui/add-banner/add-banner.component';
 import { EditCategoryComponent } from '../../ui/edit-category/edit-category.component';
 import { EditBannerComponent } from "../../ui/edit-banner/edit-banner.component";
 import { ChangeDetectorRef } from '@angular/core';
+import { EditHrDetailsComponent } from "../../ui/edit-hr-details/edit-hr-details.component";
 
 
 @Component({
@@ -18,7 +19,8 @@ import { ChangeDetectorRef } from '@angular/core';
     RouterLink,
     AddBannerComponent,
     EditBannerComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    EditHrDetailsComponent
 ],
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss']
