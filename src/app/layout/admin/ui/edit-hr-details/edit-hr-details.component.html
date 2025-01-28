@@ -1,0 +1,107 @@
+<div class="container">
+  <button type="button" (click)="openModal()"
+  class="edit-button" data-bs-toggle="modal">
+  Edit HR Details <i class="bi bi-pen"></i>
+  </button>
+
+  @if (showModal) {
+    <div class="modal-backdrop">
+      <div
+        class="backdrop-blur"
+        (click)="closeModal()">
+      </div>
+
+      <div class="modal-container">
+        <div class="modal-content-wrapper">
+          <div
+            class="modal-content"
+            (click)="$event.stopPropagation()">
+
+            <div class="modal-header">
+              <h2>Edit HR Details</h2>
+            </div>
+
+            <div class="modal-body">
+              <form [formGroup]="hrForm" (ngSubmit)="onSubmit()">
+                <div class="form-fields">
+                  <!-- Phone Number -->
+                  <div class="form-field">
+                    <label>Phone Number</label>
+                    <input
+                      type="number"
+                      formControlName="hrPhoneNumber">
+                    @if (hrForm.get('hrPhoneNumber')?.errors?.['required'] && hrForm.get('hrPhoneNumber')?.touched) {
+                      <p class="error-message">Phone number is required</p>
+                    }
+                  </div>
+
+                  <!-- HR Email -->
+                  <div class="form-field">
+                    <label>HR Email</label>
+                    <input
+                      type="email"
+                      formControlName="hrEmail">
+                    @if (hrForm.get('hrEmail')?.errors?.['email'] && hrForm.get('hrEmail')?.touched) {
+                      <p class="error-message">Please enter a valid email</p>
+                    }
+                  </div>
+
+                  <!-- HR Address -->
+                  <div class="form-field">
+                    <label>Address</label>
+                    <textarea
+                      formControlName="hrAddress"
+                      rows="3"></textarea>
+                  </div>
+
+                  <!-- HR Chat Email -->
+                  <div class="form-field">
+                    <label>Chat Email</label>
+                    <input
+                      type="email"
+                      formControlName="hrChatEmail">
+                    @if (hrForm.get('hrChatEmail')?.errors?.['email'] && hrForm.get('hrChatEmail')?.touched) {
+                      <p class="error-message">Please enter a valid email</p>
+                    }
+                  </div>
+
+                  <!-- Pro Tag Line -->
+                  <div class="form-field">
+                    <label>
+                      Product Tag Line
+                      <span class="word-count">
+                        ({{ getWordCount() }}/25 words)
+                      </span>
+                    </label>
+                    <textarea
+                      formControlName="proTagLine"
+                      rows="4"
+                      (input)="checkWordLimit()"></textarea>
+                    @if (hrForm.get('proTagLine')?.errors?.['wordLimit']) {
+                      <p class="error-message">Exceeded 25 words limit</p>
+                    }
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    (click)="closeModal()"
+                    class="cancel-button">
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    [disabled]="!hrForm.valid"
+                    class="save-button">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
