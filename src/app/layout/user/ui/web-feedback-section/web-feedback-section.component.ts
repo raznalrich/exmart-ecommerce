@@ -13,7 +13,6 @@ import { ApiService } from '../../../../api.service';
   styleUrl: './web-feedback-section.component.scss'
 })
 export class WebFeedbackSectionComponent {
-
   constructor(private api:ApiService){}
 
   userid = localStorage.getItem('userid');

@@ -29,6 +29,7 @@ export class OrderItemComponent {
   @Input() imageUrl: string = '';
   @Input() status: any;
   statusName:any;
+  @Input() isVisible:boolean = false;
   @Input() OrderedDate: any;
   @Input() statusIcon: string = '';
   productDetails:any;
@@ -55,6 +56,13 @@ ngOnInit(){
       },
     });
 
+}
+makeVisible(){
+  this.isVisible = true;
+}
+onCloseAddProduct() {
+  this.isVisible = false;
+   // Clear product details when modal is closed
 }
 // fetchProductImages() {
 //   this.orderItemslist.forEach(item => {
