@@ -7,6 +7,8 @@ import { AddBannerComponent } from '../../ui/add-banner/add-banner.component';
 import { EditCategoryComponent } from '../../ui/edit-category/edit-category.component';
 import { EditBannerComponent } from "../../ui/edit-banner/edit-banner.component";
 import { ChangeDetectorRef } from '@angular/core';
+import { ConfigurationTabComponent } from "../../ui/configuration-tab/configuration-tab.component";
+import { ConfigurationButtonComponent } from "../../ui/configuration-button/configuration-button.component";
 import { EditHrDetailsComponent } from "../../ui/edit-hr-details/edit-hr-details.component";
 
 
@@ -20,6 +22,8 @@ import { EditHrDetailsComponent } from "../../ui/edit-hr-details/edit-hr-details
     AddBannerComponent,
     EditBannerComponent,
     EditCategoryComponent,
+    ConfigurationTabComponent,
+    ConfigurationButtonComponent
     EditHrDetailsComponent
 ],
   templateUrl: './settings-page.component.html',
