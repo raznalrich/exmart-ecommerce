@@ -16,10 +16,12 @@ export class WebFeedbackSectionComponent {
 
   constructor(private api:ApiService){}
 
+  userid = localStorage.getItem('userid');
+
   webfeedbackForm = new FormGroup({
 
     feedback: new FormControl(''),
-    userId: new FormControl('1'),
+    userId: new FormControl(6),
     productName: new FormControl('website')
 
   });

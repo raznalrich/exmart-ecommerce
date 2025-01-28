@@ -36,7 +36,7 @@ export const routes: Routes = [
   {
     path:'',component: HomepageComponent,children:[
       {
-        path:'home', component: HomeStaticComponent, canActivate: [AuthGuard], children:[
+        path:'home', component: HomeStaticComponent, canActivate: [AuthGuard], data: { role: 'User' }, children:[
 
           {
             path:'category/:id',component:ProductDisplayingSectionComponent
@@ -60,7 +60,7 @@ export const routes: Routes = [
         path:'viewproduct/:id',component:SingleproductpageComponent
       },
       {
-        path: 'seeAllProducts',component: SeeAllProductsPageComponent, canActivate: [AuthGuard], children:[
+        path: 'seeAllProducts',component: SeeAllProductsPageComponent, canActivate: [AuthGuard], data: { role: 'User' }, children:[
           {
             path: 'seeAllProducts/category/:id', component: SeeAllProductsPageComponent
           }
@@ -84,7 +84,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path:'userprofile', component:UserprofileComponent, canActivate: [AuthGuard], children:[
+    path:'userprofile', component:UserprofileComponent, canActivate: [AuthGuard], data: { role: 'User' }, children:[
       {
         path:'addaddress',component:NewAddressComponent
       },
@@ -100,7 +100,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path:'admin',component: DashboardComponent, canActivate: [AuthGuard],children:[
+    path:'admin',component: DashboardComponent, canActivate: [AuthGuard], data: { role: 'Admin' }, children:[
       {
         path:'admindashboard',component:AdminDashboardComponent
       },
