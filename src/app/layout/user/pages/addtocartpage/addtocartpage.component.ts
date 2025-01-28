@@ -12,6 +12,7 @@ import { forkJoin, map, Observable } from 'rxjs';
 import { GlobalService } from '../../../../global.service';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { EmailService } from '../../../../services/email.service';
+import { Location } from '@angular/common';
 export interface OrderEmailContext {
   orderId: number;
   customerName: string;
@@ -61,7 +62,7 @@ shippingCharge:number=0;
 orderContext:any;
 addressType:string='';
 totalPrice: number = 0;
-  constructor(public api: ApiService,public apis:ApiServiceService, private route: ActivatedRoute,public global:GlobalService, private router: Router,
+  constructor(public api: ApiService,public apis:ApiServiceService, private route: ActivatedRoute,public global:GlobalService, private router: Router,private location: Location,
     public emailservice:EmailService
   ) {
     this.global.getUserId();
@@ -88,7 +89,7 @@ totalPrice: number = 0;
 
     const cartItems = this.global.signalCartList();
     this.cartItemList = this.global.signalCartList();
-    
+
     console.log('cart item list ',this.cartItemList);
 
     this.productIds = cartItems.map(item => item.productId);
@@ -162,7 +163,6 @@ this.fetchCartItems( this.global.signalCartList());
       if(+this.addressType == 1 ){
         console.log('shipping charge');
 
-        this.shippingCharge = this.shippingCharge + 49
         return total + ((product.price * quantity)+49)
       }
       else{
@@ -271,4 +271,9 @@ onSendReplay(email:string,subject:string) {
 
 }
 
+  goBack() {
+    this.location.back();
+  }
 }
+
+
