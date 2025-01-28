@@ -29,6 +29,7 @@ import { ReportPageComponent } from './layout/admin/pages/report-page/report-pag
 import { OrderPopupComponent } from "./layout/admin/ui/order-popup/order-popup.component";
 import { PopUpComponent } from "./layout/user/ui/pop-up/pop-up.component";
 import { AddBannerComponent } from "./layout/admin/ui/add-banner/add-banner.component";
+import { BredcrumbComponent } from "./layout/user/ui/bredcrumb/bredcrumb.component";
 
 @Component({
   selector: 'app-root',
@@ -55,7 +56,8 @@ import { AddBannerComponent } from "./layout/admin/ui/add-banner/add-banner.comp
     AddressConfirmPageComponent,
     OrderPopupComponent,
     PopUpComponent,
-    AddBannerComponent
+    AddBannerComponent,
+    BredcrumbComponent
 ],
 
   templateUrl: './app.component.html',
