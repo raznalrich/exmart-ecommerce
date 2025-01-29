@@ -27,6 +27,7 @@ import { EditHrDetailsComponent } from "../../ui/edit-hr-details/edit-hr-details
 
 >>>>>>> ce094e4f05038f05f08925ebfda36eb2946e576b
     ConfigurationButtonComponent,
+    ConfigurationButtonComponent,
     EditHrDetailsComponent
 
 ],
