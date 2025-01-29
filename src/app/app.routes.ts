@@ -60,7 +60,8 @@ export const routes: Routes = [
         children: [
           { path: '', redirectTo: 'terms', pathMatch: 'full' },
           { path: ':type', component: PolicyContentComponent,
-          }
+            data: { breadcrumb: 'Policy Content' }
+           }
         ]
       },
       {
@@ -77,15 +78,19 @@ export const routes: Routes = [
       },
       {
         path:'addcart',component:AddtocartpageComponent,
+        data: { breadcrumb: 'Add to cart' },
       },
       {
         path:'addressconfirm',component:AddressConfirmPageComponent,
+        data: { breadcrumb: 'Confirm Address' },
       },
       {
         path: 'orderPreview',component:OrderPreviewPageComponent,
+        data: { breadcrumb: 'Order Preview' },
       },
       {
         path:"thankyou", component:ThankyoupageComponent,
+        data: { breadcrumb: 'Thank You' },
 
       },
       {
@@ -95,15 +100,19 @@ export const routes: Routes = [
   },
   {
     path:'userprofile', component:UserprofileComponent,
+    data: { breadcrumb: 'User Profile', role: 'User' },
     canActivate: [AuthGuard], children:[
       {
         path:'addaddress',component:NewAddressComponent,
+        data: { breadcrumb: 'Add New Address' }
       },
       {
         path:'userorder',component:UserOrdersComponent,
+        data: { breadcrumb: 'My Orders' }
       },
       {
         path:'addresspage',component:SelectAddressComponent,
+        data: { breadcrumb: 'Select Address' }
       },
       {
         path:'',redirectTo:'userorder',pathMatch:'full'
@@ -114,30 +123,39 @@ export const routes: Routes = [
     path:'admin',component: DashboardComponent, canActivate: [AuthGuard], data: { role: 'Admin' }, children:[
       {
         path:'admindashboard',component:AdminDashboardComponent,
+        data: { breadcrumb: 'Admin Dashboard' }
       },
       {
         path:'productlist',component:ProductlistComponent,
+        data: { breadcrumb: 'Product List' }
       },
       {
         path:'orderlist',component:OrderListComponent,
+        data: { breadcrumb: 'Order List' }
       },
       {
         path:'reportpage',component:ReportPageComponent,
+        data: { breadcrumb: 'Report Page' }
       },
       {
         path:'viewfeedback',component:ViewFeedbackComponent,
+        data: { breadcrumb: 'View Feedback' }
       },
       {
         path:'dialoguebox',component:AddProductsComponent,
+        data: { breadcrumb: 'Add Products' }
       },
       {
         path:'settings',component:SettingsPageComponent,
+        data: { breadcrumb: 'Settings' }
       },
       {
         path:'configuration-tab',component:ConfigurationTabComponent,
+        data: { breadcrumb: 'Configuration Tab' }
       },
       {
         path:'texteditor/:id',component:AdminSettingsTextEditorComponent,
+        data: { breadcrumb: 'Text Editor' }
       }
     ]
   },
@@ -146,12 +164,15 @@ export const routes: Routes = [
   },
    {
     path:"trackexmart/:id",component:TrackExmartComponent,
+    data: { breadcrumb: 'Track Exmart' }
   },
   {
     path:"updateStatusBy/:id",component:ShippedConfirmationEmailComponent,
+    data: { breadcrumb: 'Order Status' }
   },
   {
     path:"orderconfirmed/:id",component:OrderConfirmedEmailComponent,
+    data: { breadcrumb: 'Order Confirmation' }
   }
 
 ];
