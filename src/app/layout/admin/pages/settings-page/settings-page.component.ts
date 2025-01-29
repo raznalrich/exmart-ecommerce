@@ -18,13 +18,18 @@ import { EditHrDetailsComponent } from "../../ui/edit-hr-details/edit-hr-details
   imports: [
     AddNewCategoryComponent,
     EditPoliciesComponent,
-    RouterLink,
     AddBannerComponent,
     EditBannerComponent,
     EditCategoryComponent,
+<<<<<<< HEAD
+=======
     ConfigurationTabComponent,
+
+>>>>>>> ce094e4f05038f05f08925ebfda36eb2946e576b
+    ConfigurationButtonComponent,
     ConfigurationButtonComponent,
     EditHrDetailsComponent
+
 ],
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss']
