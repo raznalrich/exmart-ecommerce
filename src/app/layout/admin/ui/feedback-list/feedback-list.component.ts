@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../../../api.service';
 import { ProductFeedbackToggleComponent } from "../product-feedback-toggle/product-feedback-toggle.component";
 import { CommonModule } from '@angular/common';
+import { ProductFeedbackComponent } from "../../../user/ui/product-feedback/product-feedback.component";
+import { FeedbackReplayComponent } from "../feedback-replay/feedback-replay.component";
+import { FeedbackReplayButtonComponent } from "../feedback-replay-button/feedback-replay-button.component";
 
 
 
 @Component({
   selector: 'app-feedback-list',
   standalone: true,
-  imports: [ProductFeedbackToggleComponent, CommonModule],
+  imports: [ProductFeedbackToggleComponent, CommonModule, ProductFeedbackComponent, FeedbackReplayComponent, FeedbackReplayButtonComponent],
   templateUrl: './feedback-list.component.html',
   styleUrl: './feedback-list.component.scss'
 })
