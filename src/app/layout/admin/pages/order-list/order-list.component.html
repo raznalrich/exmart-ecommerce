@@ -1,3 +1,21 @@
+ <!-- Success Alert -->
+<div class="wrap-alert">
+ <div
+ *ngIf="showSuccess"
+ [@alertAnimation]
+ class="alert alert-warning alert-dismissible fade show"
+ role="alert"
+>
+ {{ message }}
+ <button
+   type="button"
+   class="btn-close"
+   (click)="closeAlert()"
+   aria-label="Close"
+ ></button>
+</div>
+
+
 <div class="container">
   <div class="first-container">
     <div class="top">
@@ -34,5 +52,5 @@
   </div>
 
 </div>
-</div>
+</div></div>
 <app-orderlist-table [OrderList]="filteredItems"></app-orderlist-table>
