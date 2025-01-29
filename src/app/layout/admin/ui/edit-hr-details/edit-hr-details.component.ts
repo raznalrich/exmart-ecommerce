@@ -21,10 +21,10 @@ export class EditHrDetailsComponent implements OnInit {
     ) {
       this.hrForm = this.fb.group({
         id:1,
-        hrPhoneNumber: ['', Validators.required],
+        hrPhoneNumber: ['', [Validators.required,Validators.pattern('^[0-9]{10}$')]],
         hrEmail: ['', [Validators.required, Validators.email]],
         hrAddress: ['', Validators.required],
-        hrChatEmail: ['', [Validators.required, Validators.email]],
+        hrChatEmail: ['', [Validators.email]],
         proTagLine: ['', [Validators.required, this.wordLimitValidator]]
       });
     }
