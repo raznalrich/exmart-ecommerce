@@ -9,7 +9,6 @@ import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 import { firstValueFrom } from 'rxjs';
 import { OrderValueDisplayingButtonComponent } from '../../ui/order-value-displaying-button/order-value-displaying-button.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-order-list',
@@ -20,7 +19,6 @@ import { CommonModule } from '@angular/common';
     SearchbarComponent,
     OrderValueDisplayingButtonComponent,
     DateRangepickerComponent,
-    CommonModule
   ],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.scss',
@@ -31,9 +29,6 @@ export class OrderListComponent {
   searchPlaceholder: string = 'Search Order Item/Product';
   totalOrders : any
   deliveredOrders : any
-  message: string | undefined;
-  showSuccess: boolean | undefined;
-  alertTimeout: any;
 
   constructor(public api: ApiServiceService) {}
 
@@ -169,7 +164,6 @@ export class OrderListComponent {
         })
       );
       if (hasUpdates) {
-        this.showSuccessAlert('Order status updated successfulyy');
         this.loadOrders();
       }
     } catch (error) {
@@ -231,22 +225,5 @@ export class OrderListComponent {
 
     const buffer = await workbook.xlsx.writeBuffer();
     saveAs(new Blob([buffer]), 'Orders_With_Validation.xlsx');
-  }
-
-  showSuccessAlert(message: string) {
-    this.message = message;
-    this.showSuccess = true;
-
-    if (this.alertTimeout) {
-      clearTimeout(this.alertTimeout);
-    }
-
-    this.alertTimeout = setTimeout(() => {
-      this.closeAlert();
-    }, 2000);
-  }
-
-  closeAlert() {
-    this.showSuccess = false;
   }
 }

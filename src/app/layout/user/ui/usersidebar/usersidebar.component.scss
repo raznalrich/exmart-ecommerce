@@ -23,15 +23,16 @@
   // align-items: center;
   p{
     color: #fff;
-    text-align: center;
-    margin-bottom: 0px;
+text-align: center;
+margin-bottom: 0px;
+cursor: pointer;
     font-size: 12px;
   }
 }
 .namebox:hover{
   background-color: #fff;
   p:hover{
-    color: #253d6c;
+    color: #000;
   }
 }
 

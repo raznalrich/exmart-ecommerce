@@ -1,52 +1,5 @@
+<!-- feedback.component.html -->
 <div class="feedback-container">
-  <div class="titles">
-    <div class="expHead">EXPERIONITES</div>
-    <div class="feedback">Put Your Feedback</div>
-  </div>
-
-  <div class="form">
-    <form [formGroup]="webfeedbackForm" (ngSubmit)="submitFeedback()">
-      <div class="input-container">
-        <textarea
-          placeholder="Enter your feedback"
-          formControlName="feedback"
-          (input)="countWords($event)"
-          rows="4"
-        ></textarea>
-        <div class="word-count">{{ wordCount }}/{{ maxWords }}</div>
-        @if (showWordLimitWarning) {
-          <div class="word-limit-warning">
-            Word limit exceeded. Maximum {{ maxWords }} words allowed.
-          </div>
-        }
-      </div>
-    </form>
-
-    <div class="button">
-      <app-long-button
-        label="Submit"
-        (click)="submitFeedback()"
-      ></app-long-button>
-    </div>
-  </div>
-
-  @if (showError) {
-    <div class="alert error">
-      Please enter your feedback before submitting.
-    </div>
-  }
-
-  @if (showSuccess) {
-    <div class="alert success">
-      Thank you for the valuable feedback!
-    </div>
-  }
-</div>
-
-
-
-
-<!-- <div class="feedback-container">
   <div class="titles">
     <div class="expHead">EXPERIONITES</div>
     <div class="feedback">Put Your Feedback</div>
@@ -63,9 +16,25 @@
     <div class="button">
       <app-long-button
       label="Submit"
+      [imgAlt]="'Upload Icon'"
+      [imgPosition]="'left'"
       (click)="submitFeedback()"
       ></app-long-button>
 
     </div>
   </div>
+</div>
+
+
+
+<!-- <div class="container">
+  <div class="headings">
+    <div class="expHead">EXPERIONITES</div>
+    <div class="putFeed">Put Your Feedback</div>
+  </div>
+  <div class="feedbackSearch">
+      <input>
+
+  </div>
+
 </div> -->

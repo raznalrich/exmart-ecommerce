@@ -7,6 +7,7 @@ import { TableComponent } from '../../ui/table/table.component';
 import { GlobalService } from '../../../../global.service';
 import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
 import { AddProductsComponent } from '../add-products/add-products.component';
+import * as bootstrap from 'bootstrap';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -24,15 +25,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './productlist.component.scss',
 })
 export class ProductlistComponent {
-
   @ViewChild(AddProductsComponent) addProductsComponent!: AddProductsComponent;
   filteredItems: any = [];
   searchPlaceholder: string = 'Search Product';
   isAddProductVisible: boolean = false;
   isEditmode: boolean = false;
   editProductDetails: any;
-  showSuccessAlert = false;
-  successMessage = '';
 
   constructor(public api: ApiServiceService) {}
 
@@ -82,29 +80,17 @@ export class ProductlistComponent {
 
   onCloseAddProduct() {
     this.isAddProductVisible = false;
-    this.isEditmode = false; // Reset edit mode when modal is closed
-    this.editProductDetails = null; // Clear product details when modal is closed
+    this.isEditmode = false;          // Reset edit mode when modal is closed
+    this.editProductDetails = null;   // Clear product details when modal is closed
   }
 
   onAddButtonClick() {
-    this.isEditmode = false; // Ensure add mode
-    this.editProductDetails = null; // Clear any existing data
-    this.isAddProductVisible = true; // Show the modal
+    this.isEditmode = false;          // Ensure add mode
+    this.editProductDetails = null;   // Clear any existing data
+    this.isAddProductVisible = true;  // Show the modal
   }
 
-  onProductSaved(): void {
-    this.loadProducts();
-    this.successMessage = this.isEditmode
-      ? 'Product updated successfully!'
-      : 'Product added successfully!';
-    this.showSuccessAlert = true;
-
-    setTimeout(() => {
-      this.showSuccessAlert = false;
-    }, 3000);
-  }
-
-  add() {
+  add(){
     this.isAddProductVisible = true;
   }
 
