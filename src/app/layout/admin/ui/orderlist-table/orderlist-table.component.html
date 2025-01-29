@@ -50,17 +50,18 @@
   aria-labelledby="modalLabel"
   aria-hidden="true"
 >
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-lg modal-dialog-centered">
   <div class="modal-content">
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="modal"
-    aria-label="Close"
-    (click)="closeModal()"
-  ></button>
 
-<div class="modal-body">
+
+<div class="modal-body overflow-hidden">
+  <button
+  type="button"
+  class="btn-close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+  (click)="closeModal()"
+></button>
   <app-order-popup
   [selectedOrderItemId]="selectedOrderItemId"
   [OrderDetailsByID]="OrderDetailsByID"></app-order-popup>
@@ -74,16 +75,29 @@
   <table class="styled-table">
     <!-- @for(item of O) -->
     <tr>
+      <!-- <th>
+        <button type="button" class="btn btn-sm" >
+        <input class="form-check-input" type="checkbox" value="" [(ngModel)]="selectAll"
+        (change)="toggleSelectAll()">
+        </button>
+      </th> -->
       <th>Order Item Id</th>
       <th>Date</th>
       <th>Product</th>
       <th>Status</th>
       <th>Amount</th>
       <th>Quantity</th>
-      <th>Action</th>
+      <th>S.C</th>
+      <th> Action </th>
     </tr>
     @for(item of OrderList; track item){
       <tr>
+      <!-- <td>
+        <button type="button" class="btn btn-sm" style="margin-left: 4px;" >
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+              [(ngModel)]="item.isSelected">
+        </button>
+        </td> -->
         <td>{{item.orderItemId}}</td>
         <td>{{item.orderDate | date : "YYYY-MM-dd"}}</td>
         <td>{{item.productName}}</td>
@@ -100,13 +114,16 @@
 
         <td>{{item.amount | currency : "INR"}}</td>
          <td>{{item.quantity}}</td>
+         <td>{{item.shippingCharge | currency : "INR"}}</td>
           <td style="text-align: center;">
-            <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId, item.orderItemId)">
+
+            <button type="button" class="btn btn-sm"  (click)="openOrderDetailModal(item.orderId, item.orderItemId)">
               <i class="fa-regular fa-eye"></i>
             </button>
-            </td>
 
-      </tr>
-    }
+            </td>
+</tr>
+
+}
   </table>
 </div>
