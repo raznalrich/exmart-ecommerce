@@ -170,7 +170,7 @@ export class ApiServiceService {
   getOrderItemList() {
     return this.http.get('https://localhost:7267/api/Order/orderItem/List');
   }
-//https://exmart-backend.onrender.com/api/Order/orderItem/List
+
   toggelProductStatus(id: number) {
     const url = `https://localhost:7267/api/Product/toggle-status/${id}`;
     return this.http.put<boolean>(url, {});
