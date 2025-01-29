@@ -23,7 +23,10 @@ import { EditHrDetailsComponent } from "../../ui/edit-hr-details/edit-hr-details
     EditBannerComponent,
     EditCategoryComponent,
     ConfigurationTabComponent,
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     ConfigurationButtonComponent,
     EditHrDetailsComponent
 
