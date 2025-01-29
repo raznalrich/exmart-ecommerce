@@ -28,7 +28,8 @@ constructor(public api:ApiServiceService,public router: Router,private scrollSer
 
     this.api.GetHrDetails().subscribe((res:any)=> {
       this.HrDetailList = res;
-      this.hrEmail = this.HrDetailList.hrChatEmail || 'hr@experionglobal.com'
+      this.hrEmail = this.HrDetailList.hrChatEmail
+      // || 'hr@experionglobal.com'
       console.log("Hr details Consoling API",this.HrDetailList);
       console.log("direct Api",this.HrDetailList.hrChatEmail);
       console.log("chatEmail",this.hrEmail)
