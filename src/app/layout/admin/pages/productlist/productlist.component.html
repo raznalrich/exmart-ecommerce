@@ -1,31 +1,44 @@
-
-
-
 <div class="page">
-    <div class="top">
-
-        <app-searchbar [searchPlaceholder]="searchPlaceholder" (searchChange)="onSearch($event)"></app-searchbar>
-        <app-add-button [button]="button" (buttonClick)="onAddButtonClick()"></app-add-button>
-      </div>
-    <div class="bottom">
-      <app-table [header]="header" [items]="filteredItems" (editProduct)="onEditProduct($event)"></app-table>
-
-    </div>
-    <div class="backdrop" *ngIf="isAddProductVisible" (click)="onCloseAddProduct()"></div>
+  <div class="top">
+    <app-searchbar
+      [searchPlaceholder]="searchPlaceholder"
+      (searchChange)="onSearch($event)"
+    ></app-searchbar>
+    <app-add-button
+      [button]="button"
+      (buttonClick)="onAddButtonClick()"
+    ></app-add-button>
+  </div>
+  <div class="bottom">
+    <app-table
+      [header]="header"
+      [items]="filteredItems"
+      (editProduct)="onEditProduct($event)"
+    ></app-table>
+  </div>
+  <div
+    class="backdrop"
+    *ngIf="isAddProductVisible"
+    (click)="onCloseAddProduct()"
+  ></div>
   <div class="modal1" *ngIf="isAddProductVisible">
-
-    <div class="modal2 show d-block"  >
+    <div class="modal2 show d-block">
       @if(isEditmode){
 
-        <app-add-products [editProductDetails]="editProductDetails" [isEditMode]="true" (close)="onCloseAddProduct()"></app-add-products>
-      }
-      @else {
-        <app-add-products [isEditMode]="false"  (close)="onCloseAddProduct()"></app-add-products>
+      <app-add-products
+        [editProductDetails]="editProductDetails"
+        [isEditMode]="true"
+        (close)="onCloseAddProduct()"
+        (save)="onProductSaved()"
+      ></app-add-products>
+      } @else {
+      <app-add-products
+        [isEditMode]="false"
+        (close)="onCloseAddProduct()"
+        (save)="onProductSaved()"
+      ></app-add-products>
 
       }
-
     </div>
-
   </div>
 </div>
-

@@ -27,6 +27,8 @@ export class WebFeedbackSectionComponent {
     return userId;
   }
 
+  userid = localStorage.getItem('userid');
+
   webfeedbackForm = new FormGroup({
     feedback: new FormControl('', [Validators.required]),
     userId: new FormControl(this.getUserId()),
