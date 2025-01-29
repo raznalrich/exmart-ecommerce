@@ -8,6 +8,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { ProductFeedbackComponent } from "../../ui/product-feedback/product-feedback.component";
 import { Subscription } from 'rxjs';
+import { BredcrumbComponent } from "../../ui/bredcrumb/bredcrumb.component";
 
 @Component({
   selector: 'app-singleproductpage',
@@ -16,8 +17,7 @@ import { Subscription } from 'rxjs';
     SingleCarouselComponent,
     SingleProductDetailComponent,
     SinglePageDropdownComponent,
-    ProductFeedbackComponent
-],
+    ProductFeedbackComponent, BredcrumbComponent],
   templateUrl: './singleproductpage.component.html',
   styleUrl: './singleproductpage.component.scss',
 })

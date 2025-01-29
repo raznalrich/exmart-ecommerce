@@ -1,38 +1,27 @@
-// .container{
-//   height: 300px;
-// }
-
-/* feedback.component.css */
 .feedback-container {
   text-align: center;
   margin-top: 50px;
   font-family: Arial, sans-serif;
-  height: 300px;
+  height: 400px;
   width: 100%;
-
+  position: relative;
 }
 
-.form{
-// display: flex;
-// flex-direction: column;
-// width: 700px;
-}
-
-.button{
+.button {
   margin-top: 20px;
   margin-right: 115px;
   display: flex;
   justify-content: end;
-  padding-left:  100px;
+  padding-left: 100px;
 }
 
 .expHead {
   font-size: 40px;
   font-weight: 900;
-  color:#3E68B9;
+  color: #3E68B9;
 }
 
-.feedback{
+.feedback {
   font-size: 30px;
   color: #64A2F5;
 }
@@ -44,18 +33,132 @@ form {
   align-items: center;
 }
 
-input {
+.input-container {
+  position: relative;
   width: 80%;
+}
+
+textarea {
+  width: 100%;
   text-align: left;
-  height: 50px;
+  min-height: 100px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f4f4f4;
-  word-wrap: break-word;
+  resize: vertical;
 }
 
-button:hover {
-  background-color: #357ae8;
+.word-count {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: #666;
 }
+
+.alert {
+  position: fixed;
+  z-index: 1000;
+  top: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.error {
+  background-color: #ff4444;
+  color: white;
+}
+
+.success {
+  background-color: #00C851;
+  color: white;
+}
+
+.word-limit-warning {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  color: #ff4444;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .feedback-container {
+//   text-align: center;
+//   margin-top: 50px;
+//   font-family: Arial, sans-serif;
+//   height: 300px;
+//   width: 100%;
+
+// }
+
+// .button{
+//   margin-top: 20px;
+//   margin-right: 115px;
+//   display: flex;
+//   justify-content: end;
+//   padding-left:  100px;
+// }
+
+// .expHead {
+//   font-size: 40px;
+//   font-weight: 900;
+//   color:#3E68B9;
+// }
+
+// .feedback{
+//   font-size: 30px;
+//   color: #64A2F5;
+// }
+
+// form {
+//   margin-top: 70px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+// input {
+//   width: 80%;
+//   text-align: left;
+//   height: 50px;
+//   padding: 10px;
+//   font-size: 16px;
+//   border: 1px solid #ccc;
+//   border-radius: 5px;
+//   background-color: #f4f4f4;
+//   word-wrap: break-word;
+// }
