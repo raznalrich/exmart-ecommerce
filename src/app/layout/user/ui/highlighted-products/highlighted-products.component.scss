@@ -9,10 +9,9 @@
 }
 
 .content {
-  left: 10px;
   display: flex;
   margin-top: 20px;
-  gap: 5%;
+  gap: 10%;
 }
 
 .header {
@@ -60,14 +59,13 @@
     justify-content: center;
     border-radius: 30px;
     align-items: center;
-    width: 376px;
+    width: 373px;
     height: auto;
   }
 }
 
 .rightside {
   gap: 5px;
-  padding-right: 20%;
 }
 
 .subImaging {
@@ -83,10 +81,9 @@
     cursor: pointer;
     border-radius: 20px;
     transition: transform 0.3s ease;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 
     &:hover {
-      transform: scale(1.0);
+      transform: scale(1.02);
 
       .product-info {
         transform: translateY(0);
