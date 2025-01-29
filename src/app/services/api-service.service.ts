@@ -170,7 +170,7 @@ export class ApiServiceService {
   getOrderItemList() {
     return this.http.get('https://localhost:7267/api/Order/orderItem/List');
   }
-
+//https://exmart-backend.onrender.com/api/Order/orderItem/List
   toggelProductStatus(id: number) {
     const url = `https://localhost:7267/api/Product/toggle-status/${id}`;
     return this.http.put<boolean>(url, {});
@@ -494,14 +494,14 @@ console.log('address data',data);
   GetHrDetails(){
     return this.http.get<HrDetailsI>(`https://exmart-backend.onrender.com/api/HrDetails`);
   }
-  
-  UpdateHrDetails(HrdetailContent:HrDetailsI): Observable<any>{
-    const payload = {
-      id: 1,
-      ...HrdetailContent
-    };
-    const headers = { 'Content-Type': 'application/json' };
-    return this.http.put(`https://exmart-backend.onrender.com/api/HrDetails/1`,payload,{ headers });
+
+  UpdateHrDetails(hrDetailContent: HrDetailsI) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put(
+      'https://exmart-backend.onrender.com/api/HrDetails',
+      hrDetailContent,
+      { headers }
+    );
   }
 
   GetPolicy(){
@@ -522,15 +522,10 @@ console.log('address data',data);
         return this.http.put(`https://localhost:7267/api/Policy/${id}`, updatePayload);
       })
     );
+  }
 
-
-
-    // const payload = {
-    //   tndCcontent: policyContent
-    // };
-    // return this.http.put(`https://localhost:7267/api/Policy/${id}`, payload);
-
-    // return this.http.put(`https://localhost:7267/api/Policy/${id}`,policyContent);
+  GetUserNameById(id:number){
+    return this.http.get(`https://localhost:7267/api/users/ReturnNameFromId/${id}`);
   }
 
   LoginandToken(loginRequest:any){

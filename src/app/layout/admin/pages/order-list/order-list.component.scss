@@ -1,6 +1,19 @@
 body {
   font-family: Arial, sans-serif;
 }
+.alert {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.alert-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .right {
   padding-left: 10px;
   padding-right: 10px;

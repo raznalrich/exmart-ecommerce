@@ -2,7 +2,7 @@
   <h6 style="color: #6a0dad">
     <i class="bi bi-receipt"></i> Billing Details
   </h6>
-  <div class="order-details" style="margin-top: 25px; line-height: 18px;font-size: small;">
+  <div class="order-details" style="margin-top: 25px; line-height: 18px;font-size: small;" *ngIf="OrderDetailsByID">
     <p>Order No: <strong>{{OrderDetailsByID.orderId}}</strong></p>
     <p>Bill Date: {{OrderDetailsByID.createdAt | date : "YYYY-MM-DD"}}</p>
     <p>Total Amount: <strong>{{OrderDetailsByID.totalAmount | currency : "INR"}}</strong></p>
