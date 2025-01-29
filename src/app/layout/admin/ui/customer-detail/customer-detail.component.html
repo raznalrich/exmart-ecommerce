@@ -2,7 +2,7 @@
   <h6 style="color: #6a0dad">
     <i class="bi bi-person-circle"></i> Customer Details
   </h6>
-  <div class="order-details" style="margin-top: 25px;line-height: 18px; font-size: small;">
+  <div class="order-details" style="margin-top: 25px;line-height: 18px; font-size: small;" *ngIf="OrderDetailsByID">
     <p>Name: <strong>{{OrderDetailsByID.name}}</strong></p>
     <p>e-mail: <strong>{{OrderDetailsByID.email}}</strong></p>
     <p>Phone: <strong> {{OrderDetailsByID.phone}}</strong></p>
