@@ -24,9 +24,9 @@
             <div class="modal-body">
               <form [formGroup]="hrForm" (ngSubmit)="onSubmit()">
                 <div class="form-fields">
-                  <!-- Phone Number -->
+
                   <div class="form-field">
-                    <label>Phone Number</label>
+                    <label>HR contact phone number</label>
                     <input
                       type="number"
                       formControlName="hrPhoneNumber">
@@ -35,9 +35,8 @@
                     }
                   </div>
 
-                  <!-- HR Email -->
                   <div class="form-field">
-                    <label>HR Email</label>
+                    <label>HR e-mail</label>
                     <input
                       type="email"
                       formControlName="hrEmail">
@@ -46,17 +45,15 @@
                     }
                   </div>
 
-                  <!-- HR Address -->
                   <div class="form-field">
-                    <label>Address</label>
+                    <label>HR contact address</label>
                     <textarea
                       formControlName="hrAddress"
                       rows="3"></textarea>
                   </div>
 
-                  <!-- HR Chat Email -->
                   <div class="form-field">
-                    <label>Chat Email</label>
+                    <label>HR chat person's e-mail</label>
                     <input
                       type="email"
                       formControlName="hrChatEmail">
@@ -68,7 +65,7 @@
                   <!-- Pro Tag Line -->
                   <div class="form-field">
                     <label>
-                      Product Tag Line
+                      Product Tag Line in footer
                       <span class="word-count">
                         ({{ getWordCount() }}/25 words)
                       </span>
