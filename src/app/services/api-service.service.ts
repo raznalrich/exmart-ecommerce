@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { catchError, map, Observable, switchMap } from 'rxjs';
 
@@ -14,6 +14,7 @@ interface AddressResponse {
   // ... other fields
 }
 import { OrderItem } from '../layout/admin/interface/order.interface';
+import { HrDetailsI } from '../layout/user/interfaces/FooterInterfaces';
 
 export interface OrderEmailContext {
   orderId: string;
@@ -488,6 +489,19 @@ console.log('address data',data);
     return this.http.get(
       `https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`
     );
+  }
+
+  GetHrDetails(){
+    return this.http.get<HrDetailsI>(`https://exmart-backend.onrender.com/api/HrDetails`);
+  }
+  
+  UpdateHrDetails(HrdetailContent:HrDetailsI): Observable<any>{
+    const payload = {
+      id: 1,
+      ...HrdetailContent
+    };
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.put(`https://exmart-backend.onrender.com/api/HrDetails/1`,payload,{ headers });
   }
 
   GetPolicy(){
