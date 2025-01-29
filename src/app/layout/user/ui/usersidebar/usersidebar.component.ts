@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { LogoutButtonComponent } from '../logout-button/logout-button.component';
-
+import { ApiServiceService } from '../../../../services/api-service.service';
+interface UserResponse {
+  name: string;
+}
 @Component({
   selector: 'app-usersidebar',
   standalone: true,
@@ -10,9 +13,26 @@ import { LogoutButtonComponent } from '../logout-button/logout-button.component'
   styleUrl: './usersidebar.component.scss',
 })
 export class UsersidebarComponent {
-  constructor(private router:Router) {
+  userName: string = '';
 
+  constructor(private router:Router,private api:ApiServiceService) {}
+
+  ngOnInit(){
+    this.api.GetUserNameById(this.UserId).subscribe((res: any) => {
+      this.userName = res.userName;
+      console.log('User Name:',this.userName);
+    });
+ }
+
+ UserId : number | any = this.getUserId();
+
+  getUserId() {
+    const userId = localStorage.getItem('userId');
+    console.log('user ID aping',userId);
+
+    return userId;
   }
+
   menuItems: any = [
     {
       id: 1,
