@@ -18,6 +18,7 @@ import { EditHrDetailsComponent } from "../../ui/edit-hr-details/edit-hr-details
   imports: [
     AddNewCategoryComponent,
     EditPoliciesComponent,
+    RouterLink,
     AddBannerComponent,
     EditBannerComponent,
     EditCategoryComponent,
