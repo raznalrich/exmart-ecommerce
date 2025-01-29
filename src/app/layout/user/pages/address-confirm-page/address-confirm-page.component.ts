@@ -11,6 +11,7 @@ import { address } from '../../interfaces/AddressInterface';
 import { GlobalService } from '../../../../global.service';
 import { NewAddressComponent } from "../new-address/new-address.component";
 import { map } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-address-confirm-page',
@@ -20,7 +21,7 @@ import { map } from 'rxjs';
   styleUrl: './address-confirm-page.component.scss'
 })
 export class AddressConfirmPageComponent {
-    constructor(public api:ApiServiceService, public global:GlobalService){
+    constructor(public api:ApiServiceService, public global:GlobalService, private location:Location){
       this.global.getUserId()
     }
 
@@ -66,5 +67,9 @@ userId:number=0;
    onAddAddress() {
     this.selectedAddress = undefined;
     this.isAddProductVisible= true;
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
