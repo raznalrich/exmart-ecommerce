@@ -75,28 +75,29 @@
   <table class="styled-table">
     <!-- @for(item of O) -->
     <tr>
-      <th>
+      <!-- <th>
         <button type="button" class="btn btn-sm" >
         <input class="form-check-input" type="checkbox" value="" [(ngModel)]="selectAll"
         (change)="toggleSelectAll()">
         </button>
-      </th>
+      </th> -->
       <th>Order Item Id</th>
       <th>Date</th>
       <th>Product</th>
       <th>Status</th>
       <th>Amount</th>
       <th>Quantity</th>
+      <th>S.C</th>
       <th> Action </th>
     </tr>
     @for(item of OrderList; track item){
       <tr>
-      <td>
+      <!-- <td>
         <button type="button" class="btn btn-sm" style="margin-left: 4px;" >
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
               [(ngModel)]="item.isSelected">
         </button>
-        </td>
+        </td> -->
         <td>{{item.orderItemId}}</td>
         <td>{{item.orderDate | date : "YYYY-MM-dd"}}</td>
         <td>{{item.productName}}</td>
@@ -113,6 +114,7 @@
 
         <td>{{item.amount | currency : "INR"}}</td>
          <td>{{item.quantity}}</td>
+         <td>{{item.shippingCharge | currency : "INR"}}</td>
           <td style="text-align: center;">
 
             <button type="button" class="btn btn-sm"  (click)="openOrderDetailModal(item.orderId, item.orderItemId)">
@@ -122,6 +124,6 @@
             </td>
 </tr>
 
-    }
+}
   </table>
 </div>

@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-shipment-detail',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './shipment-detail.component.html',
   styleUrl: './shipment-detail.component.scss'
 })
