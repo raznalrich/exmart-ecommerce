@@ -31,6 +31,7 @@ import { TrackExmartComponent } from './layout/user/pages/track-exmart/track-exm
 import { ShippedConfirmationEmailComponent } from './layout/admin/ui/shipped-confirmation-email/shipped-confirmation-email.component';
 import { AuthGuard } from './authGuard/auth.guard';
 import { OrderConfirmedEmailComponent } from './layout/user/pages/order-confirmed-email/order-confirmed-email.component';
+import { ConfigurationTabComponent } from './layout/admin/ui/configuration-tab/configuration-tab.component';
 
 export const routes: Routes = [
   {
@@ -47,7 +48,7 @@ export const routes: Routes = [
 
           {
             path:'',redirectTo:'category/1',pathMatch:'full',
-            
+
           },
         ],
 
@@ -147,6 +148,10 @@ export const routes: Routes = [
       {
         path:'settings',component:SettingsPageComponent,
         data: { breadcrumb: 'Settings' }
+      },
+      {
+        path:'configuration-tab',component:ConfigurationTabComponent,
+        data: { breadcrumb: 'Configuration Tab' }
       },
       {
         path:'texteditor/:id',component:AdminSettingsTextEditorComponent,

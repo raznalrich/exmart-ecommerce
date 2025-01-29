@@ -59,6 +59,7 @@ export class LoginFormComponent {
 
           // Store token in localStorage or a service
           localStorage.setItem('token', this.token);
+          localStorage.setItem('userid', decoded.UserId);
           this.authentication(decoded.UserId);
           // Navigate to dashboard or home page
 
