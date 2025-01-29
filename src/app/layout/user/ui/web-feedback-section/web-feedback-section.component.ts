@@ -15,12 +15,10 @@ import { ApiService } from '../../../../api.service';
 export class WebFeedbackSectionComponent {
   constructor(private api:ApiService){}
 
-  userid = localStorage.getItem('userid');
-
   webfeedbackForm = new FormGroup({
 
     feedback: new FormControl(''),
-    userId: new FormControl(6),
+    userId: new FormControl('1'),
     productName: new FormControl('website')
 
   });

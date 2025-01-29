@@ -25,8 +25,6 @@ export class OrderlistTableComponent {
   OrderDetailsByID : any
   selectedOrderItemId: any;
 
-  selectAll: boolean = false;
-
 
   constructor(public api:ApiServiceService){}
 
@@ -42,18 +40,6 @@ export class OrderlistTableComponent {
       this.closeModal();
     });
 
-  }
-
-  toggleSelectAll() {
-      // Update all items' selection status based on selectAll checkbox
-    this.OrderList.forEach(item => {
-      item.isSelected = this.selectAll;
-    });
-    
-  }
-      //Method to check if any items are selected
-  getSelectedItems() {
-    return this.OrderList.filter(item => item.isSelected);
   }
 
   // Open the modal and store the selected item and status

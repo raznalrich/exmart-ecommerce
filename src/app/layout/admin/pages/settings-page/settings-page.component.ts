@@ -23,7 +23,7 @@ import { EditHrDetailsComponent } from "../../ui/edit-hr-details/edit-hr-details
     EditBannerComponent,
     EditCategoryComponent,
     ConfigurationTabComponent,
-    ConfigurationButtonComponent,
+    ConfigurationButtonComponent
     EditHrDetailsComponent
 ],
   templateUrl: './settings-page.component.html',
