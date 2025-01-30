@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../../global.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-size-button',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './size-button.component.html',
   styleUrl: './size-button.component.scss'
 })
