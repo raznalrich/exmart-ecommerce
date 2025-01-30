@@ -15,6 +15,7 @@ interface AddressResponse {
 }
 import { OrderItem } from '../layout/admin/interface/order.interface';
 import { HrDetailsI } from '../layout/user/interfaces/FooterInterfaces';
+import { OrderItemsList } from '../layout/user/interfaces/OrderEmailContext';
 
 export interface OrderEmailContext {
   orderId: string;
@@ -112,12 +113,7 @@ export class ApiServiceService {
   }
 
   deleteFromCart(productId: number, userId: number): Observable<any> {
-    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart`, {
-      params: {
-        productId: productId.toString(),
-        userId: userId.toString(),
-      },
-    });
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart/${productId}/${userId}`);
   }
 
   updateCategory(id: number, category: any): Observable<any> {
@@ -487,7 +483,7 @@ console.log('address data',data);
   }
 
   GetOrderDetailById(orderid: any) {
-    return this.http.get(
+    return this.http.get<OrderItemsList>(
       `https://localhost:7267/api/Order/orders/detailsbyid/${orderid}`
     );
   }

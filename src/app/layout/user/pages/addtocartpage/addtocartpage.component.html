@@ -30,13 +30,9 @@
             [productSize]="items.sizeName"
             [productPrice]="items.price"
             [productId]="items.id"
-            (clear) = "ngOnInit()"
-            >
-          </app-product-displaying-bar>
-
+            (clear) = "handleProductRemoval(items.id)"
+            ></app-product-displaying-bar>
         }
-
-
     </section>
 
 
