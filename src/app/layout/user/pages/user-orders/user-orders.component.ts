@@ -16,11 +16,12 @@ export class UserOrdersComponent {
   constructor(public api:ApiServiceService,public global:GlobalService,private router: Router){
     this.global.getUserId();
   }
-  @Input() tabs = ['Pending','In Transit', 'Delivered'];
+  @Input() tabs = ['Pending','In Transit', 'Delivered','Cancelled'];
   activeTab = 'Pending';
   pendingOrders:any[]=[];
   inTransitOrders: any[] = [];
   orderHistorylist: any[] = [];
+  cancelledOrders:any[]=[];
   isLoading = true;
   error: string | null = null;
 
@@ -72,6 +73,7 @@ export class UserOrdersComponent {
         console.log('in transit',this.inTransitOrders);
 
         this.pendingOrders = res.filter((order:any) => order.userId === this.userId &&  order.status ===1);
+        this.cancelledOrders = res.filter((order:any) => order.userId === this.userId &&  order.status ===5);
         this.orderHistorylist = res.filter((order: any) => order.userId === this.userId && order.status === 3);
         console.log("filtered orders", this.inTransitOrders);
         this.isLoading = false;
