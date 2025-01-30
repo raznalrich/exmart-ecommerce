@@ -89,7 +89,7 @@ ngOnInit(){
     //Fetch color details
     this.api.GetOrderDetailById(this.id).subscribe({
       next: (orderData) => {
-        this.orderData = orderData;
+        // this.orderData = orderData;
         console.log("orderData",orderData);
         this.orderItemslist = this.orderData.orderItems
         console.log('orderitemList',this.orderItemslist);
@@ -109,11 +109,7 @@ sendCancel(id:number){
   this.isSubmitting=true;
   this.api.GetOrderDetailById(this.id).subscribe({
     next: (orderData) => {
-      if (orderData) {  // Ensure orderData is valid before assignment
-        this.orderData = orderData as Order;
-      } else {
-        console.error("Order data is undefined");
-      }
+
       console.log("order details",orderData);
       this.orderItemslist = this.orderData.orderItems
       console.log('order item',this.orderItemslist);
