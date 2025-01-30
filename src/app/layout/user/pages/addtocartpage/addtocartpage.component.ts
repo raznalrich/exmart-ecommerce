@@ -160,16 +160,11 @@ this.fetchCartItems( this.global.signalCartList());
       // Find the corresponding cart item to get the quantity
       const cartItem = this.cartItemList.find((item: any) => item.productId === product.id);
       const quantity = cartItem ? cartItem.quantity : 0;
-      if(+this.addressType == 1 ){
-        console.log('shipping charge');
-
-        return total + ((product.price * quantity)+49)
-      }
-      else{
+      
         console.log("calculating total amount");
 
         return total + (product.price * quantity);
-      }
+
     }, 0);
 
     // Add delivery charge if address is 3

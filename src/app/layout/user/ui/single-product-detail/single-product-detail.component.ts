@@ -180,6 +180,7 @@ export class SingleProductDetailComponent {
           },
           error: (error) => {
             console.error('Error adding item to cart:', error);
+            this.showSuccessAlert('Item already in cart !');
           },
           complete: () => {
             this.isLoading = false;
