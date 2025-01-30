@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductcardComponent } from "../productcard/productcard.component";
 import { ApiServiceService } from '../../../../services/api-service.service';
@@ -17,7 +17,7 @@ export class ProductDisplayingSectionComponent {
   data:any;
   private paramSubscription!: Subscription;
 
-  constructor(private route: ActivatedRoute,public api:ApiServiceService){}
+  constructor(private route: ActivatedRoute,public api:ApiServiceService,public router: Router){}
   ngOnInit(){
     this.paramSubscription = this.route.paramMap.subscribe(paramMap => {
       this.id = paramMap.get('id');
@@ -30,9 +30,13 @@ export class ProductDisplayingSectionComponent {
 
       })
     });
-
-
   }
+
+  navigateToPolicy() {
+    this.router.navigate(['/seeAllProducts'])
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   ngOnDestroy() {
     // Unsubscribe to prevent memory leaks
     if (this.paramSubscription) {

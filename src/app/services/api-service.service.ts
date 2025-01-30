@@ -235,6 +235,7 @@ export class ApiServiceService {
 
   }
 
+
   getAddressTypeById(id: number): Observable<string> {
     return this.http.get<any>(`https://localhost:7267/api/Users/getAddressById/${id}`)
       .pipe(
@@ -492,18 +493,17 @@ console.log('address data',data);
   }
 
   GetHrDetails(){
-    return this.http.get<HrDetailsI>(`https://exmart-backend.onrender.com/api/HrDetails`);
+    return this.http.get<HrDetailsI>(`https://localhost:7267/api/HrDetails`);
   }
-  
-  UpdateHrDetails(HrdetailContent:HrDetailsI): Observable<any>{
-    const payload = {
-      id: 1,
-      ...HrdetailContent
-    };
-    const headers = { 'Content-Type': 'application/json' };
-    return this.http.put(`https://exmart-backend.onrender.com/api/HrDetails/1`,payload,{ headers });
-  }
+  UpdateHrDetails(hrDetailContent: HrDetailsI) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put(
+      'https://localhost:7267/api/HrDetails',hrDetailContent,{ headers }
+    );}
 
+  GetUserNameById(id:number){
+      return this.http.get(`https://localhost:7267/api/users/ReturnNameFromId/${id}`);
+  }
   GetPolicy(){
     return this.http.get(`https://localhost:7267/api/Policy`)
   }
