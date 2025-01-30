@@ -1,6 +1,6 @@
 <div class="container">
   <button type="button" (click)="openModal()"
-  class="edit-button" data-bs-toggle="modal">
+  class="btn btn-primary" style="height: 100%;" data-bs-toggle="modal">
   Edit HR Details <i class="bi bi-pen"></i>
   </button>
 
@@ -26,7 +26,7 @@
                 <div class="form-fields">
                   <!-- Phone Number -->
                   <div class="form-field">
-                    <label>Phone Number</label>
+                    <label>HR contact phone number</label>
                     <input
                       type="number"
                       formControlName="hrPhoneNumber">
@@ -37,7 +37,7 @@
 
                   <!-- HR Email -->
                   <div class="form-field">
-                    <label>HR Email</label>
+                    <label>HR e-mail</label>
                     <input
                       type="email"
                       formControlName="hrEmail">
@@ -48,7 +48,7 @@
 
                   <!-- HR Address -->
                   <div class="form-field">
-                    <label>Address</label>
+                    <label>HR contact address</label>
                     <textarea
                       formControlName="hrAddress"
                       rows="3"></textarea>
@@ -56,7 +56,7 @@
 
                   <!-- HR Chat Email -->
                   <div class="form-field">
-                    <label>Chat Email</label>
+                    <label>HR chat person's e-mail</label>
                     <input
                       type="email"
                       formControlName="hrChatEmail">
@@ -68,7 +68,7 @@
                   <!-- Pro Tag Line -->
                   <div class="form-field">
                     <label>
-                      Product Tag Line
+                      Product Tag Line in footer
                       <span class="word-count">
                         ({{ getWordCount() }}/25 words)
                       </span>
