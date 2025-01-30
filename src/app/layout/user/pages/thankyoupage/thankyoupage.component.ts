@@ -106,7 +106,7 @@ productIds: number[] = [];
             this.isContentVisible = true;
             this.ContentVisible = false;
           }
-        },1000)
+        },2000)
 
       });
     }
