@@ -61,7 +61,7 @@ export class OrderItemComponent {
   @Input() quantity: string = '';
   @Input() imageUrl: string = '';
   @Input() status: any;
-  isSubmitting=true;
+  isSubmitting=false;
 
   statusName:any;
   @Input() isVisible:boolean = false;
@@ -133,7 +133,8 @@ sendCancel(id:number){
                 this.emailservice.sendOrderCancellationEmail('raznalrich@gmail.com', orderContext).subscribe({
                   next: () => {
                     console.log('Order Cancellation email sent successfully');
-                    this.router.navigate(['/thankyou']);
+                    this.isSubmitting=false;
+                    this.router.navigate(['/userprofile/userorder']);
                   },
                   error: (emailError) => {
                     console.error('Failed to send order cancellation email:', emailError);

@@ -40,6 +40,21 @@
 }
   </div>
 </div>
+<div class="loadingSpinner" *ngIf="isSubmitting">
+  <div>
+
+    <span>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+
+      </div>
+      <p>
+
+        Cancel Requesting .....
+      </p>
+    </span>
+  </div>
+</div>
 <div class="backdrop" *ngIf="isVisible" (click)="onCloseAddProduct()">
   <div class="modal1" *ngIf="isVisible">
     <div class="modal2 show d-block"  >
@@ -84,9 +99,7 @@
                 class="btn btn-primary"
               (click)="sendCancel(id)"
               >
-              <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
+
 
               Confirm
               </button>
