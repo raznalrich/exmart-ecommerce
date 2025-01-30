@@ -32,6 +32,6 @@ export class LongButtonComponent {
       this.startLoading();
   }
   startLoading(){
-    this.isLoading = true;
+    // this.isLoading = true;
   }
 }
