@@ -6,3 +6,41 @@
 .show {
   display: block;
 }
+.loader {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+.loader.show {
+  opacity: 1;
+  animation: spin 0.8s linear infinite;
+}
+.loadingSpinner{
+
+  min-height: 100vh;
+  min-width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.148);
+  opacity: 0.5;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  span{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    p{
+      padding-left: 16px;
+    }
+  }
+}

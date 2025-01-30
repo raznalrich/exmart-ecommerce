@@ -14,6 +14,7 @@ export class GlobalService {
   orderContext = signal<OrderEmailContext[]>([])
   signalOrderList = signal<any[]>([])
   selectedAddressId = signal<string>('');
+  selectedAddressTypeName = signal<string>('');
   cartList:any[]=[];
   editProduct(item: any) {
     console.log(item);

@@ -27,8 +27,8 @@ export class OrderListComponent {
   orderlist: any[] = [];
   filteredItems: any[] = [];
   searchPlaceholder: string = 'Search Order Item/Product';
-  totalOrders : any
-  deliveredOrders : any
+  totalOrders: any;
+  deliveredOrders: any;
 
   constructor(public api: ApiServiceService) {}
 
@@ -39,11 +39,10 @@ export class OrderListComponent {
         orderDate: new Date(item.orderDate).toISOString(),
       }));
       this.filteredItems = [...this.orderlist];
-      this.totalOrders = this.filteredItems.length
-      console.log(this.totalOrders)
+      this.totalOrders = this.filteredItems.length;
+      console.log(this.totalOrders);
       console.log('filtered list', this.filteredItems);
-
-      this.calculateDevileredOrders()
+      this.calculateDevileredOrders();
     });
   }
 
@@ -53,7 +52,6 @@ export class OrderListComponent {
       this.filteredItems = [...this.orderlist];
       return;
     }
-    // console.log('Search Term:', term);
     const regex = new RegExp(`^${term}$`, 'i');
     this.filteredItems = this.orderlist.filter((item: any) => {
       const orderId =
@@ -63,7 +61,11 @@ export class OrderListComponent {
         : '';
       const status = item.status !== undefined ? item.status.toString() : '';
 
-      return regex.test(orderId) || productName.includes(term.toLowerCase()) || regex.test(status);
+      return (
+        regex.test(orderId) ||
+        productName.includes(term.toLowerCase()) ||
+        regex.test(status)
+      );
     });
 
     if (this.filteredItems.length === 0) {
@@ -72,8 +74,10 @@ export class OrderListComponent {
   }
 
   calculateDevileredOrders() {
-    this.deliveredOrders = this.filteredItems.filter(order => order.status === 3).length;
-    console.log('deliver',this.deliveredOrders);
+    this.deliveredOrders = this.filteredItems.filter(
+      (order) => order.status === 3
+    ).length;
+    console.log('deliver', this.deliveredOrders);
   }
 
   onDateRangeSelected(dateRange: { startDate: string; endDate: string }) {
@@ -142,6 +146,7 @@ export class OrderListComponent {
                 productStatusId: this.getStatusNumber(
                   row.getCell(4).value as string
                 ),
+                shippingCharge: row.getCell(5).value,
               }
           )
           .filter((order) => order && order.orderItemId) ?? [];
@@ -189,6 +194,7 @@ export class OrderListComponent {
       { header: 'Date', key: 'orderDate', width: 20 },
       { header: 'Product', key: 'productName', width: 25 },
       { header: 'Status', key: 'status', width: 15 },
+      { header: 'Shippping Charge', key: 'shippingCharge', width: 15 },
       { header: 'Amount', key: 'amount', width: 15 },
       { header: 'Quantity', key: 'quantity', width: 10 },
     ];
@@ -199,10 +205,10 @@ export class OrderListComponent {
       productName: order.productName,
       status:
         ['Pending', 'Shipped', 'Delivered'][order.status - 1] || 'Pending',
+      shippingCharge: order.shippingCharge,
       amount: order.amount.toFixed(2),
       quantity: order.quantity,
     }));
-    // console.log("this is filtered data",data);
     data.forEach((row) => worksheet.addRow(row));
 
     const dataValidation = {
@@ -218,7 +224,6 @@ export class OrderListComponent {
     const statusColumn = worksheet.getColumn('status');
     statusColumn.eachCell({ includeEmpty: true }, (cell, rowNumber) => {
       if (rowNumber > 1) {
-        // Skip header row
         cell.dataValidation = dataValidation;
       }
     });

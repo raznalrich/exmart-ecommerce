@@ -77,9 +77,9 @@ totalPrice: number = 0;
 
     // });
     this.userId = this.global.userId();
-    if(this.global.selectedAddressId() == ''){
-      // this.router.navigate(['/addressconfirm']);
-    }
+    // if(this.global.selectedAddressId() == ''){
+    //   // this.router.navigate(['/addressconfirm']);
+    // }
 
     if(this.global.selectedAddressId()){
       this.selectedAddress = +this.global.selectedAddressId();
@@ -90,22 +90,25 @@ totalPrice: number = 0;
     const cartItems = this.global.signalCartList();
     this.cartItemList = this.global.signalCartList();
 
-    console.log('cart item list ',this.cartItemList);
+    // console.log('cart item list ',this.cartItemList);
 
     this.productIds = cartItems.map(item => item.productId);
 
-    console.log('Cart list:', cartItems);
-    console.log('Product IDs:', this.productIds);
-    if(this.global.selectedAddressId()==''){
+    // console.log('Cart list:', cartItems);
+    // console.log('Product IDs:', this.productIds);
+    // if(this.global.selectedAddressId()==''){
 
       this.fetchCartItems(cartItems);
-    }
+    // }
+    // this.calculateTotalPrice();
     // console.log(this.CartItems);
   }
   loadAddress(addressId:number) {
     this.apis.getAddressById(addressId).subscribe({
       next: (formattedAddress) => {
         this.address = formattedAddress;
+        console.log('my address',this.address);
+
       },
       error: (error) => {
         console.error('Error fetching address:', error);
@@ -160,16 +163,11 @@ this.fetchCartItems( this.global.signalCartList());
       // Find the corresponding cart item to get the quantity
       const cartItem = this.cartItemList.find((item: any) => item.productId === product.id);
       const quantity = cartItem ? cartItem.quantity : 0;
-      if(+this.addressType == 1 ){
-        console.log('shipping charge');
 
-        return total + ((product.price * quantity)+49)
-      }
-      else{
         console.log("calculating total amount");
 
         return total + (product.price * quantity);
-      }
+
     }, 0);
 
     // Add delivery charge if address is 3
@@ -218,7 +216,10 @@ this.fetchCartItems( this.global.signalCartList());
                   this.emailservice.sendOrderRequestEmail('raznalrich@gmail.com', orderContext).subscribe({
                     next: () => {
                       console.log('Order confirmation email sent successfully');
-                      this.router.navigate(['/thankyou']);
+                      this.onDelete(this.userId);
+                      this.router.navigate(['/thankyou'],
+                        { state: { orderContext } }
+                      );
                     },
                     error: (emailError) => {
                       console.error('Failed to send order confirmation email:', emailError);
@@ -245,10 +246,11 @@ this.fetchCartItems( this.global.signalCartList());
   }
 
   onDelete(id: number) {
-
+    this.global.selectedAddressId.set('');
       this.apis.deleteCartById(id).subscribe({
         next: () => {
           // this.refreshAddressList();
+          this.global.getCartCount();
         },
         error: (error) => {
           console.error('Error deleting address', error);

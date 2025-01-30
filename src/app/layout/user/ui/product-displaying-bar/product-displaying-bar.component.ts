@@ -15,6 +15,8 @@ import { GlobalService } from '../../../../global.service';
 export class ProductDisplayingBarComponent {
   @Input() productImage: string = '';
   @Input() productId:number =0;
+  @Input() colorId:number =0;
+  @Input() sizeId:number =0;
   @Input() productName: string = '';
   @Input() productColor: string = '';
   @Input() productSize: string = '';
@@ -22,13 +24,14 @@ export class ProductDisplayingBarComponent {
     @Output() clear = new EventEmitter<void>();
 
   userId:any;
-  color:any;
-  size:any;
+  // color:any;
+  // size:any;
  constructor(public api: ApiServiceService, private route: ActivatedRoute,public global:GlobalService) {
 this.global.getUserId();
  }
  ngOnInit(){
   this.userId = this.global.userId();
+console.log('product id',this.productId);
 
 
 
@@ -36,10 +39,10 @@ this.global.getUserId();
  }
  deleteCart(){
   this.clear.emit();
-  
+
  }
- removeFromCart(productId: number, userId: number) {
-  this.api.deleteFromCart(productId, userId).subscribe({
+ removeFromCart(productId: number, userId: number,colorId:number,sizeId:number) {
+  this.api.deleteFromCart(productId, userId,colorId,sizeId).subscribe({
     next: (response) => {
       console.log('Item removed successfully');
       this.global.getCartCount();
