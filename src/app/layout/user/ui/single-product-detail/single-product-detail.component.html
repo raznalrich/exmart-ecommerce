@@ -41,18 +41,17 @@
 
     <div class="size-options">
       @for(SizeId of data.sizeId; track SizeId){
-    
-
-
-          <app-size-button
+        <app-size-button
           [SizeId]="SizeId"
           (sizeSelected)="handleSizeSelect($event)"
-          [ngClass]="{ active: sizeId == SizeId }"
+          [ngClass]="{
+            'active': sizeId == SizeId && SizeId != 8,
+            'free-size': sizeId == SizeId && SizeId == 8
+          }"
           [(ngModel)]="sizeId"
           (change)="checkSelection()"
-          ></app-size-button>
-        }
-
+        ></app-size-button>
+      }
     </div>
 
     <br>
