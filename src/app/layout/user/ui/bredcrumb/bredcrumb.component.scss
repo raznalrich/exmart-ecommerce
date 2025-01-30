@@ -1,0 +1,38 @@
+.breadcrumb {
+  font-size: 14px;
+  color: #666;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  margin-left: 1.2rem;
+  background-color: transparent;
+}
+
+.breadcrumb-item {
+  display: inline;
+  font-size: 14px;
+  color: #007bff;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.breadcrumb-item span {
+  color: #6c757d;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+  padding: 0 10px;
+  color: #6c757d;
+}
+
+.breadcrumb-item:last-child {
+  font-weight: bold;
+}

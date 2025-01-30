@@ -1,29 +1,84 @@
 <body>
-  <div class="login-container">
-    <div class="login-header">
-      <h4>USER LOGIN</h4>
-    </div>
-    <div class="login-avatar">
-      <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="User Avatar">
-    </div>
-    <form class="login-form" [formGroup]="LoginForm" (ngSubmit)="submit()">
-      <div class="form-group">
-        <input type="email" placeholder="Email" required formControlName="email">
-        <span class="icon">&#128231;</span>
-      </div>
-      <div class="validation-message">
-            @if (LoginForm.get('email')?.invalid && LoginForm.get('email')?.touched) {
-             invalid email⚠️
-            }
+<!-- slide show -->
+ <div class="container">
+    <div class="illustration">
+      <div class="carousel">
+        <div class="slides">
+          <div class="slide">
+            <img src="/images/rb_8432.png" alt="Experion-brand">
+            <div class="slide-text">
+              <span class="slide-text-main">Become the experion brand</span>
+              <span class="slide-text-sub">Together, we innovate, inspire, and lead from within</span>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="/images/spirit.png" alt="spirit">
+            <div class="slide-text">
+              <span class="slide-text-main">Own the Experion Spirit</span>
+              <span class="slide-text-sub">Embrace the values that drive us,the vision that inspires us</span>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="/images/by-us.png" alt="by-us">
+            <div class="slide-text">
+              <span class="slide-text-main">For Us By Us</span>
+              <span class="slide-text-sub">A platform built for Experion employees—where convenience meets exclusive rewards</span>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="/images/for-you-removebg-preview.png" alt="for-you">
+            <div class="slide-text">
+              <span class="slide-text-main">Designed for You Powered by Us</span>
+              <span class="slide-text-sub">A platform crafted exclusively for Experion employees—where every purchase reflects our shared values</span>
+            </div>
+          </div>
+          <div class="slide">
+            <img src="/images/experiance-removebg-preview.png" alt="Experiance">
+            <div class="slide-text">
+              <span class="slide-text-main">Experience the Experion Edge</span>
+              <span class="slide-text-sub">Shop from a curated collection of products and services, available only to our team</span>
+            </div>
+          </div>
         </div>
-      <div class="form-group">
-        <input type="password" placeholder="Password" required  formControlName="password">
-        <!-- <span class="icon"><i class="fa-light fa-eye-slash"></i></span> -->
+        <div class="carousel-indicators">
+          <div class="indicator"></div>
+          <div class="indicator"></div>
+          <div class="indicator"></div>
+          <div class="indicator"></div>
+          <div class="indicator"></div>
+        </div>
       </div>
-      <a href="#" class="forgot-password">Forgot Password</a>
-      <button type="submit" class="login-button">LOGIN</button>
-    </form>
+    </div>
+    <!-- Right side section -->
+    <div class="right-sec">
+      <div class="logo">
+        <img src="icons\exMartlogov1.png" alt="ExMart Logo">
+      </div>
+      <div class="login-form">
+        <h2>Welcome</h2>
+        <form class="login-form" [formGroup]="LoginForm" (ngSubmit)="submit()">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email" required formControlName="email"/>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required formControlName="password"/>
+          </div>
+          <div class="form-actions">
+            <a href="">Forgot Password?</a>
+          </div>
+          <button type="submit" class="login-btn">
+@if(isLoading){
+  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+
+}
+            Log In</button>
+        </form>
+      </div>
+    </div>
   </div>
+
   <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
   </button> -->

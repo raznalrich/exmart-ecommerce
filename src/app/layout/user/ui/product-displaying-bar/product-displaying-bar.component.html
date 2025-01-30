@@ -9,11 +9,11 @@
 
     <div class="actions">
       <div class="col">
-        <p >Color: <strong>{{ color }}</strong></p>
-        <p>Size:<strong> {{ size }}</strong></p>
+        <p >Color: <strong>{{ productColor }}</strong></p>
+        <p>Size:<strong> {{ productSize }}</strong></p>
         <p class="price">{{ productPrice | currency: 'INR' }}</p>
       </div>
-      <app-addto-cart-deletebtn [productId]="productId" [userId]="1"></app-addto-cart-deletebtn>
+      <app-addto-cart-deletebtn (click)="deleteCart()" [productId]="productId" [userId]="userId"></app-addto-cart-deletebtn>
     </div>
   </div>
 </div>

@@ -7,16 +7,42 @@ body {
   gap: 5px;
   button {
     height: 40px;
-    width: 30px;
+    width: 40px;
     border-radius: 5px;
     border: none;
     background-color: #8061c3;
     color: white;
-    i {
-      margin-right: 3px;
-    }
+    margin-right: 5px;
   }
 }
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 125px;
+  font-size: 12px;
+  // background-color: #333;
+  color: black;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%; /* Position above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
 
 .container {
   display: flex;

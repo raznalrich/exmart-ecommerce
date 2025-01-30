@@ -1,27 +1,29 @@
 <div class="cAllContainer">
   <div class="heading">All products in exMart</div>
   <div class="content">
-    <!-- <div class="leftOptions"> -->
-      <!-- <div class="filters">Filters</div>
-      @for (category of CategoryList; track category.id) {
-        <div class="category-item">
-          <label>
-            <input
-              type="checkbox"
-              [checked]="selectedCategories.has(category.categoryName)"
-              (change)="toggleCategory(category.categoryName)">
-            {{ category.categoryName }}
-          </label>
+    <div class="leftOptions">
+      <div class="filters">Filters</div>
+      <div class="categories-list">
+        @for (category of CategoryList; track category.id) {
+        <div class="category-checkbox">
+          <input
+            type="checkbox"
+            [id]="'category-' + category.id"
+            [checked]="selectedCategories.includes(category.id)"
+            (change)="onCategoryChange(category.id)"
+          />
+          <label [for]="'category-' + category.id">{{
+            category.categoryName
+          }}</label>
         </div>
-      }
-    </div> -->
+        }
+      </div>
+    </div>
+
     <div class="productGrid">
-      @for (product of displayedProducts; track product.id) {
-        <!-- <p>{{product.name}}</p> -->
-        <app-productcard [cards]="product"></app-productcard>
+      @for (product of displayedProducts; track product?.id) {
+      <app-productcard [cards]="product"></app-productcard>
       }
     </div>
   </div>
 </div>
-
-

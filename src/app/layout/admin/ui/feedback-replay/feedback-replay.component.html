@@ -1,26 +1,21 @@
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</button> -->
-
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"  centered="true">
-  <div class="modal-dialog">
+<div class="modal show d-block" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Give Your Replay</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" >
+      <div class="modal-body">
         <div class="replay-box">
-            <textarea class="feedback-input" placeholder="Reply to the feedback"
-            [(ngModel)]="replayText"
-            ></textarea>
+          <textarea class="feedback-input" placeholder="Reply to the feedback" [(ngModel)]="replayText"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" title="send"  (click)="onSendReplay()"><i class="bi bi-send-plus"></i></button>
+        <button type="button" class="btn btn-primary" title="send" (click)="onSendReplay()">
+          <i class="bi bi-send-plus"></i>
+        </button>
       </div>
     </div>
   </div>

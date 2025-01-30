@@ -1,0 +1,46 @@
+            <div class="search-container" clickOutside (clickOutside)="closeDropdown()">
+              <form>
+                <input
+                  type="search"
+                  [ngModel]="searchTerm"
+                  (ngModelChange)="onSearch($event)"
+                  name="search"
+                  placeholder="Search products"
+                  aria-label="Search"
+                  class="search-input">
+              </form>
+              @if (isLoading()) {
+                <div class="loading-indicator">
+                  Searching...
+                </div>
+              }
+              @if (error()) {
+                <div class="error-message">
+                  {{ error() }}
+                </div>
+              }
+              @if (searchTerm && filteredProducts().length > 0) {
+                <div class="dropdown-container">
+                  @for (product of visibleProducts(); track product.name) {
+                    <div
+                      class="dropdown-item"
+                      (click)="selectProduct(product)"
+                      routerLink="viewproduct/{{product.id}}">
+                      {{ product.name }}
+                    </div>
+                  }
+                  @if (filteredProducts().length > 3 && !showingAll()) {
+                    <div
+                      class="show-more-button"
+                      routerLink="/seeAllProducts">
+                      Show More
+                    </div>
+                  }
+                </div>
+              }
+              @if (searchTerm && filteredProducts().length === 0 && !isLoading() && dropdownVisible()) {
+                <div class="no-results">
+                  No products found
+                </div>
+              }
+            </div>

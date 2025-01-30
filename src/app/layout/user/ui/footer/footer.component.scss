@@ -1,5 +1,6 @@
 .container1{
-  background-color: #64A2F5;
+  // background-color: #64A2F5;
+  background: linear-gradient(to bottom,#253d6c,#3f69ba);
   padding: 5px;
   margin: 0;
   width: 100%;
@@ -19,11 +20,28 @@
       li{
         color: white;
         padding-top: 5px;
-      
+
         i{
           padding-right: 10px;
         }
       }
     }
   }
+}
+.policyTabs{
+  display: flex;
+  color: white;
+  font-weight: 700;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cursoring{
+  cursor: pointer;
+}
+
+.tndc{
+  display: flex;
 }

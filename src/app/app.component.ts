@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { AddtocartpageComponent } from './layout/user/pages/addtocartpage/addtocartpage.component';
 import { ThankyoupageComponent } from './layout/user/pages/thankyoupage/thankyoupage.component';
 // import { UsernavbarComponent } from "./layout/user/ui/usernavbar/usernavbar.component";
@@ -28,12 +28,15 @@ import { UsersidebarComponent } from './layout/user/ui/usersidebar/usersidebar.c
 import { ReportPageComponent } from './layout/admin/pages/report-page/report-page.component';
 import { OrderPopupComponent } from "./layout/admin/ui/order-popup/order-popup.component";
 import { PopUpComponent } from "./layout/user/ui/pop-up/pop-up.component";
+import { AddBannerComponent } from "./layout/admin/ui/add-banner/add-banner.component";
+import { BredcrumbComponent } from "./layout/user/ui/bredcrumb/bredcrumb.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
 
   imports: [
+    RouterLink,
     RouterOutlet,
     HomepageComponent,
     UsernavbarComponent,
@@ -50,18 +53,11 @@ import { PopUpComponent } from "./layout/user/ui/pop-up/pop-up.component";
     UserOrdersComponent,
     HomeStaticComponent,
     AddProductsComponent,
-    RouterOutlet,
-    HomepageComponent,
-    UsernavbarComponent,
-    SidebarComponent,
-    ProductlistComponent,
-    ThankyoupageComponent,
-    AddButtonComponent,
-    SingleproductpageComponent,
-    AddtocartpageComponent,
     AddressConfirmPageComponent,
     OrderPopupComponent,
-    PopUpComponent
+    PopUpComponent,
+    AddBannerComponent,
+    BredcrumbComponent
 ],
 
   templateUrl: './app.component.html',

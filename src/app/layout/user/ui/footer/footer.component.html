@@ -2,44 +2,65 @@
   <div class="row">
     <div class="col" style="padding-left: 30px;">
       <img src="images/exmart_logo.svg" alt="" srcset="">
-      <p style="font-size: 12px;padding-top: 20px;text-align: justify;">exMart is the online merchandise selling platform for experion global which holds all the experion branded items for sale</p>
+      @if (HrDetailList) {
+        <p style="font-size: 12px;padding-top: 20px;text-align: justify;">{{HrDetailList.proTagLine}}</p>
+      }
     </div>
     <div class="col">
-      <p><strong> PRODUCTS</strong></p>
-      <ul>
-        <li>Appliances</li>
-        <li>Stationary</li>
-        <li>Garments</li>
-      </ul>
+      <p><strong> CATEGORIES</strong></p>
+      @for (category of CategoryList || []; track category) {
+        <ul>
+          <li class="cursoring" (click)="navigateToCategory(category.id, category.categoryName)">
+            {{category.categoryName}}
+          </li>
+          <!-- <li class="cursoring" routerLink="home/category/{{category.id}}">{{category.categoryName}}</li> -->
+        </ul>
+      }
     </div>
     <div class="col">
       <p><strong> YOUR ACCOUNT</strong></p>
       <ul>
 
-        <li>Manage address</li>
-        <li>Order History</li>
+        <li class="cursoring" routerLink="userprofile/addresspage">Manage address</li>
+        <li> </li>
+        <li></li>
+        <li class="cursoring" routerLink="userprofile/userorder">Order History</li>
       </ul>
     </div>
     <div class="col">
       <p><strong> CONTACT</strong></p>
       <ul>
-        <li style="display: flex;"><div>
-          <i class="bi bi-telephone-fill"></i>
-        </div>+91 99999 99999</li>
-        <li style="display: flex;"><div>
-          <i class="bi bi-envelope-fill"></i>
-        </div>experion.hr.experionglobal.com</li>
-        <li style="display: flex;"><div>
-          <i class="bi bi-geo-alt-fill"></i>
-        </div>
-          HR, Experion Global, Gayathiri Building, Technopark phase-1, Trivandrum - 695581</li>
-        <li><button (click)="onSendReplay()" class="btn btn-light">Chat with HR<i class="bi bi-send-fill" style="padding-left: 10px;"></i></button></li>
+        @if (HrDetailList) {
+          <li style="display: flex;"><div>
+            <i class="bi bi-telephone-fill"></i>
+          </div>+ {{ HrDetailList.hrPhoneNumber }}</li>
+          <li style="display: flex;"><div>
+            <i class="bi bi-envelope-fill"></i>
+          </div>{{ HrDetailList.hrEmail }}</li>
+          <li style="display: flex;"><div>
+            <i class="bi bi-geo-alt-fill"></i>
+          </div>{{ HrDetailList.hrAddress }}</li>
+        }
+        <li><button (click)="openTeamsChat()"  class="btn btn-light">Chat with HR<i class="bi bi-send-fill" style="padding-left: 10px;"></i></button></li>
       </ul>
     </div>
   </div>
   <div class="row text-center">
-    <p><strong>Terms and conditions | Shipping policy | Payment policy</strong></p>
+    <div class="policyTabs">
+      <div (click)="navigateToPolicy('terms')" [class.active]="router?.url?.includes('terms')">
+        Terms and conditions
+      </div> |
+      <div (click)="navigateToPolicy('shipping')" [class.active]="router?.url?.includes('shipping')"
+        class="ShipPo">
+        Shipping policy
+      </div> |
+      <div (click)="navigateToPolicy('payment')" [class.active]="router?.url?.includes('payment')"
+        class="payPo">
+        Payment policy
+      </div>
+    </div>
+
     <hr>
-    <p>© 2024 HR department Experion global</p>
+    <p>© 2025 HR department Experion Technologies Global  </p>
   </div>
 </div>

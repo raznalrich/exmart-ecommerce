@@ -43,6 +43,5 @@ handleRadioChange(event: Event): void {
   //     // console.log("Name : ",this.arr[0].name);
   // }
   console.log(this.address);
-
 }
 }

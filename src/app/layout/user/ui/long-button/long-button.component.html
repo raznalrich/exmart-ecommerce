@@ -2,13 +2,16 @@
 (click)="onButtonClick()"
   [type]="type"
   [class]="styleClass"
-  [disabled]="disabled"
+  [disabled]="isLoading"
   [ngStyle]="{
     color: textColor,
     backgroundColor: backgroundColor,
     border: border
   }"
 >
+@if(isLoading){
+  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+}
 <!-- (mouseenter)="hovered = true"
   (mouseleave)="hovered = false"
   [ngStyle]="hovered ? {

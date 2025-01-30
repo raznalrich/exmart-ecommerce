@@ -2,10 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #64A2F5 ;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  // background-color: #64A2F5;
+  background: linear-gradient(to bottom,#253d6c,#3f69ba);
+  padding: 0px;
   height: 80vh;
+}
+
+.content {
+  display: flex;
+  margin-top: 20px;
+  gap: 10%;
 }
 
 .header {
@@ -23,43 +29,97 @@
   color: rgb(255, 255, 255);
 }
 
-.content {
-  display: flex;
-  margin-top: 20px;
-  gap: 80px;
-}
-.main-image{
+.main-image {
   object-fit: cover;
-  background-color: white;
-  border-radius: 30px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.main-image img {
   display: flex;
   justify-content: center;
-  border-radius: 30px;
   align-items: center;
-  width: 350px;
-  height: auto;
-  // margin-right: 20px;
+  border-radius: 30px;
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: transform 0.3s ease;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+
+
+    &:hover {
+      transform: scale(1);
+
+      .product-info {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  img {
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+    align-items: center;
+    width: 373px;
+    height: auto;
+  }
 }
 
 .rightside {
-
   gap: 5px;
 }
 
-.subImaging{
+.subImaging {
   padding-top: 30px;
   display: flex;
   gap: 30px;
-
 }
-.sub-image img {
-  width: 215px;
-  border-radius: 20px;
-  height: auto;
-  border: 1px solid #ccc;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+
+.sub-image {
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+
+      .product-info {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  img {
+    width: 215px;
+    border-radius: 20px;
+    height: auto;
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.product-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
 }

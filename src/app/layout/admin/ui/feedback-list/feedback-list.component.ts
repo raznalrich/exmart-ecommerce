@@ -1,48 +1,59 @@
-import { Component, input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ApiService } from '../../../../api.service';
-import { FeedbackReplayComponent } from "../feedback-replay/feedback-replay.component";
-import { AddNewCategoryComponent } from "../add-new-category/add-new-category.component";
-import { ButtonComponent } from "../button/button.component";
-import { AddressConfirmPageComponent } from "../../../user/pages/address-confirm-page/address-confirm-page.component";
-import { ToggleButtonComponent } from "../toggle-button/toggle-button.component";
-import { UserOrdersComponent } from "../../../user/pages/user-orders/user-orders.component";
+import { ProductFeedbackToggleComponent } from "../product-feedback-toggle/product-feedback-toggle.component";
+import { CommonModule } from '@angular/common';
+
 
 
 @Component({
   selector: 'app-feedback-list',
   standalone: true,
-  imports: [FeedbackReplayComponent, ToggleButtonComponent, UserOrdersComponent],
+  imports: [ProductFeedbackToggleComponent, CommonModule],
   templateUrl: './feedback-list.component.html',
   styleUrl: './feedback-list.component.scss'
 })
 export class FeedbackListComponent {
-  // arr:any;
-  // userFeed:any={
-  // name:'',
-  // feedback:'',
-  // image:'',
-  // userId:''
-  //     }
-  //   constructor(public api: ApiService) {}
-  //   ngOnInit() {
-  //     this.api.getUserFeedback().subscribe((res: any) => {
-  //       this.userFeed = res;
-  //       this.arr = this.userFeed.employees;
-  //      console.log(this.arr);
-  //     console.log("Name",this.arr[0].name)
-  //     });
-  // }
 
-  feedback:any []=[]
-    constructor(public api: ApiService){}
+  feedback: any[] = [];
+  filteredFeedback: any[] = [];
+  currentFilter: string = 'all';
 
-    ngOnInit(){
-      this.api.getUserFeedback().subscribe((res:any)=>{
-       this.feedback = res;
-        console.log(this.feedback)
-      })
 
+  constructor(public api: ApiService) {}
+
+  ngOnInit() {
+    this.loadFeedback();
+  }
+
+  loadFeedback() {
+    this.api.getUserFeedback().subscribe((res: any) => {
+      this.feedback = res;
+      this.filteredFeedback = [...res];
+    });
+  }
+
+
+  onFilterChange(filter: string) {
+    this.currentFilter = filter;
+
+    if (filter === 'all') {
+      this.filteredFeedback = [...this.feedback];
+    } else if (filter === 'website') {
+      this.filteredFeedback = this.feedback.filter(item =>
+        item.productName.toLowerCase() === 'website'
+      );
+    } else if (filter === 'product') {
+      this.filteredFeedback = this.feedback.filter(item =>
+        item.productName.toLowerCase() !== 'website'
+      );
     }
+  }
 
-    
+  shouldShowProductColumn(): boolean {
+    return this.currentFilter !== 'website';
+  }
+
+
+
 }
+

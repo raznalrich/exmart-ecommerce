@@ -1,3 +1,4 @@
+<!-- order-email.template.html -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,12 +9,12 @@
     <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
       <div style="background-color: #f8f9fa; padding: 20px; text-align: center; border-radius: 5px;">
         <h1 style="color: #333; margin: 0;">Order Confirmation</h1>
-        <p style="font-size: 18px; margin-top: 10px;">Order </p>
+        <p style="font-size: 18px; margin-top: 10px;">Order #{{orderId}}</p>
       </div>
 
       <div style="margin-top: 20px;">
-        <p>Dear </p>
-        <p>Thank you for shopping with us. Your order has been confirmed and is being processed.</p>
+        <p>Dear {{customerName}},</p>
+        <p>Thank you for shopping with ExMart. Your order has been confirmed and is being processed.</p>
       </div>
 
       <div style="margin-top: 30px;">
@@ -28,12 +29,12 @@
             </tr>
           </thead>
           <tbody>
-
+            {{itemRows}}
           </tbody>
           <tfoot>
             <tr>
               <td colspan="3" style="padding: 12px; text-align: right; font-weight: bold;">Total:</td>
-              <td style="padding: 12px; text-align: right; font-weight: bold;"></td>
+              <td style="padding: 12px; text-align: right; font-weight: bold;">₹{{totalAmount}}</td>
             </tr>
           </tfoot>
         </table>
@@ -41,13 +42,19 @@
 
       <div style="margin-top: 30px;">
         <h2 style="color: #444; font-size: 18px;">Shipping Address</h2>
-        <p style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;"></p>
+        <p style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">{{shippingAddress}}</p>
       </div>
 
+      <div style="margin-top: 30px;">
+        <a href="http://localhost:4200/trackexmart/{{orderParsingId}}"
+           style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;">
+          Track Your Order
+        </a>
+      </div>
 
       <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
         <p style="font-size: 14px; color: #666;">
-          Order Date: <br>
+          Order Date: {{orderDate}}<br>
           If you have any questions, please contact our customer support.
         </p>
       </div>

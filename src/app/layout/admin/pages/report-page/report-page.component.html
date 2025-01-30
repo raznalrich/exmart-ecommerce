@@ -1,7 +1,7 @@
 <div class="page">
     <div class="top">
         <div class="left">
-            <app-searchbar></app-searchbar>
+            <app-searchbar [searchPlaceholder]="searchPlaceholder" (searchChange)="onSearch($event)"></app-searchbar>
             <app-date-rangepicker (dateRangeSelected)="onDateRangeSelected($event)"></app-date-rangepicker>
         </div>
         <div class="right">
@@ -27,10 +27,10 @@
                     @for (item of filteredItems; track item) {
                     <tr>
                         <td scope="row">{{ filteredItems.indexOf(item) + 1 }}</td>
-                        <td>{{item.customerId}}</td>
-                        <td>{{item.customerName}}</td>
+                        <!-- <td>{{item.customerId}}</td> -->
+                        <td style="text-align: left;">{{item.customerName}}</td>
                         <td>{{item.orderId}}</td>
-                        <td>{{item.orderDate | date : "dd-MM-YYYY"}}</td>
+                        <td>{{item.orderDate | date:"dd-MM-YYYY"}}</td>
                         <td>{{item.totalAmount}}</td>
                     </tr>
                     }

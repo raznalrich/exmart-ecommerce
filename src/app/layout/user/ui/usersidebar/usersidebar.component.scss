@@ -1,5 +1,6 @@
 .sidenav {
-  background: #3e68b9;
+  // background: #3e68b9;
+  background: linear-gradient(to bottom,#253d6c,#3f69ba);
   transition: all 0.5s ease;
   padding: 20px;
   position: fixed;
@@ -12,6 +13,27 @@
   border-bottom-right-radius: 30px;
   display: flex;
   flex-direction: column;
+}
+.namebox{
+  border: #fff 1px solid;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  // align-items: center;
+  p{
+    color: #fff;
+text-align: center;
+margin-bottom: 0px;
+cursor: pointer;
+    font-size: 12px;
+  }
+}
+.namebox:hover{
+  background-color: #fff;
+  p:hover{
+    color: #000;
+  }
 }
 
 .sidenav .logo-container {

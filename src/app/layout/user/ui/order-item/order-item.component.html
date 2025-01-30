@@ -1,4 +1,4 @@
-@for(item of orderItemslist;track item){
+
 
 
 <div
@@ -7,25 +7,98 @@
 >
   <div class="d-flex align-items-center">
     <img
-      [src]="item.primaryImageUrl"
+      [src]="imageUrl"
       [alt]="title"
       style="width: 50px; height: 50px; border-radius: 8px; margin-right: 10px;"
     />
     <div>
-      <h6 style="margin: 0; font-weight: bold;">{{ item.productName }}</h6>
+      <h6 style="margin: 0; font-weight: bold;">{{ title }}</h6>
       <p style="margin: 0; font-size: 0.85rem;">
-        Color: {{ item.colorName }}<br />
-        Size: {{ item.sizeName }}<br />
-        Price: {{ item.price }}
+        <!-- Color: {{ item.colorName }}<br /> -->
+        <!-- Size: {{ item.sizeName }}<br /> -->
+        Price: {{ amount }}
       </p>
     </div>
   </div>
-  <div>
-    <p style="margin: 0; font-size: 0.9rem; font-weight: bold;">
-      pending <i [class]="statusIcon"></i>
-      <button type="button" class="btn btn-outline-danger">Cancel</button>
-    </p>
+  <div style="display: flex; align-items:center ;">
+    <p style="margin: 0; font-size: 0.9rem; font-weight: bold;margin-right: 10px;">
+      @if(status==1){
 
+        pending <i [class]="statusIcon"></i>
+      }
+      @else if(status==2){
+        Shipped
+      }
+      @else {
+        Delivered
+      }
+
+    </p>
+@if(status == 1){
+  <button type="button" class="btn btn-outline-danger" (click)="makeVisible()">Cancel</button>
+
+}
   </div>
 </div>
-}
+<div class="backdrop" *ngIf="isVisible" (click)="onCloseAddProduct()">
+  <div class="modal1" *ngIf="isVisible">
+    <div class="modal2 show d-block"  >
+
+      <div class="modal show d-block">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">
+              Confirm cancellation
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="onCloseAddProduct()"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are you sure , you want to cancel the order ?
+            <div
+  class="d-flex justify-content-between align-items-center mt-1 mb-3 p-3"
+  style="background-color: #e9e9e9; border-radius: 12px;"
+>
+  <div class="d-flex align-items-center">
+    <img
+      [src]="imageUrl"
+      [alt]="title"
+      style="width: 50px; height: 50px; border-radius: 8px; margin-right: 10px;"
+    />
+    <div>
+      <h6 style="margin: 0; font-weight: bold;">{{ title }}</h6>
+      <p style="margin: 0; font-size: 0.85rem;">
+        <!-- Color: {{ item.colorName }}<br /> -->
+        <!-- Size: {{ item.sizeName }}<br /> -->
+        Price: {{ amount }}
+      </p>
+    </div>
+  </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="submit"
+                class="btn btn-primary"
+
+              >
+              Confirm
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="onCloseAddProduct()"
+              >
+                Close
+              </button>
+            </div>
+            </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
+
