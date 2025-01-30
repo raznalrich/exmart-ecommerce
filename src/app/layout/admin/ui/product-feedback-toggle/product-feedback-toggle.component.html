@@ -1,0 +1,31 @@
+<div class="feedback-filter mb-3">
+  <div class="btn-group" role="group">
+    <button
+      type="button"
+      class="btn"
+      [class.btn-primary]="activeFilter === 'all'"
+      [class.btn-outline-primary]="activeFilter !== 'all'"
+      (click)="setFilter('all')"
+    >
+      All Feedback
+    </button>
+    <button
+      type="button"
+      class="btn"
+      [class.btn-primary]="activeFilter === 'product'"
+      [class.btn-outline-primary]="activeFilter !== 'product'"
+      (click)="setFilter('product')"
+    >
+      Product Feedback
+    </button>
+    <button
+      type="button"
+      class="btn"
+      [class.btn-primary]="activeFilter === 'website'"
+      [class.btn-outline-primary]="activeFilter !== 'website'"
+      (click)="setFilter('website')"
+    >
+      Website Feedback
+    </button>
+  </div>
+</div>

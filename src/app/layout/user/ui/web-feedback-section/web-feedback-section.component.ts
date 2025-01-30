@@ -13,7 +13,6 @@ import { ApiService } from '../../../../api.service';
   styleUrl: './web-feedback-section.component.scss'
 })
 export class WebFeedbackSectionComponent {
-
   constructor(private api:ApiService){}
 
   webfeedbackForm = new FormGroup({
@@ -21,7 +20,6 @@ export class WebFeedbackSectionComponent {
     feedback: new FormControl(''),
     userId: new FormControl('1'),
     productName: new FormControl('website')
-
 
   });
 
@@ -42,8 +40,4 @@ export class WebFeedbackSectionComponent {
       console.warn('Feedback form is invalid');
     }
   }
-
-
-
-
 }

@@ -21,6 +21,7 @@ export class LongButtonComponent {
   @Input() textColor: string = '#ffffff';
   @Input() backgroundColor: string = '#3E68B9';
   @Input() border: string = 'none';
+  isLoading:boolean = false;
 
     // Hover styles
     @Input() hoverTextColor: string = '#3E68B9';
@@ -28,5 +29,9 @@ export class LongButtonComponent {
     @Input() hoverBorder: string = '1px solid #3E68B9';
     onButtonClick() {
       this.buttonClick.emit();
+      this.startLoading();
+  }
+  startLoading(){
+    this.isLoading = true;
   }
 }

@@ -1,0 +1,125 @@
+
+<button
+  *ngIf="bannerCount < 3"
+  type="button"
+  class="btn btn-primary"
+  (click)="openModal()"
+>
+  <i class="bi bi-plus"></i>
+</button>
+
+<div
+  class="modal fade"
+  id="bannermodal"
+  #bannerModal
+  tabindex="-1"
+  aria-labelledby="addBannerModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeModal()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addBannerForm" (ngSubmit)="onSubmit()">
+          <!-- Product Selection Dropdown -->
+          <div class="mb-3 position-relative">
+            <label for="title" class="form-label">Product Name:</label>
+            <div class="dropdown">
+              <input
+                type="text"
+                id="title"
+                class="form-control"
+                [value]="selectedProduct?.name || ''"
+                (input)="filterProducts($event)"
+                (focus)="toggleDropdown()"
+                placeholder="Search or select product"
+              />
+
+              <!-- Dropdown Menu -->
+              <div
+                class="dropdown-menu w-100"
+                [class.show]="showDropdown"
+                style="max-height: 300px; overflow-y: auto"
+              >
+                <div
+                  *ngIf="filteredProducts.length === 0"
+                  class="dropdown-item text-muted"
+                >
+                  No products found
+                </div>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  *ngFor="let product of filteredProducts"
+                  (click)="selectProduct(product)"
+                >
+                  {{ product.name }}
+                </button>
+              </div>
+            </div>
+
+            <div
+              *ngIf="
+                addBannerForm.get('title')?.touched &&
+                addBannerForm.get('title')?.invalid
+              "
+              class="text-danger"
+            >
+              Product selection is required.
+            </div>
+          </div>
+
+          <!-- Primary Image Upload -->
+          <div class="mb-3">
+            <label for="primaryImage" class="form-label">Primary Image:</label>
+            <input
+              type="file"
+              id="primaryImage"
+              class="form-control"
+              (change)="onFileChange($event)"
+              accept="image/*"
+            />
+            <div
+              *ngIf="
+                addBannerForm.get('primaryImage')?.touched &&
+                addBannerForm.get('primaryImage')?.invalid
+              "
+              class="text-danger"
+            >
+              Primary image is required.
+            </div>
+            <div *ngIf="selectedFile" class="mt-2">
+              <strong>Selected File:</strong> {{ selectedFile.name }}
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!addBannerForm.valid"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="closeModal()"
+              aria-label="Close"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

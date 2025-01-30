@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule ,Validators} from '@angular/forms';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { Router } from '@angular/router';
-import * as bootstrap from 'bootstrap'
-
+import { jwtDecode } from 'jwt-decode';
+// import * as bootstrap from 'bootstrap'
+interface LoginRequestDTO {
+  email: string;
+}
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -13,10 +16,14 @@ import * as bootstrap from 'bootstrap'
 })
 export class LoginFormComponent {
   constructor(public api:ApiServiceService,private router: Router){}
-  phoneNumber: string = '';
+  phoneNumber: string = '+919746466925';
   employeeId:any=0;
   name: string = '';
   email:string='';
+  loginResponse : any
+  token : any
+  isLoading:boolean=false;
+
   LoginForm = new FormGroup({
     email:new FormControl('',Validators.email),
     password:new FormControl(''),
@@ -24,6 +31,7 @@ export class LoginFormComponent {
   })
 
   submit(){
+    this.isLoading=true;
     const email = this.LoginForm.get('email')?.value;
     this.email = email!;
 
@@ -35,28 +43,58 @@ export class LoginFormComponent {
       return;
     }
 
-    this.api.returnIdFromEmail(email).subscribe(
-      (userId) => {
-        console.log('User ID:', userId);
-        if(userId==null){
-          const modalElement = document.getElementById('exampleModal');
-          if(modalElement){
-            const modal = new bootstrap.Modal(modalElement);
-            modal.show();
-          }
-          else{
-            console.error('modal element not found');
+    const loginRequest: LoginRequestDTO = {
+      email: this.email
+    };
 
-          }
+    this.api.LoginandToken(loginRequest).subscribe((res:any)=> {
+        this.loginResponse = res;
+        console.log(this.loginResponse)
+        this.token = res.token
+
+        try {
+          const decoded: any = jwtDecode(this.token);
+          console.log('Decoded UserId:', decoded.UserId);
+          console.log('Decoded UserName:', decoded.name);
+
+          // Store token in localStorage or a service
+          localStorage.setItem('token', this.token);
+          localStorage.setItem('userid', decoded.UserId);
+          this.authentication(decoded.UserId);
+          // Navigate to dashboard or home page
+
+        } catch (error) {
+          console.error('Error decoding token:', error);
         }
-        var userID = userId;
-        this.employeeId = userID;
-        this.authentication(this.employeeId);
-      },
-      (error) => {
-        console.error('Error fetching user ID:', error);
-      }
-    );
+
+    })
+
+
+
+    // this.api.returnIdFromEmail(email).subscribe(
+    //   (userId) => {
+    //     console.log('User ID:', userId);
+    //     if(userId==null){
+    //       this.addNewUser();
+    //       // const modalElement = document.getElementById('exampleModal');
+    //       // if(modalElement){
+    //       //   // const modal = new bootstrap.Modal(modalElement);
+    //       //   // modal.show();
+    //       // }
+    //       // else{
+    //       //   console.error('modal element not found');
+
+    //       // }
+    //     }
+    //     var userID = userId;
+    //     this.employeeId = userID;
+    //     this.authentication(this.employeeId);
+    //   },
+    //   (error) => {
+    //     this.addNewUser();
+    //     console.error('Error fetching user ID:', error);
+    //   }
+    // );
 
   }
   getIdfromemail(email:string){
@@ -73,7 +111,7 @@ export class LoginFormComponent {
   this.api.IsAdmin(userId).subscribe(
     (isAdmin)=>{
       if(isAdmin){
-        alert("it is admin")
+
         this.router.navigate(['/admin/admindashboard']);
       }
       else{

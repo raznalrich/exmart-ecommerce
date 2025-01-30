@@ -1,7 +1,9 @@
-import { Component, Input} from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
 import { CategoryButtonComponent } from "../category-button/category-button.component";
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiServiceService } from '../../../../services/api-service.service';
+import { ScrollServiceService } from '../../../../services/scroll-service.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -11,35 +13,35 @@ import { ApiServiceService } from '../../../../services/api-service.service';
   templateUrl: './category-nav-bar.component.html',
   styleUrl: './category-nav-bar.component.scss'
 })
-export class CategoryNavBarComponent {
-@Input() CategoryList : any;
-  constructor(public api: ApiServiceService, private route: ActivatedRoute) {}
+export class CategoryNavBarComponent implements OnInit, OnDestroy {
+
+  private scrollSubscription!: Subscription;
+
+    @Input() CategoryList : any;
+
+  constructor(public api: ApiServiceService, private route: ActivatedRoute,
+    private elementRef: ElementRef,private scrollService: ScrollServiceService) {}
 
 ngOnInit(){
     this.api.getAllCategories().subscribe((res: any) => {
       this.CategoryList = res;
       // console.log(this.CategoryList);
     });
+    this.scrollSubscription = this.scrollService.scrollAction$.subscribe(categoryId => {
+      this.scrollToComponent();
+    });
 }
-  categories = [
-    {
-      id:1,
-      iconSrc: 'icons/garments.png',
-      label: 'garments',
-      routerLink: '/home/category/garments'
-    },
-    {
-      id:2,
-      iconSrc: 'icons/appliance.png',
-      label: 'appliances',
-      routerLink: '/home/category/appliance'
-    },
-    {
-      id:3,
-      iconSrc: 'icons/stationary.png',
-      label: 'stationary',
-      routerLink: '/home/category/stationary'
-    }
-  ];
+ngOnDestroy() {
+  if (this.scrollSubscription) {
+    this.scrollSubscription.unsubscribe();
+  }
+}
+
+private scrollToComponent() {
+  this.elementRef.nativeElement.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+}
 
 }

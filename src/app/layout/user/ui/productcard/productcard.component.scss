@@ -1,30 +1,52 @@
+.card{
+  height: 100%;
+  object-fit: contain;
+}
+.card-title{
+  font-size: 14px;
+}
 img{
-  height: 290px;
+  height: 150px;
   // width: 150px;
   object-fit: contain;
 }
 .btn{
+  font-size: 12px;
   border-radius: 0;
+  height: 2rem;
+  width: 6rem;
 }
 p{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.color-circle{
-  width: 20px;
-  height: 20px;
-  border-radius: 50px;
-  border: 1px solid black;
-  margin-right: 5px;
+.card-body{
+
 }
-.colourblock{
+
+.bottom{
   display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
 }
+// .color-circle{
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50px;
+//   border: 1px solid black;
+//   margin-right: 5px;
+// }
+// .colourblock{
+//   display: flex;
+// }
+
 .category-head{
   padding-left: 15px;
 }
-.color-circle.red { background-color: red; }
-  .color-circle.blue { background-color: blue; }
-  .color-circle.white { background-color: white; }
-  .color-circle.black { background-color: black; }
+
+// .color-circle.red { background-color: red; }
+//   .color-circle.blue { background-color: blue; }
+//   .color-circle.white { background-color: white; }
+//   .color-circle.black { background-color: black; }

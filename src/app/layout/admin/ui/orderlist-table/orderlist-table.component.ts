@@ -23,6 +23,8 @@ export class OrderlistTableComponent {
   selectedOrder: any = null;
 
   OrderDetailsByID : any
+  selectedOrderItemId: any;
+
 
   constructor(public api:ApiServiceService){}
 
@@ -30,12 +32,22 @@ export class OrderlistTableComponent {
     console.log("from order table component")
     console.log(this.OrderList)
 
+    document.getElementById('confirmModal')?.addEventListener('hidden.bs.modal', () => {
+      this.closeModal();
+    });
+
+    document.getElementById('orderDetailModal')?.addEventListener('hidden.bs.modal', () => {
+      this.closeModal();
+    });
+
   }
 
   // Open the modal and store the selected item and status
   openConfirmationModal(item: any) {
     this.selectedOrder = item; // Store the selected item (order)
     this.selectedStatus = item.status
+    const tableContainer = document.querySelector('.table-container');
+    tableContainer?.classList.add('blur-background');
     const modalElement = document.getElementById('confirmModal');
     const modalInstance = new bootstrap.Modal(modalElement!);
     modalInstance.show();
@@ -72,17 +84,27 @@ export class OrderlistTableComponent {
 
   }
 
-  openOrderDetailModal(orderId:any){
+  openOrderDetailModal(orderId: number, orderItemId: number){
+
+    this.selectedOrderItemId = orderItemId;
 
     this.api.GetOrderDetailById(orderId).subscribe((res:any)=>{
         this.OrderDetailsByID = res
+
         console.log(this.OrderDetailsByID)
         console.log(this.OrderDetailsByID.orderItems)
     })
 
     const modalElement = document.getElementById('orderDetailModal');
     const modalInstance = new bootstrap.Modal(modalElement!);
+    const tableContainer = document.querySelector('.table-container');
+    tableContainer?.classList.add('blur-background');
     modalInstance.show();
+  }
+
+  closeModal() {
+    const tableContainer = document.querySelector('.table-container');
+    tableContainer?.classList.remove('blur-background');
   }
 
 }

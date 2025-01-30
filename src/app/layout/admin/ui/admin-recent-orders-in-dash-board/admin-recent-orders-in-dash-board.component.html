@@ -1,19 +1,14 @@
 <div class="product-list">
-  <hr>
-  @for (product of products; track $index) {
     <div class="product-item">
-      <div class="product-index">{{ $index + 1 }}</div>
       <div class="product-details">
         <div class="product-image">
-         <img src="{{ product.image}}" alt="">
-          <!-- <img src="images/trialtshirt.png" alt=""> -->
+         <img [src]="proImage" [alt]="proName">
         </div>
         <div class="product-info">
-          <div class="product-name">{{ product.name }}</div>
-          <div class="product-price">₹ {{ product.price }}</div>
+          <div class="product-name">{{ proName }} x {{qty}}</div>
+          <div class="product-price">{{ proDate }}</div>
         </div>
       </div>
     </div>
     <hr>
-  }
   </div>
