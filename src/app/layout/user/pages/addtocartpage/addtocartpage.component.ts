@@ -101,7 +101,8 @@ totalPrice: number = 0;
     if(this.global.selectedAddressId()==''){
 
       this.fetchCartItems(cartItems);
-    }
+    // }
+    // this.calculateTotalPrice();
     // console.log(this.CartItems);
   }
 

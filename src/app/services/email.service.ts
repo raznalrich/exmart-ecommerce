@@ -62,7 +62,7 @@ export class EmailService {
   private async OrderCancelTemplate(){
     try {
 
-      this.productDeliverdEmailTemplate = await fetch('/template/orderCancellation.html')
+      this.CancelEmailTemplate = await fetch('/template/orderCancellation.html')
         .then(response => response.text());
     } catch (error) {
       console.error('Failed to load email template:', error);
@@ -270,7 +270,7 @@ export class EmailService {
   }
   sendOrderCancellationEmail(email: string, orderContext: OrderEmailContext): Observable<boolean> {
     const subject = `Order Cancellation request - #EXP${orderContext.orderId}`;
-    const body = this.replaceHRCancellationPlaceholders(this.hrEmailTemplate, orderContext);
+    const body = this.replaceHRCancellationPlaceholders(this.CancelEmailTemplate, orderContext);
 
     return this.api.sendMail('raznalrich@gmail.com', subject, body).pipe(
       map((response) => {
