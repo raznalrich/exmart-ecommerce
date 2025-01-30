@@ -1,9 +1,11 @@
 
   @if(sizeName!=null){
 
-
-      <button class="color-box" (click)="onSizeSelect()">{{sizeName}}</button>
-
+      <button
+      [ngClass]="SizeId === 8 ? 'size-box' : 'color-box'"
+      (click)="onSizeSelect()">
+      {{sizeName}}
+      </button>
   }
 
 

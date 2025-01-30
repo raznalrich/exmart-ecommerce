@@ -29,8 +29,14 @@
       @else if(status==2){
         Shipped
       }
-      @else {
+      @else if(status==3){
         Delivered
+      }
+      @else if(status == 4){
+        Cancelled
+      }
+      @else if(status ==5){
+        Cancellation requested
       }
 
     </p>
@@ -38,6 +44,21 @@
   <button type="button" class="btn btn-outline-danger" (click)="makeVisible()">Cancel</button>
 
 }
+  </div>
+</div>
+<div class="loadingSpinner" *ngIf="isSubmitting">
+  <div>
+
+    <span>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+
+      </div>
+      <p>
+
+        Cancel Requesting .....
+      </p>
+    </span>
   </div>
 </div>
 <div class="backdrop" *ngIf="isVisible" (click)="onCloseAddProduct()">
@@ -81,10 +102,11 @@
             </div>
             <div class="modal-footer">
               <button
-                type="submit"
                 class="btn btn-primary"
-
+              (click)="sendCancel(orderItemId)"
               >
+
+
               Confirm
               </button>
               <button
@@ -101,4 +123,5 @@
       </div>
     </div>
   </div>
+
 
