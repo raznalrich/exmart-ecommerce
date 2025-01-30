@@ -14,7 +14,7 @@ export class ThankYouPurchaseComponent {
 @Input() orderId=0;
 @Input() orderDate:any;
 @Input() address:string='';
-orderContext:OrderEmailContext[]=[];
+@Input() orderContext:OrderEmailContext[]=[];
 constructor(public global:GlobalService){}
 ngOnInit(){
 this.orderContext=this.global.orderContext();

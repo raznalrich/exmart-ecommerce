@@ -15,6 +15,10 @@
     <app-address-card [address]="data" ></app-address-card>
   }
     <div class="newAddressButton">
+<!-- disclaimer -->
+<div class="disclaimer" *ngIf="workAddress?.length > 0">
+  <p class="disclaimer-text">⚠️ You cannot modify work address.</p>
+</div>
       <app-add-address-button   [buttonLabel]="'Add New Address'"
       (add)="onAddAddress()"></app-add-address-button>
     </div>

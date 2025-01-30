@@ -93,9 +93,10 @@
         <p class="total"><span>Shipping : </span> <span>{{ '0'| currency:'INR'}}</span></p>
        } -->
        <!-- @else if (selectedAddress==3) { -->
-        @if(selectedAddress){
+        @if(this.global.selectedAddressTypeName() === 'Home'){
 
-          <p class="total"><span>Shipping : </span> <span>{{ shippingCharge | currency:'INR'}}</span></p>
+          <p class="total" style="color: red;"><span><i class="bi bi-exclamation-triangle-fill" ></i> Shipping charges will be included </span></p>
+
         }
 
        <!-- } -->
