@@ -43,6 +43,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
   additionalFiles: File[] = [];
 
   showSizes = false;
+  isLoading = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -73,7 +74,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
       vendorId: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
       categoryId: new FormControl('', Validators.required),
 
-      // Renamed controls:
       sizeId: new FormControl([]),
       colorId: new FormControl([], Validators.required),
 
@@ -273,6 +273,9 @@ export class AddProductsComponent implements OnInit, OnChanges {
       return;
     }
 
+    this.isLoading = true;
+
+
     // Decide between create or update
     if (this.isEditMode && this.productToEdit) {
       this.updateExistingProduct();
@@ -336,10 +339,13 @@ export class AddProductsComponent implements OnInit, OnChanges {
         .subscribe({
           next: (res) => {
             console.log('Product updated (with file) successfully:', res);
+            this.save.emit();
+            this.isLoading = false;
             this.closeModal();
           },
           error: (err) => {
             console.error('Error updating product:', err);
+            this.isLoading = false;
           },
         });
     } else {
@@ -364,10 +370,12 @@ export class AddProductsComponent implements OnInit, OnChanges {
       this.apiService.updateProduct(payload.id, payload).subscribe({
         next: (res) => {
           console.log('Product updated successfully:', res);
+          this.isLoading = false;
           this.closeModal();
         },
         error: (err) => {
           console.error('Error updating product:', err);
+          this.isLoading = false;
         },
       });
     }
@@ -434,10 +442,13 @@ export class AddProductsComponent implements OnInit, OnChanges {
       .subscribe({
         next: (res) => {
           console.log('Product added successfully:', res);
+          this.save.emit();
+          this.isLoading = false;
           this.closeModal();
         },
         error: (err) => {
           console.error('Error adding product:', err);
+          this.isLoading = false;
         },
       });
   }
