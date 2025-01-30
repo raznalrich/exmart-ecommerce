@@ -56,6 +56,7 @@ interface OrderItem {
 })
 export class OrderItemComponent {
   @Input() id:number=0;
+  @Input() orderItemId:number=0;
   @Input() title: string = '';
   @Input() amount: string = '';
   @Input() quantity: string = '';
@@ -105,6 +106,8 @@ ngOnInit(){
 
 }
 sendCancel(id:number){
+  console.log('order item id',id);
+
   this.isSubmitting=true;
   this.api.GetOrderDetailById(this.id).subscribe({
     next: (orderData) => {
@@ -133,8 +136,16 @@ sendCancel(id:number){
                 this.emailservice.sendOrderCancellationEmail('raznalrich@gmail.com', orderContext).subscribe({
                   next: () => {
                     console.log('Order Cancellation email sent successfully');
-                    this.isSubmitting=false;
-                    this.router.navigate(['/userprofile/userorder']);
+                    this.api.RequestOrderCancelStatusbyid(id).subscribe({
+                      next: (res: any) => {
+                        console.log('status',res);
+                        this.isSubmitting=false;
+                        this.router.navigate(['/userprofile/userorder']);
+                        this.ngOnInit();
+                      }
+                    });
+
+                    this.ngOnInit();
                   },
                   error: (emailError) => {
                     console.error('Failed to send order cancellation email:', emailError);
