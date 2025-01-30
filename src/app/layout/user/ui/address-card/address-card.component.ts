@@ -1,3 +1,4 @@
+import { address } from './../../interfaces/AddressInterface';
 
 import { Component, Input,Output, EventEmitter, signal } from '@angular/core';
 import { AddressBadgeComponent } from '../address-badge/address-badge.component';
@@ -28,11 +29,13 @@ country:'',
 phoneNo:''
 }
 arr:any;
-handleRadioChange(event: Event): void {
-  const target = event.target as HTMLInputElement;
-  if (target.checked) {
-    this.global.selectedAddressId.set(target.id);
+handleRadioChange(address: any): void {
+  // const target = event.target as HTMLInputElement;
+  if (address) {
+    this.global.selectedAddressId.set(address.id);
+    this.global.selectedAddressTypeName.set(address.addressTypeName);
     console.log('Selected Address ID:', this.global.selectedAddressId());
+    console.log('Selected Address Type name:', this.global.selectedAddressTypeName() );
   }
 }
   ngOnInit() {
