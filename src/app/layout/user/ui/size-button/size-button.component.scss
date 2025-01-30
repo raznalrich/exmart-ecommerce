@@ -44,9 +44,12 @@ color:#64A2F5
 .color-box.white { background-color: white; }
 .color-box.black { background-color: black; }
 
-
-
-
+.size-box {
+border: #64A2F5 1px solid;
+border-radius: 5px;
+min-width: 100px;
+background-color: white;
+}
 
 
 
