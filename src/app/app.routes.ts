@@ -47,7 +47,7 @@ export const routes: Routes = [
           },
 
           {
-            path:'',redirectTo:'category/1',pathMatch:'full',
+            path:'',redirectTo:'category/20',pathMatch:'full',
 
           },
         ],
