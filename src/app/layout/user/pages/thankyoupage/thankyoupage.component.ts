@@ -64,6 +64,7 @@ selectedAddress:any
 addressType:string='';
 address:string='';
 
+
 totalPrice: number = 0;
   orders: Order[] = [];
   isContentVisible = false;
@@ -73,6 +74,8 @@ totalPrice: number = 0;
       private animationStateService:AnimationStateService
   ){
     this.global.getUserId();
+    this.orderContext = this.router.getCurrentNavigation()?.extras.state?.['orderContext'];
+    console.log('Received Order Context:', this.orderContext);
   }
   CartItems: ProductDetails[] = []; // Array to store fetched product details
 productIds: number[] = [];
