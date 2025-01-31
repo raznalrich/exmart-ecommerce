@@ -1,72 +1,39 @@
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="confirmModal"
-  tabindex="-1"
-  aria-labelledby="modalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Confirm Status Change</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         Are you sure you want to update the status for this order to
         <strong>{{ getStatusName(selectedStatus) }}</strong>?
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-          (click)="closeModal()"
-        >
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">
           Cancel
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="confirmStatusChange()"
-          data-bs-dismiss="modal"
-        >
+        <button type="button" class="btn btn-primary" (click)="confirmStatusChange()" data-bs-dismiss="modal">
           Confirm
         </button>
       </div>
     </div>
   </div>
 </div>
-             <!-- Modal for Order details -->
-<div
-  class="modal fade"
-  id="orderDetailModal"
-  tabindex="-1"
-  aria-labelledby="modalLabel"
-  aria-hidden="true"
->
-<div class="modal-dialog modal-lg">
-  <div class="modal-content">
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="modal"
-    aria-label="Close"
-    (click)="closeModal()"
-  ></button>
+<!-- Modal for Order details -->
+<div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+        (click)="closeModal()"></button>
 
-<div class="modal-body">
-  <app-order-popup
-  [selectedOrderItemId]="selectedOrderItemId"
-  [OrderDetailsByID]="OrderDetailsByID"></app-order-popup>
-</div>
-</div>
-</div>
+      <div class="modal-body">
+        <app-order-popup [selectedOrderItemId]="selectedOrderItemId"
+          [OrderDetailsByID]="OrderDetailsByID"></app-order-popup>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -79,36 +46,35 @@
       <th>Product</th>
       <th>Status</th>
       <th>Amount</th>
+      <th>Shipping Charge</th>
       <th>Quantity</th>
       <th title="Shipping Charge">S.C</th>
       <th>Action</th>
     </tr>
     @for(item of OrderList; track item){
-      <tr>
-        <td>{{item.orderItemId}}</td>
-        <td>{{item.orderDate | date : "YYYY-MM-dd"}}</td>
-        <td>{{item.productName}}</td>
+    <tr>
+      <td>{{item.orderItemId}}</td>
+      <td>{{item.orderDate | date : "YYYY-MM-dd"}}</td>
+      <td>{{item.productName}}</td>
 
-        <td>
-          <select class="status-dropdown"
-                  [(ngModel)]="item.status"
-                  (change)="openConfirmationModal(item)">
-            <option [ngValue]="1">Pending</option>
-            <option [ngValue]="2">Shipped</option>
-            <option [ngValue]="3">Delivered</option>
-          </select>
-        </td>
+      <td>
+        <select class="status-dropdown" [(ngModel)]="item.status" (change)="openConfirmationModal(item)">
+          <option [ngValue]="1">Pending</option>
+          <option [ngValue]="2">Shipped</option>
+          <option [ngValue]="3">Delivered</option>
+        </select>
+      </td>
 
-        <td>{{item.amount | currency : "INR"}}</td>
-         <td>{{item.quantity}}</td>
-         <td>{{item.shippingCharge | currency : "INR"}}</td>
-          <td style="text-align: center;">
-            <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId, item.orderItemId)">
-              <i class="fa-regular fa-eye"></i>
-            </button>
-            </td>
+      <td>{{item.amount | currency : "INR"}}</td>
+      <td>{{item.shippingCharge | currency : "INR"}}</td>
+      <td>{{item.quantity}}</td>
+      <td style="text-align: center;">
+        <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId, item.orderItemId)">
+          <i class="fa-regular fa-eye"></i>
+        </button>
+      </td>
 
-      </tr>
+    </tr>
     }
   </table>
 </div>
