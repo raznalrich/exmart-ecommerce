@@ -37,8 +37,14 @@
       @else if(status==2){
         Shipped
       }
-      @else {
+      @else if(status==3){
         Delivered
+      }
+      @else if(status == 4){
+        Cancelled
+      }
+      @else if(status ==5){
+        Cancellation requested
       }
 
     </p>
@@ -105,7 +111,7 @@
             <div class="modal-footer">
               <button
                 class="btn btn-primary"
-              (click)="sendCancel(id)"
+              (click)="sendCancel(orderItemId)"
               >
 
 
