@@ -15,13 +15,18 @@ import { GlobalService } from '../../../../global.service';
 export class ProductDisplayingBarComponent {
   @Input() productImage: string = '';
   @Input() productId:number =0;
+  @Input() colorId:number =0;
+  @Input() sizeId:number =0;
   @Input() productName: string = '';
   @Input() productColor: string = '';
   @Input() productSize: string = '';
   @Input() productPrice: number = 0;
   @Output() clear = new EventEmitter<number>();
 
-   userId: number = 0;
+  userId:any;
+  // color:any;
+  // size:any;
+  //  userId: number = 0;
   // color:any;
   // size:any;
  constructor(public api: ApiServiceService, private route: ActivatedRoute,public global:GlobalService) {
@@ -29,26 +34,27 @@ this.global.getUserId();
  }
  ngOnInit(){
   this.userId = this.global.userId();
-}
+console.log('product id',this.productId);
 
-  deleteCart(proId : number){
-    console.log("pro id delete func",proId);
-    console.log("user id delete func",this.userId);
 
-  // console.log("pro disp bar pro ID:",  this.clear.emit());
-  this.clear.emit(proId);
+
+
+ }
+ deleteCart(){
+  this.clear.emit();
+
+ }
+ removeFromCart(productId: number, userId: number,colorId:number,sizeId:number) {
+  this.api.deleteFromCart(productId, userId).subscribe({
+    next: (response) => {
+      console.log('Item removed successfully');
+      this.global.getCartCount();
+      // Handle success (e.g., show notification, refresh cart)
+    },
+    error: (error) => {
+      console.error('Error removing item:', error);
+      // Handle error (e.g., show error message)
+    }
+  });
 }
-//  removeFromCart(productId: number, userId: number) {
-//   this.api.deleteFromCart(productId, userId).subscribe({
-//     next: (response) => {
-//       console.log('Item removed successfully');
-//       this.global.getCartCount();
-//       // Handle success (e.g., show notification, refresh cart)
-//     },
-//     error: (error) => {
-//       console.error('Error removing item:', error);
-//       // Handle error (e.g., show error message)
-//     }
-//   });
-// }
 }

@@ -27,11 +27,15 @@
             [productImage]="items.productImageUrl || 'images/box not packed.png'"
             [productName]="items.productName"
             [productColor]="items.colorName"
+            [colorId]="items.colorId"
+            [sizeId]="items.sizeId"
             [productSize]="items.sizeName"
             [productPrice]="items.price"
-            [productId]="items.id"
-            (clear) = "handleProductRemoval(items.id)"
-            ></app-product-displaying-bar>
+            [productId]="items.productId"
+            (clear) = "ngOnInit()"
+            >
+          </app-product-displaying-bar>
+
         }
     </section>
 
