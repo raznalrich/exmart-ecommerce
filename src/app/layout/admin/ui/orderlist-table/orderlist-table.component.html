@@ -46,9 +46,8 @@
       <th>Product</th>
       <th>Status</th>
       <th>Amount</th>
-      <th>Shipping Charge</th>
-      <th>Quantity</th>
       <th title="Shipping Charge">S.C</th>
+      <th>Quantity</th>
       <th>Action</th>
     </tr>
     @for(item of OrderList; track item){
@@ -66,7 +65,30 @@
       </td>
 
       <td>{{item.amount | currency : "INR"}}</td>
-      <td>{{item.shippingCharge | currency : "INR"}}</td>
+      <td>
+        @if(editingShippingCharge === item.orderItemId) {
+          <div class="edit-shipping">
+            <input
+              type="number"
+              [ngModel]="item.shippingCharge"
+              (ngModelChange)="tempShippingCharge = $event"
+              class="shipping-input"
+              min="0"
+              (blur)="saveShippingCharge(item)"
+              (keyup.enter)="saveShippingCharge(item)"
+              (keyup.escape)="cancelEdit()"
+            >
+          </div>
+        } @else {
+          <div
+            class="shipping-display"
+            (click)="startEdit(item.orderItemId, item.shippingCharge)"
+            title="Click to edit"
+          >
+            {{item.shippingCharge | currency : "INR"}}
+          </div>
+        }
+      </td>
       <td>{{item.quantity}}</td>
       <td style="text-align: center;">
         <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId, item.orderItemId)">
