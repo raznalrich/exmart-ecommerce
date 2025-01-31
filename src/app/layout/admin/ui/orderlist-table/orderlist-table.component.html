@@ -80,6 +80,7 @@
       <th>Status</th>
       <th>Amount</th>
       <th>Quantity</th>
+      <th title="Shipping Charge">S.C</th>
       <th>Action</th>
     </tr>
     @for(item of OrderList; track item){
@@ -100,6 +101,7 @@
 
         <td>{{item.amount | currency : "INR"}}</td>
          <td>{{item.quantity}}</td>
+         <td>{{item.shippingCharge | currency : "INR"}}</td>
           <td style="text-align: center;">
             <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId, item.orderItemId)">
               <i class="fa-regular fa-eye"></i>
