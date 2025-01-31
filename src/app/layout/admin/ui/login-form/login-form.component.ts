@@ -157,10 +157,7 @@ ngOnInit(){
   getIdfromemail(email:string){
     this.api.returnIdFromEmail(email).subscribe(
       (userId) =>{
-        var userID = userId;
-        this.employeeId = userID;
-        localStorage.setItem('userId', this.employeeId);
-          console.log('User ID stored in localStorage:', this.employeeId);
+
       }
     )
   }
@@ -192,8 +189,31 @@ ngOnInit(){
   this.api.addNewUser(this.email, this.name, this.phoneNumber).subscribe(
     (response) => {
       console.log('User added successfully:', response);
-      this.getIdfromemail(this.email)
-      this.router.navigate(['/home']);
+const loginRequest: LoginRequestDTO = {
+      email: this.email
+    };
+
+    this.api.LoginandToken(loginRequest).subscribe((res:any)=> {
+        this.loginResponse = res;
+        console.log(this.loginResponse)
+        this.token = res.token
+
+        try {
+          const decoded: any = jwtDecode(this.token);
+          console.log('Decoded UserId:', decoded.UserId);
+          console.log('Decoded UserName:', decoded.name);
+
+          // Store token in localStorage or a service
+          localStorage.setItem('token', this.token);
+          localStorage.setItem('userid', decoded.UserId);
+          this.authentication(decoded.UserId);
+          // Navigate to dashboard or home page
+
+        } catch (error) {
+          console.error('Error decoding token:', error);
+        }
+
+    })
     },
     (error) => {
       console.error('Error adding user:', error);
