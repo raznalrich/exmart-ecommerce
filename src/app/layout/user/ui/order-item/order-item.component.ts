@@ -45,6 +45,8 @@ interface OrderItem {
   price: number;
   subTotal: number;
   primaryImageUrl?: string;
+  shippingCharge: number;
+  orderItemId: number;
 
 }
 @Component({
