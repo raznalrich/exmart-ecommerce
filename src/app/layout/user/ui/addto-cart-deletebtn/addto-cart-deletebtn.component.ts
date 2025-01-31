@@ -16,7 +16,8 @@ export class AddtoCartDeletebtnComponent {
 @Input() userId:number=0;
 @Input() colorId:number=0;
 @Input() sizeId:number=0;
-
+onDelete(){
+}
   removeFromCart() {
     this.api.deleteFromCart(this.productId, this.userId).subscribe({
       next: (response) => {
