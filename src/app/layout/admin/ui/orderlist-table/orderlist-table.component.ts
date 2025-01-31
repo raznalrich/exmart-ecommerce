@@ -23,6 +23,9 @@ export class OrderlistTableComponent {
   OrderDetailsByID: any;
   selectedOrderItemId: any;
 
+  editingShippingCharge: number | null = null;
+  tempShippingCharge: number | null = null;
+
   constructor(public api: ApiServiceService) {}
 
   ngOnInit() {
@@ -101,4 +104,41 @@ export class OrderlistTableComponent {
     const tableContainer = document.querySelector('.table-container');
     tableContainer?.classList.remove('blur-background');
   }
+
+  startEdit(orderItemId: number, currentCharge: number) {
+    this.editingShippingCharge = orderItemId;
+    this.tempShippingCharge = currentCharge;
+  }
+
+  cancelEdit() {
+    this.editingShippingCharge = null;
+    this.tempShippingCharge = null;
+  }
+
+  saveShippingCharge(item: any) {
+    if (this.tempShippingCharge === null || this.tempShippingCharge === item.shippingCharge) {
+      this.cancelEdit();
+      return;
+    }
+
+    const updateData = {
+      orderItemId: item.orderItemId,
+      shippingCharge: this.tempShippingCharge
+    };
+
+    this.api.updateShippingCharge(updateData).subscribe({
+      next: (res: any) => {
+        item.shippingCharge = this.tempShippingCharge;
+        this.editingShippingCharge = null;
+        this.tempShippingCharge = null;
+        alert('Shipping charge updated successfully');
+      },
+      error: (error: any) => {
+        console.error('Error updating shipping charge:', error);
+        alert('Failed to update shipping charge');
+        this.cancelEdit();
+      }
+    });
+  }
+
 }

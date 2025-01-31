@@ -58,6 +58,7 @@ export interface AddAddressDTO {
   providedIn: 'root',
 })
 export class ApiServiceService {
+
   map(
     arg0: (order: any) => {
       CustomerID: any;
@@ -544,6 +545,10 @@ console.log('address data',data);
 
   LoginandToken(loginRequest:any){
     return this.http.post(`https://exmart-backend.onrender.com/login`,loginRequest)
+  }
+
+  updateShippingCharge(updateData: { orderItemId: any; shippingCharge: number; }) {
+    return this.http.put(`https://localhost:7267/api/Order/updateShippingCharge?`, updateData)
   }
 
 }
