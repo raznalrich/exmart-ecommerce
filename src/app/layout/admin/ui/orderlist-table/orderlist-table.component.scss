@@ -91,4 +91,18 @@ body {
   border-radius: 4px;
   font-size: 14px;
 }
+.edit-shipping {
+  display: flex;
+  align-items: center;
+}
+.shipping-input {
+  width: 80px;
+  padding: 0.25rem;
+}
+.shipping-display {
+  cursor: pointer;
+}
+.shipping-display:hover {
+  background-color: #f5f5f5;
+}
 

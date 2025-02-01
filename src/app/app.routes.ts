@@ -55,6 +55,7 @@ export const routes: Routes = [
         path: 'home',
         component: HomeStaticComponent,
         canActivate: [AuthGuard],
+        data: {role: 'User'},
         children: [
           {
             path: 'category/:id',
@@ -84,9 +85,25 @@ export const routes: Routes = [
         path: 'policies',
         component: PolicyPageComponent,
         canActivate: [AuthGuard],
+        data: {role: 'User'},
         children: [
           { path: '', redirectTo: 'terms', pathMatch: 'full' },
-          { path: ':type', component: PolicyContentComponent },
+          { path: ':type', component: PolicyContentComponent,
+          }
+        ]
+      },
+      {
+        path:'viewproduct/:id',component:SingleproductpageComponent,
+        data: { breadcrumb: 'View Product' }
+      },
+      {
+        path: 'seeAllProducts',component: SeeAllProductsPageComponent, canActivate: [AuthGuard],
+        data: {role: 'User'},
+        children:[
+          {
+            path: 'seeAllProducts/category/:id', component: SeeAllProductsPageComponent,
+            data: { breadcrumb: 'See All Products' }
+          }
         ],
       },
       {
@@ -196,6 +213,59 @@ export const routes: Routes = [
   {
     path: 'trackexmart/:id',
     component: TrackExmartComponent,
+  },
+  {
+    path:'userprofile', component:UserprofileComponent,
+    canActivate: [AuthGuard],
+    data: {role: 'User'},
+    children:[
+      {
+        path:'addaddress',component:NewAddressComponent,
+      },
+      {
+        path:'userorder',component:UserOrdersComponent,
+      },
+      {
+        path:'addresspage',component:SelectAddressComponent,
+      },
+      {
+        path:'',redirectTo:'userorder',pathMatch:'full'
+      }
+    ]
+  },
+  {
+    path:'admin',component: DashboardComponent,
+     canActivate: [AuthGuard],
+    data: {role: 'Admin'},
+    children:[
+      {
+        path:'admindashboard',component:AdminDashboardComponent,
+      },
+      {
+        path:'productlist',component:ProductlistComponent,
+      },
+      {
+        path:'orderlist',component:OrderListComponent,
+      },
+      {
+        path:'reportpage',component:ReportPageComponent,
+      },
+      {
+        path:'viewfeedback',component:ViewFeedbackComponent,
+      },
+      {
+        path:'dialoguebox',component:AddProductsComponent,
+      },
+      {
+        path:'settings',component:SettingsPageComponent,
+      },
+      {
+        path:'configuration-tab',component:ConfigurationTabComponent,
+      },
+      {
+        path:'texteditor/:id',component:AdminSettingsTextEditorComponent,
+      }
+    ]
   },
   {
     path: 'updateStatusBy/:id',
