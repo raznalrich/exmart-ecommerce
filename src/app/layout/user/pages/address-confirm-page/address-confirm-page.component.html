@@ -8,11 +8,14 @@
        routerLink="/addcart">
     </app-long-button>
   </div>
-  @for (data of workAddress; track data) {
-    <app-address-card [address]="data" ></app-address-card>
+  @for (data1 of workAddress; track data1) {
+    <app-address-card [address]="data1" ></app-address-card>
   }
-  @for (data of address; track data) {
-    <app-address-card [address]="data" ></app-address-card>
+  @if(address!=null){
+
+    @for (data of address; track data) {
+      <app-address-card [address]="data" ></app-address-card>
+    }
   }
     <div class="newAddressButton">
 <!-- disclaimer -->
