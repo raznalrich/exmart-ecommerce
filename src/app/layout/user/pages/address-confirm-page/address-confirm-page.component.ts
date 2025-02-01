@@ -43,6 +43,12 @@ isAddProductVisible:boolean=false;
 userId:number=0;
     ngOnInit() {
       this.userId=this.global.userId()
+      this.workAddress = this.api.getAddress().subscribe((res: any) => {
+        this.workAddress = res.filter((item: any) =>
+          ['office'].includes(item.addressTypeName.toLowerCase())
+        );
+        console.log("work address", this.workAddress);
+      });
       this.address= this.api.getAddressByUserId(this.userId)
       .subscribe((res: any) => {
         this.address = res.filter((item: any) =>
@@ -51,12 +57,7 @@ userId:number=0;
          console.log(this.address);
      })
 
-     this.workAddress = this.api.getAddress().subscribe((res: any) => {
-      this.workAddress = res.filter((item: any) =>
-        ['office'].includes(item.addressTypeName.toLowerCase())
-      );
-      console.log("work address", this.workAddress);
-    });
+
   }
    refreshAddressList(){
     this.ngOnInit();
