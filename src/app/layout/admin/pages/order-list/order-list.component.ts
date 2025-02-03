@@ -144,30 +144,50 @@ export class OrderListComponent {
               row && {
                 orderItemId: row.getCell(1).value,
                 productStatusId: this.getStatusNumber(
-                  row.getCell(4).value as string
+                  row.getCell(8).value as string
                 ),
-                shippingCharge: row.getCell(5).value,
+                shippingCharge: row.getCell(9).value,
               }
           )
           .filter((order) => order && order.orderItemId) ?? [];
 
+      console.log('Orders to update:', orders); // Check data before API call
+
+      // ✅ Step 2: Ensure All Data is Loaded
+      if (orders.length === 0) {
+        console.warn('No valid orders found in the file.');
+        return;
+      }
+
       // Track successful updates
       let hasUpdates = false;
 
-      await Promise.all(
-        orders.map(async (order) => {
-          try {
-            const response = await firstValueFrom(
-              this.api.updateOrderStatus(order)
-            );
-            console.log(`Order updated: ${order.orderItemId}`, response);
+      for (const order of orders) {
+        try {
+          const response = await firstValueFrom(
+            this.api.updateOrderStatus(order)
+          );
+          console.log(`Order updated: ${order.orderItemId}`, response);
+          hasUpdates = true;
+        } catch (error) {
+          console.error(`Error updating order: ${order.orderItemId}`, error);
+        }
+      }
 
-            hasUpdates = true;
-          } catch (error) {
-            console.error(`Error updating order: ${order.orderItemId}`, error);
-          }
-        })
-      );
+      // await Promise.all(
+      //   orders.map(async (order) => {
+      //     try {
+      //       const response = await firstValueFrom(
+      //         this.api.updateOrderStatus(order)
+      //       );
+      //       console.log(`Order updated: ${order.orderItemId}`, response);
+
+      //       hasUpdates = true;
+      //     } catch (error) {
+      //       console.error(`Error updating order: ${order.orderItemId}`, error);
+      //     }
+      //   })
+      // );
       if (hasUpdates) {
         this.loadOrders();
       }
@@ -193,8 +213,12 @@ export class OrderListComponent {
       { header: 'Order Item Id', key: 'orderItemId', width: 15 },
       { header: 'Date', key: 'orderDate', width: 20 },
       { header: 'Product', key: 'productName', width: 25 },
-      { header: 'Status', key: 'status', width: 15 },
+      { header: 'Address', key: 'addressLine', width: 25 },
+      { header: 'City', key: 'city', width: 25 },
+      { header: 'State', key: 'state', width: 25 },
+      { header: 'Zip code', key: 'zipCode', width: 25 },
       { header: 'Shippping Charge', key: 'shippingCharge', width: 15 },
+      { header: 'Status', key: 'status', width: 15 },
       { header: 'Amount', key: 'amount', width: 15 },
       { header: 'Quantity', key: 'quantity', width: 10 },
     ];
@@ -203,9 +227,13 @@ export class OrderListComponent {
       orderItemId: order.orderItemId,
       orderDate: new Date(order.orderDate).toLocaleDateString(),
       productName: order.productName,
+      addressLine: order.addressLine,
+      city: order.city,
+      state: order.state,
+      zipCode: order.zipCode,
+      shippingCharge: order.shippingCharge,
       status:
         ['Pending', 'Shipped', 'Delivered'][order.status - 1] || 'Pending',
-      shippingCharge: order.shippingCharge,
       amount: order.amount.toFixed(2),
       quantity: order.quantity,
     }));
