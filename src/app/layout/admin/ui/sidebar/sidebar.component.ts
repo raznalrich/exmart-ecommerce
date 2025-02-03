@@ -60,6 +60,7 @@ export class SidebarComponent {
     // Remove specific data (e.g., userId) from local storage
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
+    localStorage.removeItem('role')
     // Optionally clear all local storage
     localStorage.clear();
 
