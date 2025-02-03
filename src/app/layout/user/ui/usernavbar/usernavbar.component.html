@@ -34,7 +34,6 @@
                         @if (isDropdownOpen) {
                         <div class="dropdown-content">
                             <p style="color: black;">{{userName}}</p>
-                            <!-- <a routerLink="userprofile" (click)="closeDropdown()">Profile</a> -->
                             @for (item of menuItems; track item.id) {
                             <a [routerLink]="item.routerLink" (click)="closeDropdown()">
                                 <i [class]="item.image"></i>
