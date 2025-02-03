@@ -85,26 +85,9 @@ export const routes: Routes = [
         path: 'policies',
         component: PolicyPageComponent,
         canActivate: [AuthGuard],
-        data: {role: 'User'},
         children: [
           { path: '', redirectTo: 'terms', pathMatch: 'full' },
-          { path: ':type', component: PolicyContentComponent,
-          }
-        ]
-      },
-      {
-        path:'viewproduct/:id',component:SingleproductpageComponent,
-        data: { breadcrumb: 'View Product' }
-      },
-      {
-        path: 'seeAllProducts',component: SeeAllProductsPageComponent,
-        canActivate: [AuthGuard],
-        data: {role: 'User'},
-        children:[
-          {
-            path: 'seeAllProducts/category/:id', component: SeeAllProductsPageComponent,
-            data: { breadcrumb: 'See All Products' }
-          }
+          { path: ':type', component: PolicyContentComponent },
         ],
       },
       {
