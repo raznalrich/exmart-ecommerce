@@ -49,6 +49,41 @@ export class LoginFormComponent {
 
     this.email = email;
     this.name = this.parseNameFromEmail(email);
+    this.api.returnIdFromEmail(email).subscribe(
+      (userId) => {
+        console.log('User ID:', userId);
+        const loginRequest: LoginRequestDTO = {
+          email: this.email
+        };
+
+        this.api.LoginandToken(loginRequest).subscribe((res:any)=> {
+            this.loginResponse = res;
+            console.log(this.loginResponse)
+            this.token = res.token
+
+            try {
+              const decoded: any = jwtDecode(this.token);
+              console.log('Decoded UserId:', decoded.UserId);
+              console.log('Decoded UserName:', decoded.name);
+
+              // Store token in localStorage or a service
+              localStorage.setItem('token', this.token);
+              localStorage.setItem('userid', decoded.UserId);
+              this.authentication(decoded.UserId);
+              // Navigate to dashboard or home page
+
+            } catch (error) {
+              console.error('Error decoding token:', error);
+            }
+
+        })
+      },
+      (error) => {
+        this.addNewUser();
+        console.error('adding new user:', error);
+
+      }
+    );
 
     const loginRequest: LoginRequestDTO = {
       email: this.email
@@ -73,7 +108,7 @@ export class LoginFormComponent {
         }
       },
       error: (error) => {
-        console.error('Login error:', error);
+        // console.error('Login error:', error);
         this.errorMessage = 'Login failed. Please try again.';
         this.isLoading = false;
       },

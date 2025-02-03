@@ -1,137 +1,270 @@
+// .sidenav {
+//   // background: #3e68b9;
+//   background: linear-gradient(to bottom,#253d6c,#3f69ba);
+//   transition: all 0.5s ease;
+//   padding: 20px;
+//   position: fixed;
+//   z-index: 1;
+//   top: 0;
+//   width: 15rem;
+//   // width: 17vw;
+//   height: 100vh;
+//   border-top-right-radius: 30px;
+//   border-bottom-right-radius: 30px;
+//   display: flex;
+//   flex-direction: column;
+// }
+// .namebox{
+//   border: #fff 1px solid;
+//   width: 150px;
+//   display: flex;
+//   justify-content: center;
+//   margin-bottom: 10px;
+//   // align-items: center;
+//   p{
+//     color: #fff;
+//     text-align: center;
+//     margin-bottom: 0px;
+//     font-size: 12px;
+//   }
+// }
+// .namebox:hover{
+//   background-color: #fff;
+//   p:hover{
+//     color: #253d6c;
+//   }
+// }
+
+// .sidenav .logo-container {
+//   display: flex;
+//   align-items: center;
+//   padding: 1rem 1rem 0 1rem;
+//   width: 100%;
+// }
+// .sidenav .logo-container .logo {
+//   background: #fff;
+//   text-align: center;
+//   width: 3rem;
+//   min-width: 3rem;
+//   border-radius: 0.313rem;
+//   padding: 0.313rem;
+//   font-size: 24px;
+//   font-weight: 700;
+//   cursor: pointer;
+//   border: none;
+// }
+// .sidenav .logo-container {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 3px;
+//   font-size: 20px;
+//   font-weight: 700;
+//   color: #fff;
+// }
+// .sidenav .logo-container .btn-close {
+//   margin-left: auto;
+//   cursor: pointer;
+//   width: 2rem;
+//   height: 2rem;
+//   border-radius: 50%;
+//   background-color: transparent;
+//   border: none;
+// }
+// .sidenav .logo-container .btn-close {
+//   color: #fff;
+//   font-size: 24px;
+// }
+// .sidenav-nav {
+//   list-style: none;
+//   padding: 1rem;
+//   margin: 0;
+//   display: flex;
+//   flex-direction: column;
+//   // margin-top: 100px;
+//   cursor: pointer;
+//   flex-grow: 1;
+// }
+// .sidenav-nav .sidenav-nav-item {
+//   width: 100%;
+//   margin-bottom: 0.625rem;
+// }
+// .sidenav-nav-link{
+//   margin-top: 10px;
+// }
+// .sidenav-nav .sidenav-nav-item .sidenav-nav-link {
+//   display: flex;
+//   align-items: center;
+//   height: 3rem;
+//   color: #f3f3f3;
+//   text-decoration: none;
+//   border-radius: 50px;
+//   transition: all 0.3s ease;
+// }
+// .sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-link-icon {
+//   font-size: 30px;
+//   width: 3rem;
+//   min-width: 2rem;
+//   text-align: center;
+//   padding: 12px;
+// }
+// .sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-link-text {
+//   font-size: medium;
+//   margin-left: 1.5rem;
+// }
+// .sidenav-nav .sidenav-nav-item:hover .sidenav-nav-link {
+//   background-color: #fff;
+//   color: #000;
+//   border-radius: 20px 20px 20px 20px;
+//   transition: all 0.3s ease-in-out;
+//   padding: 10px;
+// }
+// .active {
+//   background-color: #fff;
+//   border-radius: 30px 30px 30px 30px;
+//   margin-right: -5vw;
+//   transition: all 0.3s ease-in-out;
+// }
+// .active .sidenav-link-icon,
+// .active .sidenav-link-text {
+//   color: #000;
+// }
+
+// .logout {
+//   margin-top: auto;
+//   padding: 2rem;
+// }
+
+// Define color variables for easy theming
+$primary-bg: linear-gradient(to bottom, #253d6c, #3f69ba);
+$white: #fff;
+$black: #000;
+$transition: all 0.3s ease-in-out;
+$nav-height: 60px;
+
 .sidenav {
-  // background: #3e68b9;
-  background: linear-gradient(to bottom,#253d6c,#3f69ba);
-  transition: all 0.5s ease;
-  padding: 20px;
+  background: $primary-bg;
+  transition: $transition;
+  padding: 0 20px;
   position: fixed;
-  z-index: 1;
+  z-index: 100;
   top: 0;
-  width: 15rem;
-  // width: 17vw;
-  height: 100vh;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
+  left: 0;
+  width: 100%;
+  height: $nav-height; // Set height for navbar
   display: flex;
-  flex-direction: column;
-}
-.namebox{
-  border: #fff 1px solid;
-  width: 150px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-  // align-items: center;
-  p{
-    color: #fff;
-    text-align: center;
-    margin-bottom: 0px;
-    font-size: 12px;
-  }
-}
-.namebox:hover{
-  background-color: #fff;
-  p:hover{
-    color: #253d6c;
-  }
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+// Logo Styling (Left-aligned)
 .sidenav .logo-container {
   display: flex;
   align-items: center;
-  padding: 1rem 1rem 0 1rem;
-  width: 100%;
-}
-.sidenav .logo-container .logo {
-  background: #fff;
-  text-align: center;
-  width: 3rem;
-  min-width: 3rem;
-  border-radius: 0.313rem;
-  padding: 0.313rem;
-  font-size: 24px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-}
-.sidenav .logo-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 3px;
+  color: $white;
   font-size: 20px;
   font-weight: 700;
-  color: #fff;
-}
-.sidenav .logo-container .btn-close {
-  margin-left: auto;
   cursor: pointer;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background-color: transparent;
-  border: none;
-}
-.sidenav .logo-container .btn-close {
-  color: #fff;
-  font-size: 24px;
-}
-.sidenav-nav {
-  list-style: none;
-  padding: 1rem;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  // margin-top: 100px;
-  cursor: pointer;
-  flex-grow: 1;
-}
-.sidenav-nav .sidenav-nav-item {
-  width: 100%;
-  margin-bottom: 0.625rem;
-}
-.sidenav-nav-link{
-  margin-top: 10px;
-}
-.sidenav-nav .sidenav-nav-item .sidenav-nav-link {
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  color: #f3f3f3;
-  text-decoration: none;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-}
-.sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-link-icon {
-  font-size: 30px;
-  width: 3rem;
-  min-width: 2rem;
-  text-align: center;
-  padding: 12px;
-}
-.sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-link-text {
-  font-size: medium;
-  margin-left: 1.5rem;
-}
-.sidenav-nav .sidenav-nav-item:hover .sidenav-nav-link {
-  background-color: #fff;
-  color: #000;
-  border-radius: 20px 20px 20px 20px;
-  transition: all 0.3s ease-in-out;
-  padding: 10px;
-}
-.active {
-  background-color: #fff;
-  border-radius: 30px 30px 30px 30px;
-  margin-right: -5vw;
-  transition: all 0.3s ease-in-out;
-}
-.active .sidenav-link-icon,
-.active .sidenav-link-text {
-  color: #000;
+  padding: 10px 0;
+
+  .logo {
+    background: $white;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #253d6c;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
 }
 
+// Navigation Items (Centered)
+.sidenav-nav {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+
+  .sidenav-nav-item {
+    .sidenav-nav-link {
+      display: flex;
+      align-items: center;
+      color: #f3f3f3;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 10px 15px;
+      border-radius: 20px;
+      transition: $transition;
+      font-weight: 500;
+      
+      .sidenav-link-icon {
+        font-size: 20px;
+        margin-right: 8px;
+      }
+    }
+
+    &:hover .sidenav-nav-link {
+      // background-color: rgba(255, 255, 255, 0.2);
+      color: $black;
+      transition: $transition;
+    }
+  }
+}
+
+// Active State
+.active {
+  // color: #000;
+  // background-color: $black;
+  color: $black;
+  // border-radius: 20px;
+  // padding: 10px;
+  transition: $transition;
+  // font-weight: bold;
+}
+
+// Logout Button (Right-aligned)
 .logout {
-  margin-top: auto;
-  padding: 2rem;
+  margin-left: auto;
+  padding: 10px 20px;
+  color: $white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    color: $black;
+    background: $white;
+    border-radius: 20px;
+    padding: 10px 15px;
+  }
+}
+
+// Responsive Design for Smaller Screens
+@media (max-width: 768px) {
+  .sidenav {
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
+  }
+
+  .sidenav-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .logout {
+    margin-left: 0;
+    padding-top: 10px;
+  }
 }
