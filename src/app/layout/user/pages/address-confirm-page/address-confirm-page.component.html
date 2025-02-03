@@ -17,12 +17,15 @@
       }
 
   </div>
-  @if(address==null){
+  @if(address!=null){
+    @for (data1 of workAddress; track data1) {
+      <app-address-card [address]="data1" ></app-address-card>
+    }
     @for (data of address; track data) {
       <app-address-card [address]="data" ></app-address-card>
     }
   }
-  @else {
+  @else{
     @for (data1 of workAddress; track data1) {
       <app-address-card [address]="data1" ></app-address-card>
     }

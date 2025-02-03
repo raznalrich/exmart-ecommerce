@@ -97,7 +97,8 @@ export const routes: Routes = [
         data: { breadcrumb: 'View Product' }
       },
       {
-        path: 'seeAllProducts',component: SeeAllProductsPageComponent, canActivate: [AuthGuard],
+        path: 'seeAllProducts',component: SeeAllProductsPageComponent,
+        canActivate: [AuthGuard],
         data: {role: 'User'},
         children:[
           {
