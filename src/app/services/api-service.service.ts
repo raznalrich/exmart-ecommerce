@@ -548,7 +548,7 @@ console.log('address data',data);
   }
 
   updateShippingCharge(updateData: { orderItemId: any; shippingCharge: number; }) {
-    return this.http.put(`https://localhost:7267/api/Order/updateShippingCharge?`, updateData)
+    return this.http.put(`https://exmart-backend.onrender.com/Order/updateShippingCharge?`, updateData)
   }
 
 }
