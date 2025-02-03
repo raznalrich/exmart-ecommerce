@@ -11,7 +11,6 @@ import { ApiService } from '../../../../api.service';
 import { CommonModule } from '@angular/common';
 import { forkJoin, of } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
-import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-add-products',
@@ -69,7 +68,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
   initializeForm() {
     this.addProduct = new FormGroup({
       name: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.maxLength(500)),
+      description: new FormControl('',[Validators.required,Validators.maxLength(500)] ),
       brand: new FormControl('', Validators.required),
       vendorId: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
       categoryId: new FormControl('', Validators.required),
@@ -140,7 +139,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
     this.productToEdit = null;
     this.editProductDetails = null;
 
-    // Reset the form
     this.addProduct.reset({
       createdBy: 2,
       sizeId: [],
@@ -152,7 +150,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
     this.selectedFile = null;
     this.showSizes = false;
 
-    // Clear validators for sizeId (we'll set them again on category change)
     const sizeControl = this.addProduct.get('sizeId');
     sizeControl?.clearValidators();
     sizeControl?.setValue([]);
@@ -166,7 +163,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   handleCategoryChange(categoryId: number) {
-    // If category is 20, we require a size selection
     this.showSizes = Number(categoryId) === 20;
 
     const sizeControl = this.addProduct.get('sizeId');
@@ -180,7 +176,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   populateForm(product: any) {
-    // Patch existing product data into the form
     this.addProduct.patchValue({
       name: product.name,
       description: product.description,
@@ -188,7 +183,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
       vendorId: product.vendorId,
       categoryId: product.categoryId,
 
-      // Use the correct field names:
       sizeId: product.sizeId,
       colorId: product.colorId,
 
@@ -199,7 +193,6 @@ export class AddProductsComponent implements OnInit, OnChanges {
       productImages: product.productImages || [],
     });
 
-    // Trigger size logic if needed
     this.handleCategoryChange(product.categoryId);
   }
 
@@ -208,17 +201,13 @@ export class AddProductsComponent implements OnInit, OnChanges {
     return typeof controlValue === 'string' ? controlValue : null;
   }
 
-  /**
-   * Utility to check if an id is in a FormControl's array value (for checkbox UI)
-   */
+
   isSelected(controlName: string, value: number): boolean {
     const control = this.addProduct.get(controlName);
     return control?.value?.includes(value) || false;
   }
 
-  /**
-   * When user checks/unchecks color or size checkboxes
-   */
+
   onCheckboxChange(event: Event, controlName: string) {
     const checkbox = event.target as HTMLInputElement;
     const control = this.addProduct.get(controlName);
@@ -285,6 +274,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   private updateExistingProduct() {
+    this.isLoading = true;
     const formValue = this.addProduct.value;
     const productId = this.productToEdit.id;
 
@@ -370,6 +360,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
       this.apiService.updateProduct(payload.id, payload).subscribe({
         next: (res) => {
           console.log('Product updated successfully:', res);
+          this.save.emit();
           this.isLoading = false;
           this.closeModal();
         },
