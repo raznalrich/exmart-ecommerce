@@ -67,7 +67,7 @@ export class ApiService {
 
   // Fetch products from local JSON
   getProducts(): Observable<any> {
-    return this.http.get('https://localhost:7267/api/Product');
+    return this.http.get('https://exmart-backend.onrender.com/api/Product');
   }
 
   // Add a new product
@@ -95,7 +95,7 @@ uploadImage(file: File) {
 
   updateProduct(productId: number, productData: any): Observable<any> {
     return this.http.put(
-      `https://localhost:7267/api/Product/Update/${productId}`,
+      `https://exmart-backend.onrender.com/api/Product/Update/${productId}`,
       productData
     );
   }
@@ -104,7 +104,7 @@ uploadImage(file: File) {
 
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
-      `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
+      `https://exmart-backend.onrender.com/api/Product/search?name=${encodeURIComponent(
         query
       )}`
     );
@@ -149,7 +149,7 @@ uploadImage(file: File) {
   //   );
 
   getAllFeedback(){
-    return this.http.get(`https://localhost:7267/api/FeedBack/all`);
+    return this.http.get(`https://exmart-backend.onrender.com/api/FeedBack/all`);
   }
 
   // getProductsById(id:any){
