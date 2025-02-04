@@ -24,7 +24,6 @@ export class WebFeedbackSectionComponent {
     const userId = localStorage.getItem('userId');
     return userId;
   }
-  userid = localStorage.getItem('userid');
 
   webfeedbackForm = new FormGroup({
 
@@ -54,7 +53,7 @@ export class WebFeedbackSectionComponent {
       this.showError = true;
       setTimeout(() => {
         this.showError = false;
-      }, 3000);
+      }, 2000);
       return;
     }
 
@@ -70,28 +69,9 @@ export class WebFeedbackSectionComponent {
           this.wordCount = 0;
           setTimeout(() => {
             this.showSuccess = false;
-          }, 5000);
+          }, 3000);
         },
         error: (error) => {
           console.error('Error submitting feedback:', error);
         }
-      })}}
-}
-
-  // submitFeedback() {
-  //   if (this.api && this.webfeedbackForm.valid) {
-  //     console.log('Sending feedback:', this.webfeedbackForm.value);
-
-  //     this.api.saveUserFeedback(this.webfeedbackForm.value).subscribe({
-  //       next: (response) => {
-  //         console.log('Feedback submitted successfully:', response);
-  //       },
-  //       error: (error) => {
-  //         console.error('Error submitting feedback:', error);
-  //       },
-  //     });
-  //   } else {
-  //     this.webfeedbackForm.markAllAsTouched();
-  //     console.warn('Feedback form is invalid');
-  //   }
-  // }
+      })}}}
