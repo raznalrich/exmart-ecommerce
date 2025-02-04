@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { GlobalService } from '../../../../global.service';
@@ -16,9 +16,10 @@ export class AddtoCartDeletebtnComponent {
 @Input() userId:number=0;
 @Input() colorId:number=0;
 @Input() sizeId:number=0;
-
+onDelete(){
+}
   removeFromCart() {
-    this.api.deleteFromCart(this.productId, this.userId,this.colorId,this.sizeId).subscribe({
+    this.api.deleteFromCart(this.productId, this.userId).subscribe({
       next: (response) => {
         console.log('Item removed successfully');
         this.global.getCartCount();

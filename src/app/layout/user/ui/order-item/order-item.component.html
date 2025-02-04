@@ -14,8 +14,16 @@
     <div>
       <h6 style="margin: 0; font-weight: bold;">{{ title }}</h6>
       <p style="margin: 0; font-size: 0.85rem;">
-        <!-- Color: {{ item.colorName }}<br /> -->
-        <!-- Size: {{ item.sizeName }}<br /> -->
+        @for (item of orderData.orderItems; track item.orderItemId) {
+          <div class="item-details">
+            <span><strong>  Color:</strong> {{item.colorName}}   |   </span>
+            <span><strong>  Size:</strong> {{item.sizeName}}   |   </span>
+            <span><strong>  Quantity:</strong> {{item.quantity}}</span>
+            @if (item.shippingCharge) {
+              <span>   |   <strong>  Shipping Charge:</strong> {{item.shippingCharge}}</span>
+            }
+          </div>
+        }
         Price: {{ amount }}
       </p>
     </div>

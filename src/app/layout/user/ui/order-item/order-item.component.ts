@@ -45,6 +45,8 @@ interface OrderItem {
   price: number;
   subTotal: number;
   primaryImageUrl?: string;
+  shippingCharge: number;
+  orderItemId: number;
 
 }
 @Component({
@@ -91,12 +93,13 @@ ngOnInit(){
     this.api.GetOrderDetailById(this.id).subscribe({
       next: (orderData) => {
         // this.orderData = orderData;
-        // console.log("Colordata",orderData);
+        console.log("orderData",orderData);
         this.orderItemslist = this.orderData.orderItems
-        // console.log('order item',this.orderItemslist);
-        // this.fetchProductImages();
+        console.log('orderitemList',this.orderItemslist);
 
-        // this.color = this.color.colorName;
+
+        // this.fetchProductImages();
+        // this.color = this.orderItemslist.colorName;
         // console.log('color', this.color);
       },
       error: (error) => {
@@ -111,11 +114,7 @@ sendCancel(id:number){
   this.isSubmitting=true;
   this.api.GetOrderDetailById(this.id).subscribe({
     next: (orderData) => {
-      if (orderData) {  // Ensure orderData is valid before assignment
-        this.orderData = orderData as Order;
-      } else {
-        console.error("Order data is undefined");
-      }
+
       console.log("order details",orderData);
       this.orderItemslist = this.orderData.orderItems
       console.log('order item',this.orderItemslist);
