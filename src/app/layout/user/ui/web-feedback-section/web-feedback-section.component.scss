@@ -70,12 +70,12 @@ textarea {
 }
 
 .error {
-  background-color: #ff4444;
+  background-color: #f09951;
   color: white;
 }
 
 .success {
-  background-color: #00C851;
+  background-color: #43bf73;
   color: white;
 }
 
@@ -83,7 +83,7 @@ textarea {
   position: absolute;
   bottom: -25px;
   left: 0;
-  color: #ff4444;
+  color: #dc143c;
   font-size: 14px;
   animation: fadeIn 0.3s ease-out;
 }

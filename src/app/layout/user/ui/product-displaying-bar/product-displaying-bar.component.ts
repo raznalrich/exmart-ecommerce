@@ -21,9 +21,12 @@ export class ProductDisplayingBarComponent {
   @Input() productColor: string = '';
   @Input() productSize: string = '';
   @Input() productPrice: number = 0;
-    @Output() clear = new EventEmitter<void>();
+  @Output() clear = new EventEmitter<number>();
 
   userId:any;
+  // color:any;
+  // size:any;
+  //  userId: number = 0;
   // color:any;
   // size:any;
  constructor(public api: ApiServiceService, private route: ActivatedRoute,public global:GlobalService) {
@@ -42,7 +45,7 @@ console.log('product id',this.productId);
 
  }
  removeFromCart(productId: number, userId: number,colorId:number,sizeId:number) {
-  this.api.deleteFromCart(productId, userId,colorId,sizeId).subscribe({
+  this.api.deleteFromCart(productId, userId).subscribe({
     next: (response) => {
       console.log('Item removed successfully');
       this.global.getCartCount();

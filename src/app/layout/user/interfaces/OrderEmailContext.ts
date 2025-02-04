@@ -12,3 +12,13 @@ export interface OrderEmailContext {
   shippingAddress: string;
   orderDate: Date;
 }
+
+export interface OrderItemsList {
+orderItems : Array<{
+  colorName: string
+  quantity: number
+  shippingCharge:number
+  sizeName:string
+}>
+
+}
