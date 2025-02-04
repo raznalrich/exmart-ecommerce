@@ -62,7 +62,9 @@ shippingCharge:number=0;
 orderContext:any;
 addressType:string='';
 totalPrice: number = 0;
-  constructor(public api: ApiService,public apis:ApiServiceService, private route: ActivatedRoute,public global:GlobalService, private router: Router,private location: Location,
+  constructor(public api: ApiService,public apis:ApiServiceService,
+    private route: ActivatedRoute,public global:GlobalService,
+    private router: Router,private location: Location,
     public emailservice:EmailService
   ) {
     this.global.getUserId();
@@ -97,12 +99,41 @@ totalPrice: number = 0;
     // console.log('Cart list:', cartItems);
     // console.log('Product IDs:', this.productIds);
     // if(this.global.selectedAddressId()==''){
+    console.log('Cart items:', cartItems);
+    console.log('Product IDs:', this.productIds);
+    if(this.global.selectedAddressId()==''){
 
       this.fetchCartItems(cartItems);
-    // }
-    // this.calculateTotalPrice();
+    }
     // console.log(this.CartItems);
   }
+
+  handleProductRemoval(productId: number) {
+    // Remove from local array first for immediate UI update
+    this.cartItemList = this.cartItemList.filter((items: { id: any; }) =>
+      items.id !== productId);
+
+    console.log("pro ID:",productId);
+    console.log("pro ID:",productId);
+    console.log("user ID:-",this.global.userId());
+
+
+    // Then remove from backend
+    this.apis.deleteFromCart(productId, this.global.userId()).subscribe({
+      next: () => {
+        // Update global cart count
+        this.global.getCartCount();
+        // this.calculateTotalPrice();
+        this.fetchCartItems(this.cartItemList);
+        this.calculateTotalPrice();
+        console.log("after deletion cartlist:-",this.cartItemList);
+        console.log("cart count:", this.global.getCartCount());
+      },
+      error: (error) => console.error('Error removing product:', error)
+    });
+  }
+
+
   loadAddress(addressId:number) {
     this.apis.getAddressById(addressId).subscribe({
       next: (formattedAddress) => {
@@ -134,7 +165,7 @@ this.fetchCartItems( this.global.signalCartList());
 
     forkJoin(requests).subscribe(
       (responses: any[]) => {
-        console.log('add to cart',responses);
+        console.log('add to cart:-',responses);
 
         // Map responses with cart item details including color and size
         this.CartItems = responses.map((res, index) => {
@@ -148,10 +179,10 @@ this.fetchCartItems( this.global.signalCartList());
         });
 
         this.calculateTotalPrice();
-        // console.log('Updated Cart Items:', this.CartItems);
+        console.log('Updated Cart Items:', this.CartItems);
       },
       (error) => {
-        // console.error('Error fetching product details:', error);
+        console.error('Error fetching product details:', error);
       }
     );
   }
@@ -277,5 +308,3 @@ onSendReplay(email:string,subject:string) {
     this.location.back();
   }
 }
-
-
