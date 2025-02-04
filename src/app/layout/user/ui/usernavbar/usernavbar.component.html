@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
             <div class="searchBaring">
-              <app-user-searchbar></app-user-searchbar>
+                <app-user-searchbar></app-user-searchbar>
             </div>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex flex-row align-items-center gap-3">
@@ -21,8 +21,29 @@
                         <span class="badge position-absolute custom-badge">{{cartAdd.cartCount()}}</span>
                     </button>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <img routerLink="userprofile" src="images/user.webp" alt="user" style="width: 30px;">
+                </li> -->
+
+
+                <li class="nav-item">
+                    <div class="user-dropdown">
+                        <img src="images/user.webp" alt="user" style="width: 30px; cursor: pointer;"
+                            (click)="toggleDropdown()">
+
+                        @if (isDropdownOpen) {
+                        <div class="dropdown-content">
+                            <p style="color: black;">{{userName}}</p>
+                            @for (item of menuItems; track item.id) {
+                            <a [routerLink]="item.routerLink" (click)="closeDropdown()">
+                                <i [class]="item.image"></i>
+                                {{item.item}}
+                            </a>
+                            }
+                            <a (click)="logout(); closeDropdown()">Logout</a>
+                        </div>
+                        }
+                    </div>
                 </li>
             </ul>
         </div>

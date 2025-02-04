@@ -25,7 +25,7 @@ export class AddressConfirmPageComponent {
       this.global.getUserId()
     }
 
-  @Input()address:any={
+  @Input()homeAddress:any={
     name:'',
     badgeName:'',
     place:'',
@@ -43,20 +43,37 @@ isAddProductVisible:boolean=false;
 userId:number=0;
     ngOnInit() {
       this.userId=this.global.userId()
-      this.address= this.api.getAddressByUserId(this.userId)
-      .subscribe((res: any) => {
-        this.address = res.filter((item: any) =>
-          ['home', 'other'].includes(item.addressTypeName.toLowerCase())
+      this.workAddress = this.api.getAddress().subscribe((res: any) => {
+        this.workAddress = res.filter((item: any) =>
+          ['office'].includes(item.addressTypeName.toLowerCase())
         );
-         console.log(this.address);
-     })
+        console.log("work address", this.workAddress);
+      });
+      this.api.getAddressByUserId(this.userId).subscribe({
+        next: (res: any) => {
+          if (!res) {
+            // If response is null or undefined, set address to null
+            this.homeAddress = null;
+          } else {
+            // Filter addresses to include only 'home' and 'other'
+            const filteredAddresses = res.filter((item: any) =>
+              ['home', 'other'].includes(item.addressTypeName?.toLowerCase())
+            );
 
-     this.workAddress = this.api.getAddress().subscribe((res: any) => {
-      this.workAddress = res.filter((item: any) =>
-        ['office'].includes(item.addressTypeName.toLowerCase())
-      );
-      console.log("work address", this.workAddress);
-    });
+            // If the filtered list is empty, set address to null
+            this.homeAddress = filteredAddresses.length > 0 ? filteredAddresses : null;
+          }
+
+          console.log('User address:', this.homeAddress);
+        },
+        error: (error) => {
+          console.error('API Error:', error);
+          this.homeAddress = null; // Handle error by setting address to null
+        }
+      });
+
+
+
   }
    refreshAddressList(){
     this.ngOnInit();
