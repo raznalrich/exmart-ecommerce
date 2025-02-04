@@ -1,22 +1,14 @@
-<!-- <div class="feedback-form">
-  <form [formGroup]="productFeedbackForm" (ngSubmit)="submitProductFeedback()" >
-    <input type="text" id="feedback" name="feedback" placeholder="Enter your feedback" formControlName="feedback">
-    <button type="submit">></button>
-
-  </form>
-</div> -->
-
-
-
 <div class="feedback-container">
   <form [formGroup]="productFeedbackForm" (ngSubmit)="submitProductFeedback()">
     <div class="input-wrapper">
-      <input
+      <textarea
         type="text"
         formControlName="feedback"
         placeholder="Enter your feedback..."
+        (input)="countWords($event)"
         class="feedback-input"
-      >
+      ></textarea>
+
       <button
         type="submit"
         class="send-button"
@@ -32,19 +24,22 @@
         </span>
         <span class="loader" [class.show]="isSubmitting"></span>
       </button>
-    </div>
-  </form>
 
-  <!-- <div *ngIf="showThankYou" [@messageState] class="thank-you-message">
-    <div class="success-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-      </svg>
+      @if (showError) {
+        <div class="alert error">
+          Please enter your feedback before submitting.
+        </div>
+      }
+
+      @if (showSuccess) {
+        <div class="alert success">
+          Thank you for the valuable feedback!
+        </div>
+      }
     </div>
-    <h3>Thank You!</h3>
-    <p>We appreciate your feedback.</p>
-    <button class="new-feedback-btn" (click)="resetForm()">Send Another Feedback</button>
-  </div>
-</div> -->
+        @if (showWordLimitWarning) {
+          <div class="word-limit-warning">
+            Word limit exceeded.. Maximum {{ maxWords }} words allowed!!
+          </div>
+        }
+  </form>

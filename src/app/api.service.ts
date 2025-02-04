@@ -8,7 +8,7 @@ import { Product } from './layout/user/interfaces/productInterface';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'https://localhost:7267/api';
+  private baseUrl = 'https://exmart-backend.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 
