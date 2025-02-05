@@ -15,6 +15,7 @@ interface AddressResponse {
 }
 import { OrderItem } from '../layout/admin/interface/order.interface';
 import { HrDetailsI } from '../layout/user/interfaces/FooterInterfaces';
+import { OrderItemsList } from '../layout/user/interfaces/OrderEmailContext';
 
 export interface OrderEmailContext {
   orderId: string;
@@ -112,15 +113,8 @@ export class ApiServiceService {
       );
   }
 
-  deleteFromCart(productId: number, userId: number,colorId:number,sizeId:number): Observable<any> {
-    return this.http.delete(`https://exmart-backend.onrender.com/api/addtocart/DeleteCart`, {
-      params: {
-        productId: productId,
-        userId: userId,
-        colorId:colorId,
-        sizeId:sizeId,
-      },
-    });
+  deleteFromCart(productId: number, userId: number): Observable<any> {
+    return this.http.delete(`https://localhost:7267/api/addtocart/DeleteCart/${productId}/${userId}`);
   }
 
   updateCategory(id: number, category: any): Observable<any> {
@@ -548,7 +542,7 @@ console.log('address data',data);
   }
 
   updateShippingCharge(updateData: { orderItemId: any; shippingCharge: number; }) {
-    return this.http.put(`https://localhost:7267/api/Order/updateShippingCharge?`, updateData)
+    return this.http.put(`https://exmart-backend.onrender.com/api/Order/updateShippingCharge?`, updateData)
   }
 
 }
