@@ -66,6 +66,8 @@ export class OrderlistTableComponent {
       1: 'Pending',
       2: 'Shipped',
       3: 'Delivered',
+      4: 'Cancelled',
+      5: 'Cancel Request'
     };
     return statusMap[statusId] || 'Unknown';
   }

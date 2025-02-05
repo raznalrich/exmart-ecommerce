@@ -37,7 +37,8 @@ export const routes: Routes = [
   {
     path: '',
     component: HomepageComponent,
-    data: { breadcrumb: 'Home' },
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Home' , role: 'User'},
     children: [
       {
         path: 'addaddress',
@@ -168,6 +169,8 @@ export const routes: Routes = [
     path: 'admin',
     component: DashboardComponent,
     canActivate: [AuthGuard],
+    data: {role: 'Admin'},
+
     children: [
       {
         path: 'admindashboard',
