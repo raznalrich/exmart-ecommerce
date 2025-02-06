@@ -41,13 +41,13 @@
   <table class="styled-table">
     <!-- @for(item of O) -->
     <tr>
-      <th>Order Item Id</th>
+      <th>Id</th>
       <th>Date</th>
       <th>Product</th>
       <th>Status</th>
-      <th>Amount</th>
       <th title="Shipping Charge">S.C</th>
       <th>Quantity</th>
+      <th>Total</th>
       <th>Action</th>
     </tr>
     @for(item of OrderList; track item){
@@ -66,7 +66,7 @@
         </select>
       </td>
 
-      <td>{{item.amount | currency : "INR"}}</td>
+
       <td>
         @if(editingShippingCharge === item.orderItemId) {
           <div class="edit-shipping">
@@ -92,6 +92,7 @@
         }
       </td>
       <td>{{item.quantity}}</td>
+      <td>{{item.amount + item.shippingCharge | currency : "INR"}}</td>
       <td style="text-align: center;">
         <button type="button" class="btn btn-primary" (click)="openOrderDetailModal(item.orderId, item.orderItemId)">
           <i class="fa-regular fa-eye"></i>
