@@ -1,9 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 import { GlobalService } from '../../../../global.service';
 import { UserSearchbarComponent } from '../user-searchbar/user-searchbar.component';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { ApiServiceService } from '../../../../services/api-service.service';
-import { LogoutButtonComponent } from '../logout-button/logout-button.component';
 
 @Component({
   selector: 'app-usernavbar',
@@ -77,6 +76,13 @@ export class UsernavbarComponent {
 
   closeDropdown() {
     this.isDropdownOpen = false;
-    // this.router.navigate(['home/addresspage']);
+  }
+  @HostListener('document:click', ['$event'])
+  handleOutsideClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const isUserIcon = target.closest('.user-dropdown');
+    if (!isUserIcon && this.isDropdownOpen) {
+      this.closeDropdown();
+    }
   }
 }

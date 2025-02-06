@@ -1,8 +1,10 @@
-<nav class="bg-gray-100 p-4 ">
-  <ul class="nav nav-tabs">
-    <li class="nav-item" *ngFor="let tab of tabs">
-      <a [class]="'nav-link active' + (activeTab === tab ? 'bg-blue-500 text-black border' : 'hover:bg-gray-200')" aria-current="page" (click)="setActiveTab(tab)" >
-        @if(tab=='Pending'){
+<div style="min-height: 100vh;">
+
+  <nav class="bg-gray-100 p-4 ">
+    <ul class="nav nav-tabs">
+      <li class="nav-item" *ngFor="let tab of tabs">
+        <a [class]="'nav-link active' + (activeTab === tab ? 'bg-blue-500 text-black border' : 'hover:bg-gray-200')" aria-current="page" (click)="setActiveTab(tab)" >
+          @if(tab=='Pending'){
           <i [class]="'bi bi-hourglass-split'"></i>
 
         }
@@ -17,16 +19,16 @@
         }
         {{ tab }}</a>
       <!-- <button
-        [class]="'px-4 py-2 rounded ' + (activeTab === tab ? 'bg-blue-500 text-white' : 'hover:bg-gray-200')"
-        (click)="setActiveTab(tab)">
-        {{ tab }}
-      </button> -->
-    </li>
-  </ul>
+      [class]="'px-4 py-2 rounded ' + (activeTab === tab ? 'bg-blue-500 text-white' : 'hover:bg-gray-200')"
+      (click)="setActiveTab(tab)">
+      {{ tab }}
+    </button> -->
+  </li>
+</ul>
 </nav>
 <div
-  class="container   "
-  style=" border-radius: 14px; padding: 5px"
+class="container   "
+style=" border-radius: 14px; padding: 5px;"
 >
 <div [ngSwitch]="activeTab">
   <div *ngSwitchCase="'Pending'">
@@ -39,31 +41,45 @@
       [items]="pendingOrders"
       ></app-order-section>
 
-  }
-  @if(isLoading){
-    <!-- <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div> -->
-    <p class="placeholder-glow">
-      <span class="placeholder col-12"></span>
-    </p>
-  }
+    }
+    @if(isLoading){
+      <!-- <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div> -->
+      <p class="placeholder-glow">
+        <span class="placeholder col-12"></span>
+      </p>
+    }
+    @else if (pendingOrders.length==0) {
+      <div class="container d-flex flex-column align-items-center justify-content-center vh-100 text-center">
+        <div class="cart-logo mb-4">
+          <img src="/icons/cart-empty.png" alt="Empty Cart" class="img-fluid" style="max-width: 350px;" />
+        </div>
+        <!-- <h2 class="mb-3 text-secondary">Your Cart is Empty</h2> -->
+        <p class="mb-4 text-muted">Looks like you haven't orderd anything yet.</p>
+        <app-long-button
+          label="Continue shopping"
+     (buttonClick)="redirectToHome()"
+          ></app-long-button>
+      </div>
+    }
+
     <!-- <app-order-section
-      title="In Transit"
-      icon="bi bi-truck"
-      maxHeight="200px"
-      [items]="inTransitOrders">
-    </app-order-section> -->
-  </div>
-  <div *ngSwitchCase="'In Transit'">
-    @if(!isLoading&&!error){
+    title="In Transit"
+    icon="bi bi-truck"
+    maxHeight="200px"
+    [items]="inTransitOrders">
+  </app-order-section> -->
+</div>
+<div *ngSwitchCase="'In Transit'">
+  @if(!isLoading&&!error){
 
-      <app-order-section
-      title="In Transit"
-      icon="bi bi-truck"
-      maxHeight="70vh"
-      [items]="inTransitOrders"
-      ></app-order-section>
+    <app-order-section
+    title="In Transit"
+    icon="bi bi-truck"
+    maxHeight="70vh"
+    [items]="inTransitOrders"
+    ></app-order-section>
 
   }
   @if(isLoading){
@@ -73,6 +89,15 @@
     <p class="placeholder-glow">
       <span class="placeholder col-12"></span>
     </p>
+  }
+  @else if (inTransitOrders.length==0) {
+
+    <div class="no-products-container">
+      <img src="images\intransit-warning.png" alt="No Orders" class="no-orders-image">
+      <p class="no-orders-message">Oops! No products are in transit.</p>
+    </div>
+
+
   }
     <!-- <app-order-section
       title="In Transit"
@@ -99,24 +124,41 @@
       <span class="placeholder col-12"></span>
     </p>
   }
-  </div>
-  <div *ngSwitchCase="'Cancelled'">
-    @if(!isLoading&&!error){
-
-      <app-order-section
-      title="In Cancelled"
-      icon="bi bi-box"
-      maxHeight="70vh"
-      [items]="cancelledOrders">
-    </app-order-section>
+  @else if (orderHistorylist.length==0) {
+    <div class="no-products-container">
+      <img src="images\delivered-warning.jpg" alt="No Orders" class="no-orders-image">
+      <p class="no-orders-message">Your products haven't delivered yet !.</p>
+    </div>
   }
-  @if(isLoading){
-    <!-- <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div> -->
-    <p class="placeholder-glow">
+</div>
+<div *ngSwitchCase="'Cancelled'">
+  @if(!isLoading&&!error){
+
+    <app-order-section
+    title="In Cancelled"
+    icon="bi bi-box"
+    maxHeight="70vh"
+    [items]="cancelledOrders">
+  </app-order-section>
+}
+@if(isLoading){
+  <!-- <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div> -->
+  <p class="placeholder-glow">
       <span class="placeholder col-12"></span>
     </p>
   }
-  </div>
+  @else if (cancelledOrders.length==0) {
+
+    <div class="no-products-container">
+      <i class="fas fa-ban no-products-icon"></i>
+      <p class="no-products-message">No cancelled orders found!</p>
+      <p class="no-products-subtext">All your orders are active or completed successfully.</p>
+    </div>
+
+  }
+</div>
+</div>
+
 </div>
