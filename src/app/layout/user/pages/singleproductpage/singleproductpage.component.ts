@@ -29,6 +29,8 @@ export class SingleproductpageComponent implements OnInit,OnDestroy {
   routeSubscription!:Subscription;
   constructor(public api: ApiServiceService, private route: ActivatedRoute) {}
   ngOnInit() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     this.routeSubscription = this.route.params.subscribe((params)=>{
       this.id = params['id'];
       console.log("AAA",this.id);

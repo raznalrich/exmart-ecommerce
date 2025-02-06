@@ -107,7 +107,7 @@ export class EmailService {
         <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">₹${item.price}</td>
         <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">₹${item.subtotal}</td>
         <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: center;">
-        <a href="http://localhost:4200/updateStatusBy/${item.orderItemId}"
+        <a href="https://exmart.vercel.app/updateStatusBy/${item.orderItemId}"
            style="display: inline-block; padding: 8px 16px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
           Ship Now
         </a>
@@ -260,7 +260,7 @@ export class EmailService {
         <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">₹${item.price}</td>
         <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right;">₹${item.subtotal}</td>
         <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: center;">
-        <a href="http://localhost:4200/updateStatusBy/${item.orderItemId}"
+        <a href="https://exmart.vercel.app/updateStatusBy/${item.orderItemId}"
            style="display: inline-block; padding: 8px 16px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
           Cancel
         </a>

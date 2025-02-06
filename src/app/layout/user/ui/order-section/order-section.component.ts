@@ -18,7 +18,7 @@ export class OrderSectionComponent {
   @Input() items:any[] = [];
   data:any;
   ngOnInit(){
-    console.log('hello',this.items);
-    
+    // console.log('hello',this.items);
+
   }
 }
