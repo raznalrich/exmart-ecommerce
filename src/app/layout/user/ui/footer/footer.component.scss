@@ -5,8 +5,9 @@
   margin: 0;
   width: 100%;
   .row{
-    width: 100%;
+    // width: 100%;
     padding-top: 30px;
+    gap: 20px;
     hr{
       color: white;
       border: 2px white solid;
@@ -16,7 +17,7 @@
     }
     ul{
       list-style: none;
-
+      padding-left: 0px;
       li{
         color: white;
         padding-top: 5px;
@@ -44,4 +45,11 @@
 
 .tndc{
   display: flex;
+}
+
+.lineBottom{
+  object-fit: fill;
+  width: 100%;
+  border: solid 1px #253d6c ;
+  opacity: 40%;
 }

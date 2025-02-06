@@ -9,14 +9,15 @@ import { formatDate } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule, NgModel } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { AdminTopProductsChartComponent } from "../../ui/admin-top-products-chart/admin-top-products-chart.component";
 
 
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [SidebarComponent,AdminValuesDisplayingButtonComponent,
-    AdminWeeklyChartDispComponent, AdminRecentOrdersInDashBoardComponent,RouterLink,FormsModule],
+  imports: [SidebarComponent, AdminValuesDisplayingButtonComponent,
+    AdminWeeklyChartDispComponent, AdminRecentOrdersInDashBoardComponent, RouterLink, FormsModule, AdminTopProductsChartComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
