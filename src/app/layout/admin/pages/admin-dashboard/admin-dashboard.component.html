@@ -1,9 +1,10 @@
 <div class="adminDashboardContainer">
- <div class="adminHead">
-  <div class="greetings">Greetings <strong>Admin</strong></div>
- </div>
+ <!-- <div class="adminHead"> -->
+
+ <!-- </div> -->
  <div class="contents">
     <div class="leftCont">
+      <div class="greetings">Greetings <strong>Admin</strong></div>
       <div class="leftTopIcons">
 
         <app-admin-values-displaying-button
@@ -76,7 +77,11 @@
           [qty] = 'orders.quantity'
           ></app-admin-recent-orders-in-dash-board>
         }
+
       </div>
+      <app-admin-top-products-chart
+      [data]="monthlyOrderCounts">
+      </app-admin-top-products-chart>
     </div>
  </div>
 </div>
