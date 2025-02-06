@@ -26,7 +26,7 @@ export class AdminWeeklyChartDispComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.barChart) {
-      this.barChart.destroy(); 
+      this.barChart.destroy();
     }
 
     setTimeout(() => {
@@ -55,7 +55,7 @@ export class AdminWeeklyChartDispComponent {
           scales: {
             y: {
               beginAtZero: true,
-              max: 40,
+              max: 50,
             },
           },
         },
