@@ -93,9 +93,9 @@ ngOnInit(){
     this.api.GetOrderDetailById(this.id).subscribe({
       next: (orderData) => {
         // this.orderData = orderData;
-        console.log("orderData",orderData);
+        // console.log("orderData",orderData);
         this.orderItemslist = this.orderData.orderItems
-        console.log('orderitemList',this.orderItemslist);
+        // console.log('orderitemList',this.orderItemslist);
 
 
         // this.fetchProductImages();

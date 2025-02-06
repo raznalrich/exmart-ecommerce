@@ -53,71 +53,88 @@ input::placeholder {
 .searchBaring {
   padding-left: 5%;
   width: 400px;
-  // padding-right: 20px;
 }
 
-// .dropdown-container {
+// .user-dropdown {
 //   position: relative;
+//   display: inline-block;
 // }
 
-// .profile-trigger {
+// .dropdown-content {
+//   position: absolute;
+//   right: 0;
+//   top: 100%;
+//   background-color: white;
+//   min-width: 160px;
+//   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+//   z-index: 1000;
+//   border-radius: 4px;
+//   padding: 8px 0;
+// }
+
+// .dropdown-content a {
+//   color: black;
+//   padding: 12px 16px;
+//   text-decoration: none;
+//   display: flex;
+//   align-items: center;
 //   cursor: pointer;
 // }
 
-// .dropdown-menu {
-//   position: absolute;
-//   top: 100%;
-//   right: 0;
-//   background: white;
-//   border-radius: 4px;
-//   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-//   min-width: 200px;
-//   z-index: 1000;
+// .dropdown-content a i {
+//   margin-right: 8px;
 // }
 
-// .dropdown-item {
-//   display: flex;
-//   align-items: center;
-//   padding: 10px 12px;
-//   text-decoration: none;
-//   color: #333;
-//   transition: background-color 0.2s;
-// }
-
-// .dropdown-item:hover {
-//   background-color: #f5f5f5;
+// .dropdown-content a:hover {
+//   background-color: #f1f1f1;
 // }
 
 .user-dropdown {
   position: relative;
-  display: inline-block;
 }
 
 .dropdown-content {
   position: absolute;
   right: 0;
-  top: 100%;
   background-color: white;
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
   z-index: 1000;
-  border-radius: 4px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.dropdown-content p {
+  color: black;
+  font-weight: bold;
+  text-align: center;
   padding: 8px 0;
+  margin: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  padding: 8px 12px;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.dropdown-content a i {
-  margin-right: 8px;
+  display: block;
+  transition: background 0.3s;
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background: linear-gradient(to bottom, #253d6c, #3f69ba);
+  border-radius: 5px;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
