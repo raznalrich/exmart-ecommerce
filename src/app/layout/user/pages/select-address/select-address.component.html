@@ -1,4 +1,4 @@
-<div class="container py-3" style="border-radius: 18px">
+<div class="container py-3" style="border-radius: 18px;min-height: 80vh;">
   <div class="mx-auto">
     <!-- Add New Address Button -->
     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -11,12 +11,21 @@
     <div style="height: 20px"></div>
 
     <div class="card border-0 p-2" style="max-height: 380px; overflow-y: auto">
-      @for (data of address; track data) {
-      <app-profile-address-card
-        [address]="data"
-        (edit)="onEdit($event)"
-        (delete)="onDelete($event)"
-      ></app-profile-address-card>
+      @if(address.length==0){
+        <div class="no-products-container">
+          <img src="images\Image (5).png" alt="No Orders" class="no-orders-image">
+          <p class="no-orders-message">Oops! you haven't added your home address.</p>
+        </div>
+      }
+      @else {
+
+        @for (data of address; track data) {
+          <app-profile-address-card
+          [address]="data"
+          (edit)="onEdit($event)"
+          (delete)="onDelete($event)"
+          ></app-profile-address-card>
+        }
       }
     </div>
 
