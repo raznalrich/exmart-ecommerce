@@ -363,6 +363,38 @@ console.log('address data',data);
       );
   }
 
+  addOfficeAddress(userId:number, item: any) {
+    let data = {
+      userId: userId,
+      // isPrimary: true,
+      addressTypeId: 2, // Address type (e.g., Home, Work)
+      addressLine: item.addressLine, // Building number
+      zipCode: item.zipCode, // Pincode
+      city: item.city, // City
+      district: item.district, // District
+      state: item.state, // State
+      createdBy:userId
+    };
+console.log('address data',data);
+
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    return this.http
+      .post('https://exmart-backend.onrender.com/api/Users/addAddress', data, { headers, responseType:'text' })
+      .pipe(
+        catchError((error) => {
+          console.log('Error details:', error.error);
+          throw (error);
+        })
+      );
+  }
+
+
+
+
+
+
   getAddressByUserId(id:number){
     return this.http.get(`https://exmart-backend.onrender.com/api/Users/getAddress/${id}`)
   }
