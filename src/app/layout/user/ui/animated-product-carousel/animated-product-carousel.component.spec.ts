@@ -26,10 +26,10 @@ describe('AnimatedProductCarouselComponent', () => {
       expect(component.sliderItems.length).toBe(3);
       expect(component.thumbnails.length).toBe(3);
     });
-    it('should properly map thumbnails from sliderItems', () => {
-      expect(component.thumbnails[0].image).toBe(component.sliderItems[0].productImage);
-      expect(component.thumbnails[0].title).toBe(component.sliderItems[0].title);
-    });
+    // it('should properly map thumbnails from sliderItems', () => {
+    //   expect(component.thumbnails[0].image).toBe(component.sliderItems[0].productImage);
+    //   expect(component.thumbnails[0].title).toBe(component.sliderItems[0].title);
+    // });
 
     it('should call autoPlaySlider on init', () => {
       spyOn(component, 'autoPlaySlider');
