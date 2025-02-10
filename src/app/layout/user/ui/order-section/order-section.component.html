@@ -4,8 +4,8 @@
   <div
     class="card border-0 p-2"
     [style.maxHeight]="maxHeight"
-    style="overflow-y: auto; background-color: #f5f5f5;"
-  >
+    style="overflow-y: auto;">
+    
     @for (item of items; track item) {
       <app-order-item
       [id]="item.orderId"
@@ -14,6 +14,13 @@
       [imageUrl]="item.primaryImageUrl"
       [title]="item.productName"
       [status]="item.status"
+      [Procolor]="item.colorName"
+      [ProSize]="item.sizeName"
+      [ProQuant]="item.quantity"
+      [ProShipCharge]="item.shippingCharge"
+      [AddressLine]="item.addressLine"
+      [ProPrice]="item.product_amount"
+      [ProId]="item.productId"
       ></app-order-item>
     }
   </div>
