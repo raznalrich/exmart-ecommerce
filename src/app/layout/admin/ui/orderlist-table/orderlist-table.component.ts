@@ -77,6 +77,7 @@ export class OrderlistTableComponent {
       const OrderListDTO = {
         orderItemId: this.selectedOrder.orderItemId,
         productStatusId: this.selectedStatus,
+        shippingCharge: this.selectedOrder.shippingCharge
       };
       console.log(OrderListDTO);
       this.api.updateOrderStatus(OrderListDTO).subscribe((res: any) => {

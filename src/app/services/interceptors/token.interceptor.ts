@@ -20,7 +20,6 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     // - Exclude specific URLs:
       return !req.url.includes('/api/AuthControllers/Login')
 
-
     // - Exclude specific methods:
     //   return req.method !== 'GET';
 
