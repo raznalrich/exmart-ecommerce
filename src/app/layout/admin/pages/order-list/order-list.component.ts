@@ -173,21 +173,6 @@ export class OrderListComponent {
           console.error(`Error updating order: ${order.orderItemId}`, error);
         }
       }
-
-      // await Promise.all(
-      //   orders.map(async (order) => {
-      //     try {
-      //       const response = await firstValueFrom(
-      //         this.api.updateOrderStatus(order)
-      //       );
-      //       console.log(`Order updated: ${order.orderItemId}`, response);
-
-      //       hasUpdates = true;
-      //     } catch (error) {
-      //       console.error(`Error updating order: ${order.orderItemId}`, error);
-      //     }
-      //   })
-      // );
       if (hasUpdates) {
         this.loadOrders();
       }
@@ -201,6 +186,8 @@ export class OrderListComponent {
       pending: 1,
       shipped: 2,
       delivered: 3,
+      cancelled: 4,
+      requested: 5,
     };
     return statusMap[status.toLowerCase()] || 1;
   }
@@ -233,7 +220,9 @@ export class OrderListComponent {
       zipCode: order.zipCode,
       shippingCharge: order.shippingCharge,
       status:
-        ['Pending', 'Shipped', 'Delivered'][order.status - 1] || 'Pending',
+        ['Pending', 'Shipped', 'Delivered', 'Cancelled', 'Requested'][
+          order.status - 1
+        ] || 'Pending',
       amount: order.amount.toFixed(2),
       quantity: order.quantity,
     }));
@@ -242,11 +231,11 @@ export class OrderListComponent {
     const dataValidation = {
       type: 'list' as const,
       allowBlank: false,
-      formulae: ['"Pending,Shipped,Delivered"'],
+      formulae: ['"Pending,Shipped,Delivered,Cancelled,Requested"'],
       showErrorMessage: true,
       errorTitle: 'Invalid Input',
       error:
-        'Please select a value from the dropdown: Pending, Shipped, or Delivered.',
+        'Please select a value from the dropdown: Pending, Shipped, Delivered, Cancelled & Requested.',
     };
 
     const statusColumn = worksheet.getColumn('status');
