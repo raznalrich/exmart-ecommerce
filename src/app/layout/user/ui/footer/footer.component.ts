@@ -14,8 +14,8 @@ import { subscribeOn } from 'rxjs';
 })
 export class FooterComponent {
 
-CategoryList : any = [];
-HrDetailList: any;
+CategoryList : any[] = [];
+HrDetailList: any={};
 hrEmail: string = '';
 
 constructor(public api:ApiServiceService,public router: Router,private scrollService: ScrollServiceService,private animationStateService : AnimationStateService){}
@@ -53,4 +53,9 @@ openTeamsChat(): void {
       }, 100);
     });
   }
+  navigateToUserSide(userLink: string){
+    this.router.navigate([userLink])
+    window.scrollTo({ top : 0, behavior:'smooth'});
+  }
+
 }

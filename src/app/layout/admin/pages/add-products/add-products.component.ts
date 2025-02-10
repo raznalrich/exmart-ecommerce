@@ -1,4 +1,3 @@
-// add-products.component.ts
 import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import {
   FormControl,
@@ -6,11 +5,24 @@ import {
   FormsModule,
   ReactiveFormsModule,
   Validators,
+  AbstractControl,
+  ValidationErrors
 } from '@angular/forms';
 import { ApiService } from '../../../../api.service';
 import { CommonModule } from '@angular/common';
 import { forkJoin, of } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
+
+/**
+ * Custom validator that checks if a form control’s value is a non‑empty array.
+ */
+export function nonEmptyArrayValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value;
+  if (Array.isArray(value) && value.length === 0) {
+    return { emptyArray: true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-add-products',
@@ -50,7 +62,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
     this.initializeForm();
     this.fetchInitialData();
 
-    // If we're in edit mode and have product details, populate the form
+    // Populate the form if in edit mode.
     if (this.isEditMode && this.editProductDetails) {
       this.setEditMode();
     } else {
@@ -68,7 +80,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
   initializeForm() {
     this.addProduct = new FormGroup({
       name: new FormControl('', Validators.required),
-      description: new FormControl('',[Validators.required,Validators.maxLength(500)] ),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
       brand: new FormControl('', Validators.required),
       vendorId: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
       categoryId: new FormControl('', Validators.required),
@@ -89,10 +101,11 @@ export class AddProductsComponent implements OnInit, OnChanges {
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
-      productImages: new FormControl([], Validators.required),
+      // Add our custom nonEmptyArrayValidator alongside Validators.required.
+      productImages: new FormControl([], [Validators.required, nonEmptyArrayValidator]),
     });
 
-    // Adjust size logic based on category
+    // Adjust size validators based on category selection.
     this.addProduct.get('categoryId')?.valueChanges.subscribe((categoryId) => {
       this.handleCategoryChange(categoryId);
     });
@@ -158,11 +171,12 @@ export class AddProductsComponent implements OnInit, OnChanges {
 
   setEditMode() {
     this.productToEdit = this.editProductDetails;
-    console.log('product details', this.editProductDetails);
+    console.log('Product details:', this.editProductDetails);
     this.populateForm(this.editProductDetails);
   }
 
   handleCategoryChange(categoryId: number) {
+    // For example, if category 20 requires sizes.
     this.showSizes = Number(categoryId) === 20;
 
     const sizeControl = this.addProduct.get('sizeId');
@@ -182,15 +196,14 @@ export class AddProductsComponent implements OnInit, OnChanges {
       brand: product.brand,
       vendorId: product.vendorId,
       categoryId: product.categoryId,
-
       sizeId: product.sizeId,
       colorId: product.colorId,
-
       primaryImageUrl: product.primaryImageUrl,
       weight: product.weight,
       price: product.price,
       createdBy: product.createdBy,
-      productImages: product.productImages || [],
+      // If productImages exist use them; otherwise default to an empty array.
+      productImages: product.productImages && product.productImages.length ? product.productImages : []
     });
 
     this.handleCategoryChange(product.categoryId);
@@ -201,12 +214,10 @@ export class AddProductsComponent implements OnInit, OnChanges {
     return typeof controlValue === 'string' ? controlValue : null;
   }
 
-
   isSelected(controlName: string, value: number): boolean {
     const control = this.addProduct.get(controlName);
     return control?.value?.includes(value) || false;
   }
-
 
   onCheckboxChange(event: Event, controlName: string) {
     const checkbox = event.target as HTMLInputElement;
@@ -238,20 +249,36 @@ export class AddProductsComponent implements OnInit, OnChanges {
     if (!input.files) return;
     this.additionalFiles = Array.from(input.files);
 
-    // We create placeholders for each additional file, e.g. { imageUrl: '' }
+    // Create placeholder objects (for example, { imageUrl: '' } for each file).
     const filePlaceholders = this.additionalFiles.map(() => ({
       imageUrl: '',
     }));
 
     this.addProduct.patchValue({ productImages: filePlaceholders });
-    console.log(
-      'Additional files selected:',
-      this.additionalFiles.map((f) => f.name)
-    );
+    console.log('Additional files selected:', this.additionalFiles.map((f) => f.name));
+  }
+
+  /**
+   * Scrolls to the first invalid field in the form.
+   */
+  scrollToFirstInvalid() {
+    // A short delay allows the error classes to be applied.
+    setTimeout(() => {
+      const firstInvalidControl = document.querySelector('.is-invalid') as HTMLElement;
+      if (firstInvalidControl) {
+        firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalidControl.focus();
+      }
+    }, 0);
   }
 
   onSubmit() {
+    // If the form is invalid, mark controls as touched and scroll to the first invalid field.
     if (!this.addProduct.valid) {
+      Object.keys(this.addProduct.controls).forEach(key => {
+        this.addProduct.get(key)?.markAsTouched();
+      });
+      this.scrollToFirstInvalid();
       console.error('Form is invalid:', this.addProduct.errors);
       Object.keys(this.addProduct.controls).forEach((key) => {
         const controlErrors = this.addProduct.get(key)?.errors;
@@ -264,8 +291,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
 
     this.isLoading = true;
 
-
-    // Decide between create or update
+    // Decide between creating a new product or updating an existing one.
     if (this.isEditMode && this.productToEdit) {
       this.updateExistingProduct();
     } else {
@@ -274,19 +300,18 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   private updateExistingProduct() {
-    this.isLoading = true;
     const formValue = this.addProduct.value;
     const productId = this.productToEdit.id;
 
     if (this.selectedFile) {
-      // If user has a new primary image
+      // If a new primary image has been selected.
       this.apiService
         .uploadImage(this.selectedFile)
         .pipe(
           switchMap((primaryRes: any) => {
             const primaryImageUrl = primaryRes.imageUrl;
             if (this.additionalFiles.length > 0) {
-              // Upload additional images
+              // Upload additional images in parallel.
               const uploads = this.additionalFiles.map((file) => this.apiService.uploadImage(file));
               return forkJoin(uploads).pipe(
                 map((additionalResponses: any[]) => {
@@ -303,7 +328,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
             }
           }),
           switchMap(({ primaryImageUrl, additionalImageUrls }) => {
-            // Build the payload with correct field names
+            // Build the payload.
             const payload = {
               id: productId,
               name: formValue.name,
@@ -322,7 +347,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
               })),
             };
 
-            console.log('Edit payload with uploaded file:', payload);
+            console.log('Edit payload with new file:', payload);
             return this.apiService.updateProduct(payload.id, payload);
           })
         )
@@ -339,7 +364,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
           },
         });
     } else {
-      // No new primary image selected
+      // No new primary image selected; use the existing one.
       const payload = {
         id: productId,
         name: formValue.name,
@@ -373,20 +398,20 @@ export class AddProductsComponent implements OnInit, OnChanges {
   }
 
   private createNewProduct() {
-    // Must have primary image
+    // Ensure a primary image has been selected.
     if (!this.selectedFile) {
       console.error('No primary image selected for upload.');
       return;
     }
 
-    // 1) Upload primary image
+    // 1) Upload the primary image.
     this.apiService
       .uploadImage(this.selectedFile)
       .pipe(
         switchMap((primaryResponse: any) => {
           const primaryImageUrl = primaryResponse.imageUrl;
 
-          // 2) If additional files, upload them in parallel
+          // 2) Upload additional images if any.
           if (this.additionalFiles.length > 0) {
             const additionalUploadObservables = this.additionalFiles.map((file) =>
               this.apiService.uploadImage(file)
@@ -407,7 +432,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
           }
         }),
         switchMap(({ primaryImageUrl, additionalImageUrls }) => {
-          // 3) Build final payload using the correct field names
+          // 3) Build the final payload.
           const formValue = this.addProduct.value;
           const payload = {
             name: formValue.name,
@@ -447,7 +472,7 @@ export class AddProductsComponent implements OnInit, OnChanges {
   closeModal() {
     this.isModalOpen = false;
     this.close.emit();
-    this.setAddMode(); // Reset form to "add mode" upon closing
+    this.setAddMode(); // Reset form to "add mode" upon closing.
   }
 
   buttonFunction() {

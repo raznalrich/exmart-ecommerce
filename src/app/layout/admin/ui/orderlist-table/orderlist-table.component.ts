@@ -67,7 +67,7 @@ export class OrderlistTableComponent {
       2: 'Shipped',
       3: 'Delivered',
       4: 'Cancelled',
-      5: 'Cancel Request'
+      5: 'Requested',
     };
     return statusMap[statusId] || 'Unknown';
   }
@@ -77,7 +77,7 @@ export class OrderlistTableComponent {
       const OrderListDTO = {
         orderItemId: this.selectedOrder.orderItemId,
         productStatusId: this.selectedStatus,
-        shippingCharge: this.selectedOrder.shippingCharge
+        shippingcharge: this.selectedOrder.shippingcharge,
       };
       console.log(OrderListDTO);
       this.api.updateOrderStatus(OrderListDTO).subscribe((res: any) => {
@@ -119,14 +119,17 @@ export class OrderlistTableComponent {
   }
 
   saveShippingCharge(item: any) {
-    if (this.tempShippingCharge === null || this.tempShippingCharge === item.shippingCharge) {
+    if (
+      this.tempShippingCharge === null ||
+      this.tempShippingCharge === item.shippingCharge
+    ) {
       this.cancelEdit();
       return;
     }
 
     const updateData = {
       orderItemId: item.orderItemId,
-      shippingCharge: this.tempShippingCharge
+      shippingCharge: this.tempShippingCharge,
     };
 
     this.api.updateShippingCharge(updateData).subscribe({
@@ -140,8 +143,7 @@ export class OrderlistTableComponent {
         console.error('Error updating shipping charge:', error);
         alert('Failed to update shipping charge');
         this.cancelEdit();
-      }
+      },
     });
   }
-
 }
