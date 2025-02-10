@@ -61,11 +61,28 @@ export class OrderItemComponent {
   @Input() orderItemId:number=0;
   @Input() title: string = '';
   @Input() amount: string = '';
-  @Input() quantity: string = '';
   @Input() imageUrl: string = '';
   @Input() status: any;
-  isSubmitting=false;
 
+  @Input() ProId:number=0;
+  @Input() Procolor: string = '';
+  @Input() ProSize: string = '';
+  @Input() ProPrice: string = '';
+  @Input() ProQuant: number = 0;
+  @Input() ProShipCharge: number =0;
+  @Input() AddressLine: string = '';
+
+
+  isSubmitting=false;
+  isExpanded: boolean = false;
+  // statusIcon: string = '';
+
+  toggleDetails(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.isExpanded = !this.isExpanded;
+  }
   statusName:any;
   @Input() isVisible:boolean = false;
   @Input() OrderedDate: any;
@@ -107,6 +124,10 @@ ngOnInit(){
       },
     });
 
+}
+routeToPro(ProId : number){
+  this.router.navigate(['/viewproduct',ProId ])
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 sendCancel(id:number){
   console.log('order item id',id);
