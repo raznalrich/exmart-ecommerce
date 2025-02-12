@@ -123,19 +123,15 @@ export class OrderListComponent {
   async onFileChange(event: Event) {
     const target = event.target as HTMLInputElement;
     const file = target?.files?.[0];
-
     if (!file) return;
-
     try {
       const workbook = new ExcelJS.Workbook();
       await workbook.xlsx.load(await file.arrayBuffer());
       const worksheet = workbook.getWorksheet(1);
-
       if (!worksheet) {
         console.error('No worksheet found');
         return;
       }
-
       const orders =
         worksheet
           .getRows(2, worksheet.rowCount - 1)
@@ -144,21 +140,19 @@ export class OrderListComponent {
               row && {
                 orderItemId: row.getCell(1).value,
                 productStatusId: this.getStatusNumber(
-                  row.getCell(8).value as string
+                  row.getCell(9).value as string
                 ),
-                shippingCharge: row.getCell(9).value,
+                shippingCharge: row.getCell(8).value,
               }
           )
           .filter((order) => order && order.orderItemId) ?? [];
-
-      console.log('Orders to update:', orders); // Check data before API call
-
-      // ✅ Step 2: Ensure All Data is Loaded
+      console.log('Orders to update:', orders); 
+      // Check data before API call
+      // Step 2: Ensure All Data is Loaded
       if (orders.length === 0) {
         console.warn('No valid orders found in the file.');
         return;
       }
-
       // Track successful updates
       let hasUpdates = false;
 
@@ -181,7 +175,12 @@ export class OrderListComponent {
     }
   }
 
-  private getStatusNumber(status: string): number {
+  private getStatusNumber(status: any): number {
+    // Handle cases where status might not be a string
+    if (!status || typeof status !== 'string') {
+      console.warn('Invalid status value:', status);
+      return 1; // Default to pending
+    }
     const statusMap: { [key: string]: number } = {
       pending: 1,
       shipped: 2,
@@ -189,9 +188,9 @@ export class OrderListComponent {
       cancelled: 4,
       requested: 5,
     };
-    return statusMap[status.toLowerCase()] || 1;
+    return statusMap[status.toString().toLowerCase()] || 1;
   }
-
+  
   async downloadReport() {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Orders');
@@ -220,14 +219,13 @@ export class OrderListComponent {
       zipCode: order.zipCode,
       shippingCharge: order.shippingCharge,
       status:
-        ['Pending', 'Shipped', 'Delivered', 'Cancelled', 'Requested'][
+        ['pending', 'shipped', 'delivered', 'cancelled', 'requested'][
           order.status - 1
         ] || 'Pending',
       amount: order.amount.toFixed(2),
       quantity: order.quantity,
     }));
     data.forEach((row) => worksheet.addRow(row));
-
     const dataValidation = {
       type: 'list' as const,
       allowBlank: false,
@@ -237,14 +235,12 @@ export class OrderListComponent {
       error:
         'Please select a value from the dropdown: Pending, Shipped, Delivered, Cancelled & Requested.',
     };
-
     const statusColumn = worksheet.getColumn('status');
     statusColumn.eachCell({ includeEmpty: true }, (cell, rowNumber) => {
       if (rowNumber > 1) {
         cell.dataValidation = dataValidation;
       }
     });
-
     const buffer = await workbook.xlsx.writeBuffer();
     saveAs(new Blob([buffer]), 'Orders_With_Validation.xlsx');
   }
