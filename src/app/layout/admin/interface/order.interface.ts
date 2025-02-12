@@ -8,4 +8,5 @@ export interface OrderItem {
   amount: number;
   quantity: number;
   orderId: number;
+  product_amount : number
 }

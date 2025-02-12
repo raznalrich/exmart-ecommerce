@@ -5,7 +5,7 @@
     class="card border-0 p-2"
     [style.maxHeight]="maxHeight"
     style="overflow-y: auto;">
-    
+
     @for (item of items; track item) {
       <app-order-item
       [id]="item.orderId"
@@ -21,6 +21,7 @@
       [AddressLine]="item.addressLine"
       [ProPrice]="item.product_amount"
       [ProId]="item.productId"
+      [ProOrderDate]="item.orderDate"
       ></app-order-item>
     }
   </div>
