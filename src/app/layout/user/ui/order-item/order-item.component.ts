@@ -9,7 +9,7 @@ export interface Order {
   email: string;
   phone: string;
   orderId: number;
-  createdAt: string; // or Date if you prefer
+  createdAt: string;
   totalAmount: number;
   addressLine: string;
   city: string;
@@ -60,7 +60,7 @@ export class OrderItemComponent {
   @Input() id:number=0;
   @Input() orderItemId:number=0;
   @Input() title: string = '';
-  @Input() amount: string = '';
+  @Input() amount: number = 0;
   @Input() imageUrl: string = '';
   @Input() status: any;
 
@@ -71,11 +71,11 @@ export class OrderItemComponent {
   @Input() ProQuant: number = 0;
   @Input() ProShipCharge: number =0;
   @Input() AddressLine: string = '';
-
+  @Input() ProOrderDate: Date | undefined ;
+  TotalAmount : number = 0;
 
   isSubmitting=false;
   isExpanded: boolean = false;
-  // statusIcon: string = '';
 
   toggleDetails(event?: Event) {
     if (event) {
@@ -124,6 +124,7 @@ ngOnInit(){
       },
     });
 
+    this.TotalAmount = this.amount + this.ProShipCharge; // total amount calculation
 }
 routeToPro(ProId : number){
   this.router.navigate(['/viewproduct',ProId ])
@@ -160,7 +161,7 @@ sendCancel(id:number){
                       next: (res: any) => {
                         console.log('status',res);
                         this.isSubmitting=false;
-                        this.router.navigate(['/userprofile/userorder']);
+                        this.router.navigate(['userorder']);
                         this.ngOnInit();
                       }
                     });
