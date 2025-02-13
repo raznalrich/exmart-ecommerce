@@ -10,3 +10,10 @@ export interface OrderItem {
   orderId: number;
   product_amount : number
 }
+
+export interface TopProduct {
+  productId: number;
+  productName: string;
+  primaryImageUrl: string;
+  totalQuantity: number;
+}

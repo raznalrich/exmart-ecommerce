@@ -20,10 +20,6 @@ hr {
   gap: 500px;
   align-items: center;
 }
-app-admin-values-displaying-button{
-}
-.monthly-orders {
-}
 .year-selector{
   display: flex;
   justify-content: end;
@@ -83,4 +79,73 @@ align-items: center;
   width: 95px;
   border-radius: 30px;
   border: none;
+}
+
+
+.top-products-preview {
+  padding: 1rem;
+}
+
+.products-grid {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.product-preview-card {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-hover-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.5rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.product-preview-card:hover .product-hover-info {
+  transform: translateY(0);
+}
+
+.product-name {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.product-quantity {
+  color: #e5e7eb;
+  font-size: 0.75rem;
+}
+
+.view-more-btn {
+  height: 150px;
+  padding: 0 1.5rem;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.view-more-btn:hover {
+  background-color: #e5e7eb;
 }
