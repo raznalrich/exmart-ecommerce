@@ -1,4 +1,31 @@
-<div style="height: 30%; width: 90%;">
-  <canvas
-  id="pieChart"></canvas>
+<div class="top-products-preview">
+  <div class="topsellProHead">Top Selling products</div>
+  <div class="products-grid">
+    @for (product of topThreeProducts(); track product.productId) {
+      <div class="product-preview-card">
+        <img
+          [src]="product.primaryImageUrl"
+          [alt]="product.productName"
+          class="product-image"
+          (error)="handleImageError($event)"
+        >
+        <div class="product-hover-info">
+          <p class="product-name">{{product.productName}}</p>
+          <p class="product-quantity">{{product.totalQuantity}} units sold</p>
+        </div>
+      </div>
+    }
+    <button
+      class="view-more-btn"
+      (click)="showModal.set(true)">
+      View More
+    </button>
+  </div>
 </div>
+
+@if (showModal()) {
+  <app-admin-all-sold-pros-list
+    [products]="allProducts()"
+    (closeModal)="showModal.set(false)"
+  ></app-admin-all-sold-pros-list>
+}
