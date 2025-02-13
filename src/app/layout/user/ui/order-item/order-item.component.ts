@@ -9,7 +9,7 @@ export interface Order {
   email: string;
   phone: string;
   orderId: number;
-  createdAt: string; // or Date if you prefer
+  createdAt: string;
   totalAmount: number;
   addressLine: string;
   city: string;
@@ -60,12 +60,29 @@ export class OrderItemComponent {
   @Input() id:number=0;
   @Input() orderItemId:number=0;
   @Input() title: string = '';
-  @Input() amount: string = '';
-  @Input() quantity: string = '';
+  @Input() amount: number = 0;
   @Input() imageUrl: string = '';
   @Input() status: any;
-  isSubmitting=false;
 
+  @Input() ProId:number=0;
+  @Input() Procolor: string = '';
+  @Input() ProSize: string = '';
+  @Input() ProPrice: string = '';
+  @Input() ProQuant: number = 0;
+  @Input() ProShipCharge: number =0;
+  @Input() AddressLine: string = '';
+  @Input() ProOrderDate: Date | undefined ;
+  TotalAmount : number = 0;
+
+  isSubmitting=false;
+  isExpanded: boolean = false;
+
+  toggleDetails(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.isExpanded = !this.isExpanded;
+  }
   statusName:any;
   @Input() isVisible:boolean = false;
   @Input() OrderedDate: any;
@@ -107,6 +124,11 @@ ngOnInit(){
       },
     });
 
+    this.TotalAmount = this.amount + this.ProShipCharge;
+}
+routeToPro(ProId : number){
+  this.router.navigate(['/viewproduct',ProId ])
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 sendCancel(id:number){
   console.log('order item id',id);
@@ -129,7 +151,7 @@ sendCancel(id:number){
                     subtotal: item.price * item.quantity + item.shippingCharge
                   })),
                   totalAmount: this.orderData.totalAmount,
-                  shippingAddress: this.orderData.addressLine, // You'll need to format this
+                  shippingAddress: this.orderData.addressLine,
                   orderDate: new Date(this.orderData.createdAt)
                 };
                 this.emailservice.sendOrderCancellationEmail('raznalrich@gmail.com', orderContext).subscribe({
@@ -139,7 +161,7 @@ sendCancel(id:number){
                       next: (res: any) => {
                         console.log('status',res);
                         this.isSubmitting=false;
-                        this.router.navigate(['/userprofile/userorder']);
+                        this.router.navigate(['userorder']);
                         this.ngOnInit();
                       }
                     });
@@ -152,11 +174,6 @@ sendCancel(id:number){
                     this.router.navigate(['/thankyou']);
                   }
                 });
-                // this.orderContext = orderContext;
-      // this.fetchProductImages();
-
-      // this.color = this.color.colorName;
-      // console.log('color', this.color);
     },
     error: (error) => {
       console.error('Error fetching color:', error);
@@ -168,19 +185,5 @@ makeVisible(){
 }
 onCloseAddProduct() {
   this.isVisible = false;
-   // Clear product details when modal is closed
 }
-// fetchProductImages() {
-//   this.orderItemslist.forEach(item => {
-//     this.api.getProductsById(item.productId).subscribe({
-//       next: (imageData) => {
-//         this.productDetails = imageData
-//         console.log('OrderItemId',item.productId);
-
-//         item.primaryImageUrl = this.productDetails.primaryImageUrl
-//       },
-//       error: (error) => console.error('Error fetching image:', error)
-//     });
-//   });
-// }
 }

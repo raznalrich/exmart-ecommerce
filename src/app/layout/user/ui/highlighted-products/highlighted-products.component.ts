@@ -30,7 +30,7 @@ export class HighlightedProductsComponent {
               productId: order.productId,
               imageUrl: order.primaryImageUrl,
               productName: order.productName,
-              amount: order.amount,
+              amount: order.product_amount,
               totalSold: order.quantity
             });
           }

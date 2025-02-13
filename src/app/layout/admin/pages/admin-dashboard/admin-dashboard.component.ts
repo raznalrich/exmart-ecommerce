@@ -1,22 +1,24 @@
-import { Component, NgModule, SimpleChanges } from '@angular/core';
+import { Component, computed, Input, NgModule, signal, SimpleChanges } from '@angular/core';
 import { SidebarComponent } from "../../ui/sidebar/sidebar.component";
 import { AdminValuesDisplayingButtonComponent } from "../../ui/admin-values-displaying-button/admin-values-displaying-button.component";
 import { AdminWeeklyChartDispComponent } from "../../ui/admin-weekly-chart-disp/admin-weekly-chart-disp.component";
 import { AdminRecentOrdersInDashBoardComponent } from "../../ui/admin-recent-orders-in-dash-board/admin-recent-orders-in-dash-board.component";
 import { ApiServiceService } from '../../../../services/api-service.service';
-import { OrderItem } from '../../interface/order.interface';
+import { OrderItem, TopProduct } from '../../interface/order.interface';
 import { formatDate } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule, NgModel } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { AdminTopProductsChartComponent } from "../../ui/admin-top-products-chart/admin-top-products-chart.component";
+import { Order } from '../../../user/ui/order-item/order-item.component';
 
 
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [SidebarComponent,AdminValuesDisplayingButtonComponent,
-    AdminWeeklyChartDispComponent, AdminRecentOrdersInDashBoardComponent,RouterLink,FormsModule],
+  imports: [SidebarComponent, AdminValuesDisplayingButtonComponent,
+    AdminWeeklyChartDispComponent, AdminRecentOrdersInDashBoardComponent, FormsModule, AdminTopProductsChartComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
@@ -24,6 +26,7 @@ import { BrowserModule } from '@angular/platform-browser';
 export class AdminDashboardComponent {
 
   allOrders: OrderItem[] = [];
+  orderexchange: OrderItem[] = [];
   pendingOrders: number = 0;
   shippedOrders : number = 0;
   deliveredOrders : number = 0;
@@ -46,7 +49,8 @@ export class AdminDashboardComponent {
 
     this.api.getOrderDetail().subscribe((res: OrderItem[]) => {
       this.allOrders = res;
-      console.log(this.allOrders);
+      this.orderexchange = this.allOrders;
+      console.log('all orders in dashboard',this.allOrders);
 
       this.calculatePendingOrders();
       this.calculateShippedOrders();
@@ -101,23 +105,11 @@ onYearChange(event: Event) {
     this.allOrders.forEach(order => {
       const orderDate = new Date(order.orderDate);
 
-      // Count orders for selected year
       if (orderDate.getFullYear() === year) {
           this.monthlyOrderCounts[orderDate.getMonth()]++;
       }
   });
   console.log(`Orders for year ${year}:`, this.monthlyOrderCounts);
-
-    // this.allOrders
-    //   .filter(order => {
-    //     const orderDate = new Date(order.orderDate);
-    //     return orderDate.getFullYear() === Number(this.selectedYear);
-
-    //  })
-    //   .forEach(order => {
-    //     const month = new Date(order.orderDate).getMonth();
-    //     this.monthlyOrderCounts[month]++;
-    //   });
         console.log('selected Year: ',this.selectedYear);
   }
 
