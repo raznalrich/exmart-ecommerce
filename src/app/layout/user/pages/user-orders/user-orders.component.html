@@ -35,7 +35,7 @@ style=" border-radius: 14px; padding: 5px;"
     @if(!isLoading&&!error){
 
       <app-order-section
-      title="In Transit"
+      title="Pending"
       icon="bi bi-truck"
       maxHeight="70vh"
       [items]="pendingOrders"
@@ -110,7 +110,7 @@ style=" border-radius: 14px; padding: 5px;"
     @if(!isLoading&&!error){
 
       <app-order-section
-      title="In delivered"
+      title="Delivered"
       icon="bi bi-box"
       maxHeight="70vh"
       [items]="orderHistorylist">
@@ -135,7 +135,7 @@ style=" border-radius: 14px; padding: 5px;"
   @if(!isLoading&&!error){
 
     <app-order-section
-    title="In Cancelled"
+    title="Cancelled"
     icon="bi bi-box"
     maxHeight="70vh"
     [items]="cancelledOrders">
