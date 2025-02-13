@@ -1,68 +1,57 @@
-import { Component, Input } from '@angular/core';
-import { Chart, ChartConfiguration, registerables } from 'chart.js';
+import { Component, computed, EventEmitter, Input, OnInit, Output, signal } from '@angular/core';
+import { OrderItem, TopProduct } from '../../interface/order.interface';
+import { AdminAllSoldProsListComponent } from "../admin-all-sold-pros-list/admin-all-sold-pros-list.component";
 
 @Component({
   selector: 'app-admin-top-products-chart',
   standalone: true,
-  imports: [],
+  imports: [AdminAllSoldProsListComponent],
   templateUrl: './admin-top-products-chart.component.html',
   styleUrl: './admin-top-products-chart.component.scss'
 })
 export class AdminTopProductsChartComponent {
-   @Input() data: any[] = [];
-  //  @Input() data: any;
-    changedData:any=[]
-    barChart: any;
 
+  private orderDetails = signal<OrderItem[]>([]);
+  showModal = signal(false);
+  
 
+  allProducts = computed(() => this.calculateTopProducts(this.orderDetails()));
+  topThreeProducts = computed(() => this.allProducts().slice(0, 3));
 
-    constructor() {
-      Chart.register(...registerables);
-    }
+  @Input() set AllOrderDetails(value: OrderItem[]) {
+    this.orderDetails.set(value || []);
+  }
 
+calculateTopProducts(orders: OrderItem[]): TopProduct[] {
+    if (!orders.length) return [];
 
-    // ngOnChanges(changes: SimpleChanges): void {
-    //   if (this.barChart) {
-    //     this.barChart.destroy();
-    //   }
-    ngOnInit(){
-      // console.log("View On It: ", this.data);
+    const productMap = new Map<number, TopProduct>();
 
-      const barChartConfig: ChartConfiguration = {
-        type: 'pie',
-        data: {
-          labels: ["pro1","pro2","pro3","pro4","pro5"],
-          datasets: [
-            {
-              label: 'Top Products',
-              data: [5,10,30,9,7],
-              backgroundColor: ['#F09951', '#EA5853', '#64A2F5', '#43BF73','#4d4d4d'],
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 50,
-            },
-          },
-        },
-      };
+    orders.forEach(order => {
+      if (!order) return;
 
-      const ctx = document.getElementById('pieChart') as HTMLCanvasElement;
-      if (ctx) {
-        this.barChart = new Chart(ctx.getContext('2d')!, barChartConfig);
+      const existing = productMap.get(order.productId);
+      if (existing) {
+        existing.totalQuantity += order.quantity || 0;
+        console.log('total quant', existing.totalQuantity);
+
       } else {
-        console.error('Failed to get canvas element');
-      }
-    }
+        productMap.set(order.productId, {
+          productId: order.productId,
+          productName: order.productName,
+          primaryImageUrl: order.primaryImageUrl,
+          totalQuantity: order.quantity || 0
+        });
 
+      }
+    });
+
+    return Array.from(productMap.values())
+      .sort((a, b) => b.totalQuantity - a.totalQuantity);
+  }
+
+  handleImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    img.src = '/assets/placeholder-image.png';
+  }
 }

@@ -1,0 +1,45 @@
+<div class="modal-overlay" (click)="closeModal.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>All Products Sales</h2>
+      <div class="total-summary">
+        Total Items Sold: <span class="total-count">{{totalQuantity()}}</span>
+      </div>
+      <div class="modal-actions">
+        <button
+        class="export-btn"
+        (click)="exportToExcel()"
+        [disabled]="isExporting"
+      >
+        @if (isExporting) {
+          Exporting...
+        } @else {
+          Export to Excel
+        }
+      </button>
+        <button class="close-btn" (click)="closeModal.emit()">×</button>
+      </div>
+    </div>
+
+    <div class="products-grid">
+      @for (product of products; track product.productId) {
+        <div class="product-card">
+          <div class="imageSec">
+            <img
+            [src]="product.primaryImageUrl"
+            [alt]="product.productName"
+            class="product-image"
+            (error)="handleImageError($event)"
+          >
+          </div>
+
+          <div class="product-info">
+            <p class="product-name">{{product.productName}}</p>
+            <p class="product-id">ID: {{product.productId}}</p>
+            <p class="product-quantity">{{product.totalQuantity}} units sold</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
