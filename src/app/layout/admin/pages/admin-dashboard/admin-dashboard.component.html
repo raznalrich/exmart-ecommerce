@@ -1,9 +1,10 @@
 <div class="adminDashboardContainer">
- <div class="adminHead">
-  <div class="greetings">Greetings <strong>Admin</strong></div>
- </div>
+ <!-- <div class="adminHead"> -->
+
+ <!-- </div> -->
  <div class="contents">
     <div class="leftCont">
+      <div class="greetings">Greetings <strong>Admin</strong></div>
       <div class="leftTopIcons">
 
         <app-admin-values-displaying-button
@@ -70,13 +71,17 @@
       <div class="newOrd">
         @for (orders of latestProducts; track orders ){
           <app-admin-recent-orders-in-dash-board
-          [proImage] = "orders.imageUrl"
-          [proName] = "orders.productName"
-          [proDate] ="orders.orderDate"
-          [qty] = 'orders.quantity'
+          [proImage]="orders.imageUrl"
+          [proName]="orders.productName"
+          [proDate]="orders.orderDate"
+          [qty]='orders.quantity'
           ></app-admin-recent-orders-in-dash-board>
         }
+
       </div>
+      <app-admin-top-products-chart
+      [AllOrderDetails]="orderexchange"
+      ></app-admin-top-products-chart>
     </div>
  </div>
 </div>

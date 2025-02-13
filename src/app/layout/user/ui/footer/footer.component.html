@@ -3,28 +3,26 @@
     <div class="col" style="padding-left: 30px;">
       <img src="images/exmart_logo.svg" alt="" srcset="">
       @if (HrDetailList) {
-        <p style="font-size: 12px;padding-top: 20px;text-align: justify;">{{HrDetailList.proTagLine}}</p>
+        <p style="font-size: 12px;padding-top: 20px;text-align: justify;">{{HrDetailList?.proTagLine}}</p>
       }
     </div>
     <div class="col">
       <p><strong> CATEGORIES</strong></p>
       @for (category of CategoryList || []; track category) {
         <ul>
-          <li class="cursoring" (click)="navigateToCategory(category.id, category.categoryName)">
-            {{category.categoryName}}
+          <li class="cursoring" (click)="navigateToCategory(category?.id, category?.categoryName)">
+            {{category?.categoryName}}
           </li>
-          <!-- <li class="cursoring" routerLink="home/category/{{category.id}}">{{category.categoryName}}</li> -->
-        </ul>
+         </ul>
       }
     </div>
     <div class="col">
       <p><strong> YOUR ACCOUNT</strong></p>
       <ul>
-
-        <li class="cursoring" routerLink="userprofile/addresspage">Manage address</li>
+        <li class="cursoring" (click)="navigateToUserSide('addresspage')">Manage address</li>
         <li> </li>
         <li></li>
-        <li class="cursoring" routerLink="userprofile/userorder">Order History</li>
+        <li class="cursoring" (click)="navigateToUserSide('userorder')">Order History</li>
       </ul>
     </div>
     <div class="col">
@@ -33,13 +31,13 @@
         @if (HrDetailList) {
           <li style="display: flex;"><div>
             <i class="bi bi-telephone-fill"></i>
-          </div>+91 {{ HrDetailList.hrPhoneNumber }}</li>
+          </div>+91 {{ HrDetailList?.hrPhoneNumber }}</li>
           <li style="display: flex;"><div>
             <i class="bi bi-envelope-fill"></i>
-          </div>{{ HrDetailList.hrEmail }}</li>
+          </div>{{ HrDetailList?.hrEmail }}</li>
           <li style="display: flex;"><div>
             <i class="bi bi-geo-alt-fill"></i>
-          </div>{{ HrDetailList.hrAddress }}</li>
+          </div>{{ HrDetailList?.hrAddress }}</li>
         }
         <li><button (click)="openTeamsChat()"  class="btn btn-light">Chat with HR<i class="bi bi-send-fill" style="padding-left: 10px;"></i></button></li>
       </ul>
@@ -47,20 +45,20 @@
   </div>
   <div class="row text-center">
     <div class="policyTabs">
-      <div (click)="navigateToPolicy('terms')" [class.active]="router.url.includes('terms')">
+      <div (click)="navigateToPolicy('terms')" [class.active]="router.url?.includes('terms')">
         Terms and conditions
       </div> |
-      <div (click)="navigateToPolicy('shipping')" [class.active]="router.url.includes('shipping')"
+      <div (click)="navigateToPolicy('shipping')" [class.active]="router.url?.includes('shipping')"
         class="ShipPo">
         Shipping policy
       </div> |
-      <div (click)="navigateToPolicy('payment')" [class.active]="router.url.includes('payment')"
+      <div (click)="navigateToPolicy('payment')" [class.active]="router.url?.includes('payment')"
         class="payPo">
         Payment policy
       </div>
     </div>
 
-    <hr>
+    <div class="lineBottom"></div>
     <p>© 2025 HR department Experion Technologies Global  </p>
   </div>
 </div>
