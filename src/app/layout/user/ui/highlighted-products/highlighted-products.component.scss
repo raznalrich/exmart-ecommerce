@@ -1,18 +1,19 @@
 .container1 {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   // background-color: #64A2F5;
+  justify-content: space-between;
   background: linear-gradient(to bottom,#253d6c,#3f69ba);
   padding: 0px;
   height: 80vh;
 }
 
 .content {
-  left: 10px;
+  padding-left: 0px;
   display: flex;
   margin-top: 20px;
-  gap: 5%;
+  gap: 15%;
 }
 
 .header {
@@ -21,12 +22,12 @@
 
 .expHead {
   color: white;
-  font-size: 60px;
+  font-size: 450%;
   font-weight: bold;
 }
 
 .freqVist {
-  font-size: 31.5px;
+  font-size: 230%;
   color: rgb(255, 255, 255);
 }
 
@@ -36,6 +37,8 @@
   justify-content: center;
   align-items: center;
   border-radius: 30px;
+  padding-top: 1%;
+  padding-left: 10%;
 
   .image-container {
     position: relative;
@@ -61,7 +64,7 @@
     border-radius: 30px;
     align-items: center;
     width: 376px;
-    height: auto;
+    height: 376px;
   }
 }
 
@@ -73,7 +76,7 @@
 .subImaging {
   padding-top: 30px;
   display: flex;
-  gap: 30px;
+  gap: 15%;
 }
 
 .sub-image {
@@ -84,6 +87,7 @@
     border-radius: 20px;
     transition: transform 0.3s ease;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+
 
     &:hover {
       transform: scale(1.0);
@@ -97,7 +101,7 @@
   img {
     width: 215px;
     border-radius: 20px;
-    height: auto;
+    height: 215px;
     border: 1px solid #ccc;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   }

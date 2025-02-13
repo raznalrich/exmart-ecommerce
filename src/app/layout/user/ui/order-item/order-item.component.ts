@@ -124,7 +124,7 @@ ngOnInit(){
       },
     });
 
-    this.TotalAmount = this.amount + this.ProShipCharge; // total amount calculation
+    this.TotalAmount = this.amount + this.ProShipCharge;
 }
 routeToPro(ProId : number){
   this.router.navigate(['/viewproduct',ProId ])
@@ -151,7 +151,7 @@ sendCancel(id:number){
                     subtotal: item.price * item.quantity + item.shippingCharge
                   })),
                   totalAmount: this.orderData.totalAmount,
-                  shippingAddress: this.orderData.addressLine, // You'll need to format this
+                  shippingAddress: this.orderData.addressLine,
                   orderDate: new Date(this.orderData.createdAt)
                 };
                 this.emailservice.sendOrderCancellationEmail('raznalrich@gmail.com', orderContext).subscribe({
@@ -174,11 +174,6 @@ sendCancel(id:number){
                     this.router.navigate(['/thankyou']);
                   }
                 });
-                // this.orderContext = orderContext;
-      // this.fetchProductImages();
-
-      // this.color = this.color.colorName;
-      // console.log('color', this.color);
     },
     error: (error) => {
       console.error('Error fetching color:', error);
@@ -190,19 +185,5 @@ makeVisible(){
 }
 onCloseAddProduct() {
   this.isVisible = false;
-   // Clear product details when modal is closed
 }
-// fetchProductImages() {
-//   this.orderItemslist.forEach(item => {
-//     this.api.getProductsById(item.productId).subscribe({
-//       next: (imageData) => {
-//         this.productDetails = imageData
-//         console.log('OrderItemId',item.productId);
-
-//         item.primaryImageUrl = this.productDetails.primaryImageUrl
-//       },
-//       error: (error) => console.error('Error fetching image:', error)
-//     });
-//   });
-// }
 }
