@@ -1,10 +1,4 @@
 
-<header>
-  <nav>
-    <button *ngIf="!isLoggedIn" (click)="login()">Login</button>
-    <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
-  </nav>
-</header>
 <main>
   <router-outlet></router-outlet>
 </main>

@@ -141,9 +141,9 @@ private listenForAuthChanges() {
         next: (response) => {
           console.log("Login successful:", response);
           this.isLoggedIn.next(true)
-          // Update active account
+
           if (response.account) {
-            
+
             this.msalService.instance.setActiveAccount(response.account);
             localStorage.setItem('userid', response.account.localAccountId);
             localStorage.setItem('name',  response.account.name?? '');
@@ -164,7 +164,6 @@ logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role')
     localStorage.clear();
-
     this.router.navigate(['/login']);
 }
 

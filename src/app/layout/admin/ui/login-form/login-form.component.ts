@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule ,Validators} f
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { AuthService } from '../../../../services/auth/auth.service';
 // import * as bootstrap from 'bootstrap'
 interface LoginRequestDTO {
   email: string;
@@ -15,7 +16,10 @@ interface LoginRequestDTO {
   styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent {
-  constructor(public api:ApiServiceService,private router: Router){}
+  constructor(public api:ApiServiceService,private router: Router,private authService : AuthService)
+  {
+    this.authService.login();
+  }
   phoneNumber: string = '+919746466925';
   employeeId:any=0;
   name: string = '';
@@ -32,72 +36,73 @@ export class LoginFormComponent {
   })
 
   submit() {
-    if (this.LoginForm.invalid) {
-      this.errorMessage = 'Please enter a valid email address';
-      return;
-    }
+    this.authService.login();
+  //   if (this.LoginForm.invalid) {
+  //     this.errorMessage = 'Please enter a valid email address';
+  //     return;
+  //   }
 
-    this.isLoading = true;
-    this.errorMessage = '';
-    const email = this.LoginForm.get('email')?.value;
+  //   this.isLoading = true;
+  //   this.errorMessage = '';
+  //   const email = this.LoginForm.get('email')?.value;
 
-    if (!email) {
-      this.isLoading = false;
-      this.errorMessage = 'Email is required';
-      return;
-    }
+  //   if (!email) {
+  //     this.isLoading = false;
+  //     this.errorMessage = 'Email is required';
+  //     return;
+  //   }
 
-    this.email = email;
-    this.name = this.parseNameFromEmail(email);
-    this.api.returnIdFromEmail(email).subscribe(
-      (userId) => {
-       this.processLogin(email)
-      },
-      (error) => {
-        this.addNewUser();
-        console.error('adding new user:', error);
-        this.processLogin(email)
-      }
-    );
+  //   this.email = email;
+  //   this.name = this.parseNameFromEmail(email);
+  //   this.api.returnIdFromEmail(email).subscribe(
+  //     (userId) => {
+  //      this.processLogin(email)
+  //     },
+  //     (error) => {
+  //       this.addNewUser();
+  //       console.error('adding new user:', error);
+  //       this.processLogin(email)
+  //     }
+  //   );
 
 
   }
 
-  private processLogin(email: string) {
-    const loginRequest: LoginRequestDTO = { email };
+  // private processLogin(email: string) {
+  //   const loginRequest: LoginRequestDTO = { email };
 
-    this.api.LoginandToken(loginRequest).subscribe({
-      next: (res: any) => {
-        this.loginResponse = res;
-        this.token = res.token;
+  //   this.api.LoginandToken(loginRequest).subscribe({
+  //     next: (res: any) => {
+  //       this.loginResponse = res;
+  //       this.token = res.token;
 
-        try {
-          const decoded: any = jwtDecode(this.token);
-          console.log('Decoded UserId:', decoded.UserId);
-          console.log('Decoded UserName:', decoded.name);
+  //       try {
+  //         const decoded: any = jwtDecode(this.token);
+  //         console.log('Decoded UserId:', decoded.UserId);
+  //         console.log('Decoded UserName:', decoded.name);
 
-          // Store token and user info
-          localStorage.setItem('token', this.token);
-          localStorage.setItem('userid', decoded.UserId);
-          localStorage.setItem('loginTimestamp', new Date().getTime().toString());
+  //         // Store token and user info
+  //         localStorage.setItem('token', this.token);
+  //         localStorage.setItem('userid', decoded.UserId);
+  //         localStorage.setItem('loginTimestamp', new Date().getTime().toString());
 
-          this.authentication(decoded.UserId);
-          this.setupAutoClear();
-        } catch (error) {
-          console.error('Error decoding token:', error);
-          this.errorMessage = 'Invalid token received';
-        }
-      },
-      error: (error) => {
-        console.error('Login error:', error);
-        this.errorMessage = 'Login failed. Please try again.';
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
-  }
+  //         this.authentication(decoded.UserId);
+  //         this.setupAutoClear();
+  //       } catch (error) {
+  //         console.error('Error decoding token:', error);
+  //         this.errorMessage = 'Invalid token received';
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error('Login error:', error);
+  //       this.errorMessage = 'Login failed. Please try again.';
+  //       this.isLoading = false;
+  //     },
+  //     complete: () => {
+  //       this.isLoading = false;
+  //     }
+  //   });
+  // }
 
     // this.api.returnIdFromEmail(email).subscribe(
     //   (userId) => {
@@ -126,128 +131,128 @@ export class LoginFormComponent {
 
 
 
-  setupAutoClear(){
-    const loginTimestamp = localStorage.getItem('loginTimestamp');
-    if (!loginTimestamp) return;
+//   setupAutoClear(){
+//     const loginTimestamp = localStorage.getItem('loginTimestamp');
+//     if (!loginTimestamp) return;
 
-    const now = new Date().getTime();
-    const timeElapsed = now - parseInt(loginTimestamp);
-    const twentyFourHours = 24 * 60 * 60 * 1000;
+//     const now = new Date().getTime();
+//     const timeElapsed = now - parseInt(loginTimestamp);
+//     const twentyFourHours = 24 * 60 * 60 * 1000;
 
-    // Calculate remaining time until clear
-    const timeUntilClear = twentyFourHours - timeElapsed;
-    if (timeUntilClear <= 0) {
-      this.clearLocalStorage();
-  } else {
-      // Set timeout to clear after remaining time
-      setTimeout(this.clearLocalStorage, timeUntilClear);
-  }
-  }
+//     // Calculate remaining time until clear
+//     const timeUntilClear = twentyFourHours - timeElapsed;
+//     if (timeUntilClear <= 0) {
+//       this.clearLocalStorage();
+//   } else {
+//       // Set timeout to clear after remaining time
+//       setTimeout(this.clearLocalStorage, timeUntilClear);
+//   }
+//   }
 
-  clearLocalStorage() {
-    localStorage.clear();
+//   clearLocalStorage() {
+//     localStorage.clear();
 
-}
-// Function to check storage status on page load/refresh
-checkStorageOnLoad():any {
-  const loginTimestamp = localStorage.getItem('loginTimestamp');
-  if (loginTimestamp) {
-      const now = new Date().getTime();
-      const timeElapsed = now - parseInt(loginTimestamp);
-      const twentyFourHours = 24 * 60 * 60 * 1000;
+// }
+// // Function to check storage status on page load/refresh
+// checkStorageOnLoad():any {
+//   const loginTimestamp = localStorage.getItem('loginTimestamp');
+//   if (loginTimestamp) {
+//       const now = new Date().getTime();
+//       const timeElapsed = now - parseInt(loginTimestamp);
+//       const twentyFourHours = 24 * 60 * 60 * 1000;
 
-      if (timeElapsed >= twentyFourHours) {
-          this.clearLocalStorage();
-      } else {
-          this.setupAutoClear();
-      }
-  }
-}
+//       if (timeElapsed >= twentyFourHours) {
+//           this.clearLocalStorage();
+//       } else {
+//           this.setupAutoClear();
+//       }
+//   }
+// }
 
-ngOnInit(){
-  this.checkStorageOnLoad();
-}
+// ngOnInit(){
+//   this.checkStorageOnLoad();
+// }
 
-  getIdfromemail(email:string){
-    this.api.returnIdFromEmail(email).subscribe(
-      (userId) =>{
+//   getIdfromemail(email:string){
+//     this.api.returnIdFromEmail(email).subscribe(
+//       (userId) =>{
 
-      }
-    )
-  }
-  authentication(userId: any): void {
-    this.api.IsAdmin(userId).subscribe({
-      next: (isAdmin) => {
-        if (isAdmin) {
-          localStorage.setItem("role", "Admin");
-          this.router.navigate(['/admin/admindashboard']);
-        } else {
-          localStorage.setItem('userId', userId);
-          localStorage.setItem("role", "User");
-          this.router.navigate(['/home']);
-        }
-      },
-      error: (error) => {
-        console.error('Authentication error:', error);
-        localStorage.setItem('userId', userId);
-        localStorage.setItem("role", "User");
-        this.router.navigate(['/home']);
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
-  }
- addNewUser(){
+//       }
+//     )
+//   }
+//   authentication(userId: any): void {
+//     this.api.IsAdmin(userId).subscribe({
+//       next: (isAdmin) => {
+//         if (isAdmin) {
+//           localStorage.setItem("role", "Admin");
+//           this.router.navigate(['/admin/admindashboard']);
+//         } else {
+//           localStorage.setItem('userId', userId);
+//           localStorage.setItem("role", "User");
+//           this.router.navigate(['/home']);
+//         }
+//       },
+//       error: (error) => {
+//         console.error('Authentication error:', error);
+//         localStorage.setItem('userId', userId);
+//         localStorage.setItem("role", "User");
+//         this.router.navigate(['/home']);
+//       },
+//       complete: () => {
+//         this.isLoading = false;
+//       }
+//     });
+//   }
+//  addNewUser(){
 
-  this.api.addNewUser(this.email, this.name, this.phoneNumber).subscribe(
-    (response) => {
-      console.log('User added successfully:', response);
-const loginRequest: LoginRequestDTO = {
-      email: this.email
-    };
+//   this.api.addNewUser(this.email, this.name, this.phoneNumber).subscribe(
+//     (response) => {
+//       console.log('User added successfully:', response);
+// const loginRequest: LoginRequestDTO = {
+//       email: this.email
+//     };
 
-    this.api.LoginandToken(loginRequest).subscribe((res:any)=> {
-        this.loginResponse = res;
-        console.log(this.loginResponse)
-        this.token = res.token
+//     this.api.LoginandToken(loginRequest).subscribe((res:any)=> {
+//         this.loginResponse = res;
+//         console.log(this.loginResponse)
+//         this.token = res.token
 
-        try {
-          const decoded: any = jwtDecode(this.token);
-          console.log('Decoded UserId:', decoded.UserId);
-          console.log('Decoded UserName:', decoded.name);
+//         try {
+//           const decoded: any = jwtDecode(this.token);
+//           console.log('Decoded UserId:', decoded.UserId);
+//           console.log('Decoded UserName:', decoded.name);
 
-          // Store token in localStorage or a service
-          localStorage.setItem('token', this.token);
-          localStorage.setItem('userid', decoded.UserId);
-          this.authentication(decoded.UserId);
-          // Navigate to dashboard or home page
+//           // Store token in localStorage or a service
+//           localStorage.setItem('token', this.token);
+//           localStorage.setItem('userid', decoded.UserId);
+//           this.authentication(decoded.UserId);
+//           // Navigate to dashboard or home page
 
-        } catch (error) {
-          console.error('Error decoding token:', error);
-        }
+//         } catch (error) {
+//           console.error('Error decoding token:', error);
+//         }
 
-    })
-    },
-    (error) => {
-      console.error('Error adding user:', error);
-      alert('Failed to add user. Please try again.');
-    }
-  );
+//     })
+//     },
+//     (error) => {
+//       console.error('Error adding user:', error);
+//       alert('Failed to add user. Please try again.');
+//     }
+//   );
 
 
- }
- parseNameFromEmail(email: string): string {
-  if (!email || !email.includes('@')) {
-    return '';
-  }
+//  }
+//  parseNameFromEmail(email: string): string {
+//   if (!email || !email.includes('@')) {
+//     return '';
+//   }
 
-  const namePart = email.split('@')[0];
-  return namePart
-    .split('.')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
-}
+//   const namePart = email.split('@')[0];
+//   return namePart
+//     .split('.')
+//     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+//     .join(' ');
+// }
 
 
 }
