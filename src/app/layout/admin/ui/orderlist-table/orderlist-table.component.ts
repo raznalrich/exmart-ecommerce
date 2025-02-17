@@ -47,7 +47,7 @@ export class OrderlistTableComponent {
 
   // Open the modal and store the selected item and status
   openConfirmationModal(item: any) {
-    this.selectedOrder = item; // Store the selected item (order)
+    this.selectedOrder = item;
     this.selectedStatus = item.status;
     const tableContainer = document.querySelector('.table-container');
     tableContainer?.classList.add('blur-background');
@@ -74,14 +74,15 @@ export class OrderlistTableComponent {
 
   confirmStatusChange() {
     if (this.selectedOrder && this.selectedStatus !== null) {
+      console.log("selected order : ",this.selectedOrder)
       const OrderListDTO = {
         orderItemId: this.selectedOrder.orderItemId,
         productStatusId: this.selectedStatus,
-        shippingcharge: this.selectedOrder.shippingcharge,
+        shippingcharge: this.selectedOrder.shippingCharge,
       };
-      console.log(OrderListDTO);
+      console.log("status update request", OrderListDTO);
       this.api.updateOrderStatus(OrderListDTO).subscribe((res: any) => {
-        console.log(res);
+        console.log("response from status update", res);
       });
     }
   }

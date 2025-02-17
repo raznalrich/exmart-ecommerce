@@ -51,43 +51,20 @@ export class LoginFormComponent {
     this.name = this.parseNameFromEmail(email);
     this.api.returnIdFromEmail(email).subscribe(
       (userId) => {
-        console.log('User ID:', userId);
-        const loginRequest: LoginRequestDTO = {
-          email: this.email
-        };
-
-        this.api.LoginandToken(loginRequest).subscribe((res:any)=> {
-            this.loginResponse = res;
-            console.log(this.loginResponse)
-            this.token = res.token
-
-            try {
-              const decoded: any = jwtDecode(this.token);
-              console.log('Decoded UserId:', decoded.UserId);
-              console.log('Decoded UserName:', decoded.name);
-
-              // Store token in localStorage or a service
-              localStorage.setItem('token', this.token);
-              localStorage.setItem('userid', decoded.UserId);
-              this.authentication(decoded.UserId);
-              // Navigate to dashboard or home page
-
-            } catch (error) {
-              console.error('Error decoding token:', error);
-            }
-
-        })
+       this.processLogin(email)
       },
       (error) => {
         this.addNewUser();
         console.error('adding new user:', error);
-
+        this.processLogin(email)
       }
     );
 
-    const loginRequest: LoginRequestDTO = {
-      email: this.email
-    };
+
+  }
+
+  private processLogin(email: string) {
+    const loginRequest: LoginRequestDTO = { email };
 
     this.api.LoginandToken(loginRequest).subscribe({
       next: (res: any) => {
@@ -96,6 +73,10 @@ export class LoginFormComponent {
 
         try {
           const decoded: any = jwtDecode(this.token);
+          console.log('Decoded UserId:', decoded.UserId);
+          console.log('Decoded UserName:', decoded.name);
+
+          // Store token and user info
           localStorage.setItem('token', this.token);
           localStorage.setItem('userid', decoded.UserId);
           localStorage.setItem('loginTimestamp', new Date().getTime().toString());
@@ -108,7 +89,7 @@ export class LoginFormComponent {
         }
       },
       error: (error) => {
-        // console.error('Login error:', error);
+        console.error('Login error:', error);
         this.errorMessage = 'Login failed. Please try again.';
         this.isLoading = false;
       },
@@ -117,8 +98,6 @@ export class LoginFormComponent {
       }
     });
   }
-
-
 
     // this.api.returnIdFromEmail(email).subscribe(
     //   (userId) => {

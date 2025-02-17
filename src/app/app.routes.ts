@@ -37,7 +37,7 @@ export const routes: Routes = [
   {
     path: '',
     component: HomepageComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { breadcrumb: 'Home' , role: 'User'},
     children: [
       {
@@ -55,7 +55,7 @@ export const routes: Routes = [
       {
         path: 'home',
         component: HomeStaticComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         data: {role: 'User'},
         children: [
           {
@@ -85,7 +85,7 @@ export const routes: Routes = [
       {
         path: 'policies',
         component: PolicyPageComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         data: {role: 'User'},
         children: [
           { path: '', redirectTo: 'terms', pathMatch: 'full' },
@@ -99,7 +99,7 @@ export const routes: Routes = [
       },
       {
         path: 'seeAllProducts',component: SeeAllProductsPageComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         data: {role: 'User'},
         children:[
           {
@@ -116,7 +116,7 @@ export const routes: Routes = [
       {
         path: 'seeAllProducts',
         component: SeeAllProductsPageComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         children: [
           {
             path: 'seeAllProducts/category/:id',
@@ -168,7 +168,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: {role: 'Admin'},
 
     children: [
@@ -239,7 +239,7 @@ export const routes: Routes = [
   },
   {
     path:'admin',component: DashboardComponent,
-     canActivate: [AuthGuard],
+    //  canActivate: [AuthGuard],
     data: {role: 'Admin'},
     children:[
       {

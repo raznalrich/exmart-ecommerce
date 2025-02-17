@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError, map, Observable, switchMap } from 'rxjs';
+import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
 
@@ -571,6 +571,18 @@ console.log('address data',data);
 
   LoginandToken(loginRequest:any){
     return this.http.post(`https://exmart-backend.onrender.com/login`,loginRequest)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log('API Error Response:', {
+          status: error.status,
+          message: error.error?.message,
+          error: error
+        });
+
+        // Pass through the error with the original status code
+        return throwError(() => error);
+      })
+    );
   }
 
   updateShippingCharge(updateData: { orderItemId: any; shippingCharge: number; }) {

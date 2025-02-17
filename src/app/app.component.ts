@@ -30,6 +30,15 @@ import { OrderPopupComponent } from "./layout/admin/ui/order-popup/order-popup.c
 import { PopUpComponent } from "./layout/user/ui/pop-up/pop-up.component";
 import { AddBannerComponent } from "./layout/admin/ui/add-banner/add-banner.component";
 import { BredcrumbComponent } from "./layout/user/ui/bredcrumb/bredcrumb.component";
+import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
+import { CommonModule } from '@angular/common';
+import {  InteractionStatus } from '@azure/msal-browser';
+import { filter, Subject, takeUntil } from 'rxjs';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from './api.service';
+import { AuthService } from './services/auth/auth.service';
+
 
 @Component({
   selector: 'app-root',
@@ -57,12 +66,42 @@ import { BredcrumbComponent } from "./layout/user/ui/bredcrumb/bredcrumb.compone
     OrderPopupComponent,
     PopUpComponent,
     AddBannerComponent,
-    BredcrumbComponent
+    BredcrumbComponent,
+    CommonModule
 ],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
+  isLoggedIn : any;
   title = 'ExMart';
+
+  constructor(private authService: AuthService, private msalService : MsalService) {}
+
+
+
+logout() {
+this.authService.logout();
+}
+login() {
+this.authService.login();
+}
+
+  ngOnInit(): void {
+    console.log("Checking MSAL accounts on page load...");
+    const accounts = this.msalService.instance.getAllAccounts();
+    console.log("Accounts on init:", accounts);
+    this.authService.initializeAuth();
+    this.authService.isLoggedIn$.subscribe((loggedIn) => {
+      this.isLoggedIn = loggedIn;
+    });
+
+  }
+
+  ngOnDestroy(): void {
+    this.authService.destroy();
+  }
+
 }
