@@ -72,6 +72,7 @@ import { AuthService } from './services/auth/auth.service';
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+ 
 })
 export class AppComponent {
 

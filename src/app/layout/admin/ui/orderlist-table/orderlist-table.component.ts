@@ -47,7 +47,11 @@ export class OrderlistTableComponent {
 
   // Open the modal and store the selected item and status
   openConfirmationModal(item: any) {
+<<<<<<< HEAD
     this.selectedOrder = item;
+=======
+    this.selectedOrder = item; // Store the selected item (order)
+>>>>>>> a738a50c23276f42a7fc32d8a0c700adc212dfb5
     this.selectedStatus = item.status;
     const tableContainer = document.querySelector('.table-container');
     tableContainer?.classList.add('blur-background');
