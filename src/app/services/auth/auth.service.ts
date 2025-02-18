@@ -163,6 +163,7 @@ logout() {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     localStorage.removeItem('role')
+    localStorage.removeItem('userRole');
     localStorage.clear();
     this.router.navigate(['/login']);
 }

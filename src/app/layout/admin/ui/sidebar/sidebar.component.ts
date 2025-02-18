@@ -11,11 +11,7 @@ import { LogoutButtonComponent } from '../../../user/ui/logout-button/logout-but
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
-<<<<<<< HEAD
    constructor(private router:Router, private authService : AuthService) {
-=======
-   constructor(private router:Router) {
->>>>>>> a738a50c23276f42a7fc32d8a0c700adc212dfb5
 
     }
   menuItems: any = [
