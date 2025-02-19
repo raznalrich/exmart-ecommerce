@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../services/auth/auth.service';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { LogoutButtonComponent } from '../../../user/ui/logout-button/logout-button.component';
@@ -10,7 +11,7 @@ import { LogoutButtonComponent } from '../../../user/ui/logout-button/logout-but
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
-   constructor(private router:Router) {
+   constructor(private router:Router, private authService : AuthService) {
 
     }
   menuItems: any = [
@@ -57,13 +58,13 @@ export class SidebarComponent {
     icon: 'bi bi-box-arrow-left',
   };
   logout(): void {
-    // Remove specific data (e.g., userId) from local storage
-    localStorage.removeItem('userId');
-    localStorage.removeItem('token');
-    localStorage.removeItem('role')
-    // Optionally clear all local storage
-    localStorage.clear();
 
-    this.router.navigate(['/login']);
+    // localStorage.removeItem('userId');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('role')
+    // localStorage.removeItem('loginTimestamp')
+    // localStorage.clear();
+    // this.router.navigate(['/login']);
+    this.authService.logout();
   }
 }

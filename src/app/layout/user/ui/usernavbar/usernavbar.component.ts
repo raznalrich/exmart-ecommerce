@@ -3,6 +3,7 @@ import { GlobalService } from '../../../../global.service';
 import { UserSearchbarComponent } from '../user-searchbar/user-searchbar.component';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { ApiServiceService } from '../../../../services/api-service.service';
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-usernavbar',
@@ -18,7 +19,8 @@ export class UsernavbarComponent {
   constructor(
     public cartAdd: GlobalService,
     private router: Router,
-    private api: ApiServiceService
+    private api: ApiServiceService,
+    private authService : AuthService
   ) {}
 
   ngOnInit() {
@@ -59,13 +61,14 @@ export class UsernavbarComponent {
   };
 
   logout(): void {
-    // Remove specific data (e.g., userId) from local storage
-    localStorage.removeItem('userId');
-    localStorage.removeItem('token');
-    // Optionally clear all local storage
-    localStorage.clear();
+    // // Remove specific data (e.g., userId) from local storage
+    // localStorage.removeItem('userId');
+    // localStorage.removeItem('token');
+    // // Optionally clear all local storage
+    // localStorage.clear();
 
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
+    this.authService.logout();
   }
 
   isDropdownOpen = false;
