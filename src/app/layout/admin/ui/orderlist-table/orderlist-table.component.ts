@@ -1,10 +1,7 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BillingDetailComponent } from '../billing-detail/billing-detail.component';
-import { CustomerDetailComponent } from '../customer-detail/customer-detail.component';
 import { OrderPopupComponent } from '../order-popup/order-popup.component';
-import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { ApiServiceService } from '../../../../services/api-service.service';
 declare var bootstrap: any;
 

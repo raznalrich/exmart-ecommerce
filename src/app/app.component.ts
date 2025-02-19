@@ -38,6 +38,8 @@ import { filter, Subject, takeUntil } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from './api.service';
 import { AuthService } from './services/auth/auth.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmModalComponent } from './layout/admin/ui/confirm-modal/confirm-modal.component';
 
 
 @Component({
@@ -67,12 +69,14 @@ import { AuthService } from './services/auth/auth.service';
     PopUpComponent,
     AddBannerComponent,
     BredcrumbComponent,
-    CommonModule
+    CommonModule,
+    MatDialogModule,
+    ConfirmModalComponent
 ],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
- 
+
 })
 export class AppComponent {
 
