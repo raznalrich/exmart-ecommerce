@@ -118,7 +118,7 @@ export class ApiServiceService {
   }
 
   updateCategory(id: number, category: any): Observable<any> {
-    return this.http.put<any>(
+    return this.http.post<any>(
       `https://exmart-backend.onrender.com/api/Categories/${id}`,
       category
     );
