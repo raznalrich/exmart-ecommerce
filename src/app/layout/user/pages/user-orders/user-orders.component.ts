@@ -3,22 +3,26 @@ import { OrderSectionComponent } from '../../ui/order-section/order-section.comp
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { CommonModule } from '@angular/common';
 import { GlobalService } from '../../../../global.service';
+import { Router } from '@angular/router';
+import { LongButtonComponent } from "../../ui/long-button/long-button.component";
 
 @Component({
   selector: 'app-user-orders',
   standalone: true,
-  imports: [OrderSectionComponent,CommonModule],
+  imports: [OrderSectionComponent, CommonModule, LongButtonComponent],
   templateUrl: './user-orders.component.html',
   styleUrl: './user-orders.component.scss'
 })
 export class UserOrdersComponent {
-  constructor(public api:ApiServiceService,public global:GlobalService){
+  constructor(public api:ApiServiceService,public global:GlobalService,private router: Router){
     this.global.getUserId();
   }
-  @Input() tabs = ['In Transit', 'Pending'];
-  activeTab = 'In Transit';
+  @Input() tabs = ['Pending','In Transit', 'Delivered','Cancelled'];
+  activeTab = 'Pending';
+  pendingOrders:any[]=[];
   inTransitOrders: any[] = [];
   orderHistorylist: any[] = [];
+  cancelledOrders:any[]=[];
   isLoading = true;
   error: string | null = null;
 
@@ -42,7 +46,15 @@ export class UserOrdersComponent {
   ];
 
   userId: any;
+  logout(): void {
+    // Remove specific data (e.g., userId) from local storage
+    localStorage.removeItem('userId');
 
+    // Optionally clear all local storage
+    localStorage.clear();
+
+    this.router.navigate(['/login']);
+  }
   ngOnInit() {
     this.loadOrders();
     this.userId = this.global.userId();
@@ -55,10 +67,20 @@ export class UserOrdersComponent {
     this.isLoading = true;
     this.error = null;
 
-    this.api.getAllOrderList().subscribe({
+    this.api.getOrderItemList().subscribe({
       next: (res: any) => {
-        this.inTransitOrders = res.filter((order:any) => order.userId === this.userId);
-        this.orderHistorylist = res.filter((order: { userId: number }) => order.userId === this.userId);
+
+        this.inTransitOrders = res.filter((order:any) => order.userId === this.userId && order.status === 2 );
+        console.log('in transit',this.inTransitOrders);
+        if(this.inTransitOrders.length==0){
+
+          console.log('no intransit');
+
+        }
+
+        this.pendingOrders = res.filter((order:any) => order.userId === this.userId &&  order.status ===1);
+        this.cancelledOrders = res.filter((order:any) => order.userId === this.userId &&  order.status ===5);
+        this.orderHistorylist = res.filter((order: any) => order.userId === this.userId && order.status === 3);
         console.log("filtered orders", this.inTransitOrders);
         this.isLoading = false;
       },
@@ -72,5 +94,7 @@ export class UserOrdersComponent {
       }
     });
   }
-
+  redirectToHome(){
+    this.router.navigate(['/home']);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AddtoCartDeletebtnComponent } from "../addto-cart-deletebtn/addto-cart-deletebtn.component";
 import { CurrencyPipe } from '@angular/common';
 import { ApiServiceService } from '../../../../services/api-service.service';
@@ -15,43 +15,36 @@ import { GlobalService } from '../../../../global.service';
 export class ProductDisplayingBarComponent {
   @Input() productImage: string = '';
   @Input() productId:number =0;
+  @Input() colorId:number =0;
+  @Input() sizeId:number =0;
   @Input() productName: string = '';
-  @Input() productColor: number = 0;
-  @Input() productSize: number = 0;
+  @Input() productColor: string = '';
+  @Input() productSize: string = '';
   @Input() productPrice: number = 0;
+  @Output() clear = new EventEmitter<number>();
+
   userId:any;
-  color:any;
-  size:any;
+  // color:any;
+  // size:any;
+  //  userId: number = 0;
+  // color:any;
+  // size:any;
  constructor(public api: ApiServiceService, private route: ActivatedRoute,public global:GlobalService) {
 this.global.getUserId();
  }
  ngOnInit(){
   this.userId = this.global.userId();
-  this.api.getColorById(this.productColor).subscribe({
-    next: (colorData) => {
-      this.color = colorData;
-      this.color = this.color.colorName
-      console.log('color',this.color);
+console.log('product id',this.productId);
 
-    },
-    error: (error) => {
-      console.error('Error fetching color:', error);
-    }
-  });
 
-  // Fetch size details
-  this.api.getSizeById(this.productSize).subscribe({
-    next: (sizeData) => {
-      this.size = sizeData;
-      this.size = this.size.size
-    },
-    error: (error) => {
-      console.error('Error fetching size:', error);
-    }
-  });
+
 
  }
- removeFromCart(productId: number, userId: number) {
+ deleteCart(){
+  this.clear.emit();
+
+ }
+ removeFromCart(productId: number, userId: number,colorId:number,sizeId:number) {
   this.api.deleteFromCart(productId, userId).subscribe({
     next: (response) => {
       console.log('Item removed successfully');

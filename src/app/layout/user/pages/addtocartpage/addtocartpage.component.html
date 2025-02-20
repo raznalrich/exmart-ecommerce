@@ -14,29 +14,29 @@
 }
 @else {
 
+  <main class="cart-container">
 
-<main class="cart-container">
-
-
-  <div class="card-items">
-
-    <section class="bag-section">
-        @for(items of CartItems; track items ){
+    <div class="card-items">
+      <section class="bag-section">
+        <h4 class="subheading1"><i class="bi bi-arrow-left-circle-fill" (click)="goBack()"
+          style="cursor: pointer; padding-right: 15px;"></i>Add to cart</h4>
+        @for(items of cartItemList; track items ){
           <!-- <img [src]="items[0].imageUrl" [alt]="items.productName" /> -->
 
           <app-product-displaying-bar
-            [productImage]="items.primaryImageUrl || 'images/box not packed.png'"
-            [productName]="items.name"
-            [productColor]="items.colorId"
-            [productSize]="items.sizeId"
+            [productImage]="items.productImageUrl || 'images/box not packed.png'"
+            [productName]="items.productName"
+            [productColor]="items.colorName"
+            [colorId]="items.colorId"
+            [sizeId]="items.sizeId"
+            [productSize]="items.sizeName"
             [productPrice]="items.price"
-            [productId]="items.id"
+            [productId]="items.productId"
+            (clear) = "ngOnInit()"
             >
           </app-product-displaying-bar>
 
         }
-
-
     </section>
 
 
@@ -84,22 +84,26 @@
     <div class="summary-details">
       <!-- <p><span>No of Items:</span> <span>{{global.cartCount()}}</span></p> -->
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
-       @for(numberOfItems of CartItems; track numberOfItems){
+       <!-- @for(numberOfItems of CartItems; track numberOfItems){ -->
         @for(numOfCartItems of cartItemList;track numOfCartItems){
-          @if(numberOfItems.id == numOfCartItems.productId){
 
-            <p><span>{{numberOfItems.name}} x <strong>{{numOfCartItems.quantity}}</strong></span> <span>{{numberOfItems.price * numOfCartItems.quantity | currency:'INR'}}</span></p>
-          }
+
+            <p><span>{{numOfCartItems.productName}} x <strong>{{numOfCartItems.quantity}}</strong></span> <span>{{numOfCartItems.price * numOfCartItems.quantity | currency:'INR'}}</span></p>
+
         }
 
-       }
-      @if(selectedAddress==1||selectedAddress==2){
+       <!-- } -->
+      <!-- @if(addressType==1){
         <p class="total"><span>Shipping : </span> <span>{{ '0'| currency:'INR'}}</span></p>
-       }
-       @else if (selectedAddress==3) {
-        <p class="total"><span>Shipping : </span> <span>{{ '50'| currency:'INR'}}</span></p>
+       } -->
+       <!-- @else if (selectedAddress==3) { -->
+        @if(this.global.selectedAddressTypeName() === 'Home'){
 
-       }
+          <p class="total" style="color: red;"><span><i class="bi bi-exclamation-triangle-fill" ></i> Shipping charges will be included </span></p>
+
+        }
+
+       <!-- } -->
       <!-- <p><span>Estimated Shipping:</span> <span>{{10 | currency:'INR'}}</span></p> -->
       <p class="total"><span>Total:</span> <span>{{ totalPrice| currency:'INR'}}</span></p>
     </div>
@@ -107,6 +111,7 @@
     <div class="button">
       @if(selectedAddress){
         <app-long-button
+
       label="Confirm Purchase"
  (buttonClick)="placeOrder()"
       ></app-long-button>

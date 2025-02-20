@@ -1,5 +1,6 @@
+import { AuthService } from './../../../../services/auth/auth.service';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LogoutButtonComponent } from '../../../user/ui/logout-button/logout-button.component';
 
 @Component({
@@ -10,6 +11,9 @@ import { LogoutButtonComponent } from '../../../user/ui/logout-button/logout-but
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
+   constructor(private router:Router, private authService : AuthService) {
+
+    }
   menuItems: any = [
     {
       id: 1,
@@ -53,4 +57,14 @@ export class SidebarComponent {
     route: '',
     icon: 'bi bi-box-arrow-left',
   };
+  logout(): void {
+
+    // localStorage.removeItem('userId');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('role')
+    // localStorage.removeItem('loginTimestamp')
+    // localStorage.clear();
+    // this.router.navigate(['/login']);
+    this.authService.logout();
+  }
 }

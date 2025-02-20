@@ -1,20 +1,22 @@
+<!-- product-feedback.component.html -->
 <div class="table table-hover mt-5">
+  <div class="toggle-button">
+    <app-product-feedback-toggle (filterChange)="onFilterChange($event)"></app-product-feedback-toggle>
+  </div>
   <div>
     <div class="card-body scrollable-card">
-      <app-product-feedback-toggle (filterChange)="onFilterChange($event)"></app-product-feedback-toggle>
       <table class="table table-borderless align-middle">
         <thead class="text-muted border-bottom">
           <tr>
-            <th scope="col">Employee</th>
+            <th scope="col" class="sticky-col">Employee</th>
             @if(shouldShowProductColumn()){
-              <th scope="col">Product Name</th>
+            <th scope="col" class="sticky-col">Product Name</th>
             }
-            <th scope="col">Feedback</th>
-            <th scope="col" class="text-center">Action</th>
+            <th scope="col" class="sticky-col">Feedback</th>
           </tr>
         </thead>
         <tbody>
-          @for(item of filteredFeedback; track item){
+          @for (item of filteredFeedback; track item) {
             <tr class="border-bottom hover-row">
               <td class="d-flex align-items-center">
                 <img
@@ -24,18 +26,13 @@
                 />
                 <span class="fw-bold">{{ item.userName }}</span>
               </td>
-              @if(shouldShowProductColumn()){
+              @if (shouldShowProductColumn()) {
                 <td>
                   <p class="mb-0 text-muted">{{ item.productName }}</p>
                 </td>
               }
               <td>
                 <p class="mb-0 text-muted">{{ item.feedBack }}</p>
-              </td>
-              <td class="text-center">
-                <button class="replay-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                  <i class="bi bi-send-fill action-icon" title="Send Feedback"></i>
-                </button>
               </td>
             </tr>
           }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { OrderlistTableComponent } from '../../ui/orderlist-table/orderlist-table.component';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
@@ -8,6 +8,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 import { firstValueFrom } from 'rxjs';
+import { OrderValueDisplayingButtonComponent } from '../../ui/order-value-displaying-button/order-value-displaying-button.component';
+import { ConfirmModalComponent } from '../../ui/confirm-modal/confirm-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-order-list',
@@ -16,16 +19,25 @@ import { firstValueFrom } from 'rxjs';
     OrderlistTableComponent,
     ReactiveFormsModule,
     SearchbarComponent,
-    AdminValuesDisplayingButtonComponent,
+    OrderValueDisplayingButtonComponent,
     DateRangepickerComponent,
   ],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.scss',
 })
 export class OrderListComponent {
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   orderlist: any[] = [];
   filteredItems: any[] = [];
-  constructor(public api: ApiServiceService) {}
+  searchPlaceholder: string = 'Search Order Item/Product';
+  totalOrders: any;
+  deliveredOrders: any;
+
+
+  constructor(public api: ApiServiceService, private dialog : MatDialog) {}
+
   ngOnInit() {
     this.api.getOrderList().subscribe((res: any) => {
       this.orderlist = res.map((item: any) => ({
@@ -33,8 +45,45 @@ export class OrderListComponent {
         orderDate: new Date(item.orderDate).toISOString(),
       }));
       this.filteredItems = [...this.orderlist];
+      this.totalOrders = this.filteredItems.length;
+      console.log(this.totalOrders);
       console.log('filtered list', this.filteredItems);
+      this.calculateDevileredOrders();
     });
+  }
+
+  onSearch(searchTerm: string) {
+    const term = searchTerm.trim();
+    if (!term) {
+      this.filteredItems = [...this.orderlist];
+      return;
+    }
+    const regex = new RegExp(`^${term}$`, 'i');
+    this.filteredItems = this.orderlist.filter((item: any) => {
+      const orderId =
+        item.orderItemId !== undefined ? item.orderItemId.toString() : '';
+      const productName = item.productName
+        ? item.productName.toLowerCase()
+        : '';
+      const status = item.status !== undefined ? item.status.toString() : '';
+
+      return (
+        regex.test(orderId) ||
+        productName.includes(term.toLowerCase()) ||
+        regex.test(status)
+      );
+    });
+
+    if (this.filteredItems.length === 0) {
+      console.warn('No matching results found for:', term);
+    }
+  }
+
+  calculateDevileredOrders() {
+    this.deliveredOrders = this.filteredItems.filter(
+      (order) => order.status === 3
+    ).length;
+    console.log('deliver', this.deliveredOrders);
   }
 
   onDateRangeSelected(dateRange: { startDate: string; endDate: string }) {
@@ -66,22 +115,46 @@ export class OrderListComponent {
     }
   }
 
+  loadOrders() {
+    this.api.getOrderList().subscribe((res: any) => {
+      this.orderlist = res.map((item: any) => ({
+        ...item,
+        orderDate: new Date(item.orderDate).toISOString(),
+      }));
+      this.filteredItems = [...this.orderlist];
+      console.log('filtered list', this.filteredItems);
+    });
+  }
+
   async onFileChange(event: Event) {
     const target = event.target as HTMLInputElement;
     const file = target?.files?.[0];
+    if (!file) {
+      console.log("file not found")
+      return;
+    }
+    console.log("call for confirm modal")
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      data: { fileName: file.name },
+      width: '400px',
+      position: { top: '-35%', left: '35%' },
+      panelClass: 'centered-dialog'
+    });
 
-    if (!file) return;
+    const result = await firstValueFrom(dialogRef.afterClosed());
+    if (!result) {
+      this.fileInput.nativeElement.value = '';
+      return;
+    }
 
     try {
       const workbook = new ExcelJS.Workbook();
       await workbook.xlsx.load(await file.arrayBuffer());
       const worksheet = workbook.getWorksheet(1);
-
       if (!worksheet) {
         console.error('No worksheet found');
         return;
       }
-
       const orders =
         worksheet
           .getRows(2, worksheet.rowCount - 1)
@@ -90,36 +163,58 @@ export class OrderListComponent {
               row && {
                 orderItemId: row.getCell(1).value,
                 productStatusId: this.getStatusNumber(
-                  row.getCell(4).value as string
+                  row.getCell(9).value as string
                 ),
+                shippingCharge: row.getCell(8).value,
               }
           )
           .filter((order) => order && order.orderItemId) ?? [];
+      console.log('Orders to update:', orders);
+      // Check data before API call
+      // Step 2: Ensure All Data is Loaded
+      if (orders.length === 0) {
+        console.warn('No valid orders found in the file.');
+        return;
+      }
+      // Track successful updates
+      let hasUpdates = false;
 
-      await Promise.all(
-        orders.map(async (order) => {
-          try {
-            const response = await firstValueFrom(
-              this.api.updateOrderStatus(order)
-            );
-            console.log(`Order updated: ${order.orderItemId}`, response);
-          } catch (error) {
-            console.error(`Error updating order: ${order.orderItemId}`, error);
-          }
-        })
-      );
+      for (const order of orders) {
+        try {
+          const response = await firstValueFrom(
+            this.api.updateOrderStatus(order)
+          );
+          console.log(`Order updated: ${order.orderItemId}`, response);
+          hasUpdates = true;
+        } catch (error) {
+          console.error(`Error updating order: ${order.orderItemId}`, error);
+        }
+      }
+      if (hasUpdates) {
+        this.loadOrders();
+      }
     } catch (error) {
       console.error('Error reading Excel file:', error);
     }
+    finally {
+      this.fileInput.nativeElement.value = '';
+    }
   }
 
-  private getStatusNumber(status: string): number {
+  private getStatusNumber(status: any): number {
+    // Handle cases where status might not be a string
+    if (!status || typeof status !== 'string') {
+      console.warn('Invalid status value:', status);
+      return 1; // Default to pending
+    }
     const statusMap: { [key: string]: number } = {
       pending: 1,
       shipped: 2,
       delivered: 3,
+      cancelled: 4,
+      requested: 5,
     };
-    return statusMap[status.toLowerCase()] || 1;
+    return statusMap[status.toString().toLowerCase()] || 1;
   }
 
   async downloadReport() {
@@ -130,6 +225,11 @@ export class OrderListComponent {
       { header: 'Order Item Id', key: 'orderItemId', width: 15 },
       { header: 'Date', key: 'orderDate', width: 20 },
       { header: 'Product', key: 'productName', width: 25 },
+      { header: 'Address', key: 'addressLine', width: 25 },
+      { header: 'City', key: 'city', width: 25 },
+      { header: 'State', key: 'state', width: 25 },
+      { header: 'Zip code', key: 'zipCode', width: 25 },
+      { header: 'Shippping Charge', key: 'shippingCharge', width: 15 },
       { header: 'Status', key: 'status', width: 15 },
       { header: 'Amount', key: 'amount', width: 15 },
       { header: 'Quantity', key: 'quantity', width: 10 },
@@ -139,32 +239,34 @@ export class OrderListComponent {
       orderItemId: order.orderItemId,
       orderDate: new Date(order.orderDate).toLocaleDateString(),
       productName: order.productName,
+      addressLine: order.addressLine,
+      city: order.city,
+      state: order.state,
+      zipCode: order.zipCode,
+      shippingCharge: order.shippingCharge,
       status:
-        ['Pending', 'Shipped', 'Delivered'][order.status - 1] || 'Pending',
+        ['pending', 'shipped', 'delivered', 'cancelled', 'requested'][
+          order.status - 1
+        ] || 'Pending',
       amount: order.amount.toFixed(2),
       quantity: order.quantity,
     }));
-    // console.log("this is filtered data",data);
     data.forEach((row) => worksheet.addRow(row));
-
     const dataValidation = {
       type: 'list' as const,
       allowBlank: false,
-      formulae: ['"Pending,Shipped,Delivered"'],
+      formulae: ['"Pending,Shipped,Delivered,Cancelled,Requested"'],
       showErrorMessage: true,
       errorTitle: 'Invalid Input',
       error:
-        'Please select a value from the dropdown: Pending, Shipped, or Delivered.',
+        'Please select a value from the dropdown: Pending, Shipped, Delivered, Cancelled & Requested.',
     };
-
     const statusColumn = worksheet.getColumn('status');
     statusColumn.eachCell({ includeEmpty: true }, (cell, rowNumber) => {
       if (rowNumber > 1) {
-        // Skip header row
         cell.dataValidation = dataValidation;
       }
     });
-
     const buffer = await workbook.xlsx.writeBuffer();
     saveAs(new Blob([buffer]), 'Orders_With_Validation.xlsx');
   }

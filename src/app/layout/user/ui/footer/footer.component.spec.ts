@@ -1,155 +1,122 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { HttpClientTestingModule, provideHttpClientTesting } from '@angular/common/http/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FooterComponent } from './footer.component';
+import { ApiServiceService } from '../../../../services/api-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
+import { ScrollServiceService } from '../../../../services/scroll-service.service';
+import { AnimationStateService } from '../../../../services/animation-state.service';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
+  let apiService: jasmine.SpyObj<ApiServiceService>;
+  let router: jasmine.SpyObj<Router>;
+  let scrollService: jasmine.SpyObj<ScrollServiceService>;
 
   beforeEach(async () => {
+    const apiSpy = jasmine.createSpyObj('ApiServiceService', ['getAllCategories', 'GetHrDetails']);
+    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const scrollSpy = jasmine.createSpyObj('ScrollServiceService', ['triggerScroll']);
+
     await TestBed.configureTestingModule({
-      imports: [FooterComponent]
-    })
-    .compileComponents();
+      declarations: [],
+      providers: [
+        { provide: ApiServiceService, useValue: apiSpy },
+        { provide: Router, useValue: routerSpy },
+        { provide: ScrollServiceService, useValue: scrollSpy },
+        { provide: AnimationStateService, useValue: {} }
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    apiService = TestBed.inject(ApiServiceService) as jasmine.SpyObj<ApiServiceService>;
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    scrollService = TestBed.inject(ScrollServiceService) as jasmine.SpyObj<ScrollServiceService>;
+
+     apiService.getAllCategories.and.returnValue(of([
+    { id: 43, categoryName: 'Appliances' },
+    { id: 47, categoryName: 'Electronics' },
+  ]));
+
+  apiService.GetHrDetails.and.returnValue(of({
+    id: 1,
+    hrPhoneNumber: 9999999111,
+    hrEmail: 'hr@experionglobal.com',
+    hrChatEmail: 'sona.george@experionglobal.com',
+    hrAddress: 'HR, Experion Global, Gayathiri Building, Technopark phase-1, Trivandrum - 695581',
+    proTagLine: 'exMart is the e-branding website of experion global which holds all the experion branded items for sale'
+  }));
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Logo and Description', () => {
-    it('should display the company logo', () => {
-      const logo = fixture.debugElement.query(By.css('img[src="images/exmart_logo.svg"]'));
-      expect(logo).toBeTruthy();
-      expect(logo.attributes['alt']).toBeDefined();
-    });
+  it('should fetch category list on init', () => {
+    const mockCategories = [
+      { id: 43, categoryName: 'Appliances',iconPath: 'https://cdn-icons-png.flaticon.com/512/3724/3724720.png'},
+      { id: 47, categoryName: 'Electronics',iconPath: 'https://cdn-icons-png.flaticon.com/512/3724/3724722.png' },
+    ];
+    apiService.getAllCategories.and.returnValue(of(mockCategories));
 
-    it('should display the company description', () => {
-      const description = fixture.debugElement.query(By.css('.col p'));
-      expect(description.nativeElement.textContent).toContain('exMart is the online merchandise selling platform');
-    });
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(component.CategoryList).toEqual(mockCategories);
   });
+  it('should fetch HR details on init', () => {
+    const mockHrDetails = {
+      id: 1,
+      hrPhoneNumber: 9999999111,
+      hrEmail: 'hr@experionglobal.com',
+      hrChatEmail: 'sona.george@experionglobal.com',
+      hrAddress: 'HR, Experion Global, Gayathiri Building, Technopark phase-1, Trivandrum - 695581',
+      proTagLine: 'exMart is the e-branding website of experion global which holds all the experion branded items for sale'
+    };
+    apiService.GetHrDetails.and.returnValue(of(mockHrDetails));
 
-  describe('Products Section', () => {
-    it('should display PRODUCTS heading', () => {
-      const heading = fixture.debugElement.queryAll(By.css('.col p strong'))[0];
-      expect(heading.nativeElement.textContent.trim()).toBe('PRODUCTS');
-    });
-
-    it('should list all product categories', () => {
-      const productSection = fixture.debugElement.queryAll(By.css('.col'))[1];
-      const categories = productSection.queryAll(By.css('li'));
-
-      expect(categories.length).toBe(3);
-      expect(categories[0].nativeElement.textContent).toContain('Appliances');
-      expect(categories[1].nativeElement.textContent).toContain('Stationary');
-      expect(categories[2].nativeElement.textContent).toContain('Garments');
-    });
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(component.HrDetailList).toEqual(mockHrDetails);
+    expect(component.hrEmail).toEqual('sona.george@experionglobal.com');
   });
+  it('should navigate to category on click', fakeAsync(() => {
+    router.navigate.and.returnValue(Promise.resolve(true));
+    component.navigateToCategory('47', 'Electronics');
+    tick();
+    tick(100);
+    expect(router.navigate).toHaveBeenCalledWith(['/home/category/', '47']);
+    expect(scrollService.triggerScroll).toHaveBeenCalledWith('47');
+  }));
+  it('should open Teams chat', fakeAsync(() => {
+  spyOn(window, 'open');
+  component.HrDetailList = {
+    hrChatEmail: 'sona.george@experionglobal.com'
+  };
+  component.hrEmail = 'sona.george@experionglobal.com';
+  component.openTeamsChat();
+  expect(window.open).toHaveBeenCalledWith(
+    'msteams:/l/chat/0/0?users=sona.george%40experionglobal.com',
+    '_blank'
+  );
+  tick(1000);
+  expect(window.open).toHaveBeenCalledWith(
+    'https://teams.microsoft.com/_#/conversations/new?users=sona.george%40experionglobal.com',
+    '_blank' );
+}));
 
-  describe('Your Account Section', () => {
-    it('should display YOUR ACCOUNT heading', () => {
-      const heading = fixture.debugElement.queryAll(By.css('.col p strong'))[1];
-      expect(heading.nativeElement.textContent.trim()).toBe('YOUR ACCOUNT');
-    });
-
-    it('should list all account options', () => {
-      const accountSection = fixture.debugElement.queryAll(By.css('.col'))[2];
-      const options = accountSection.queryAll(By.css('li'));
-
-      expect(options.length).toBe(2);
-      expect(options[0].nativeElement.textContent).toContain('Manage address');
-      expect(options[1].nativeElement.textContent).toContain('Order History');
-    });
+  it('should navigate to user page', () => {
+    router.navigate.and.returnValue(Promise.resolve(true));
+    component.navigateToUserSide('addresspage');
+    expect(router.navigate).toHaveBeenCalledWith(['addresspage']);
   });
-
-  describe('Contact Section', () => {
-    let contactColumn: any;
-
-    beforeEach(() => {
-      contactColumn = fixture.debugElement.queryAll(By.css('.col'))[3];
-    });
-
-    it('should display CONTACT heading', () => {
-      const heading = contactColumn.query(By.css('p strong'));
-      expect(heading.nativeElement.textContent.trim()).toBe('CONTACT');
-    });
-
-    it('should display phone number with icon', () => {
-      const phoneElement = contactColumn.query(By.css('li:first-child'));
-      const phoneIcon = phoneElement.query(By.css('.bi-telephone-fill'));
-
-      expect(phoneIcon).toBeTruthy();
-      expect(phoneElement.nativeElement.textContent).toContain('+91 99999 99999');
-    });
-
-    it('should display email with icon', () => {
-      const emailElement = contactColumn.queryAll(By.css('li'))[1];
-      const emailIcon = emailElement.query(By.css('.bi-envelope-fill'));
-
-      expect(emailIcon).toBeTruthy();
-      expect(emailElement.nativeElement.textContent.trim()).toContain('experion.hr.experionglobal.com');
-    });
-
-    it('should display address with icon', () => {
-      const addressElement = contactColumn.queryAll(By.css('li'))[2];
-      const addressIcon = addressElement.query(By.css('.bi-geo-alt-fill'));
-
-      expect(addressIcon).toBeTruthy();
-      expect(addressElement.nativeElement.textContent).toContain('Experion Global');
-      expect(addressElement.nativeElement.textContent).toContain('Technopark');
-    });
-
-    it('should have a chat button with icon', () => {
-      const chatButton = contactColumn.query(By.css('.btn-light'));
-      const sendIcon = chatButton.query(By.css('.bi-send-fill'));
-
-      expect(chatButton).toBeTruthy();
-      expect(chatButton.nativeElement.textContent).toContain('Chat with HR');
-      expect(sendIcon).toBeTruthy();
-    });
-  });
-
-  describe('Footer Bottom Section', () => {
-    it('should display policies text', () => {
-      const policiesText = fixture.debugElement.query(By.css('.row.text-center p strong'));
-      expect(policiesText.nativeElement.textContent).toContain('Terms and conditions');
-      expect(policiesText.nativeElement.textContent).toContain('Shipping policy');
-      expect(policiesText.nativeElement.textContent).toContain('Payment policy');
-    });
-
-    it('should display copyright notice', () => {
-      const copyright = fixture.debugElement.queryAll(By.css('.row.text-center p'))[1];
-      expect(copyright.nativeElement.textContent).toContain('© 2024 HR department Experion global');
-    });
-
-    it('should have a horizontal rule', () => {
-      const hr = fixture.debugElement.query(By.css('hr'));
-      expect(hr).toBeTruthy();
-    });
-  });
-
-  describe('Layout Structure', () => {
-    it('should have correct number of columns', () => {
-      const columns = fixture.debugElement.queryAll(By.css('.col'));
-      expect(columns.length).toBe(4);
-    });
-
-    it('should have two rows', () => {
-      const rows = fixture.debugElement.queryAll(By.css('.row'));
-      expect(rows.length).toBe(2);
-    });
-
-    it('should have bootstrap classes applied', () => {
-      const container = fixture.debugElement.query(By.css('.container1'));
-      expect(container).toBeTruthy();
-
-      const button = fixture.debugElement.query(By.css('.btn.btn-light'));
-      expect(button).toBeTruthy();
-    });
+  it('should navigate to policy page', () => {
+    router.navigate.and.returnValue(Promise.resolve(true));
+    component.navigateToPolicy('terms');
+    expect(router.navigate).toHaveBeenCalledWith(['/policies', 'terms']);
   });
 });
+
+

@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { FooterComponent } from "../ui/footer/footer.component";
 import { UsernavbarComponent } from "../ui/usernavbar/usernavbar.component";
 import { GlobalService } from '../../../global.service';
+import { UsersidebarComponent } from '../ui/usersidebar/usersidebar.component';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, UsernavbarComponent],
+  imports: [RouterOutlet,RouterLink, FooterComponent, UsernavbarComponent,UsersidebarComponent],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })

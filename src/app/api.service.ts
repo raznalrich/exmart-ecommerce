@@ -8,7 +8,7 @@ import { Product } from './layout/user/interfaces/productInterface';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'https://localhost:7267/api';
+  private baseUrl = 'https://exmart-backend.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +23,11 @@ export class ApiService {
     return this.http
       .get<any[]>(`${this.baseUrl}/Categories`)
       .pipe(catchError(this.handleError));
+  }
+  updateBanner(id: number, updatedBanner: any) {
+    // If your endpoint is like PUT /banners/{id}
+    // Adjust to match your real endpoint & HTTP method
+    return this.http.put(`${this.baseUrl}/Banner/${id}`, updatedBanner);
   }
 
   // Fetch all sizes (Corrected Endpoint)
@@ -40,13 +45,13 @@ export class ApiService {
   }
 
   // Fetch card images from local JSON
-  getCardImages(): Observable<any> {
-    return this.http
-      .get(`Data/carouselImages.json`)
-      .pipe(catchError(this.handleError));
-  }
+  // getCardImages(): Observable<any> {
+  //   return this.http
+  //     .get(`Data/carouselImages.json`)
+  //     .pipe(catchError(this.handleError));
+  // }
 
-  // Fetch product details from local JSON
+  //Fetch product details from local JSON
   getProductDetails(): Observable<any> {
     return this.http
       .get(`Data/details.json`)
@@ -54,15 +59,15 @@ export class ApiService {
   }
 
   // Fetch carousel images from local JSON
-  getCarouselImages(): Observable<any> {
-    return this.http
-      .get(`Data/carouselImages.json`)
-      .pipe(catchError(this.handleError));
-  }
+  // getCarouselImages(): Observable<any> {
+  //   return this.http
+  //     .get(`Data/carouselImages.json`)
+  //     .pipe(catchError(this.handleError));
+  // }
 
   // Fetch products from local JSON
-  getProducts() {
-    return this.http.get('https://localhost:7267/api/Product');
+  getProducts(): Observable<any> {
+    return this.http.get('https://exmart-backend.onrender.com/api/Product');
   }
 
   // Add a new product
@@ -90,7 +95,7 @@ uploadImage(file: File) {
 
   updateProduct(productId: number, productData: any): Observable<any> {
     return this.http.put(
-      `https://localhost:7267/api/Product/Update/${productId}`,
+      `https://exmart-backend.onrender.com/api/Product/Update/${productId}`,
       productData
     );
   }
@@ -99,18 +104,18 @@ uploadImage(file: File) {
 
   searchProducts(query: string): Observable<Product[]> {
     return this.http.get<Product[]>(
-      `https://localhost:7267/api/Product/search?name=${encodeURIComponent(
+      `https://exmart-backend.onrender.com/api/Product/search?name=${encodeURIComponent(
         query
       )}`
     );
   }
 
   // Fetch user address from local JSON
-  getUserAddress(): Observable<any> {
-    return this.http
-      .get(`Data/address.json`)
-      .pipe(catchError(this.handleError));
-  }
+  // getUserAddress(): Observable<any> {
+  //   return this.http
+  //     .get(`Data/address.json`)
+  //     .pipe(catchError(this.handleError));
+  // }
 
   // Fetch user feedback
   getUserFeedback(): Observable<any> {
@@ -144,7 +149,7 @@ uploadImage(file: File) {
   //   );
 
   getAllFeedback(){
-    return this.http.get(`https://localhost:7267/api/FeedBack/all`);
+    return this.http.get(`https://exmart-backend.onrender.com/api/FeedBack/all`);
   }
 
   // getProductsById(id:any){

@@ -1,34 +1,119 @@
-body {
-  font-family: Arial, sans-serif;
+.feedback-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-input {
+  flex: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 400px;
+}
+
+.feedback-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+}
+
+.send-button {
+  background: #4a90e2;
+  border: none;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.send-button:hover:not(:disabled) {
+  background: #357abd;
+  transform: scale(1.05);
+}
+
+.send-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+.alert {
+  position: fixed;
+  z-index: 1000;
+  top: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.error {
+  background-color: #f09951;
+  color: white;
+}
+
+.success {
+  background-color: #43bf73;
+  color: white;
+}
+.word-limit-warning {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #f4f4f4;
+  padding-top: 10px;
+  color: #dc143c;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease-out;
 }
-.feedback-form {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
+.word-count {
+  position: absolute;
+  font-size: 12px;
+  color: #666;
 }
-.feedback-form input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.button-content.hidden {
+  opacity: 0;
 }
-.feedback-form button {
-  padding: 10px 15px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
+
+.loader {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
-.feedback-form button:hover {
-  background-color: #0056b3;
+
+.loader.show {
+  opacity: 1;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

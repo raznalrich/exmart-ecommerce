@@ -29,72 +29,208 @@ import { PolicyPageComponent } from './layout/user/pages/policy-page/policy-page
 import { PolicyContentComponent } from './layout/user/ui/policy-content/policy-content.component';
 import { TrackExmartComponent } from './layout/user/pages/track-exmart/track-exmart.component';
 import { ShippedConfirmationEmailComponent } from './layout/admin/ui/shipped-confirmation-email/shipped-confirmation-email.component';
+import { AuthGuard } from './authGuard/auth.guard';
+import { OrderConfirmedEmailComponent } from './layout/user/pages/order-confirmed-email/order-confirmed-email.component';
+import { ConfigurationTabComponent } from './layout/admin/ui/configuration-tab/configuration-tab.component';
 
 export const routes: Routes = [
   {
-    path:'',component: HomepageComponent,children:[
+    path: '',
+    component: HomepageComponent,
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Home' , role: 'User'},
+    children: [
       {
-        path:'home', component: HomeStaticComponent,children:[
+        path: 'addaddress',
+        component: NewAddressComponent,
+      },
+      {
+        path: 'userorder',
+        component: UserOrdersComponent,
+      },
+      {
+        path: 'addresspage',
+        component: SelectAddressComponent,
+      },
+      {
+        path: 'home',
+        component: HomeStaticComponent,
+        canActivate: [AuthGuard],
+        data: {role: 'User'},
+        children: [
+          {
+            path: 'category/:id',
+            component: ProductDisplayingSectionComponent,
+          },
 
           {
-            path:'category/:id',component:ProductDisplayingSectionComponent
+            path: '',
+            redirectTo: 'category/20',
+            pathMatch: 'full',
           },
           {
-            path:'',redirectTo:'category/1',pathMatch:'full'
+            path: 'addaddress',
+            component: NewAddressComponent,
+          },
+          {
+            path: 'userorder',
+            component: UserOrdersComponent,
+          },
+          {
+            path: 'addresspage',
+            component: SelectAddressComponent,
           },
         ],
-
       },
       {
         path: 'policies',
         component: PolicyPageComponent,
+        canActivate: [AuthGuard],
+        data: {role: 'User'},
         children: [
           { path: '', redirectTo: 'terms', pathMatch: 'full' },
-          { path: ':type', component: PolicyContentComponent }
+          { path: ':type', component: PolicyContentComponent,
+          }
         ]
       },
-
-      // {
-      //   path: 'policy/:id',component:PolicyPageComponent
-      // },
       {
-        path:'viewproduct/:id',component:SingleproductpageComponent
+        path:'viewproduct/:id',component:SingleproductpageComponent,
+        data: { breadcrumb: 'View Product' }
       },
       {
-        path: 'seeAllProducts',component: SeeAllProductsPageComponent,children:[
+        path: 'seeAllProducts',component: SeeAllProductsPageComponent,
+        canActivate: [AuthGuard],
+        data: {role: 'User'},
+        children:[
           {
-            path: 'seeAllProducts/category/:id', component: SeeAllProductsPageComponent
+            path: 'seeAllProducts/category/:id', component: SeeAllProductsPageComponent,
+            data: { breadcrumb: 'See All Products' }
           }
         ],
       },
       {
-        path:'addcart',component:AddtocartpageComponent
+        path: 'viewproduct/:id',
+        component: SingleproductpageComponent,
+        data: { breadcrumb: 'View Product' },
       },
       {
-        path:'addressconfirm',component:AddressConfirmPageComponent
+        path: 'seeAllProducts',
+        component: SeeAllProductsPageComponent,
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: 'seeAllProducts/category/:id',
+            component: SeeAllProductsPageComponent,
+            data: { breadcrumb: 'See All Products' },
+          },
+        ],
       },
       {
-        path: 'orderPreview',component:OrderPreviewPageComponent
+        path: 'addcart',
+        component: AddtocartpageComponent,
       },
       {
-        path:"thankyou", component:ThankyoupageComponent
+        path: 'addressconfirm',
+        component: AddressConfirmPageComponent,
       },
+      {
+        path: 'orderPreview',
+        component: OrderPreviewPageComponent,
+      },
+      {
+        path: 'thankyou',
+        component: ThankyoupageComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+    ],
+  },
+  // {
+  //   path:'userprofile', component:UserprofileComponent,
+  //   canActivate: [AuthGuard], children:[
+  //     // {
+  //     //   path:'addaddress',component:NewAddressComponent,
+  //     // },
+  //     // {
+  //     //   path:'userorder',component:UserOrdersComponent,
+  //     // },
+  //     // {
+  //     //   path:'addresspage',component:SelectAddressComponent,
+  //     // },
+  //     // {
+  //     //   path:'',redirectTo:'userorder',pathMatch:'full'
+  //     // }
+  //   ]
+  // },
+  {
+    path: 'admin',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+    data: {role: 'Admin'},
 
+    children: [
       {
-        path:'',redirectTo:'home',pathMatch:'full'
-      }
-    ]
+        path: 'admindashboard',
+        component: AdminDashboardComponent,
+      },
+      {
+        path: 'productlist',
+        component: ProductlistComponent,
+      },
+      {
+        path: 'orderlist',
+        component: OrderListComponent,
+      },
+      {
+        path: 'reportpage',
+        component: ReportPageComponent,
+      },
+      {
+        path: 'viewfeedback',
+        component: ViewFeedbackComponent,
+      },
+      {
+        path: 'dialoguebox',
+        component: AddProductsComponent,
+      },
+      {
+        path: 'settings',
+        component: SettingsPageComponent,
+      },
+      {
+        path: 'configuration-tab',
+        component: ConfigurationTabComponent,
+      },
+      {
+        path: 'texteditor/:id',
+        component: AdminSettingsTextEditorComponent,
+      },
+    ],
   },
   {
-    path:'userprofile', component:UserprofileComponent,children:[
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'trackexmart/:id',
+    component: TrackExmartComponent,
+  },
+  {
+    path:'userprofile', component:UserprofileComponent,
+    canActivate: [AuthGuard],
+    data: {role: 'User'},
+    children:[
       {
-        path:'addaddress',component:NewAddressComponent
+        path:'addaddress',component:NewAddressComponent,
       },
       {
-        path:'userorder',component:UserOrdersComponent
+        path:'userorder',component:UserOrdersComponent,
       },
       {
-        path:'addresspage',component:SelectAddressComponent
+        path:'addresspage',component:SelectAddressComponent,
       },
       {
         path:'',redirectTo:'userorder',pathMatch:'full'
@@ -102,41 +238,45 @@ export const routes: Routes = [
     ]
   },
   {
-    path:'admin',component: DashboardComponent,children:[
+    path:'admin',component: DashboardComponent,
+     canActivate: [AuthGuard],
+    data: {role: 'Admin'},
+    children:[
       {
-        path:'admindashboard',component:AdminDashboardComponent
+        path:'admindashboard',component:AdminDashboardComponent,
       },
       {
-        path:'productlist',component:ProductlistComponent
+        path:'productlist',component:ProductlistComponent,
       },
       {
-        path:'orderlist',component:OrderListComponent
+        path:'orderlist',component:OrderListComponent,
       },
       {
-        path:'reportpage',component:ReportPageComponent
+        path:'reportpage',component:ReportPageComponent,
       },
       {
-        path:'viewfeedback',component:ViewFeedbackComponent
+        path:'viewfeedback',component:ViewFeedbackComponent,
       },
       {
-        path:'dialoguebox',component:AddProductsComponent
+        path:'dialoguebox',component:AddProductsComponent,
       },
       {
-        path:'settings',component:SettingsPageComponent
+        path:'settings',component:SettingsPageComponent,
       },
       {
-        path:'texteditor/:id',component:AdminSettingsTextEditorComponent
+        path:'configuration-tab',component:ConfigurationTabComponent,
+      },
+      {
+        path:'texteditor/:id',component:AdminSettingsTextEditorComponent,
       }
     ]
   },
   {
-    path:'login',component:LoginComponent
-  },
-   {
-    path:"trackexmart/:id",component:TrackExmartComponent
+    path: 'updateStatusBy/:id',
+    component: ShippedConfirmationEmailComponent,
   },
   {
-    path:"updateStatusBy/:id",component:ShippedConfirmationEmailComponent
-  }
-
+    path: 'orderconfirmed/:id',
+    component: OrderConfirmedEmailComponent,
+  },
 ];

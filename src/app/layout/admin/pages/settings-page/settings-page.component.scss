@@ -19,11 +19,14 @@ h1 {
 }
 h2{
   font-size: 1.4em;
-  margin-top: 30px;
+  // margin-top: 30px;
 }
 .categories-section {
-  margin-top: 20px;
+  margin-top: 10px;
   animation: fadeInUp 1.2s ease-in-out;
+}
+.spacing{
+  padding-top: 30px;
 }
 
 .categories {
@@ -53,6 +56,7 @@ h2{
   width: 40px;
   height: 40px;
   margin-bottom: 10px;
+  // color: #333;
 }
 
 .category-card .category-name {
@@ -85,11 +89,12 @@ h2{
 }
 
 .edit-policies{
-  margin-top: 60px;
+  margin-top: 5%;
+  height: 40px;
   display: flex;
   // justify-content: center;
   // align-items: center;
-  gap: 10px;
+  gap: 40px;
   font-size: 1em;
   animation: fadeIn 1.5s ease-in-out;
   cursor: pointer;
@@ -171,4 +176,7 @@ button{
   100% {
     transform: scale(1);
   }
+}
+.configuration-section {
+  padding-top: 30px;
 }

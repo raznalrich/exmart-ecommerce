@@ -7,13 +7,14 @@ import { TableComponent } from '../../ui/table/table.component';
 import { GlobalService } from '../../../../global.service';
 import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
 import { AddProductsComponent } from '../add-products/add-products.component';
-import * as bootstrap from 'bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-productlist',
   standalone: true,
 
   imports: [
+    CommonModule,
     AddButtonComponent,
     TableComponent,
     SearchbarComponent,
@@ -23,15 +24,20 @@ import * as bootstrap from 'bootstrap';
   styleUrl: './productlist.component.scss',
 })
 export class ProductlistComponent {
-  @ViewChild(AddProductsComponent) addProductsComponent!: AddProductsComponent;
 
-  // onClickButton() {
-  //   console.log('Added product');
-  // }
+  @ViewChild(AddProductsComponent) addProductsComponent!: AddProductsComponent;
+  filteredItems: any = [];
+  searchPlaceholder: string = 'Search Product';
+  isAddProductVisible: boolean = false;
+  isEditmode: boolean = false;
+  editProductDetails: any;
+  showSuccessAlert = false;
+  successMessage = '';
+
   constructor(public api: ApiServiceService) {}
 
   items: any;
-  header: any = ['Id', 'Image', 'Category', 'Product', 'Price', 'Actions'];
+  header: any = ['Id', 'Image', 'Product', 'Category', 'Price', 'Actions'];
 
   button: any = {
     id: 1,
@@ -41,37 +47,65 @@ export class ProductlistComponent {
 
   ngOnInit() {
     this.loadProducts();
+    this.api.getProducts().subscribe((res: any) => {
+      this.items = res;
+    });
   }
 
   loadProducts() {
     this.api.getProducts().subscribe((res: any) => {
-      this.items = res;
-      console.log(this.items);
+      this.filteredItems = res;
     });
   }
 
-  onEditProduct(product: any) {
-    // Pass the product to AddProductsComponent for editing
-    this.addProductsComponent.setEditMode(product);
-
-    // Open the modal using Bootstrap's JS API
-    const modalElement = document.getElementById('staticBackdrop');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
+  onSearch(searchTerm: any) {
+    const term = searchTerm.toLowerCase().trim();
+    if (!term) {
+      this.filteredItems = [...this.items];
+      return;
+    }
+    this.filteredItems = this.items.filter((item: any) => {
+      return item.name && item.name.toLowerCase().includes(term);
+    });
+    // console.log(this.filteredItems);
+    if (this.filteredItems.length === 0) {
+      console.log('No matching results found for:', term);
     }
   }
 
-  onAddButtonClick() {
-    // Set Add Mode
-    this.addProductsComponent.setAddMode();
+  onEditProduct(product: any) {
+    this.isEditmode = true;
+    this.editProductDetails = product;
+    this.isAddProductVisible = true;
+    console.log('Editing product:', this.editProductDetails);
+  }
 
-    // Open the modal
-    const modalElement = document.getElementById('staticBackdrop');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-    }
+  onCloseAddProduct() {
+    this.isAddProductVisible = false;
+    this.isEditmode = false; // Reset edit mode when modal is closed
+    this.editProductDetails = null; // Clear product details when modal is closed
+  }
+
+  onAddButtonClick() {
+    this.isEditmode = false; // Ensure add mode
+    this.editProductDetails = null; // Clear any existing data
+    this.isAddProductVisible = true; // Show the modal
+  }
+
+  onProductSaved(): void {
+    this.loadProducts();
+    this.successMessage = this.isEditmode
+      ? 'Product updated successfully!'
+      : 'Product added successfully!';
+    this.showSuccessAlert = true;
+
+    setTimeout(() => {
+      this.showSuccessAlert = false;
+    }, 3000);
+  }
+
+  add() {
+    this.isAddProductVisible = true;
   }
 
   icons: any = [
@@ -86,6 +120,4 @@ export class ProductlistComponent {
       bgColor: '#EC7063',
     },
   ];
-
-
 }

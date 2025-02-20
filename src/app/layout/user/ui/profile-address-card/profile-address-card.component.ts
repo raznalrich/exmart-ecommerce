@@ -36,7 +36,6 @@ export class ProfileAddressCardComponent {
 
   onEdit() {
     this.edit.emit(this.address.id);
-
   }
 
   onDelete() {
