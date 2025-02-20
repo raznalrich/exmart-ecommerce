@@ -52,11 +52,11 @@ export class NewAddressComponent implements OnInit{
 
     this.addressForm = this.fb.group({
       addressTypeName: ['Home', Validators.required],
-      addressLine: ['', Validators.required], // Changed from buildingNo
+      addressLine: ['', Validators.required],
       city: ['', Validators.required],
       district: ['', Validators.required],
       state: ['', Validators.required],
-      zipCode: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]] // Changed from pincode
+      zipCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern('^[0-9]{6}$')], ] // Changed from pincode
     });
   }
 

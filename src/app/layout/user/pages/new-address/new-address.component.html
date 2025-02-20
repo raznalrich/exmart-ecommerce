@@ -23,7 +23,7 @@
 
 
   <div class="mb-3">
-    <label for="addressLine" class="form-label">Building No</label>
+    <label for="addressLine" class="form-label">AddressLine</label>
     <input
       id="addressLine"
       type="text"
@@ -32,7 +32,7 @@
       [ngClass]="{'is-invalid': formControls['addressLine'].touched && formControls['addressLine'].errors}"
     >
     <div class="invalid-feedback" *ngIf="formControls['addressLine'].touched && formControls['addressLine'].errors?.['required']">
-      Building number is required
+      Address Line is required
     </div>
   </div>
 
