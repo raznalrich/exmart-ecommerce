@@ -30,14 +30,16 @@ import { OrderPopupComponent } from "./layout/admin/ui/order-popup/order-popup.c
 import { PopUpComponent } from "./layout/user/ui/pop-up/pop-up.component";
 import { AddBannerComponent } from "./layout/admin/ui/add-banner/add-banner.component";
 import { BredcrumbComponent } from "./layout/user/ui/bredcrumb/bredcrumb.component";
+
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { CommonModule } from '@angular/common';
-import {  InteractionStatus } from '@azure/msal-browser';
+// import {  InteractionStatus } from '@azure/msal-browser';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from './api.service';
-import { AuthService } from './services/auth/auth.service';
+// import { AuthService } from './services/auth/auth.service';
+import {AuthService} from './services/auth/auth.service'
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmModalComponent } from './layout/admin/ui/confirm-modal/confirm-modal.component';
 
@@ -81,8 +83,7 @@ import { ConfirmModalComponent } from './layout/admin/ui/confirm-modal/confirm-m
 export class AppComponent {
 
   isLoggedIn : any;
-  title = 'ExMart';
-
+  title = 'ExMart'
   constructor(private authService: AuthService, private msalService : MsalService) {}
 
 

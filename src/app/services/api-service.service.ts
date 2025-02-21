@@ -589,4 +589,18 @@ console.log('address data',data);
     return this.http.put(`https://exmart-backend.onrender.com/api/Order/updateShippingCharge?`, updateData)
   }
 
+  getAddressByPincode(pin: any) {
+    return this.http.get('Data/pincode.json').pipe(
+      map((data:any) => {
+      console.log("data:",data);
+        // Filter the data based on the pincode
+        const filteredData = data.filter((item:any) => item.pincode ===  Number(pin));
+        console.log("Filtered data:",filteredData);
+        return filteredData;
+      })
+    );
+  }
+
+
+
 }

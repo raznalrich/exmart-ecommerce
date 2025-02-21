@@ -46,17 +46,18 @@ export class NewAddressComponent implements OnInit{
   successMessage='';
   userId:number=0;
   @Input() addressId:number=0;
+  isLoadingPincode = false;
 
   constructor(private api: ApiServiceService, private fb: FormBuilder, public global:GlobalService) {
     this.global.getUserId();
 
     this.addressForm = this.fb.group({
       addressTypeName: ['Home', Validators.required],
-      addressLine: ['', Validators.required], // Changed from buildingNo
+      addressLine: ['', Validators.required],
       city: ['', Validators.required],
       district: ['', Validators.required],
       state: ['', Validators.required],
-      zipCode: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]] // Changed from pincode
+      zipCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern('^[0-9]{6}$')], ] // Changed from pincode
     });
   }
 
@@ -69,6 +70,24 @@ if (this.editMode && this.addressId !== undefined) {
   this.fetchAddressById(this.addressId);
 }
 }
+
+
+
+pinCheck() {
+  let pincode = this.addressForm.value.zipCode;
+  if (pincode?.length === 6) {
+    this.api.getAddressByPincode(pincode).subscribe((res: any) => {
+      this.addressForm.get('state')?.setValue(res[0].stateName);
+      this.addressForm.get('city')?.setValue(res[0].taluk);
+      this.addressForm.get('district')?.setValue(res[0].districtName);
+    });
+
+  }
+}
+
+
+
+
 
 private fetchAddressById(id: number) {
   this.api.getuserAddressById(id).subscribe({

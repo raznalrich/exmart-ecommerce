@@ -16,7 +16,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-address-confirm-page',
   standalone: true,
-  imports: [CommonModule,CheckoutbuttonComponent, AddAddressButtonComponent, AddressCardComponent, RouterLink, LongButtonComponent, NewAddressComponent],
+  imports: [CommonModule, CheckoutbuttonComponent, AddAddressButtonComponent, AddressCardComponent, RouterLink, LongButtonComponent, NewAddressComponent],
   templateUrl: './address-confirm-page.component.html',
   styleUrl: './address-confirm-page.component.scss'
 })
