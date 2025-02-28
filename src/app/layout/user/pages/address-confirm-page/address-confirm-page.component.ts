@@ -25,6 +25,7 @@ export class AddressConfirmPageComponent {
       this.global.getUserId()
     }
 
+    selectedRadioValue: string|null=null;
   @Input()homeAddress:any={
     name:'',
     badgeName:'',
@@ -71,10 +72,12 @@ userId:number=0;
           this.homeAddress = null; // Handle error by setting address to null
         }
       });
-
-
-
   }
+
+  onRadioSelection(selectedId: string) {
+    this.selectedRadioValue = selectedId;
+  }
+
    refreshAddressList(){
     this.ngOnInit();
    }
