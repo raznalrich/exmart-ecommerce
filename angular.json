@@ -30,6 +30,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "env.js",
+                "input": "dist/EXMART-ECOMMERCE/browser",
+                "output": "."
               }
             ],
             "styles": [
