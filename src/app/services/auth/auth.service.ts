@@ -1,3 +1,6 @@
+import { EnvironmentService } from './../../environments/environment.service';
+// import { environment } from './../../../environments/environment.prod';
+
 import { Injectable } from '@angular/core';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { InteractionStatus } from '@azure/msal-browser';
@@ -7,10 +10,21 @@ import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
+
 interface LoginRequestDTO {
   email: string;
 }
-
+declare global {
+  interface Window {
+    env: {
+      clientId: string;
+      clientSecret: string;
+      tenantId: string;
+      authority:string;
+      redirectUri:string;
+    }
+  }
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -58,7 +72,9 @@ constructor(
   private msalService: MsalService,
   private msalBroadcastService: MsalBroadcastService,
   private api : ApiServiceService,
-  private router: Router
+  private router: Router,
+  private Environmentservice : EnvironmentService
+
 
 ) {
   this.initializeAuth();
@@ -66,6 +82,7 @@ constructor(
 
 async initializeAuth() {
   try {
+    console.log("environment variable from authservice: ", this.Environmentservice.clientSecret)
     await this.msalService.initialize().toPromise();  // 🔹 Ensure initialization completes
     console.log('MSAL Initialized Successfully!');
     this.checkLoginStatus();
@@ -135,6 +152,7 @@ private listenForAuthChanges() {
 
   async login() {
   console.log("Starting login process...");
+
   await this.msalService.initialize().toPromise();
     this.msalService.loginPopup()
       .subscribe({

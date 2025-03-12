@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpInterceptorService } from './services/interceptors/http-interceptor.service';
+import { EnvironmentService } from './environments/environment.service';
 
 import {
   MSAL_GUARD_CONFIG,
@@ -15,20 +16,7 @@ import {
   MsalBroadcastService,
 } from '@azure/msal-angular';
 import { Configuration, InteractionType, PublicClientApplication } from '@azure/msal-browser';
-import { environment } from '../environments/environment';
 import { tokenInterceptor } from './services/interceptors/token.interceptor';
-
-const msalConfig: Configuration = {
-  auth: {
-    clientId: environment.msalConfig.auth.clientId,
-    authority: environment.msalConfig.auth.authority,
-    redirectUri: environment.msalConfig.auth.redirectUri,
-  },
-  cache: {
-    cacheLocation: 'localStorage',
-    storeAuthStateInCookie: false
-  }
-};
 
 const guardConfig: MsalGuardConfiguration = {
   interactionType: InteractionType.Redirect,
@@ -41,14 +29,28 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-
     provideHttpClient(
       withInterceptors([tokenInterceptor]),
-      withInterceptorsFromDi()),
+      withInterceptorsFromDi()
+    ),
     provideAnimationsAsync(),
+    EnvironmentService,
     {
       provide: MSAL_INSTANCE,
-      useFactory: () => new PublicClientApplication(msalConfig)
+      useFactory: (envService: EnvironmentService) => {
+        return new PublicClientApplication({
+          auth: {
+            clientId: envService.auth.clientId,
+            authority: envService.auth.authority,
+            redirectUri: envService.auth.redirectUri,
+          },
+          cache: {
+            cacheLocation: 'localStorage',
+            storeAuthStateInCookie: false
+          }
+        });
+      },
+      deps: [EnvironmentService]
     },
     {
       provide: MSAL_GUARD_CONFIG,
