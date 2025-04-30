@@ -2,7 +2,7 @@
 (click)="onButtonClick()"
   [type]="type"
   [class]="styleClass"
-  [disabled]="isLoading"
+  [disabled]="disabled || isLoading"
 
   [ngStyle]="{
     color: textColor,

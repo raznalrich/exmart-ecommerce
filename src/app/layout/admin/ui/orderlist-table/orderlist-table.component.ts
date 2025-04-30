@@ -1,10 +1,7 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BillingDetailComponent } from '../billing-detail/billing-detail.component';
-import { CustomerDetailComponent } from '../customer-detail/customer-detail.component';
 import { OrderPopupComponent } from '../order-popup/order-popup.component';
-import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { ApiServiceService } from '../../../../services/api-service.service';
 declare var bootstrap: any;
 
@@ -74,14 +71,15 @@ export class OrderlistTableComponent {
 
   confirmStatusChange() {
     if (this.selectedOrder && this.selectedStatus !== null) {
+      console.log("selected order : ",this.selectedOrder)
       const OrderListDTO = {
         orderItemId: this.selectedOrder.orderItemId,
         productStatusId: this.selectedStatus,
-        shippingcharge: this.selectedOrder.shippingcharge,
+        shippingcharge: this.selectedOrder.shippingCharge,
       };
-      console.log(OrderListDTO);
+      console.log("status update request", OrderListDTO);
       this.api.updateOrderStatus(OrderListDTO).subscribe((res: any) => {
-        console.log(res);
+        console.log("response from status update", res);
       });
     }
   }

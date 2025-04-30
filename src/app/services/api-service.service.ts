@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { catchError, map, Observable, switchMap } from 'rxjs';
+import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
 
 import { Product } from '../layout/user/interfaces/productInterface';
 
@@ -118,7 +118,7 @@ export class ApiServiceService {
   }
 
   updateCategory(id: number, category: any): Observable<any> {
-    return this.http.put<any>(
+    return this.http.post<any>(
       `https://exmart-backend.onrender.com/api/Categories/${id}`,
       category
     );
@@ -571,10 +571,36 @@ console.log('address data',data);
 
   LoginandToken(loginRequest:any){
     return this.http.post(`https://exmart-backend.onrender.com/login`,loginRequest)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log('API Error Response:', {
+          status: error.status,
+          message: error.error?.message,
+          error: error
+        });
+
+        // Pass through the error with the original status code
+        return throwError(() => error);
+      })
+    );
   }
 
   updateShippingCharge(updateData: { orderItemId: any; shippingCharge: number; }) {
     return this.http.put(`https://exmart-backend.onrender.com/api/Order/updateShippingCharge?`, updateData)
   }
+
+  getAddressByPincode(pin: any) {
+    return this.http.get('Data/pincode.json').pipe(
+      map((data:any) => {
+      console.log("data:",data);
+        // Filter the data based on the pincode
+        const filteredData = data.filter((item:any) => item.pincode ===  Number(pin));
+        console.log("Filtered data:",filteredData);
+        return filteredData;
+      })
+    );
+  }
+
+
 
 }

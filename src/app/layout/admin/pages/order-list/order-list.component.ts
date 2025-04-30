@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { OrderlistTableComponent } from '../../ui/orderlist-table/orderlist-table.component';
 import { ApiServiceService } from '../../../../services/api-service.service';
 import { SearchbarComponent } from '../../ui/searchbar/searchbar.component';
@@ -9,6 +9,8 @@ import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 import { firstValueFrom } from 'rxjs';
 import { OrderValueDisplayingButtonComponent } from '../../ui/order-value-displaying-button/order-value-displaying-button.component';
+import { ConfirmModalComponent } from '../../ui/confirm-modal/confirm-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-order-list',
@@ -24,13 +26,17 @@ import { OrderValueDisplayingButtonComponent } from '../../ui/order-value-displa
   styleUrl: './order-list.component.scss',
 })
 export class OrderListComponent {
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   orderlist: any[] = [];
   filteredItems: any[] = [];
   searchPlaceholder: string = 'Search Order Item/Product';
   totalOrders: any;
   deliveredOrders: any;
 
-  constructor(public api: ApiServiceService) {}
+
+  constructor(public api: ApiServiceService, private dialog : MatDialog) {}
 
   ngOnInit() {
     this.api.getOrderList().subscribe((res: any) => {
@@ -123,7 +129,24 @@ export class OrderListComponent {
   async onFileChange(event: Event) {
     const target = event.target as HTMLInputElement;
     const file = target?.files?.[0];
-    if (!file) return;
+    if (!file) {
+      console.log("file not found")
+      return;
+    }
+    console.log("call for confirm modal")
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      data: { fileName: file.name },
+      width: '400px',
+      position: { top: '-35%', left: '35%' },
+      panelClass: 'centered-dialog'
+    });
+
+    const result = await firstValueFrom(dialogRef.afterClosed());
+    if (!result) {
+      this.fileInput.nativeElement.value = '';
+      return;
+    }
+
     try {
       const workbook = new ExcelJS.Workbook();
       await workbook.xlsx.load(await file.arrayBuffer());
@@ -146,7 +169,7 @@ export class OrderListComponent {
               }
           )
           .filter((order) => order && order.orderItemId) ?? [];
-      console.log('Orders to update:', orders); 
+      console.log('Orders to update:', orders);
       // Check data before API call
       // Step 2: Ensure All Data is Loaded
       if (orders.length === 0) {
@@ -173,6 +196,9 @@ export class OrderListComponent {
     } catch (error) {
       console.error('Error reading Excel file:', error);
     }
+    finally {
+      this.fileInput.nativeElement.value = '';
+    }
   }
 
   private getStatusNumber(status: any): number {
@@ -190,7 +216,7 @@ export class OrderListComponent {
     };
     return statusMap[status.toString().toLowerCase()] || 1;
   }
-  
+
   async downloadReport() {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Orders');

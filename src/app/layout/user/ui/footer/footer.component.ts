@@ -19,7 +19,6 @@ HrDetailList: any={};
 hrEmail: string = '';
 
 constructor(public api:ApiServiceService,public router: Router,private scrollService: ScrollServiceService,private animationStateService : AnimationStateService){}
-
   ngOnInit(){
     this.api.getAllCategories().subscribe((res: any) => {
       this.CategoryList = res;

@@ -28,6 +28,7 @@ stste:'',
 country:'',
 phoneNo:''
 }
+@Output() radioSelect = new EventEmitter<string>();
 arr:any;
 handleRadioChange(address: any): void {
   // const target = event.target as HTMLInputElement;
@@ -36,6 +37,9 @@ handleRadioChange(address: any): void {
     this.global.selectedAddressTypeName.set(address.addressTypeName);
     console.log('Selected Address ID:', this.global.selectedAddressId());
     console.log('Selected Address Type name:', this.global.selectedAddressTypeName() );
+
+
+    this.radioSelect.emit(this.address.id); // Emit selected address ID or any unique identifier
   }
 }
   ngOnInit() {
@@ -47,4 +51,7 @@ handleRadioChange(address: any): void {
   // }
   console.log(this.address);
 }
+
+
+
 }

@@ -6,30 +6,43 @@
       @if(homeAddress!=null){
         <app-long-button
         label="Proceed to buy"
-        routerLink="/addcart">
+        routerLink="/addcart"
+        [disabled]="!selectedRadioValue">
      </app-long-button>
       }
       @else{
         <app-long-button
         label="Proceed to buy"
-        routerLink="/addcart">
+        routerLink="/addcart"
+        [disabled]="true">
      </app-long-button>
       }
 
   </div>
-  @for (data1 of workAddress; track data1) {
-    <app-address-card [address]="data1" ></app-address-card>
+  <!-- @for (data1 of workAddress; track data1) {
+    <app-address-card [address]="data1" (radioSelect)="onRadioSelection($event)></app-address-card>
   }
   @if(homeAddress!=null){
 
     @for (data of homeAddress; track data) {
-      <app-address-card [address]="data" ></app-address-card>
+      <app-address-card [address]="data" (radioSelect)="onRadioSelection($event)"></app-address-card>
     }
- 
+
+  } -->
+
+
+  @if (workAddress?.length > 0) {
+    @for (data1 of workAddress; track data1) {
+      <app-address-card [address]="data1" (radioSelect)="onRadioSelection($event)"></app-address-card>
+    }
   }
 
-
-
+  <!-- Home Address -->
+  @if (homeAddress != null && homeAddress.length > 0) {
+    @for (data of homeAddress; track data) {
+      <app-address-card [address]="data" (radioSelect)="onRadioSelection($event)"></app-address-card>
+    }
+  }
 
 
     <div class="newAddressButton">

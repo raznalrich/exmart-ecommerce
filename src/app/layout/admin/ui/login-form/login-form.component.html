@@ -1,5 +1,7 @@
 <body>
+
 <!-- slide show -->
+
  <div class="container">
     <div class="illustration">
       <div class="carousel">
@@ -49,7 +51,9 @@
         </div>
       </div>
     </div>
+
     <!-- Right side section -->
+
     <div class="right-sec">
       <div class="logo">
         <img src="icons\exMartlogov1.png" alt="ExMart Logo">
@@ -57,7 +61,7 @@
       <div class="login-form">
         <h2>Welcome</h2>
         <form class="login-form" [formGroup]="LoginForm" (ngSubmit)="submit()">
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" id="email" placeholder="Enter your email" required formControlName="email"/>
           </div>
@@ -67,23 +71,25 @@
           </div>
           <div class="form-actions">
             <a href="">Forgot Password?</a>
-          </div>
+          </div> -->
           <button type="submit" class="login-btn">
 @if(isLoading){
   <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-
 }
-            Log In</button>
+<img class="microsoft-logo" src="icons\microsoft bg remove logo.png" alt="image not found">
+            Sign in with microsoft</button>
         </form>
       </div>
     </div>
   </div>
 
+
   <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
   </button> -->
   <!-- modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -108,4 +114,7 @@
       </div>
     </div>
   </div>
-</body>
+</body> -->
+
+<!-- ===================================================================================================== -->
+

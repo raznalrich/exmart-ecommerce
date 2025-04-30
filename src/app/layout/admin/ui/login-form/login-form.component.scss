@@ -335,7 +335,7 @@ body {
 
 .login-btn {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background: #007bff;
   color: white;
   border: none;
@@ -380,3 +380,10 @@ body {
   height: 3rem !important;
   width: 3rem !important;
 }
+.microsoft-logo {
+  width: 20px; /* Adjust size as needed */
+  height: 20px;
+  margin-right: 8px; /* Adds spacing between logo and text */
+  vertical-align: middle; /* Aligns logo with text */
+}
+
